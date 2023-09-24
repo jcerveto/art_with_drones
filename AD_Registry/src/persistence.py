@@ -1,4 +1,4 @@
-import csv
+import json
 from .drone import droneEntity as drone
 
 
@@ -11,76 +11,79 @@ class Persistence:
 
         try:
             with open(self.filename, 'r') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    if len(row) >= 2:
-                        new_drone = drone.DroneEntity(id=row[0], alias=row[1])
-                        drones.append(new_drone)
-                    else:
-                        print(f"Skipping invalid data: {row}")
+                drones_data = json.load(file)
+                for drone_data in drones_data:
+                    new_drone = drone.DroneEntity(id=drone_data['id'], alias=drone_data['alias'])
+                    drones.append(new_drone)
         except Exception as e:
-            print(f"Error reading CSV file: {e}")
+            print(f"Error reading JSON file: {e}")
             return []
 
         return drones
 
-    def get_drone_by_id(self, id: str):
-        new_drone: drone.DroneEntity = None
+    def read_drone(self, drone_to_send: object) -> bool:
+        """
+        Get drone by id.
+        Change drone instance attributes.
+        :param drone_to_send:
+        :return: Returns true if the drone exists, false otherwise.
+        """
 
         try:
             with open(self.filename, 'r') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    if len(row) >= 2:
-                        if row[0] == id:
-                            new_drone = drone.DroneEntity(id=row[0], alias=row[1])
-                            break
-                    else:
-                        print(f"Skipping invalid data: {row}")
+                drones_data = json.load(file)
+                drone_id_str = str(drone_to_send.id)  # Convertir el ID a cadena
+                if drone_id_str in drones_data:
+                    drone_info = drones_data[drone_id_str][0]
+                    new_drone = drone.DroneEntity(id=drone_info['id'], alias=drone_info['alias'])
+                    drone_to_send.id = new_drone.id
+                    drone_to_send.alias = new_drone.alias
+                else:
+                    print(f"Drone with ID {drone_to_send.id} not found.")
+                    return False
         except Exception as e:
-            print(f"Error reading CSV file: {e}")
-            return None
+            print(f"Error reading JSON file: {e}")
+            return False
 
-        return new_drone
+        return True
 
     def add_drone(self, new_drone) -> bool:
-        if self.exists_drone(new_drone):
-            return False # No se crea
+        drones_data = []
 
-        # se crea
+        if self.exists_drone(new_drone):
+            return False  # No se crea
+
         try:
-            with open(self.filename, 'a') as file:
-                writer = csv.writer(file)
-                writer.writerow([new_drone.id, new_drone.alias])
+            with open(self.filename, 'r') as file:
+                drones_data = json.load(file)
+
+            drones_data[f"{str(new_drone.id)}"] = [{'id': new_drone.id, 'alias': new_drone.alias}]
+
+            with open(self.filename, 'w') as file:
+                json.dump(drones_data, file, indent=4)
         except Exception as e:
-            print(f"Error writing CSV file: {e}")
+            print(f"Error writing JSON file: {e}")
             return False
 
         return True
 
     def update_drone(self, updated_drone) -> bool:
-        rows = []
+        drones_data = []
+
+        if not self.exists_drone(updated_drone):
+            return False    # No se actualiza
 
         try:
-            with open(self.filename, 'r+') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    if len(row) >= 2:
-                        if row[0] == updated_drone.id:
-                            rows.append([updated_drone.id, updated_drone.alias])
-                        else:
-                            rows.append(row)
-                    else:
-                        print(f"Skipping invalid data: {row}")
+            with open(self.filename, 'r') as file:
+                drones_data = json.load(file)
 
-                # Volvemos al inicio del archivo y escribimos las filas actualizadas
-                file.seek(0)
-                writer = csv.writer(file)
-                writer.writerows(rows)
-                file.truncate()  # Truncamos el archivo si las nuevas filas son más cortas
+            updated_drone_data = {'id': updated_drone.id, 'alias': updated_drone.alias}
+            drones_data[f"{str(updated_drone.id)}"] = [updated_drone_data]
 
+            with open(self.filename, 'w') as file:
+                json.dump(drones_data, file, indent=4)
         except Exception as e:
-            print(f"Error updating CSV file: {e}")
+            print(f"Error updating JSON file: {e}")
             return False
 
         return True
@@ -89,26 +92,18 @@ class Persistence:
         if not self.exists_drone(drone_to_delete):
             return False
 
-        rows = []
         try:
-            with open(self.filename, 'r+') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    if len(row) >= 2:
-                        if row[0] == drone_to_delete.id:
-                            continue
-                        else:
-                            rows.append(row)
-                    else:
-                        print(f"Skipping invalid data: {row}")
+            with open(self.filename, 'r') as file:
+                drones_data = json.load(file)
+            print("hola1")
 
-            # Volvemos al inicio del archivo y escribimos las filas actualizadas
-            with open(self.filename, 'w', newline='') as file:
-                writer = csv.writer(file)
-                writer.writerows(rows)
+            # Crear una nueva versión de drones_data sin el dron a eliminar
+            new_drones_data = {key: value for key, value in drones_data.items() if key != str(drone_to_delete.id)}
 
+            with open(self.filename, 'w') as file:
+                json.dump(new_drones_data, file, indent=4)
         except Exception as e:
-            print(f"Error deleting CSV file: {e}")
+            print(f"Error deleting JSON file: {e}")
             return False
 
         return True
@@ -116,18 +111,9 @@ class Persistence:
     def exists_drone(self, drone_obj) -> bool:
         try:
             with open(self.filename, 'r') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    if len(row) >= 2:
-                        if row[0] == drone_obj.id:
-                            return True
-                    else:
-                        print(f"Skipping invalid data: {row}")
+                drones_data = json.load(file)
+                return drone_obj.id in drones_data
 
         except Exception as e:
-            print(f"Error reading CSV file: {e}")
+            print(f"Error reading JSON file: {e}")
             return False
-        return  False
-
-
-

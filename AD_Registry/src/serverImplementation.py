@@ -8,6 +8,9 @@ from .drone import droneEntity
 
 
 class ServerImplementation:
+    MAX_SIZE = 1024
+    FORMAT = 'utf-8'
+
     def __init__(self, host, port):
         self.host = host
         self.port = port
@@ -24,29 +27,21 @@ class ServerImplementation:
         with self.lock:
             self.total_requests += 1
             try:
-
                 print(f"Handling request from {client_address}... Number of requests: {self.total_requests}")
-                client_data = client_socket.recv(1024)
-                print(f"Received: {client_data.decode('utf-8')}")
+                client_data = client_socket.recv(self.MAX_SIZE)
+                print(f"Received: {client_data}")
 
-                drone_obj = droneEntity.DroneEntity(
-
-                    id=str(self.total_requests),
-                    alias=f"Drone {self.total_requests}"
-                )
-                if drone_obj.create():
-                    msg = f"Drone {self.total_requests} created".encode('utf-8')
-                else:
-                    msg = f"Drone {self.total_requests} not created".encode('utf-8')
-                client_socket.sendall(msg)
-                print(f"Sent: {msg}")
+                response = self.get_response_from_request(client_data)
+                client_socket.sendall(response)
+                print(f"Sent: {response}")
                 print(f"Closing connection from {client_address}...")
                 client_socket.close()
 
-
+            except KeyboardInterrupt:
+                print("Pressed Ctrl + C. Closing server...")
+                self.stop()
             except Exception as e:
                 print(f"Error handling request: {e}")
-                return
 
     def start(self):
         try:
@@ -62,3 +57,27 @@ class ServerImplementation:
         except Exception as e:
             print(f"The server was already closed. Exception: {e}")
             sys.exit(1)
+
+    def get_response_from_request(self, request: bytes) -> bytes:
+        clean_request = self.decode(request)
+
+        # AQUI VA LA LOGICA DE NEGOCIO
+
+        drone_obj = droneEntity.DroneEntity(
+            id=str(self.total_requests),
+            alias=f"Drone {self.total_requests}"
+        )
+        if drone_obj.create():
+            msg = f"Drone {self.total_requests} created"
+        else:
+            msg = f"Drone {self.total_requests} not created"
+
+        # FIN DE LA LOGICA DE NEGOCIO
+        msg = self.encode(msg)
+        return msg
+
+    def encode(self, msg: str) -> bytes:
+        return msg.encode(self.FORMAT)
+
+    def decode(self, msg: bytes) -> str:
+        return msg.decode(self.FORMAT)

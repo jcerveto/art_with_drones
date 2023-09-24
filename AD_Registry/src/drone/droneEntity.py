@@ -3,17 +3,15 @@ from . import droneImplementation
 
 class DroneEntity:
     def __init__(self, id: str, alias: str):
-        '''
+        """
         Constructor. Entity Layer
         :param id:
         :param alias:
         :return:
-        '''
-        print("Beiginning of the constructor. ")
+        """
         self.id = id
         self.alias = alias
         self.drone = droneImplementation.DroneImplementation(self.id, self.alias)
-        print("End of the constructor")
 
     def create(self) -> bool:
         try:
@@ -49,3 +47,4 @@ class DroneEntity:
 
     def __str__(self):
         return str(self.drone)
+
