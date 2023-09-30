@@ -14,7 +14,7 @@ const client = new net.Socket();
 
 client.on('connect', () => {
     console.log('Connected to ' + HOST + ':' + PORT);
-    const message = 'hello\r\n';
+    const message = 'alacant';
     client.write(message.toString('utf-8')); // No es necesario convertir a UTF-8
 });
 
