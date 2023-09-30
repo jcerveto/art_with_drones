@@ -1,8 +1,9 @@
 import * as net from 'net';
 
 import { ServerEntity } from '../model/ServerEntity';
-import { resolve } from 'path';
-
+import { SquareEntity } from '../model/SquareEntity';
+import { EStatus } from '../model/EStatus';
+import { DronEntity } from '../model/DronEntity';
 
 export class ServerImplementation {
 
@@ -13,7 +14,7 @@ export class ServerImplementation {
             });
 
             // Call the async function every 10 seconds
-            setInterval(ServerImplementation.weatherStuff, 10000);
+            setInterval(() => ServerImplementation.weatherStuff(server), 10000);
 
             return true;
         } catch (err) {
@@ -52,12 +53,12 @@ export class ServerImplementation {
         }
     }
 
-    public static handleClient(conn: net.Socket) {
+    public static handleClient(server: ServerEntity, conn: net.Socket) {
         console.log('new client');
 
         conn.on('data', data => {
-            conn.write(data.toString('utf-8') + '\r\n' + data.toString('utf-8'));
-            conn.end();
+            console.log('data received: ' + data);
+            ServerImplementation.handleClientRequest(server, conn, data);
         });
 
         conn.on('end', () => {
@@ -83,8 +84,8 @@ export class ServerImplementation {
 
     private static async getCurrentTemperature(): Promise<number> {
         return new Promise<number>((resolve, reject) => {
-            const HOST = '127.0.0.1';
-            const PORT = 8888;
+            const HOST = 'ad_weather';
+            const PORT = 5555;
             const city = 'alacant';
             const client = new net.Socket();
             //console.log('Trying to connect to: ' + HOST + ':' + PORT);
@@ -139,6 +140,54 @@ export class ServerImplementation {
     private static handleBadWeather() {
         console.log('Bad weather...');
     }
+
+    public static handleClientRequest(server: ServerEntity, conn: net.Socket, data: Buffer) {
+        try {
+            const cleanRequest = data.toString('utf-8');
+            const jsonRequest = JSON.parse(cleanRequest);
+            const dron = {
+                id: jsonRequest.id,
+                targetSquareStr: jsonRequest.target,
+                currentSquareStr: jsonRequest.current
+            }
+            const targetSquare = SquareEntity.fromString(dron.targetSquareStr);
+            const currentSquare = SquareEntity.fromString(dron.currentSquareStr);
+            const pathEnded = targetSquare.equals(currentSquare);
+            let status: EStatus = EStatus.UNKNOWN;
+            if (pathEnded) {
+                status = EStatus.GOOD;
+            }
+            else {
+                status = EStatus.BAD;
+            }
+            const dronEntity = new DronEntity(dron.id, status, currentSquare);
+            currentSquare.setDron(dronEntity);
+            // se elimina el anterior. No funciona. Pero eliminaria todos los drones de una casulla
+            server.getMap().getMapObject()
+                .delete(dronEntity.getId());
+            // se anade
+            server.getMap().getMapObject()
+                .set(currentSquare.getHash(), currentSquare);
+            server.showMap();
+            const bytesResponse = Buffer.from(cleanRequest + '\r\n' + cleanRequest);
+            conn.write(bytesResponse.toString('utf-8'));
+            conn.end();
+        }
+        catch (err) {
+            console.error(`ERROR: Trying to handle client request: ${err}`);
+        }
+
+    }
+
+    public static showMap(server: ServerEntity): void {
+        try {
+            console.log(server.getMap().toString());
+        }
+        catch (err) {
+            console.error(`ERROR: Trying to show map: ${err}`);
+        }
+    }
+
 
 
 }

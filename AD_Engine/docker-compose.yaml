@@ -2,19 +2,17 @@ version: '3'
 networks:
   art_with_drones_network_1:
     driver: bridge
-    
+
 services:
-  ad_weather:
+  ad_engine:
     build:
       context: .
-    image: ad_weather
+    image: ad_engine
     networks:
       - art_with_drones_network_1
     ports:
-      - "8888:5555"
-    volumes:
-      - ./data:/app/data
+      - "8080:6000"
     working_dir: /app
     stdin_open: true
     tty: true
-    command: ["python", "src/main.py", "5555"]
+    command: ["npm", "run", "build:start", "6000"]
