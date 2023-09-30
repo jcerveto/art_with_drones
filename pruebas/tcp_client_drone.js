@@ -64,7 +64,15 @@ async function main() {
 
     await client.connect();
 
-    const message = 'Hello from the client!';
+    const currentSquare = `${Math.floor(Math.random() * 20) + 1}-${Math.floor(Math.random() * 20) + 1}`;
+    const targetSquare = `${Math.floor(Math.random() * 20) + 1}-${Math.floor(Math.random() * 20) + 1}`;
+    const dron = {
+        id: 1,
+        target:  targetSquare,
+        current:  currentSquare,
+    }
+    const message = JSON.stringify(dron);
+    console.log(`Sending to the server: ${message}`);
     await client.send(message.toString('utf8'));
 
     const response = await client.receive();
