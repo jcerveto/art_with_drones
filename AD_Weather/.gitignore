@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Creados por IDEs y editores
+.idea/
+.vscode/
+*.swp
+
+# Ambientes virtuales
+venv/
+env/
+ENV/
+
+# Archivos de configuración
+*.log
+*.ini
+*.cfg
+
+# Dependencias de Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Otros
+*.db
+*.sqlite3
+*.pdf
+*.xlsx
+*.xls
+*.zip
