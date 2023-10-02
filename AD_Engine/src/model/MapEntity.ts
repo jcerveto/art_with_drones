@@ -1,4 +1,6 @@
 import { SquareEntity } from "./SquareEntity";
+import { createDrone, deleteDrone } from "../queries/crud-current";
+
 
 export class MapEntity {
     private __size: number = 0;
@@ -21,6 +23,53 @@ export class MapEntity {
             }
         }
     }
+
+    public async removeDrone(square: SquareEntity, id: string): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            try {
+                deleteDrone(square, id)
+                    .then((result: boolean) => {
+                        if (result) {
+                            resolve();
+                        }
+                        else {
+                            reject();
+                        }
+                    })
+                    .catch((err) => {
+                        console.error('Error deleting data:', err.message);
+                        reject();
+                    }); 
+            } catch (err) {
+                console.error('Error removing drone:', err);
+                reject();
+            }
+        });
+    }
+
+    public async addDrone(square: SquareEntity, id: string): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            try {
+                createDrone(square, id)
+                    .then((result: boolean) => {
+                        if (result) {
+                            resolve();
+                        }
+                        else {
+                            reject();
+                        }
+                    })
+                    .catch((err) => {
+                        console.error('Error inserting data:', err.message);
+                        reject();
+                    }); 
+            } catch (err) {
+                console.error('Error adding drone:', err);
+                reject();
+            }
+        });
+    }
+    
 
     public getSize(): number {
         return this.__size;

@@ -29,8 +29,22 @@ export class SquareEntity {
         this.__dron = dron;
     }
 
-    pub
+    public getRow(): number {
+        return this.__row;
+    }
 
+    public setRow(row: number) {
+        this.__row = row;
+    }
+
+    public getColumn(): number {
+        return this.__column;
+    }
+
+    public setColumn(column: number) {
+        this.__column = column;
+    }
+    
     public isEmpty(): boolean {
         return this.__dron === null;
     }
