@@ -48,4 +48,4 @@ class Drone:
                 self.status = True
             
             client.send_data(self)
-            # time.sleep(1)
+            time.sleep(0.2)

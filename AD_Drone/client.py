@@ -1,8 +1,8 @@
 import socket
 import json
 
-HOST = "127.0.0.1"
-PORT = "8090"
+HOST = "localhost"
+PORT = 8090
 
 def send_data(drone):
     try:
@@ -11,10 +11,11 @@ def send_data(drone):
         client_socket.connect((HOST, PORT))
         client_socket.send(message.encode())
         response = client_socket.recv(128)
-        print(response.decode())
+        print(f"RECEIVED {response.decode()} ON DRONE {drone.id}")
         client_socket.close()
 
     except Exception:
+        print(f"CONNECTION ERROR ON DRONE {drone.id}")
         client_socket.close()
 
 """
