@@ -1,21 +1,20 @@
-import { resolve } from "path";
 import sqlite3 from "sqlite3";
 
-const databaseName: string = process.env.DATABASE_NAME ?? '../AD_DronesBD/database.db';
-console.log('!!!!!!!databaseName: ', databaseName)
+import { dbPath } from "./setDb";
+
 
 export async function displayData(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-        const db = new sqlite3.Database(databaseName, (err) => {
+        const db = new sqlite3.Database(dbPath, (err) => {
             if (err) {
-                console.error('Error opening database:', databaseName, err.message);
+                console.error('Error opening database:', dbPath, err.message);
                 reject(err);
                 return;
             }
-            console.log('Connected to the SQLite database:', databaseName);
+            console.log('Connected to the SQLite database:', dbPath);
         
             try {
-        
+                console.log("data will be displayed: ")
                 // Mostrar datos de la tabla registry
                 db.all('SELECT * FROM registry', [], (err, rows) => {
                     if (err) {

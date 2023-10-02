@@ -85,8 +85,8 @@ export class ServerImplementation {
 
     private static async getCurrentTemperature(): Promise<number> {
         return new Promise<number>((resolve, reject) => {
-            const HOST = 'ad_weather';
-            const PORT = 5555;
+            const HOST = '0.0.0.0';
+            const PORT = 5000;
             const city = 'alacant';
             const client = new net.Socket();
             //console.log('Trying to connect to: ' + HOST + ':' + PORT);
@@ -164,9 +164,21 @@ export class ServerImplementation {
             const dronEntity = new DronEntity(dron.id, status, currentSquare);
             currentSquare.setDron(dronEntity);
             // se elimina el anterior. No funciona. Pero eliminaria todos los drones de una casulla
+            /* USAR awais per manejando los catch
             server.getMap().getMapObject()
                 .delete(dronEntity.getId());
             // se anade
+            const dronTemp = new DronEntity("a", EStatus.BAD, new SquareEntity(1, 1));
+            server.getMap()
+                .addDrone(currentSquare, "holi")
+                .then(() => {
+                    console.log('Drone added');
+                })
+                .catch((err) => {
+                    console.error('Error adding drone:', err);
+                })
+                */
+
             server.getMap().getMapObject()
                 .set(currentSquare.getHash(), currentSquare);
             server.showMap();
