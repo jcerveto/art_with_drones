@@ -4,9 +4,6 @@ node_modules/
 # Compiled output
 dist/
 
-# TypeScript configuration
-tsconfig.json
-
 # Editor directories and files
 .idea/
 .vscode/

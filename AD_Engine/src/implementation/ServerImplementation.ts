@@ -4,6 +4,7 @@ import { ServerEntity } from '../model/ServerEntity';
 import { SquareEntity } from '../model/SquareEntity';
 import { EStatus } from '../model/EStatus';
 import { DronEntity } from '../model/DronEntity';
+import { displayData } from '../queries/display-data';
 
 export class ServerImplementation {
 
@@ -169,6 +170,17 @@ export class ServerImplementation {
             server.getMap().getMapObject()
                 .set(currentSquare.getHash(), currentSquare);
             server.showMap();
+            displayData()
+                .then(() => {
+                    console.log('Data displayed');
+                })
+                .catch((err) => {
+                    console.error('Error displaying data:', err);
+                })
+                .finally(() => {
+                    console.log('End of displayData');
+                });
+
             const bytesResponse = Buffer.from(cleanRequest + '\r\n' + cleanRequest);
             conn.write(bytesResponse.toString('utf-8'));
             conn.end();
