@@ -1,4 +1,10 @@
-﻿################################################################################
+﻿AD_Registry/.idea/AD_Registry.iml
+AD_Registry/.idea/misc.xml
+AD_Registry/.idea/modules.xml
+AD_Registry/.idea/vcs.xml
+AD_Registry/.idea/inspectionProfiles/profiles_settings.xml
+**/__pycache__/
+################################################################################
 # Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
 ################################################################################
 
