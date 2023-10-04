@@ -1,0 +1,46 @@
+// REGISTRY drone->registry
+{
+	"id_registry": 0,
+	"alias": ""
+}
+
+// REGISTRY registry->drone
+{
+	"token": "",
+	"ok": true
+}
+
+// AUTHENTICATION drone->engine
+{
+	"id_registry": 0,
+	"token": ""
+}
+
+// AUTHENTICATION engine->drone
+{
+	"target_position": {
+		"row": 0,
+		"col": 0
+	},
+	"ok": true
+}
+
+// KAFKA drone->engine 
+{
+	"id_registry": 0,
+	"current_position": {
+		"row": 0,
+		"col": 0,
+	}
+}
+
+// KAFKA engine->drone
+{
+	"target_position": {
+		"row": 0,
+		"col": 0,
+	}
+}
+
+// FIGURE JSON
+// Predefinido
