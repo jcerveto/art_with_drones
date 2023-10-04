@@ -10,31 +10,46 @@ const db = new sqlite3.Database(databaseName, (err) => {
     console.log('Connected to the SQLite database:', databaseName);
 
     try {
-
-        // Mostrar datos de la tabla registry
-        db.all('SELECT * FROM registry', [], (err, rows) => {
+        // Mostrar datos de la tabla MapFiguraDron
+        db.all('SELECT * FROM MapFiguraDron', [], (err, rows) => {
             if (err) {
                 throw err;
             }
-            console.log('Data from registry table:');
+            console.log('Data from MapFiguraDron table:');
             console.log("Show row per row: ")
             rows.forEach((row) => {
-                console.log(`ID: ${row.pk_registry_id}, Alias: ${row.registry_alias}`);
+                console.log(`Registry ID: ${row.pk_fk_map_registry_id}, Figure: ${row.uk_map_figura}`);
             });
             console.log("Show as JSON: /n: ", JSON.stringify(rows, null, 2))
+            console.log("============================================")
         });
 
-        // Mostrar datos de la tabla current
-        db.all('SELECT * FROM current', [], (err, rows) => {
+        // Mostrar datos de la tabla Current
+        db.all('SELECT * FROM Current', [], (err, rows) => {
             if (err) {
                 throw err;
             }
-            console.log('Data from current table:');
+            console.log('Data from Current table:');
             console.log("Show row per row: ")
             rows.forEach((row) => {
-                console.log(`Registry ID: ${row.pk_fk_current_registry_id}, Row: ${row.current_row}, Column: ${row.current_column}`);
+                console.log(`Registry ID: ${row.pk_fk_current_registry_id}, Row: ${row.row}, Column: ${row.column}`);
             });
             console.log("Show as JSON: /n: ", JSON.stringify(rows, null, 2))
+            console.log("============================================")
+        });
+
+        // Mostrar datos de la tabla Registry
+        db.all('SELECT * FROM Registry', [], (err, rows) => {
+            if (err) {
+                throw err;
+            }
+            console.log('Data from Registry table:');
+            console.log("Show row per row: ")
+            rows.forEach((row) => {
+                console.log(`ID: ${row.pk_registry_id}, Alias: ${row.alias}`);
+            });
+            console.log("Show as JSON: /n: ", JSON.stringify(rows, null, 2))
+            console.log("============================================")
         });
     }
     catch (err) {
