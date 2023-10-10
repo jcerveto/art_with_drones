@@ -1,59 +1,112 @@
-import * as net from 'net';
-import { ServerImplementation } from '../implementation/ServerImplementation';
-import { MapEntity } from './MapEntity';
+import { MapEntity } from "./MapEntity";
+import {ServerImplementation} from "../implementation/ServerImplementation";
+import * as net from "net";
+import {SquareEntity} from "./SquareEntity";
 
 export class ServerEntity {
-    private server: net.Server;
-    private port: number;
-    private map: MapEntity;
+    private _host: string;
+    private _port: number;
+    private _map: MapEntity;
+    private _serverNet: net.Server;
 
-    public static MIN_VALID_TEMPERATURE = 0;
-
-    public getServer(): net.Server {
-        return this.server;
+    public getHost(): string {
+        return this._host;
     }
 
     public getPort(): number {
-        return this.port;
+        return this._port;
     }
 
     public getMap(): MapEntity {
-        return this.map;
+        return this._map;
     }
 
-    public constructor(port: number) {
-        this.port = port;
-        this.server = net.createServer(this.handleClient.bind(this));
-        this.map = new MapEntity(20);
+    public getServer(): net.Server {
+        return this._serverNet;
     }
 
-    public handleClient(conn: net.Socket) {
+
+    public constructor(port: number, host: string) {
+        this._host = host;
+        this._port = port;
+
+        this._serverNet = this.createNetServer();
+        this._map = new MapEntity();
+    }
+
+    private createNetServer(): net.Server {
+        return ServerImplementation.createNetServer(this);
+    }
+
+    public start(): void {
         try {
-            ServerImplementation.handleClient(this, conn);
+            ServerImplementation.start(this)
+                .then(() => {
+                    console.log("Server started!");
+                })
+                .catch((err) => {
+                    console.error("Error starting! Closing server...", err);
+                })
+        } catch (err) {
+            throw new Error('Error starting! Closing server...' + err);
+        }
+    }
+
+    public handleClientAuthentication(conn: net.Socket): void {
+        try {
+            ServerImplementation.handleClientAuthentication(this, conn);
         }
         catch (err) {
             console.error(`ERROR: Trying to handle client: ${err}`);
         }
     }
 
-    public start() {
+    public getTargetSquareFromDronId(dronId: number): SquareEntity | null {
         try {
-            ServerImplementation.start(this);
-        }
-        catch (err) {
-            console.error(`ERROR: Trying to start: ${err}`);
+            return ServerImplementation.getTargetSquareFromDronId(this, dronId);
+        } catch (err) {
+            console.error('ERROR: at getTargetSquareFromDronId: ', err.message);
         }
     }
 
-    public showMap() {
+    // BROKER'S METHODS
+    public subscribeToDrones(): void {
         try {
-            ServerImplementation.showMap(this);
-        }
-        catch (err) {
-            console.error(`ERROR: Trying to show map: ${err}`);
+            ServerImplementation.subscribeToDrones(this);
+        } catch (err) {
+            console.error(err.message);
         }
     }
 
+    public sendMapToDrones(): void {
+        try {
+            ServerImplementation.sendMapToDrones(this);
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
 
-    
+    public async weatherStuff(): Promise<void> {
+        try {
+            await ServerImplementation.weatherStuff(this);
+        } catch (err) {
+            console.error("ERROR: Trying to weatherStuffs. ", err);
+        }
+    }
+
+    public async isWeatherValid(): Promise<void> {
+        try {
+            await ServerImplementation.isWeatherValid(this);
+        } catch (err) {
+            console.error("ERROR: Trying to weatherStuffs. ", err);
+        }
+    }
+
+    public handleBadWeather(): void {
+        try {
+            await ServerImplementation.handleBadWeather(this);
+        } catch (err) {
+            console.error("ERROR: Trying to handleBadWeather. ", err);
+        }
+    }
 }

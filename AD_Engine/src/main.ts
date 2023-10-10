@@ -9,7 +9,8 @@ if (process.argv.length != 3) {
 
 try {
     const port = parseInt(process.argv[2]);
-    const server = new ServerEntity(port);
+    const host = '0.0.0.0';
+    const server = new ServerEntity(port, host);
     server.start();
 }
 catch (err) {

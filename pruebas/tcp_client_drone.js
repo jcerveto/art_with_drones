@@ -62,14 +62,15 @@ async function main() {
 
     const client = new TCPClient(HOST, PORT);
 
-    await client.connect();
+    await client.connect()  ;
 
-    const currentSquare = `${Math.floor(Math.random() * 20) + 1}-${Math.floor(Math.random() * 20) + 1}`;
-    const targetSquare = `${Math.floor(Math.random() * 20) + 1}-${Math.floor(Math.random() * 20) + 1}`;
+    const currentSquareJson = {
+        row: Math.floor(Math.random() * 20) + 1,
+        col: Math.floor(Math.random() * 20) + 1
+    }
     const dron = {
-        id: 1,
-        target:  targetSquare,
-        current:  currentSquare,
+        id_registry: 1,
+        currentPosition: currentSquareJson,
     }
     const message = JSON.stringify(dron);
     console.log(`Sending to the server: ${message}`);

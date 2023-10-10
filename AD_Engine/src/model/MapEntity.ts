@@ -1,105 +1,75 @@
-import { SquareEntity } from "./SquareEntity";
-import { createDrone, deleteDrone } from "../queries/crud-current";
-
+import {SquareEntity} from "./SquareEntity";
 
 export class MapEntity {
-    private __size: number = 0;
+    public static SIZE: number = 20;
 
-    private __map: Map<string, SquareEntity> = new Map<string, SquareEntity>();
+    private __map: Map<
+        string,
+        SquareEntity
+    > = new Map<string, SquareEntity>();
 
-    constructor(size: number) {
-        if (size < 0) {
-            throw new Error('Map size cannot be negative');
-        }
-        if (size > 20) {
-            throw new Error('Map size cannot be greater than 20');
-        }
-        this.__size = size;
+    public getMapObject(): Map<string, SquareEntity> {
+        return this.__map;
+    }
 
-        for (let row = 1; row <= size; row++) {
-            for (let column = 1; column <= size; column++) {
+
+    constructor() {
+        for (let row = 1; row <= MapEntity.SIZE; row++) {
+            for (let column = 1; column <= MapEntity.SIZE; column++) {
                 const square = new SquareEntity(row, column);
                 this.__map.set(square.getHash(), square);
             }
         }
     }
 
-    public async removeDrone(square: SquareEntity, id: string): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
-            try {
-                deleteDrone(square, id)
-                    .then((result: boolean) => {
-                        if (result) {
-                            resolve();
-                        }
-                        else {
-                            reject();
-                        }
-                    })
-                    .catch((err) => {
-                        console.error('Error deleting data:', err.message);
-                        reject();
-                    }); 
-            } catch (err) {
-                console.error('Error removing drone:', err);
-                reject();
-            }
-        });
-    }
 
-    public async addDrone(square: SquareEntity, id: string): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
-            try {
-                createDrone(square, id)
-                    .then((result: boolean) => {
-                        if (result) {
-                            resolve();
-                        }
-                        else {
-                            reject();
-                        }
-                    })
-                    .catch((err) => {
-                        console.error('Error inserting data:', err.message);
-                        reject();
-                    }); 
-            } catch (err) {
-                console.error('Error adding drone:', err);
-                reject();
-            }
-        });
-    }
-    
-
-    public getSize(): number {
-        return this.__size;
-    }
-
-    public getMapObject(): Map<string, SquareEntity> {
-        return this.__map;
-    }
 
     public toString(): string {
         let buffer = '  ';
 
-        for (let i = 1; i <= this.__size; i++) {
+        for (let i = 1; i <= MapEntity.SIZE; i++) {
             buffer += `${i}`.padStart(2, ' ');
         }
         buffer += '\n';
-    
-        for (let row = 1; row <= this.__size; row++) {
+
+        for (let row = 1; row <= MapEntity.SIZE; row++) {
             buffer += `${row}`.padStart(2, ' ');
-    
-            for (let column = 1; column <= this.__size; column++) {
+
+            for (let column = 1; column <= MapEntity.SIZE; column++) {
                 const square = this.__map.get(`${row}-${column}`);
                 buffer += square.toString().padStart(2, ' ');
             }
             buffer += '\n';
         }
-    
+
         return buffer;
     }
-    
 
+    public updateSquare(newSquare: SquareEntity): void {
+        const key = newSquare.getHash();
+
+        if (this.__map.has(key)) {
+            this.__map.set(key, newSquare);
+        } else {
+            console.error(`Square with hash ${key} not found in the map.`);
+        }
+    }
+
+
+    public toJson(): string {
+        try {
+            const jsonArray: Array<string> = [];
+
+            this.__map.forEach((square: SquareEntity) => {
+                jsonArray.push(square.toJson());
+            });
+
+            return JSON.stringify(jsonArray);
+        } catch (err) {
+            console.error("ERROR: Parsing Map toJson. Returning empty object. ", err);
+            return JSON.stringify({});
+        }
+
+    }
 
 }

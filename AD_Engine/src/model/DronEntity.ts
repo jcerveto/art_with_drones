@@ -3,14 +3,13 @@ import { SquareEntity } from "./SquareEntity";
 
 
 export class DronEntity {
-    private __id: string;
+    private __id: number;
     private __status: EStatus = EStatus.BAD;
     private __target: SquareEntity | null = null;
 
-    constructor(id: string, status: EStatus, target: SquareEntity | null = null) {
+    constructor(id: number, status: EStatus) {
         this.__id = id;
         this.__status = status;
-        this.__target = target;
     }
 
     public getStatus(): EStatus {
@@ -29,14 +28,17 @@ export class DronEntity {
         this.__target = target;
     }
 
-    public getId(): string {
+    public getId(): number {
         return this.__id;
     }
 
     public getHash(): string {
-        return this.__id;
+        return this.__id?.toString();
     }
-    
+
+    public getTargetSquare(): SquareEntity {
+        return new SquareEntity(15, 18);
+    }
 
     public toString(): string {
         if (this.__status === EStatus.GOOD)
