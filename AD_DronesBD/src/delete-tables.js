@@ -19,8 +19,12 @@ const db = new sqlite3.Database(databaseName, (err) => {
         if (answer.toLowerCase() === 'yes') {
             // Vaciar todas las tablas
             db.serialize(() => {
-                db.run('DELETE FROM registry');
-                db.run('DELETE FROM current');
+                db.run('DELETE FROM Registry');
+                console.log('Registry table has been emptied.');
+                db.run('DELETE FROM Current');
+                console.log('Current table has been emptied.');
+                db.run('DELETE FROM MapFiguraDron');
+                console.log('MapFiguraDron table has been emptied.');
             });
             console.log('All tables have been emptied.');
         } else {

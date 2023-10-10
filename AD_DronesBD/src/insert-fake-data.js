@@ -1,6 +1,11 @@
 const sqlite3 = require('sqlite3').verbose();
 const databaseName = process.env.DATABASE_NAME || 'database.db';
 
+const fakeDronesIds = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+const fakeFiguresDronesIds=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+const fakeRows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+const fakeColumns = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
 const db = new sqlite3.Database(databaseName, (err) => {
     if (err) {
         console.error('Error opening database:', databaseName, err.message);
@@ -10,27 +15,55 @@ const db = new sqlite3.Database(databaseName, (err) => {
 
     try {
         // Insert 10 drones into the registry table
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= fakeDronesIds.length; i++) {
             const registryAlias = `Drone ${i}`;
-            db.run(`INSERT INTO registry (registry_alias) VALUES (?)`, [registryAlias], function(err) {
+            const token = `token-${i}`;
+            db.run(`
+                INSERT INTO 
+                Registry 
+                    (pk_registry_id, alias, token) 
+                    VALUES (?, ?, ?)`
+                , [fakeDronesIds[i], registryAlias, token], function(err) {
                 if (err) {
-                    return console.error('Error inserting drone into registry:', err.message);
+                    return console.error('Error inserting drone into Registry:', err.message);
                 }
                 console.log(`Inserted drone "${registryAlias}" into registry with ID: ${this.lastID}`);
             });
         }
 
-        // Insert 5 drones into the current table (assuming registry IDs start from 1)
-        for (let i = 1; i <= 5; i++) {
-            const currentRow = i;
-            const currentColumn = i;
-            db.run(`INSERT INTO current (pk_fk_current_registry_id, current_row, current_column) VALUES (?, ?, ?)`, [i, currentRow, currentColumn], function(err) {
+        // Insert 5 drones into the current table
+        for (let i = 1; i <= fakeDronesIds.length/2; i++) {
+            const currentRow = fakeRows[i];
+            const currentColumn = fakeColumns[i];
+            db.run(`
+                INSERT INTO
+                Current
+                    (pk_fk_current_registry_id, row, column, isActive) 
+                VALUES (?, ?, ?, ?)`
+                , [i, currentRow, currentColumn, true], function(err) {
                 if (err) {
                     return console.error('Error inserting drone into current:', err.message);
                 }
                 console.log(`Inserted drone with Registry ID ${i} into current table.`);
             });
         }
+
+        // Insert 5 drones into the map table
+        for (let i = 1; i <= fakeDronesIds.length/2; i++) {
+            const mapFigura = fakeFiguresDronesIds[i];
+            db.run(`
+                INSERT INTO
+                MapFiguraDron
+                    (pk_fk_map_registry_id, uk_map_figura) 
+                VALUES (?, ?)`
+                , [i, mapFigura], function(err) {
+                if (err) {
+                    return console.error('Error inserting drone into map:', err.message);
+                }
+                console.log(`Inserted drone with Registry ID ${i} into map table.`);
+            });
+        }
+
     }
     catch (err) {
         console.error('Error:', err.message);

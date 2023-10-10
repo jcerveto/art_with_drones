@@ -1,217 +1,197 @@
 import * as net from 'net';
 
-import { ServerEntity } from '../model/ServerEntity';
-import { SquareEntity } from '../model/SquareEntity';
-import { EStatus } from '../model/EStatus';
-import { DronEntity } from '../model/DronEntity';
-import { displayData } from '../queries/display-data';
+import {ServerEntity} from "../model/ServerEntity";
+import * as errorMessages from "../settings/ConnectionsMessages";
+import {MapFiguraDronTable} from "../model/MapFiguraDronTable";
+import {DronEntity} from "../model/DronEntity";
+import {SquareEntity} from "../model/SquareEntity";
+import * as BrokerServices from "./BrokerImplementation";
+import * as WeatherServices from "./WeatherImplementation";
+import * as WeatherSettings from "../settings/WeatherSettings";
+
 
 export class ServerImplementation {
+    public static createNetServer(server: ServerEntity): net.Server {
+        return net.createServer(server.handleClientAuthentication.bind(server));
+    }
 
-    public static start(server: ServerEntity): boolean {
+    public static async start(server: ServerEntity) {
         try {
-            server.getServer().listen(server.getPort(), () => {
-                console.log('listening on 0.0.0.0:' + server.getPort());
-            });
+            // Publicar servidor en puerto
+            server.getServer()
+                .listen(server.getPort(), () => {
+                    console.log('listening on 0.0.0.0:' + server.getPort());
+                });
 
-            // Call the async function every 10 seconds
-            setInterval(() => ServerImplementation.weatherStuff(server), 10000);
+            // Cargar figura a dibujar
+            if (!MapFiguraDronTable.createEmptyFigure(server.getMap())) {
+                throw new Error('No se ha podido cargar la figura mapeada. ')
+            }
+            console.log("Figure mapped correctly. ")
 
-            return true;
+            // Crear seguimiento del tiempo.
+            setInterval(() => server.weatherStuff(), WeatherSettings.WEATHER_TIMEOUT);
+
+            // Crear topic para publicar el mapa.
+            await BrokerServices.initMapPublisher();
+            console.log("Map Broker connected. ")
+
+            // TEMPORAL: Cada cierto tiempo se publica el mapa actual.
+            setInterval(() => server.sendMapToDrones(), 5_000);
+
         } catch (err) {
-            console.error("ERROR: Trying to start: ", err);
-            return false;
+            console.error("ERROR while starting... ", err);
+            throw err;
+        }
+    }
+
+    public static handleClientAuthentication(server: ServerEntity, conn: net.Socket): void {
+        console.log(`New client. `);
+
+        conn.on('data', data => {
+            try {
+                console.log('data received: ' + data);
+                ServerImplementation.handleClientAuthenticationRequest(server, conn, data);
+                console.log("hola3")
+            } catch (err) {
+                console.error(`ERROR: Trying to handle client: ${err}`);
+            }
+        });
+
+        conn.on('end', () => {
+            try {
+                console.log('client disconnected');
+            } catch (err) {
+                console.error(`ERROR: Trying to handle END of the client: ${err}`);
+            }
+        });
+
+        conn.on('close', () => {
+            try {
+                ServerImplementation.handleClientAuthenticationClose(server, conn);
+            } catch (err) {
+                console.error(`ERROR: Trying to close client: ${err}`);
+            }
+        });
+    }
+
+    private static handleClientAuthenticationRequest(server: ServerEntity, conn: net.Socket, data: Buffer) {
+        try {
+            const cleanRequest = data.toString('utf-8');
+            console.log('clean request: ', cleanRequest);
+            const jsonParsedRequest = JSON.parse(cleanRequest);
+            console.log('parsed: ', jsonParsedRequest);
+            const dron_id = parseInt(jsonParsedRequest.id_registry);
+            const dron_token = jsonParsedRequest.token;
+            // validate token
+            /*
+            if (! RegistryTable.dronIdMatchesWithToken(dron_id, dron_token)) {
+                throw new Error("ERROR: Token don't match with Drone id");
+                !!! NO FUNCIONA
+            }*/
+
+            // map to figure
+            const newDrone = new DronEntity(dron_id, null);
+            if (!MapFiguraDronTable.mapNewDrone(newDrone)) {
+                throw new Error('ERROR: BAD DRONE MATCH. ')
+            }
+
+            // obtener target square
+            const targetSquare = server.getTargetSquareFromDronId(dron_id);
+            if (targetSquare == null || targetSquare == undefined) {
+                throw new Error("ERROR: getTargetSquareFromDronId returned null or undefined. ")
+            }
+
+            // enviar respuesta
+            const answer = {
+                target_position: targetSquare.toJson(),
+                ok: true
+            }
+            const answerJson = JSON.stringify(answer, null, 2);
+
+            const bytesResponse = Buffer.from(answerJson);
+            conn.write(bytesResponse.toString('utf-8'));
+            console.log("RESPUESTA ENVIADA. ");
+            conn.end();
+
+        } catch (err) {
+            console.log("hola1")
+            console.error('Error handling client request:', err.message, err.error);
+            console.log("hola2")
+            conn.write(errorMessages.AuthFailed);
+            conn.end();
+        }
+    }
+
+    private static handleClientAuthenticationClose(server: ServerEntity, conn: net.Socket): void {
+        console.log("Cerrar conn con el cliente. ");
+    }
+
+    public static getTargetSquareFromDronId(server: ServerEntity, dronId: number): SquareEntity | null {
+        try {
+            // leer fichero de la figura
+            return new SquareEntity(15, 15);
+        } catch (err) {
+            console.error(err.message);
+            return null;
+        }
+    }
+
+    public static subscribeToDrones(server: ServerEntity): void {
+        try {
+            console.log("subscribed to drones. ")
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
+    public static sendMapToDrones(server: ServerEntity): void {
+        try {
+            BrokerServices.publishMap(server.getMap())
+                .then(() => {
+                    console.log(`New map published.`);
+                })
+                .catch((err) => {
+                    console.log("ERROR: Publishing map. ", err);
+                });
+        } catch (err) {
+            console.error(err.message);
         }
     }
 
     public static async weatherStuff(server: ServerEntity) {
-        // Async function to be called every 10 seconds
-        console.log('Async task executed at ', new Date());
-        // Your asynchronous logic here
-        
-        try {
-            ServerImplementation.isWeatherValid()
-                .then((isValid) => {
-                    if (isValid) {
-                        console.log('Weather is valid!');
-                    }
-                    else {
-                        console.log('Weather is not valid!');
-                        ServerImplementation.handleBadWeather();
-                    }
-                })
-                .catch((err) => {
-                    console.log("Unexpected error in weatherStuff: ", err)
-                    ServerImplementation.handleBadWeather();
-                })
-                .finally(() => {
-                    console.log("End of async task")
-                });
+        console.log('Weather task executed. ');
 
+        try {
+            const isValid = await server.isWeatherValid();
+            if (!isValid) {
+                server.handleBadWeather();
+            }
         } catch (err) {
-            console.error(`ERROR: ${err}`);
-            console.log('Weather validation failed');
+            console.error(`ERROR: While weatherStuff: ${err}`)
         }
+
     }
 
-    public static handleClient(server: ServerEntity, conn: net.Socket) {
-        console.log('new client');
-
-        conn.on('data', data => {
-            console.log('data received: ' + data);
-            ServerImplementation.handleClientRequest(server, conn, data);
-        });
-
-        conn.on('end', () => {
-            console.log('client left');
-        });
-
-        conn.on('close', () => {
-            console.log('client closed connection');
-        });
-    }
-
-    public static async isWeatherValid(): Promise<boolean> {
+    public static async isWeatherValid(server: ServerEntity) {
         try {
-            const currentTemperature = await ServerImplementation.getCurrentTemperature();
-            const isValid = await ServerImplementation.isTemperatureValid(currentTemperature);
-            return isValid;
+            const currentTemperature = await WeatherServices.getCurrentTemperature();
+            const isWeatherValid = WeatherServices.isWeatherValid(currentTemperature);
+            return isWeatherValid;
         } catch (err) {
-            console.error(`ERROR: Trying to validate weather data: ${err}`);
+            console.error(`ERROR: While isWeatherValid: ${err}`)
             return false;
         }
     }
-    
 
-    private static async getCurrentTemperature(): Promise<number> {
-        return new Promise<number>((resolve, reject) => {
-            const HOST = '0.0.0.0';
-            const PORT = 5000;
-            const city = 'alacant';
-            const client = new net.Socket();
-            //console.log('Trying to connect to: ' + HOST + ':' + PORT);
-
-            client.connect(PORT, HOST, () => {
-                console.log('Connected to: ' + HOST + ':' + PORT);
-                client.write(city);
-            });
-
-            client.on('data', (data) => {
-                const response = data.toString('utf-8');
-                const responseJson = JSON.parse(response);
-                const temperature: number = parseInt(responseJson?.temperature);
-                if (!isNaN(temperature)) {
-                    client.destroy();
-                    resolve(temperature); // Resuelve la promesa con la temperatura recibida
-                } else {
-                    client.destroy();
-                    reject(new Error('Invalid temperature format')); // Rechaza la promesa con un error
-                }
-            });
-
-            client.on('close', () => {
-                console.log('Connection closed');
-            });
-
-            client.on('error', (err) => {
-                console.error('Error trying to get current temperature: ' + err);
-                client.destroy();
-                reject(-1); // Rechaza la promesa con un valor negativo
-            });
-        });
-    }
-
-
-    private static isTemperatureValid(temperature: number): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            try {
-                if (temperature >= ServerEntity.MIN_VALID_TEMPERATURE) {
-                    resolve(true);
-                } else {
-                    reject(false);
-                }
-            } catch (err) {
-                console.error(`ERROR: Trying to validate temperature: ${err}`);
-                reject(false);
-            }
-
-        });
-    }
-
-    private static handleBadWeather() {
-        console.log('Bad weather...');
-    }
-
-    public static handleClientRequest(server: ServerEntity, conn: net.Socket, data: Buffer) {
+    static async handleBadWeather(server: ServerEntity) {
         try {
-            const cleanRequest = data.toString('utf-8');
-            const jsonRequest = JSON.parse(cleanRequest);
-            const dron = {
-                id: jsonRequest.id,
-                targetSquareStr: jsonRequest.target,
-                currentSquareStr: jsonRequest.current
-            }
-            const targetSquare = SquareEntity.fromString(dron.targetSquareStr);
-            const currentSquare = SquareEntity.fromString(dron.currentSquareStr);
-            const pathEnded = targetSquare.equals(currentSquare);
-            let status: EStatus = EStatus.UNKNOWN;
-            if (pathEnded) {
-                status = EStatus.GOOD;
-            }
-            else {
-                status = EStatus.BAD;
-            }
-            const dronEntity = new DronEntity(dron.id, status, currentSquare);
-            currentSquare.setDron(dronEntity);
-            // se elimina el anterior. No funciona. Pero eliminaria todos los drones de una casulla
-            /* USAR awais per manejando los catch
-            server.getMap().getMapObject()
-                .delete(dronEntity.getId());
-            // se anade
-            const dronTemp = new DronEntity("a", EStatus.BAD, new SquareEntity(1, 1));
-            server.getMap()
-                .addDrone(currentSquare, "holi")
-                .then(() => {
-                    console.log('Drone added');
-                })
-                .catch((err) => {
-                    console.error('Error adding drone:', err);
-                })
-                */
+            console.log('Handling bad weather... ');
 
-            server.getMap().getMapObject()
-                .set(currentSquare.getHash(), currentSquare);
-            server.showMap();
-            displayData()
-                .then(() => {
-                    console.log('Data displayed');
-                })
-                .catch((err) => {
-                    console.error('Error displaying data:', err);
-                })
-                .finally(() => {
-                    console.log('End of displayData');
-                });
-
-            const bytesResponse = Buffer.from(cleanRequest + '\r\n' + cleanRequest);
-            conn.write(bytesResponse.toString('utf-8'));
-            conn.end();
-        }
-        catch (err) {
-            console.error(`ERROR: Trying to handle client request: ${err}`);
-        }
-
-    }
-
-    public static showMap(server: ServerEntity): void {
-        try {
-            console.log(server.getMap().toString());
-        }
-        catch (err) {
-            console.error(`ERROR: Trying to show map: ${err}`);
+            const droneR = new DronEntity(1234, null);
+            server.sendPostionToDrone()
+        } catch (err) {
+            console.error(`ERROR: While handleBadWeather: ${err}`)
         }
     }
-
-
-
 }
