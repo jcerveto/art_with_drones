@@ -31,23 +31,6 @@ const db = new sqlite3.Database(databaseName, (err) => {
             });
         }
 
-        // Insert 5 drones into the current table
-        for (let i = 1; i <= fakeDronesIds.length/2; i++) {
-            const currentRow = fakeRows[i];
-            const currentColumn = fakeColumns[i];
-            db.run(`
-                INSERT INTO
-                Current
-                    (pk_fk_current_registry_id, row, column, isActive) 
-                VALUES (?, ?, ?, ?)`
-                , [i, currentRow, currentColumn, true], function(err) {
-                if (err) {
-                    return console.error('Error inserting drone into current:', err.message);
-                }
-                console.log(`Inserted drone with Registry ID ${i} into current table.`);
-            });
-        }
-
         // Insert 5 drones into the map table
         for (let i = 1; i <= fakeDronesIds.length/2; i++) {
             const mapFigura = fakeFiguresDronesIds[i];
@@ -56,7 +39,7 @@ const db = new sqlite3.Database(databaseName, (err) => {
                 MapFiguraDron
                     (pk_fk_map_registry_id, uk_map_figura) 
                 VALUES (?, ?)`
-                , [i, mapFigura], function(err) {
+                , [null, mapFigura], function(err) {
                 if (err) {
                     return console.error('Error inserting drone into map:', err.message);
                 }

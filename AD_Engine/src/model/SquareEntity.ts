@@ -60,15 +60,19 @@ export class SquareEntity {
     }
 
     public toString(): string {
-        if (this.__drones === null || this.__drones.size == 0) {
+        const status: EStatus = this.getStatus();
+
+        if (status === EStatus.GOOD) {
             return '■';
         }
-
-        if (this.__drones.size > 1) { // hay varios drones en la misma posicion, al menos 1 estará mal colocado
-            return 'R';
+        if (status === EStatus.BAD) {
+            return '▤';
+        }
+        if (status === EStatus.UNKNOWN) {
+            return '□';
         }
 
-        return this.__drones[0]?.toString();    // Solo hay un dron
+        return '?';
     }
 
     public toJson(): string {
@@ -97,7 +101,7 @@ export class SquareEntity {
     }
 
     public getStatus(): EStatus {
-        if (this.__drones == null || this.__drones == undefined) {
+        if (this.__drones == null || this.__drones == undefined || this.__drones.size == 0) {
             return EStatus.UNKNOWN;
         }
         if (this.__drones.size > 1) {
@@ -111,15 +115,6 @@ export class SquareEntity {
         }
     }
 
-    public static fromString(str: string): SquareEntity {
-        try {
-            const parts = str.split('-');
-            return new SquareEntity(parseInt(parts[0]), parseInt(parts[1]));
-        }
-        catch (err) {
-            throw new Error('Invalid square format. string: ' + str);
-        }
-    }
 
     public static fromJson(json: any): SquareEntity {
         try {

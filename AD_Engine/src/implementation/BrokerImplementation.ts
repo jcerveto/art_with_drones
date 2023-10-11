@@ -6,9 +6,10 @@ import {SquareEntity} from "../model/SquareEntity";
 import {ServerEntity} from "../model/ServerEntity";
 import {EStatus} from "../model/EStatus";
 
+
 const kafka = new Kafka({
     clientId: "art_with_drones",
-    brokers: ['0.0.0.0:29092']
+    brokers: [`${BrokerSettings.BROKER_HOST}:${BrokerSettings.BROKER_PORT}`]
 });
 
 // ************************************************
@@ -22,14 +23,13 @@ export async function initMapPublisher() {
 }
 
 export async function publishMap(map: MapEntity) {
-    const topicMap = BrokerSettings.TOPIC_MAP;
     try {
         const mapJson = map.toJson();
         const objectToSend = {
             map: mapJson
         }
         await producerMap.send({
-            topic: topicMap,
+            topic: BrokerSettings.TOPIC_MAP,
             messages: [
                 {value: JSON.stringify(objectToSend)}
             ]
@@ -125,8 +125,7 @@ export async function suscribeToKeepAlive(server: ServerEntity , drone: DronEnti
                                     message
                                 }) => {
                 // handle new position
-                const value = JSON.parse(message.value.toString());
-                console.log(`Received message ${JSON.stringify(value)} on topic ${topic}, grupo: ${droneGroupId} partition ${partition}`);
+                const value = JSON.parse(`Mensaje recibido en el keep alive con topic=${topic}, partition=${partition}. ` + message.value.toString());
 
                 keepAliveReceived = true;
                 setTimeout(() => {

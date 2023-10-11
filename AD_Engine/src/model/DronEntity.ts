@@ -4,7 +4,7 @@ import { SquareEntity } from "./SquareEntity";
 
 export class DronEntity {
     private __id: number;
-    private __status: EStatus = EStatus.BAD;
+    private __status: EStatus = EStatus.UNKNOWN;
     private __target: SquareEntity | null = null;
 
     constructor(id: number, status: EStatus = null) {
@@ -45,12 +45,6 @@ export class DronEntity {
     }
 
     public toString(): string {
-        if (this.__status === EStatus.GOOD)
-            return 'G';
-        if (this.__status === EStatus.BAD)
-            return 'R';
-        if (this.__status === EStatus.UNKNOWN)
-            return '■';
-        return '■';
+        return `[${this.__id}]`;
     }
 }

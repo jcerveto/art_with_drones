@@ -2,12 +2,15 @@ import { MapEntity } from "./MapEntity";
 import {ServerImplementation} from "../implementation/ServerImplementation";
 import * as net from "net";
 import {SquareEntity} from "./SquareEntity";
+import {DronEntity} from "./DronEntity";
+import {WaitingPoolEntity} from "./WaitingPoolEntity";
 
 export class ServerEntity {
     private _host: string;
     private _port: number;
     private _map: MapEntity;
     private _serverNet: net.Server;
+    private _waitingPool: WaitingPoolEntity = new WaitingPoolEntity();
 
     public getHost(): string {
         return this._host;
@@ -25,6 +28,9 @@ export class ServerEntity {
         return this._serverNet;
     }
 
+    public getWaitingPool(): WaitingPoolEntity {
+        return this._waitingPool;
+    }
 
     public constructor(port: number, host: string) {
         this._host = host;
@@ -49,6 +55,14 @@ export class ServerEntity {
                 })
         } catch (err) {
             throw new Error('Error starting! Closing server...' + err);
+        }
+    }
+
+    public async startFigure(): Promise<void> {
+        try {
+            await ServerImplementation.startFigure(this);
+        } catch (err) {
+            console.error("Error starting figure!", err);
         }
     }
 
@@ -115,6 +129,15 @@ export class ServerEntity {
             ServerImplementation.sendDronesToBase(this);
         } catch (err) {
             console.error("ERROR: Trying to sendDronesToBase. ", err);
+        }
+    }
+
+    public readyToStartFigure(): boolean {
+        try {
+            return ServerImplementation.readyToStartFigure(this);
+        } catch (err) {
+            console.error("ERROR: Trying to readyToStartFigure. Retuning false ", err);
+            return false;
         }
     }
 }
