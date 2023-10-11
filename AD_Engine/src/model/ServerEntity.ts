@@ -94,19 +94,27 @@ export class ServerEntity {
         }
     }
 
-    public async isWeatherValid(): Promise<void> {
+    public async isWeatherValid(): Promise<boolean> {
         try {
-            await ServerImplementation.isWeatherValid(this);
+            return await ServerImplementation.isWeatherValid(this);
         } catch (err) {
             console.error("ERROR: Trying to weatherStuffs. ", err);
         }
     }
 
-    public handleBadWeather(): void {
+    public async handleBadWeather(): Promise<void> {
         try {
             await ServerImplementation.handleBadWeather(this);
         } catch (err) {
             console.error("ERROR: Trying to handleBadWeather. ", err);
+        }
+    }
+
+    public sendDronesToBase(): void {
+        try {
+            ServerImplementation.sendDronesToBase(this);
+        } catch (err) {
+            console.error("ERROR: Trying to sendDronesToBase. ", err);
         }
     }
 }

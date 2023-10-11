@@ -48,11 +48,10 @@ export class ServerImplementation {
     public static handleClientAuthentication(server: ServerEntity, conn: net.Socket): void {
         console.log(`New client. `);
 
-        conn.on('data', data => {
+        conn.on('data', async data => {
             try {
                 console.log('data received: ' + data);
-                ServerImplementation.handleClientAuthenticationRequest(server, conn, data);
-                console.log("hola3")
+                await ServerImplementation.handleClientAuthenticationRequest(server, conn, data);
             } catch (err) {
                 console.error(`ERROR: Trying to handle client: ${err}`);
             }
@@ -75,7 +74,7 @@ export class ServerImplementation {
         });
     }
 
-    private static handleClientAuthenticationRequest(server: ServerEntity, conn: net.Socket, data: Buffer) {
+    private static async handleClientAuthenticationRequest(server: ServerEntity, conn: net.Socket, data: Buffer) {
         try {
             const cleanRequest = data.toString('utf-8');
             console.log('clean request: ', cleanRequest);
@@ -102,22 +101,23 @@ export class ServerImplementation {
                 throw new Error("ERROR: getTargetSquareFromDronId returned null or undefined. ")
             }
 
+            // suscribirse al keep alive
+            await BrokerServices.suscribeToKeepAlive(server, newDrone);
+
             // enviar respuesta
             const answer = {
                 target_position: targetSquare.toJson(),
                 ok: true
             }
             const answerJson = JSON.stringify(answer, null, 2);
-
             const bytesResponse = Buffer.from(answerJson);
+
             conn.write(bytesResponse.toString('utf-8'));
             console.log("RESPUESTA ENVIADA. ");
             conn.end();
 
         } catch (err) {
-            console.log("hola1")
             console.error('Error handling client request:', err.message, err.error);
-            console.log("hola2")
             conn.write(errorMessages.AuthFailed);
             conn.end();
         }
@@ -163,9 +163,9 @@ export class ServerImplementation {
         console.log('Weather task executed. ');
 
         try {
-            const isValid = await server.isWeatherValid();
+            const isValid : boolean = await server.isWeatherValid();
             if (!isValid) {
-                server.handleBadWeather();
+                await server.handleBadWeather();
             }
         } catch (err) {
             console.error(`ERROR: While weatherStuff: ${err}`)
@@ -184,14 +184,28 @@ export class ServerImplementation {
         }
     }
 
-    static async handleBadWeather(server: ServerEntity) {
+    public static async handleBadWeather(server: ServerEntity) {
         try {
             console.log('Handling bad weather... ');
 
-            const droneR = new DronEntity(1234, null);
-            server.sendPostionToDrone()
+            server.sendDronesToBase();
         } catch (err) {
             console.error(`ERROR: While handleBadWeather: ${err}`)
+        }
+    }
+
+    public static sendDronesToBase(server: ServerEntity) {
+        try {
+            console.log('Sending drones to base... ');
+            server.getMap()
+                .getDrones().forEach(async (drone: DronEntity) => {
+                await BrokerServices.publishTargetPosition(drone, new SquareEntity(1, 1));
+                console.log(`Drone ${drone.getId()} sent to base. `);
+            });
+
+
+        } catch (err) {
+            console.error(`ERROR: While sendDronesToBase: ${err}`)
         }
     }
 }

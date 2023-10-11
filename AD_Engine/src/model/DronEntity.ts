@@ -7,7 +7,7 @@ export class DronEntity {
     private __status: EStatus = EStatus.BAD;
     private __target: SquareEntity | null = null;
 
-    constructor(id: number, status: EStatus) {
+    constructor(id: number, status: EStatus = null) {
         this.__id = id;
         this.__status = status;
     }
@@ -30,6 +30,10 @@ export class DronEntity {
 
     public getId(): number {
         return this.__id;
+    }
+
+    public equals(other: DronEntity): boolean {
+        return this.__id === other.__id;
     }
 
     public getHash(): string {

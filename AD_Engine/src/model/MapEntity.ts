@@ -1,4 +1,6 @@
 import {SquareEntity} from "./SquareEntity";
+import {DronEntity} from "./DronEntity";
+import {EStatus} from "./EStatus";
 
 export class MapEntity {
     public static SIZE: number = 20;
@@ -45,14 +47,16 @@ export class MapEntity {
         return buffer;
     }
 
-    public updateSquare(newSquare: SquareEntity): void {
-        const key = newSquare.getHash();
+    public getDrones(): Array<DronEntity> {
+        const drones: Array<DronEntity> = [];
 
-        if (this.__map.has(key)) {
-            this.__map.set(key, newSquare);
-        } else {
-            console.error(`Square with hash ${key} not found in the map.`);
-        }
+        this.__map.forEach((square: SquareEntity) => {
+            square.getDrones().forEach((drone: DronEntity) => {
+                drones.push(drone);
+            });
+        });
+
+        return drones;
     }
 
 
@@ -72,4 +76,52 @@ export class MapEntity {
 
     }
 
+    public isDroneInMap(obj: DronEntity): boolean {
+        const drones = this.getDrones();
+        drones.forEach((droneInMap: DronEntity) => {
+            if (droneInMap.equals(obj)) {
+                return true;
+            }
+        });
+
+        return false;
+    }
+
+    public getSquareByDrone(droneEntity: DronEntity): SquareEntity | null {
+        this.__map.forEach((square: SquareEntity) => {
+            square.getDrones().forEach((drone: DronEntity) => {
+                if (drone.equals(droneEntity)) {
+                    return square;
+                }
+            });
+        });
+
+        return null;
+    }
+
+    public moveDrone(droneEntity: DronEntity, squareEntity: SquareEntity) {
+        if (!this.isDroneInMap(droneEntity)) {
+            throw new Error(`ERROR: Drone ${droneEntity.getId()} not in map.`);
+        }
+
+        const currentSquare = this.getSquareByDrone(droneEntity);
+        if (currentSquare === null) {
+            throw new Error(`ERROR: Drone ${droneEntity.getId()} not in map.`);
+        }
+
+        currentSquare.removeDrone(droneEntity);
+        this.__map.forEach((square: SquareEntity) => {
+            if (square.equals(squareEntity)) {
+                square.addDrone(droneEntity);
+            }
+        });
+    }
+
+    public changeDroneStatus(drone: DronEntity, newState: EStatus): void {
+        try {
+            console.error("SE TIENE QUE CAMBIAR EL ESTADO. IMPLEMENTARLO!!!!")
+        } catch (err) {
+            console.error(`ERROR: While changing drone status: ${err}`)
+        }
+    }
 }
