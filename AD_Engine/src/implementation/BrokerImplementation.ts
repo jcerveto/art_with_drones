@@ -104,7 +104,7 @@ export async function handleKeepAliveStatus(server: ServerEntity, newDrone: Dron
     try {
         const droneId = newDrone.getId();
         const droneTopic = `${BrokerSettings.TOPIC_KEEP_ALIVE}_${droneId}`;
-        const droneGroupId = `keep_alive_dron_id=${droneId}`;
+        const droneGroupId = `keep_alive_dron_id_${droneId}`;
 
         const keepAliveConsumer = kafka.consumer({
             groupId: droneGroupId,
@@ -129,6 +129,7 @@ export async function handleKeepAliveStatus(server: ServerEntity, newDrone: Dron
                 console.error(`ERROR: Drone ${droneId} is not in map.`);
             }
 
+            server.sendMapToDrones();
         }
 
         const onNoMessageReceivedCallback = () => {
@@ -140,6 +141,8 @@ export async function handleKeepAliveStatus(server: ServerEntity, newDrone: Dron
             else {
                 console.error(`ERROR: Drone ${droneId} not in map.`)
             }
+
+            server.sendMapToDrones();
         }
 
         // poner un await y crear una promesa con timeout encapsulando el consumer.run
@@ -166,68 +169,3 @@ export async function handleKeepAliveStatus(server: ServerEntity, newDrone: Dron
     }
 }
 
-export async function handleCurrentPosition(server: ServerEntity, newDrone: DronEntity): Promise<NodeJS.Timeout> {
-    try {
-        const droneId = newDrone.getId();
-        const droneTopic = `${BrokerSettings.TOPIC_KEEP_ALIVE}_${droneId}`;
-        const droneGroupId = `keep_alive_dron_id=${droneId}`;
-
-        const keepAliveConsumer = kafka.consumer({
-            groupId: droneGroupId,
-        });
-
-
-        await keepAliveConsumer.connect();
-        await keepAliveConsumer.subscribe({
-            topic: droneTopic,
-            fromBeginning: false
-        });
-
-        let messageReceived = false;
-
-
-        const onMessageReceivedCallback = () => {
-            console.log('Se recibió un mensaje en el topic "keep_alive". Ejecutando el callback de condición cumplida...');
-            if (server.getMap().isDroneInMap(newDrone)) {
-                server.getMap().changeDroneStatus(newDrone, EKeepAliveStatus.ALIVE);
-                console.log(`dronId: ${droneId} now is ALIVE`);
-            } else {
-                console.error(`ERROR: Drone ${droneId} is not in map.`);
-            }
-
-        }
-
-        const onNoMessageReceivedCallback = () => {
-            console.log('No se recibió ningún mensaje en el topic "keep_alive". Ejecutando el callback de condición no cumplida...');
-            if (server.getMap().isDroneInMap(newDrone)) {
-                server.getMap().changeDroneStatus(newDrone, EKeepAliveStatus.DEAD);
-                console.log(`dronId: ${droneId} now is UNKNOWN`);
-            }
-            else {
-                console.error(`ERROR: Drone ${droneId} not in map.`)
-            }
-        }
-
-        // poner un await y crear una promesa con timeout encapsulando el consumer.run
-        keepAliveConsumer.run({
-            eachMessage: async ({ topic, partition, message }) => {
-                messageReceived = true;
-                onMessageReceivedCallback(); // Ejecuta el callback cuando se recibe un mensaje
-            },
-        });
-
-        const setIntervalId: NodeJS.Timeout = setInterval(() => {
-            if (!messageReceived) {
-                console.log('No se recibió ningún mensaje en el topic "keep_alive". Ejecutando el callback de condición no cumplida...');
-                onNoMessageReceivedCallback(); // Ejecuta el callback cuando no se recibe ningún mensaje
-            }
-
-            messageReceived = false; // Reinicia el estado del mensaje recibido para la próxima comprobación
-
-        }, BrokerSettings.KEEP_ALIVE_INTERVAL);
-
-        return setIntervalId;
-    } catch (err) {
-        console.error("ERROR: Trying to handleKeepAliveStatus. Exception was not raised. ", err.message);
-    }
-}

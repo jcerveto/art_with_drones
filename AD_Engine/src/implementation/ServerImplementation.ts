@@ -101,17 +101,16 @@ export class ServerImplementation {
             server.getWaitingPool().addDron(newDrone);
 
             // add to map (1, 1)
-            const square = new SquareEntity(1, 1);
-            server.getMap().addDrone(newDrone, square);
+            const firstSquare = new SquareEntity(1, 1);
+            server.getMap().addDrone(newDrone, firstSquare);
             console.log("New drone added to map with UNKNOWN status. ");
 
             // handle keep alive status.
             const keepAliveLoopId = await BrokerServices.handleKeepAliveStatus(server, newDrone);
             //console.log("Keep alive loop id: ", keepAliveLoopId);
 
-            // handle current position
-            //const targetPositionLoopId = await BrokerServices.handleCurrentPosition(server, newDrone);
-            //console.log("Target position loop id: ", targetPositionLoopId);
+            // handle target position publisher
+            await BrokerServices.publishTargetPosition(newDrone, firstSquare);
 
             // subscribe to current position
             await BrokerServices.subscribeToCurrentPosition(server, newDrone);
@@ -213,8 +212,8 @@ export class ServerImplementation {
     public static async handleBadWeather(server: ServerEntity) {
         try {
             console.log('Handling bad weather... ');
-
-            server.sendDronesToBase();
+            console.warn("Está comentado. Cambiarlo para release. ")
+            // server.sendDronesToBase();
         } catch (err) {
             console.error(`ERROR: While handleBadWeather: ${err}`)
         }

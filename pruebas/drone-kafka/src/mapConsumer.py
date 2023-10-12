@@ -5,7 +5,7 @@ from kafka import KafkaConsumer
 from json import loads
 
 import utils
-import brokerSettings
+import setEnviromentVariables
 
 
 def main():
@@ -15,7 +15,7 @@ def main():
 
     consumer = KafkaConsumer(
         topic_name,
-        bootstrap_servers=[f'{brokerSettings.getBrokerHost()}:{brokerSettings.getBrokerPort()}'],
+        bootstrap_servers=[f'{setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}'],
         auto_offset_reset='latest',
         enable_auto_commit=True,
         group_id=group_id,

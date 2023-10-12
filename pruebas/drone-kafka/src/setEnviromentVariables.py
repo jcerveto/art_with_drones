@@ -34,3 +34,14 @@ def getCurrentPositionTopic(droneId: int) -> str:
 def getMessageDelay() -> int:
     return int(os.getenv('MESSAGE_DELAY', 5))
 
+def getEngineHost() -> str:
+    return os.getenv('ENGINE_HOST', '0.0.0.0')
+
+def getEnginePort() -> int:
+    return int(os.getenv('ENGINE_PORT', 8080))
+
+def getEncoding() -> str:
+    return os.getenv('ENCODING', 'utf-8')
+
+def getMaxContentLength() -> int:
+    return int(os.getenv('MAX_CONTENT_LENGTH', 1024))

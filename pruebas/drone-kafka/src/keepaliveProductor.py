@@ -3,14 +3,14 @@ from kafka import KafkaProducer
 import time
 import json
 
-import brokerSettings
+import setEnviromentVariables
 
 
 def main(dronId: int):
-    keep_alive_topic = brokerSettings.getKeepAliveTopic(dronId)
+    keep_alive_topic = setEnviromentVariables.getKeepAliveTopic(dronId)
     print(f"Keep alive topic: {keep_alive_topic}")
 
-    producer = KafkaProducer(bootstrap_servers=[f"{brokerSettings.getBrokerHost()}:{brokerSettings.getBrokerPort()}"],
+    producer = KafkaProducer(bootstrap_servers=[f"{setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}"],
                              value_serializer=lambda x:
                              json.dumps(x).encode('utf-8'))
 
