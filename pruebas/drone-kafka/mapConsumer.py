@@ -5,20 +5,17 @@ from kafka import KafkaConsumer
 from json import loads
 
 import utils
+import brokerSettings
 
 
-def main(argv):
+def main():
 
-    if len(argv) != 3:
-        print("Usage: python consumer_kafka.py <topic_name> <group_id>")
-        sys.exit(1)
-
-    topic_name = argv[1]
-    group_id = argv[2]
+    topic_name = brokerSettings.getMapTopic()
+    group_id = f"group_{brokerSettings.getMapTopic()}"
 
     consumer = KafkaConsumer(
         topic_name,
-        bootstrap_servers=['localhost:29092'],
+        bootstrap_servers=[f'{brokerSettings.getBrokerHost()}:{brokerSettings.getBrokerPort()}'],
         auto_offset_reset='latest',
         enable_auto_commit=True,
         group_id=group_id,
@@ -28,5 +25,6 @@ def main(argv):
     for message in consumer:
         message = message.value
         utils.handle_map(message)
+
 if __name__ == "__main__":
-    main(sys.argv)
+    main()

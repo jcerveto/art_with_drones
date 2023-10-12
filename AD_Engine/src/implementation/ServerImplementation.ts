@@ -92,16 +92,29 @@ export class ServerImplementation {
 
 
             // ver si hay hueco y mapear to figure
-            const newDrone = new DronEntity(dron_id, null);
-            if (!MapFiguraDronTable.mapNewDrone(newDrone)) {
+            const newDrone = new DronEntity(dron_id);
+            if (! await MapFiguraDronTable.mapNewDrone(newDrone)) {
                 throw new Error('ERROR: BAD DRONE MATCH. ')
             }
 
             // añadir a la waiting pool
             server.getWaitingPool().addDron(newDrone);
 
-            // suscribirse al keep alive
-            // await BrokerServices.suscribeToKeepAlive(server, newDrone);
+            // add to map (1, 1)
+            const square = new SquareEntity(1, 1);
+            server.getMap().addDrone(newDrone, square);
+            console.log("New drone added to map with UNKNOWN status. ");
+
+            // handle keep alive status.
+            const keepAliveLoopId = await BrokerServices.handleKeepAliveStatus(server, newDrone);
+            //console.log("Keep alive loop id: ", keepAliveLoopId);
+
+            // handle current position
+            //const targetPositionLoopId = await BrokerServices.handleCurrentPosition(server, newDrone);
+            //console.log("Target position loop id: ", targetPositionLoopId);
+
+            // subscribe to current position
+            await BrokerServices.subscribeToCurrentPosition(server, newDrone);
 
             // enviar respuesta
             const answer = {
@@ -211,7 +224,7 @@ export class ServerImplementation {
         try {
             console.log('Sending drones to base... ');
             server.getMap()
-                .getDrones().forEach(async (drone: DronEntity) => {
+                .getAliveDrones().forEach(async (drone: DronEntity) => {
                 await BrokerServices.publishTargetPosition(drone, new SquareEntity(1, 1));
                 console.log(`Drone ${drone.getId()} sent to base. `);
             });

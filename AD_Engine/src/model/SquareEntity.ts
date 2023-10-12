@@ -1,5 +1,6 @@
 import {DronEntity} from "./DronEntity";
 import {EStatus, getEStatusToString} from "./EStatus";
+import {EKeepAliveStatus} from "./EKeepAliveStatus";
 
 
 export class SquareEntity {
@@ -21,8 +22,38 @@ export class SquareEntity {
         this.__column = column;
     }
 
-    public getDrones(): Map<string, DronEntity> {
-        return this.__drones;
+    public getAliveDrones(): Array<DronEntity> {
+        let drones: Array<DronEntity> = [];
+
+        this.__drones.forEach((drone: DronEntity) => {
+            if (drone.getStatus() == EKeepAliveStatus.ALIVE) {
+                drones.push(drone);
+            }
+        });
+
+        return drones;
+    }
+
+    public getDeadDrones(): Array<DronEntity> {
+        let drones: Array<DronEntity> = [];
+
+        this.__drones.forEach((drone: DronEntity) => {
+            if (drone.getStatus() == EKeepAliveStatus.DEAD) {
+                drones.push(drone);
+            }
+        });
+
+        return drones;
+    }
+
+    public getAllDrones(): Array<DronEntity> {
+        let dronesArray: Array<DronEntity> = [];
+        
+        this.__drones.forEach((drone: DronEntity) => {
+            dronesArray.push(drone);
+        });
+
+        return dronesArray;
     }
 
     public getRow(): number {
@@ -101,10 +132,14 @@ export class SquareEntity {
     }
 
     public getStatus(): EStatus {
-        if (this.__drones == null || this.__drones == undefined || this.__drones.size == 0) {
+        if (this.getAliveDrones() == null || this.getAliveDrones() == undefined) {
             return EStatus.UNKNOWN;
         }
-        if (this.__drones.size > 1) {
+
+        if (this.getAliveDrones().length == 0) {
+            return EStatus.UNKNOWN;
+        }
+        if (this.getAliveDrones().length > 1) {
             return EStatus.BAD;
         }
 

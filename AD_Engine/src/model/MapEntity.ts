@@ -1,6 +1,6 @@
 import {SquareEntity} from "./SquareEntity";
 import {DronEntity} from "./DronEntity";
-import {EStatus} from "./EStatus";
+import {EKeepAliveStatus} from "./EKeepAliveStatus";
 
 export class MapEntity {
     public static SIZE: number = 20;
@@ -47,11 +47,35 @@ export class MapEntity {
         return buffer;
     }
 
-    public getDrones(): Array<DronEntity> {
+    public getAliveDrones(): Array<DronEntity> {
         const drones: Array<DronEntity> = [];
 
         this.__map.forEach((square: SquareEntity) => {
-            square.getDrones().forEach((drone: DronEntity) => {
+            square.getAliveDrones().forEach((drone: DronEntity) => {
+                drones.push(drone);
+            });
+        });
+
+        return drones;
+    }
+
+    public getDeadDrones(): Array<DronEntity> {
+        const drones: Array<DronEntity> = [];
+
+        this.__map.forEach((square: SquareEntity) => {
+            square.getDeadDrones().forEach((drone: DronEntity) => {
+                drones.push(drone);
+            });
+        });
+
+        return drones;
+    }
+
+    public getAllDrones(): Array<DronEntity> {
+        const drones: Array<DronEntity> = [];
+
+        this.__map.forEach((square: SquareEntity) => {
+            square.getAllDrones().forEach((drone: DronEntity) => {
                 drones.push(drone);
             });
         });
@@ -77,19 +101,21 @@ export class MapEntity {
     }
 
     public isDroneInMap(obj: DronEntity): boolean {
-        const drones = this.getDrones();
+        const drones = this.getAllDrones();
+
+        let found = false;
         drones.forEach((droneInMap: DronEntity) => {
             if (droneInMap.equals(obj)) {
-                return true;
+                found = true;
             }
         });
 
-        return false;
+        return found;
     }
 
     public getSquareByDrone(droneEntity: DronEntity): SquareEntity | null {
         this.__map.forEach((square: SquareEntity) => {
-            square.getDrones().forEach((drone: DronEntity) => {
+            square.getAllDrones().forEach((drone: DronEntity) => {
                 if (drone.equals(droneEntity)) {
                     return square;
                 }
@@ -117,11 +143,32 @@ export class MapEntity {
         });
     }
 
-    public changeDroneStatus(drone: DronEntity, newState: EStatus): void {
+    public changeDroneStatus(drone: DronEntity, newState: EKeepAliveStatus): void {
         try {
-            console.error("SE TIENE QUE CAMBIAR EL ESTADO. IMPLEMENTARLO!!!!")
+            this.__map.forEach((square: SquareEntity) => {
+                square.getAllDrones().forEach((droneInMap: DronEntity) => {
+                    if (droneInMap.equals(drone)) {
+                        droneInMap.setStatus(newState);
+                        return;
+                    }
+                });
+            });
+
+            //throw new RangeError(`ERROR: Drone ${drone.getId()} not in map.`);
         } catch (err) {
             console.error(`ERROR: While changing drone status: ${err}`)
         }
+    }
+
+    public addDrone(drone: DronEntity, square: SquareEntity): void {
+        if (this.isDroneInMap(drone)) {
+            console.warn(`WARNING: Drone ${drone.getId()} already in map. Continuing...`);
+        }
+
+        this.__map.forEach((squareInMap: SquareEntity) => {
+            if (squareInMap.equals(square)) {
+                squareInMap.addDrone(drone);
+            }
+        });
     }
 }

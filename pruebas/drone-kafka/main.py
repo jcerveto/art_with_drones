@@ -1,14 +1,29 @@
 import sys
 import threading
 import time
-import mapConsumer
+import os
 
+import mapConsumer
+import keepaliveProductor
 
 def main(argv):
-    print("Hello, World!")
+    if len(argv) != 1:
+        print("Usage: python main.py")
+        sys.exit(1)
     
-    mapConsumerThread = threading.Thread(target=mapConsumer.main, args=(argv,))
+    print(f"PID: {os.getpid()}")
+
+
+    # PRINT MAP THREAD
+    mapConsumerThread = threading.Thread(target=mapConsumer.main, args=())
     mapConsumerThread.start()
+
+    # PRODUCE KEEP ALIVE THREAD
+    keepaliveProductorThread = threading.Thread(target=keepaliveProductor.main, args=(10,))
+    keepaliveProductorThread.start()
+
+    # MAIN THREAD
+
     for i in range(10):
         print("Hello, World!")
         time.sleep(1)
