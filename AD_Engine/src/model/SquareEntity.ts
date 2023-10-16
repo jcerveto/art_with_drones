@@ -1,5 +1,6 @@
 import {DronEntity} from "./DronEntity";
 import {EStatus, getEStatusToString} from "./EStatus";
+import {EKeepAliveStatus} from "./EKeepAliveStatus";
 
 
 export class SquareEntity {
@@ -21,8 +22,38 @@ export class SquareEntity {
         this.__column = column;
     }
 
-    public getDrones(): Map<string, DronEntity> {
-        return this.__drones;
+    public getAliveDrones(): Array<DronEntity> {
+        let drones: Array<DronEntity> = [];
+
+        this.__drones.forEach((drone: DronEntity) => {
+            if (drone.getStatus() == EKeepAliveStatus.ALIVE) {
+                drones.push(drone);
+            }
+        });
+
+        return drones;
+    }
+
+    public getDeadDrones(): Array<DronEntity> {
+        let drones: Array<DronEntity> = [];
+
+        this.__drones.forEach((drone: DronEntity) => {
+            if (drone.getStatus() == EKeepAliveStatus.DEAD) {
+                drones.push(drone);
+            }
+        });
+
+        return drones;
+    }
+
+    public getAllDrones(): Array<DronEntity> {
+        let dronesArray: Array<DronEntity> = [];
+        
+        this.__drones.forEach((drone: DronEntity) => {
+            dronesArray.push(drone);
+        });
+
+        return dronesArray;
     }
 
     public getRow(): number {
@@ -60,15 +91,19 @@ export class SquareEntity {
     }
 
     public toString(): string {
-        if (this.__drones === null || this.__drones.size == 0) {
+        const status: EStatus = this.getStatus();
+
+        if (status === EStatus.GOOD) {
             return '■';
         }
-
-        if (this.__drones.size > 1) { // hay varios drones en la misma posicion, al menos 1 estará mal colocado
-            return 'R';
+        if (status === EStatus.BAD) {
+            return '▤';
+        }
+        if (status === EStatus.UNKNOWN) {
+            return '□';
         }
 
-        return this.__drones[0]?.toString();    // Solo hay un dron
+        return '?';
     }
 
     public toJson(): string {
@@ -97,10 +132,14 @@ export class SquareEntity {
     }
 
     public getStatus(): EStatus {
-        if (this.__drones == null || this.__drones == undefined) {
+        if (this.getAliveDrones() == null || this.getAliveDrones() == undefined) {
             return EStatus.UNKNOWN;
         }
-        if (this.__drones.size > 1) {
+
+        if (this.getAliveDrones().length == 0) {
+            return EStatus.UNKNOWN;
+        }
+        if (this.getAliveDrones().length > 1) {
             return EStatus.BAD;
         }
 
@@ -111,15 +150,6 @@ export class SquareEntity {
         }
     }
 
-    public static fromString(str: string): SquareEntity {
-        try {
-            const parts = str.split('-');
-            return new SquareEntity(parseInt(parts[0]), parseInt(parts[1]));
-        }
-        catch (err) {
-            throw new Error('Invalid square format. string: ' + str);
-        }
-    }
 
     public static fromJson(json: any): SquareEntity {
         try {

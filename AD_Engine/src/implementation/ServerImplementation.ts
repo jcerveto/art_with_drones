@@ -8,6 +8,10 @@ import {SquareEntity} from "../model/SquareEntity";
 import * as BrokerServices from "./BrokerImplementation";
 import * as WeatherServices from "./WeatherImplementation";
 import * as WeatherSettings from "../settings/WeatherSettings";
+import {RegistryTable} from "../model/RegistryTable";
+import * as BrokerSettings from "../settings/BrokerSettings";
+import {FigureImplementation} from "./FigureImplementation";
+import {MapFiguraDronTableImplementation} from "./MapFiguraDronTableImplementation";
 
 
 export class ServerImplementation {
@@ -23,21 +27,15 @@ export class ServerImplementation {
                     console.log('listening on 0.0.0.0:' + server.getPort());
                 });
 
-            // Cargar figura a dibujar
-            if (!MapFiguraDronTable.createEmptyFigure(server.getMap())) {
-                throw new Error('No se ha podido cargar la figura mapeada. ')
-            }
-            console.log("Figure mapped correctly. ")
-
             // Crear seguimiento del tiempo.
-            setInterval(() => server.weatherStuff(), WeatherSettings.WEATHER_TIMEOUT);
+            // setInterval(() => server.weatherStuff(), WeatherSettings.WEATHER_TIMEOUT);
 
             // Crear topic para publicar el mapa.
             await BrokerServices.initMapPublisher();
             console.log("Map Broker connected. ")
 
             // TEMPORAL: Cada cierto tiempo se publica el mapa actual.
-            setInterval(() => server.sendMapToDrones(), 5_000);
+            // setInterval(() => server.sendMapToDrones(), 5_000);
 
         } catch (err) {
             console.error("ERROR while starting... ", err);
@@ -52,6 +50,10 @@ export class ServerImplementation {
             try {
                 console.log('data received: ' + data);
                 await ServerImplementation.handleClientAuthenticationRequest(server, conn, data);
+                console.log("Current waiting pool length: ", server.getWaitingPool().getDrones().length);
+                if (server.readyToStartFigure()) {
+                    await server.startFigure();
+                }
             } catch (err) {
                 console.error(`ERROR: Trying to handle client: ${err}`);
             }
@@ -81,44 +83,67 @@ export class ServerImplementation {
             const jsonParsedRequest = JSON.parse(cleanRequest);
             console.log('parsed: ', jsonParsedRequest);
             const dron_id = parseInt(jsonParsedRequest.id_registry);
-            const dron_token = jsonParsedRequest.token;
-            // validate token
-            /*
-            if (! RegistryTable.dronIdMatchesWithToken(dron_id, dron_token)) {
-                throw new Error("ERROR: Token don't match with Drone id");
-                !!! NO FUNCIONA
-            }*/
+            const dron_token = jsonParsedRequest?.token;
 
-            // map to figure
-            const newDrone = new DronEntity(dron_id, null);
-            if (!MapFiguraDronTable.mapNewDrone(newDrone)) {
+            // validate token
+            if (! await RegistryTable.dronIdMatchesWithToken(dron_id, dron_token)) {
+                throw new Error(`ERROR: Token don't match with Drone id: ${dron_id} and token: ${dron_token}.`);
+            }
+
+
+            // ver si hay hueco y mapear to figure
+            const newDrone = new DronEntity(dron_id);
+            if (! await MapFiguraDronTable.mapNewDrone(newDrone)) {
                 throw new Error('ERROR: BAD DRONE MATCH. ')
             }
 
-            // obtener target square
-            const targetSquare = server.getTargetSquareFromDronId(dron_id);
-            if (targetSquare == null || targetSquare == undefined) {
-                throw new Error("ERROR: getTargetSquareFromDronId returned null or undefined. ")
-            }
+            // añadir a la waiting pool
+            server.getWaitingPool().addDron(newDrone);
 
-            // suscribirse al keep alive
-            await BrokerServices.suscribeToKeepAlive(server, newDrone);
+            // add to map (1, 1)
+            const firstSquare = new SquareEntity(1, 1);
+            server.getMap().addDrone(newDrone, firstSquare);
+            console.log("New drone added to map with UNKNOWN status. ");
+
+            // handle keep alive status.
+            const keepAliveLoopId = await BrokerServices.handleKeepAliveStatus(server, newDrone);
+            //console.log("Keep alive loop id: ", keepAliveLoopId);
+
+            // handle target position publisher
+            await BrokerServices.publishTargetPosition(newDrone, firstSquare);
+
+            // subscribe to current position
+            await BrokerServices.subscribeToCurrentPosition(server, newDrone);
 
             // enviar respuesta
             const answer = {
-                target_position: targetSquare.toJson(),
-                ok: true
+                ok: true,
+
+                message: `Successful authentication. Subscribe to topics: 
+                    'start',
+                    '${BrokerSettings.TOPIC_TARGET_POSITION}_${dron_id}',
+                    '${BrokerSettings.TOPIC_MAP}'. Publish to topic: 
+                    '${BrokerSettings.TOPIC_KEEP_ALIVE}_${dron_id}
+                     `
             }
             const answerJson = JSON.stringify(answer, null, 2);
             const bytesResponse = Buffer.from(answerJson);
+            const encodedResponse = bytesResponse.toString('utf-8');
 
-            conn.write(bytesResponse.toString('utf-8'));
+            conn.write(encodedResponse);
             console.log("RESPUESTA ENVIADA. ");
             conn.end();
 
         } catch (err) {
             console.error('Error handling client request:', err.message, err.error);
-            conn.write(errorMessages.AuthFailed);
+            const answer = {
+                ok: false,
+                message: errorMessages.AuthFailed
+            };
+            const answerJson = JSON.stringify(answer);
+            const bytesResponse = Buffer.from(answerJson);
+            const encodedResponse = bytesResponse.toString('utf-8');
+            conn.write(encodedResponse);
             conn.end();
         }
     }
@@ -145,15 +170,9 @@ export class ServerImplementation {
         }
     }
 
-    public static sendMapToDrones(server: ServerEntity): void {
+    public static async sendMapToDrones(server: ServerEntity) {
         try {
-            BrokerServices.publishMap(server.getMap())
-                .then(() => {
-                    console.log(`New map published.`);
-                })
-                .catch((err) => {
-                    console.log("ERROR: Publishing map. ", err);
-                });
+            await BrokerServices.publishMap(server.getMap());
         } catch (err) {
             console.error(err.message);
         }
@@ -187,7 +206,7 @@ export class ServerImplementation {
     public static async handleBadWeather(server: ServerEntity) {
         try {
             console.log('Handling bad weather... ');
-
+            console.warn("Está comentado. Cambiarlo para release. ")
             server.sendDronesToBase();
         } catch (err) {
             console.error(`ERROR: While handleBadWeather: ${err}`)
@@ -198,7 +217,7 @@ export class ServerImplementation {
         try {
             console.log('Sending drones to base... ');
             server.getMap()
-                .getDrones().forEach(async (drone: DronEntity) => {
+                .getAliveDrones().forEach(async (drone: DronEntity) => {
                 await BrokerServices.publishTargetPosition(drone, new SquareEntity(1, 1));
                 console.log(`Drone ${drone.getId()} sent to base. `);
             });
@@ -206,6 +225,31 @@ export class ServerImplementation {
 
         } catch (err) {
             console.error(`ERROR: While sendDronesToBase: ${err}`)
+        }
+    }
+
+    public static async startFigure(server: ServerEntity) {
+        try {
+            console.log('Emptying waiting pool... ');
+            server.getWaitingPool().emptyPool();
+            console.log('Starting figure... ');
+            const figureIds: Array<number> = await FigureImplementation.loadFigureIds();
+            await MapFiguraDronTableImplementation.fillWithNewFigure(figureIds);
+            console.log("Figure ids stores correctly. ")
+            server.start();
+        } catch (err) {
+            console.error(`ERROR: While startFigure. Re-Raised: ${err}`)
+            throw err;
+        }
+
+    }
+
+    static readyToStartFigure(server: ServerEntity): boolean {
+        try {
+            return server.getWaitingPool().getDrones().length == 3;
+        } catch (err) {
+            console.error(`ERROR: While readyToStartFigure. Re-Raised: ${err}`)
+            throw err;
         }
     }
 }

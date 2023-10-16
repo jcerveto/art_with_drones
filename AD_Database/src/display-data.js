@@ -24,20 +24,6 @@ const db = new sqlite3.Database(databaseName, (err) => {
             console.log("============================================")
         });
 
-        // Mostrar datos de la tabla Current
-        db.all('SELECT * FROM Current', [], (err, rows) => {
-            if (err) {
-                throw err;
-            }
-            console.log('Data from Current table:');
-            console.log("Show row per row: ")
-            rows.forEach((row) => {
-                console.log(`Registry ID: ${row.pk_fk_current_registry_id}, Row: ${row.row}, Column: ${row.column}`);
-            });
-            console.log("Show as JSON: /n: ", JSON.stringify(rows, null, 2))
-            console.log("============================================")
-        });
-
         // Mostrar datos de la tabla Registry
         db.all('SELECT * FROM Registry', [], (err, rows) => {
             if (err) {

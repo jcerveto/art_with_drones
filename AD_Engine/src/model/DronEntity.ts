@@ -1,22 +1,21 @@
-import { EStatus } from "./EStatus"
 import { SquareEntity } from "./SquareEntity";
+import {EKeepAliveStatus} from "./EKeepAliveStatus";
 
 
 export class DronEntity {
     private __id: number;
-    private __status: EStatus = EStatus.BAD;
+    private __status: EKeepAliveStatus = EKeepAliveStatus.DEAD;
     private __target: SquareEntity | null = null;
 
-    constructor(id: number, status: EStatus = null) {
+    constructor(id: number) {
         this.__id = id;
-        this.__status = status;
     }
 
-    public getStatus(): EStatus {
+    public getStatus(): EKeepAliveStatus {
         return this.__status;
     }
 
-    public setStatus(status: EStatus) {
+    public setStatus(status: EKeepAliveStatus) {
         this.__status = status;
     }
 
@@ -33,7 +32,7 @@ export class DronEntity {
     }
 
     public equals(other: DronEntity): boolean {
-        return this.__id === other.__id;
+        return this.__id == other.__id;
     }
 
     public getHash(): string {
@@ -45,12 +44,6 @@ export class DronEntity {
     }
 
     public toString(): string {
-        if (this.__status === EStatus.GOOD)
-            return 'G';
-        if (this.__status === EStatus.BAD)
-            return 'R';
-        if (this.__status === EStatus.UNKNOWN)
-            return '■';
-        return '■';
+        return `[${this.__id}]`;
     }
 }

@@ -24,8 +24,8 @@ client.on('connect', () => {
 
      */
     const message = {
-        id_registry: 0,
-        token: "hola"
+        id_registry: 10,
+        token: "token-1"
     }
     const messageJson = JSON.stringify(message);
     client.write(messageJson.toString('utf-8')); // No es necesario convertir a UTF-8
