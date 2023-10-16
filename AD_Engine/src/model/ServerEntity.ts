@@ -92,9 +92,9 @@ export class ServerEntity {
         }
     }
 
-    public sendMapToDrones(): void {
+    public async sendMapToDrones() {
         try {
-            ServerImplementation.sendMapToDrones(this);
+            await ServerImplementation.sendMapToDrones(this);
         } catch (err) {
             console.error(err.message);
         }

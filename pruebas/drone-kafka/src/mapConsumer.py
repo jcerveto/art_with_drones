@@ -7,11 +7,10 @@ from json import loads
 import utils
 import setEnviromentVariables
 
-
 def main():
 
-    topic_name = brokerSettings.getMapTopic()
-    group_id = f"group_{brokerSettings.getMapTopic()}"
+    topic_name = setEnviromentVariables.getMapTopic()
+    group_id = f"group_{setEnviromentVariables.getMapTopic()}"
 
     consumer = KafkaConsumer(
         topic_name,

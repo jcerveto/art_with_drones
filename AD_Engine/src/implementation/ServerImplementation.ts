@@ -28,14 +28,14 @@ export class ServerImplementation {
                 });
 
             // Crear seguimiento del tiempo.
-            setInterval(() => server.weatherStuff(), WeatherSettings.WEATHER_TIMEOUT);
+            // setInterval(() => server.weatherStuff(), WeatherSettings.WEATHER_TIMEOUT);
 
             // Crear topic para publicar el mapa.
             await BrokerServices.initMapPublisher();
             console.log("Map Broker connected. ")
 
             // TEMPORAL: Cada cierto tiempo se publica el mapa actual.
-            setInterval(() => server.sendMapToDrones(), 5_000);
+            // setInterval(() => server.sendMapToDrones(), 5_000);
 
         } catch (err) {
             console.error("ERROR while starting... ", err);
@@ -170,15 +170,9 @@ export class ServerImplementation {
         }
     }
 
-    public static sendMapToDrones(server: ServerEntity): void {
+    public static async sendMapToDrones(server: ServerEntity) {
         try {
-            BrokerServices.publishMap(server.getMap())
-                .then(() => {
-                    console.log(`New map published.`);
-                })
-                .catch((err) => {
-                    console.log("ERROR: Publishing map. ", err);
-                });
+            await BrokerServices.publishMap(server.getMap());
         } catch (err) {
             console.error(err.message);
         }
@@ -213,7 +207,7 @@ export class ServerImplementation {
         try {
             console.log('Handling bad weather... ');
             console.warn("Está comentado. Cambiarlo para release. ")
-            // server.sendDronesToBase();
+            server.sendDronesToBase();
         } catch (err) {
             console.error(`ERROR: While handleBadWeather: ${err}`)
         }

@@ -114,15 +114,16 @@ export class MapEntity {
     }
 
     public getSquareByDrone(droneEntity: DronEntity): SquareEntity | null {
+        let currentSquare: SquareEntity = null;
         this.__map.forEach((square: SquareEntity) => {
             square.getAllDrones().forEach((drone: DronEntity) => {
                 if (drone.equals(droneEntity)) {
-                    return square;
+                    currentSquare = square;
                 }
             });
         });
 
-        return null;
+        return currentSquare;
     }
 
     public moveDrone(droneEntity: DronEntity, squareEntity: SquareEntity) {
@@ -135,12 +136,8 @@ export class MapEntity {
             throw new Error(`ERROR: Drone ${droneEntity.getId()} not in map.`);
         }
 
-        currentSquare.removeDrone(droneEntity);
-        this.__map.forEach((square: SquareEntity) => {
-            if (square.equals(squareEntity)) {
-                square.addDrone(droneEntity);
-            }
-        });
+        this.removeDrone(droneEntity);
+        this.addDrone(droneEntity, squareEntity);
     }
 
     public changeDroneStatus(drone: DronEntity, newState: EKeepAliveStatus): void {
@@ -162,12 +159,27 @@ export class MapEntity {
 
     public addDrone(drone: DronEntity, square: SquareEntity): void {
         if (this.isDroneInMap(drone)) {
-            console.warn(`WARNING: Drone ${drone.getId()} already in map. Continuing...`);
+            console.warn(`WARNING: Can not add Drone ${drone.getId()} already in map. Continuing...`);
         }
 
         this.__map.forEach((squareInMap: SquareEntity) => {
             if (squareInMap.equals(square)) {
                 squareInMap.addDrone(drone);
+            }
+        });
+    }
+
+    public removeDrone(drone: DronEntity): void {
+        if (! this.isDroneInMap(drone)) {
+            console.warn(`WARNING: Can not remove Drone ${drone.getId()} not in map. Continuing...`);
+        }
+
+        const squareReference = this.getSquareByDrone(drone);
+
+        this.__map.forEach((squareInMap: SquareEntity) => {
+            if (squareInMap.equals(squareReference) || JSON.stringify(squareInMap) === JSON.stringify(squareReference)) {
+                console.log("BORRANDO...")
+                squareInMap.removeDrone(drone);
             }
         });
     }

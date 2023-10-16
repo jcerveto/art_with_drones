@@ -50,5 +50,7 @@ class DroneMovement:
             if self.x == x and self.y == y:
                 self.status = True
 
-            client.send_data(self)
+            #client.send_data(self)
             time.sleep(2)
+
+

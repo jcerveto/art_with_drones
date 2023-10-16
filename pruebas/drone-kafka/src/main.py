@@ -7,8 +7,8 @@ import mapConsumer
 import keepaliveProductor
 
 def main(argv):
-    if len(argv) != 1:
-        print("Usage: python main.py")
+    if len(argv) != 2:
+        print("Usage: python main.py <drone_id>")
         sys.exit(1)
     
     print(f"PID: {os.getpid()}")
@@ -19,7 +19,7 @@ def main(argv):
     mapConsumerThread.start()
 
     # PRODUCE KEEP ALIVE THREAD
-    keepaliveProductorThread = threading.Thread(target=keepaliveProductor.main, args=(10,))
+    keepaliveProductorThread = threading.Thread(target=keepaliveProductor.main, args=(int(argv[1]),))
     keepaliveProductorThread.start()
 
     # MAIN THREAD

@@ -1,4 +1,5 @@
 import json
+import coordinateMovement
 
 counter = 0
 
@@ -132,7 +133,7 @@ es un arreglo de pasos [(x1, y1), (x2, y2)...]
 """
 
 
-def get_path(x, y, end_x, end_y):
+def get_path(x, y, end_x, end_y) -> list:
     # perdón por la recursividad
     if x == end_x and y == end_y:
         return []
@@ -142,3 +143,27 @@ def get_path(x, y, end_x, end_y):
 
     return [(dx, dy)] + get_path(x + dx, y + dy, end_x, end_y)
 
+def get_path_temp(start: coordinateMovement.CoordinateMovement, end: coordinateMovement.CoordinateMovement) -> list:
+    """
+    Encuentra el camino desde el punto inicial hasta el punto final en forma de lista de objetos CoordinateMovement.
+
+    Args:
+        start (coordinateMovement.CoordinateMovement): Objeto CoordinateMovement que representa el punto inicial.
+        end (coordinateMovement.CoordinateMovement): Objeto CoordinateMovement que representa el punto final.
+
+    Returns:
+        list: Lista de objetos CoordinateMovement que forman el camino desde el punto inicial hasta el punto final.
+    """
+    path = []  # Inicializar la lista de puntos del camino
+    while start != end:
+        path.append(coordinateMovement.CoordinateMovement(start.row, start.col))  # Agregar el punto actual al camino
+        if start.row < end.row:
+            start.row += 1
+        elif start.row > end.row:
+            start.row -= 1
+        if start.col < end.col:
+            start.col += 1
+        elif start.col > end.col:
+            start.col -= 1
+    path.append(end)  # Agregar el punto final al camino
+    return path

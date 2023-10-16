@@ -44,7 +44,7 @@ export async function publishMap(map: MapEntity) {
 export async function subscribeToCurrentPosition(server: ServerEntity, drone: DronEntity) {
     const droneId = drone.getId();
     const droneTopic = `${BrokerSettings.TOPIC_CURRENT_POSITION}_${droneId}`;
-    const droneGroupId = `current_position_dron_id=${droneId}`;
+    const droneGroupId = `current_position=${droneId}`;
 
     const consumer = kafka.consumer({
         groupId: droneGroupId
@@ -65,10 +65,16 @@ export async function subscribeToCurrentPosition(server: ServerEntity, drone: Dr
         }) => {
             // handle new position
             const value = JSON.parse(message.value.toString());
+            const drones = server.getMap().getAliveDrones();
+            console.log("drones: " + JSON.stringify(drones))
+            console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++")
             console.log(`Received message ${JSON.stringify(value)} on topic ${topic}, grupo: ${droneGroupId} partition ${partition}`);
-            const square = value?.square;
-            const currentSquareEntity = new SquareEntity(square?.row, square?.col);
-            const droneEntity = new DronEntity(droneId);
+            const currentSquareEntity = new SquareEntity(value?.row, value?.col);
+            console.log("Current square: ", currentSquareEntity.toString())
+            const idReceived: number = parseInt(value?.id_registry)
+            const droneEntity = new DronEntity(idReceived);
+            console.log("drone: ", droneEntity.toString());
+            console.log(`New current position received: ${droneEntity.toString()}, ${currentSquareEntity.getHash()}`)
             server.getMap().moveDrone(droneEntity, currentSquareEntity);
             await publishMap(server.getMap());
         }
@@ -120,7 +126,7 @@ export async function handleKeepAliveStatus(server: ServerEntity, newDrone: Dron
         let messageReceived = false;
 
 
-        const onMessageReceivedCallback = () => {
+        const onMessageReceivedCallback = async () => {
             console.log('Se recibió un mensaje en el topic "keep_alive". Ejecutando el callback de condición cumplida...');
             if (server.getMap().isDroneInMap(newDrone)) {
                 server.getMap().changeDroneStatus(newDrone, EKeepAliveStatus.ALIVE);
@@ -129,34 +135,33 @@ export async function handleKeepAliveStatus(server: ServerEntity, newDrone: Dron
                 console.error(`ERROR: Drone ${droneId} is not in map.`);
             }
 
-            server.sendMapToDrones();
+            await server.sendMapToDrones();
         }
 
-        const onNoMessageReceivedCallback = () => {
+        const onNoMessageReceivedCallback = async () => {
             console.log('No se recibió ningún mensaje en el topic "keep_alive". Ejecutando el callback de condición no cumplida...');
             if (server.getMap().isDroneInMap(newDrone)) {
                 server.getMap().changeDroneStatus(newDrone, EKeepAliveStatus.DEAD);
                 console.log(`dronId: ${droneId} now is UNKNOWN`);
-            }
-            else {
+            } else {
                 console.error(`ERROR: Drone ${droneId} not in map.`)
             }
 
-            server.sendMapToDrones();
+            await server.sendMapToDrones();
         }
 
         // poner un await y crear una promesa con timeout encapsulando el consumer.run
         keepAliveConsumer.run({
             eachMessage: async ({ topic, partition, message }) => {
                 messageReceived = true;
-                onMessageReceivedCallback(); // Ejecuta el callback cuando se recibe un mensaje
+                await onMessageReceivedCallback(); // Ejecuta el callback cuando se recibe un mensaje
             },
         });
 
-        const setIntervalId: NodeJS.Timeout = setInterval(() => {
+        const setIntervalId: NodeJS.Timeout = setInterval(async () => {
             if (!messageReceived) {
                 console.log('No se recibió ningún mensaje en el topic "keep_alive". Ejecutando el callback de condición no cumplida...');
-                onNoMessageReceivedCallback(); // Ejecuta el callback cuando no se recibe ningún mensaje
+                await onNoMessageReceivedCallback(); // Ejecuta el callback cuando no se recibe ningún mensaje
             }
 
             messageReceived = false; // Reinicia el estado del mensaje recibido para la próxima comprobación

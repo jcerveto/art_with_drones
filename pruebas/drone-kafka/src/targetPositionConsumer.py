@@ -11,6 +11,11 @@ import utils
 
 def getTargetPositionFromMessage(message: dict) -> coordinateMovement.CoordinateMovement:
     position_dict = utils.from_json(message["target_position"])
+    return coordinateMovement.CoordinateMovement(
+        row=int(position_dict["row"]),
+        col=int(position_dict["col"])
+    )
+
 
 
 def handle_new_position(
@@ -19,7 +24,8 @@ def handle_new_position(
     print("Handling new position...")
     target_position: coordinateMovement.CoordinateMovement = getTargetPositionFromMessage(message)
     print("JOAN AQUI GESTIONAR LA NUEVA POSICION con hilos")
-
+    path = utils.get_path_temp(current_position, target_position)
+    print(f"Path: {path}")
 
 
 def main(drone: droneEntity.DroneEntity, targetPositionConsumerIsOpen: threading.Event):
