@@ -1,28 +1,37 @@
-// REGISTRY drone->registry
+// SOCKET::REGISTRY drone->registry
 {
-	"id_registry": 0,
-	"alias": ""
+	"id_registry": INT,
+	"alias": STRING
 }
 
-// REGISTRY registry->drone
+// SOCKET::REGISTRY registry->drone
 {
-	"token": "",
-	"ok": true
+	"token": STRING,
+	"ok": BOOLEAN
 }
 
-// AUTHENTICATION drone->engine
+"stage" puede ser "auth_request" o "ok_ack"
+// SOCKET:AUTHENTICATION:FASE_1 drone->engine
 {
-	"id_registry": 0,
-	"token": ""
+	"id_registry": INT,
+	"token": STRING,
+	"stage": STRING,
 }
 
-// AUTHENTICATION engine->drone
+// SOCKET:AUTHENTICATION:FASE_2 drone->engine
 {
-	"target_position": {
-		"row": 0,
-		"col": 0
-	},
-	"ok": true
+	"id_registry": INT,
+	"token": STRING,
+	"stage": STRING,
+	"ok": BOOLEAN
+}
+
+
+// SOCKET:AUTHENTICATION:FASE_1 engine->drone
+{
+	"ok": BOOLEAN,
+	"message": STRING,
+	¿"error": STRING? es opcional. Solo si "ok" es False
 }
 
 // KAFKA drone->engine 
