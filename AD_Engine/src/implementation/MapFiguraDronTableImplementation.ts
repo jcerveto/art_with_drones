@@ -62,6 +62,7 @@ export class MapFiguraDronTableImplementation {
     }
 
     static async fillWithNewFigure(figureIds: Array<number>): Promise<void> {
+        // TODO: Insertar row y column
         try {
             await MapFiguraDronTableImplementation.removeFigure();
             const db = new sqlite3.Database(DatabaseSettings.dbPath);

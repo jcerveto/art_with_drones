@@ -22,6 +22,9 @@ def main(argv):
     keepaliveProductorThread = threading.Thread(target=keepaliveProductor.main, args=(int(argv[1]),))
     keepaliveProductorThread.start()
 
+    # CONSUMER TARGET POSITION THREAD
+    #...
+
     # MAIN THREAD
 
     for i in range(10):

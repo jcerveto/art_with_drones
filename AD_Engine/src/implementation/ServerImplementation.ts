@@ -34,6 +34,9 @@ export class ServerImplementation {
             await BrokerServices.initMapPublisher();
             console.log("Map Broker connected. ")
 
+            // TODO: Añadir productor de taget_position
+            // TODO: Añadir consumidor de current_position
+
             // TEMPORAL: Cada cierto tiempo se publica el mapa actual.
             // setInterval(() => server.sendMapToDrones(), 5_000);
 
@@ -93,7 +96,7 @@ export class ServerImplementation {
 
             // ver si hay hueco y mapear to figure
             const newDrone = new DronEntity(dron_id);
-            if (! await MapFiguraDronTable.mapNewDrone(newDrone)) {
+            if (! await MapFiguraDronTable.mapNewDrone(newDrone)) {         // TODO: Añadir row y column dede FigureEntity
                 throw new Error('ERROR: BAD DRONE MATCH. ')
             }
 
