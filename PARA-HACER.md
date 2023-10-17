@@ -15,4 +15,5 @@
 # Registry funcional con sqlite.
 # Que Weather sea multihilo
 
+# Página Web. Yo haría un /map para mostrar el mega y, luego ya si eso, un /registry para mostrar la BBDD. El /map puede ser un consumidor que cada vez que reciba un mensaje, renderice el mapa nuevo. 
 # Documentación de los tipos de mensajes que se envían. 
