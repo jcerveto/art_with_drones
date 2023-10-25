@@ -34,7 +34,7 @@
 	¿"error": STRING? es opcional. Solo si "ok" es False
 }
 
-// KAFKA drone->engine 
+// KAFKA current_position: drone->engine 
 {
 	"id_registry": 0,
 	"current_position": {
