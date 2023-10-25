@@ -1,17 +1,18 @@
-# Usa la imagen oficial de Python como base
-FROM python:3.9-slim
+FROM node:18-alpine
 
-# Establece el directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Copia los archivos necesarios al contenedor
-COPY app.py /app
+COPY package.json /app
+COPY package-lock.json /app
+RUN npm install
+
+COPY .env /app
+COPY server.js /app
 COPY styles.css /app
 COPY index.html /app
 COPY script.js /app
 
-# Expone el puerto en el que se ejecutará la aplicación
 EXPOSE 8000
 
-# Comando para ejecutar el servidor Python cuando se inicie el contenedor
-CMD ["python", "app.py"]
+
+CMD ["npm", "start"]
