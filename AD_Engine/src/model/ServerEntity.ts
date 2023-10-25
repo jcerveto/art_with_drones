@@ -4,6 +4,7 @@ import * as net from "net";
 import {SquareEntity} from "./SquareEntity";
 import {DronEntity} from "./DronEntity";
 import {WaitingPoolEntity} from "./WaitingPoolEntity";
+import {FigureEntity} from "./FigureEntity";
 
 export class ServerEntity {
     private _host: string;
@@ -11,6 +12,33 @@ export class ServerEntity {
     private _map: MapEntity;
     private _serverNet: net.Server;
     private _waitingPool: WaitingPoolEntity = new WaitingPoolEntity();
+    private _figures = Array<FigureEntity>();
+    private _showActive: boolean = false;
+    private _currentFigure: FigureEntity | null = null;
+
+    public getShowActive(): boolean {
+        return this._showActive;
+    }
+
+    public activateShow(): void {
+        this._showActive = true;
+    }
+
+    public deactivateShow(): void {
+        this._showActive = false;
+    }
+
+    public getCurrentFigure(): FigureEntity | null {
+        return this._currentFigure;
+    }
+
+    public addCurrentFigure(figure: FigureEntity): void {
+        this._currentFigure = figure;
+    }
+
+    public clearCurrentFigure(): void {
+        this._currentFigure = null;
+    }
 
     public getHost(): string {
         return this._host;
@@ -44,12 +72,9 @@ export class ServerEntity {
         return ServerImplementation.createNetServer(this);
     }
 
-    public start(): void {
+    public async start(): Promise<void> {
         try {
-            ServerImplementation.start(this)
-                .then(() => {
-                    console.log("Server started!");
-                })
+            await ServerImplementation.start(this)
                 .catch((err) => {
                     console.error("Error starting! Closing server...", err);
                 })
@@ -75,9 +100,9 @@ export class ServerEntity {
         }
     }
 
-    public getTargetSquareFromDronId(dronId: number): SquareEntity | null {
+    public async getTargetSquareFromDronId(dronId: number): Promise<SquareEntity> {
         try {
-            return ServerImplementation.getTargetSquareFromDronId(this, dronId);
+            return await ServerImplementation.getTargetSquareFromDronId(this, dronId);
         } catch (err) {
             console.error('ERROR: at getTargetSquareFromDronId: ', err.message);
         }
@@ -138,6 +163,34 @@ export class ServerEntity {
         } catch (err) {
             console.error("ERROR: Trying to readyToStartFigure. Retuning false ", err);
             return false;
+        }
+    }
+
+    public loadFigures(): void {
+        try {
+            ServerImplementation.loadFigures(this);
+        } catch (err) {
+            console.error("ERROR: Trying to loadFigures. ", err);
+        }
+    }
+
+    public getFigures(): Array<FigureEntity> {
+        return this._figures;
+    }
+
+    public addFigure(figure: FigureEntity): void {
+        this._figures.push(figure);
+    }
+
+    public clearFigures(): void {
+        this._figures = [];
+    }
+
+    public async startShow(): Promise<void> {
+        try {
+            await ServerImplementation.startShow(this);
+        } catch (err) {
+            console.error("ERROR: Trying to startShow. ", err);
         }
     }
 }

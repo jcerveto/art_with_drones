@@ -22,6 +22,8 @@ const db = new sqlite3.Database(databaseName, (err) => {
         db.run(`CREATE TABLE IF NOT EXISTS MapFiguraDron (
             uk_map_figura INTEGER PRIMARY KEY,
             pk_fk_map_registry_id INTEGER,
+            row INTEGER NOT NULL,
+            column INTEGER NOT NULL,
             FOREIGN KEY (pk_fk_map_registry_id) REFERENCES Registry(pk_registry_id)
         )`);
         console.log('Created table MapFiguraDron');

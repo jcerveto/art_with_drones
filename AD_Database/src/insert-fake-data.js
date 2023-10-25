@@ -32,19 +32,21 @@ const db = new sqlite3.Database(databaseName, (err) => {
         }
 
         // Insert 5 drones into the map table
-        for (let i = 1; i <= fakeDronesIds.length/2; i++) {
+        for (let i = 0; i < fakeDronesIds.length / 2; i++) {
             const mapFigura = fakeFiguresDronesIds[i];
+            const row = fakeRows[i];
+            const column = fakeColumns[i];
             db.run(`
                 INSERT INTO
                 MapFiguraDron
-                    (pk_fk_map_registry_id, uk_map_figura) 
-                VALUES (?, ?)`
-                , [null, mapFigura], function(err) {
-                if (err) {
-                    return console.error('Error inserting drone into map:', err.message);
-                }
-                console.log(`Inserted drone with Registry ID ${i} into map table.`);
-            });
+                    (pk_fk_map_registry_id, uk_map_figura, row, column) 
+                VALUES (?, ?, ?, ?)`
+                , [null, mapFigura, row, column], function (err) {
+                    if (err) {
+                        return console.error('Error inserting drone into map:', err.message);
+                    }
+                    console.log(`Inserted drone with Registry ID ${i} into map table.`);
+                });
         }
 
     }

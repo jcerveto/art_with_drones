@@ -6,6 +6,7 @@ import {SquareEntity} from "../model/SquareEntity";
 import {ServerEntity} from "../model/ServerEntity";
 import {EStatus} from "../model/EStatus";
 import {EKeepAliveStatus} from "../model/EKeepAliveStatus";
+import { sleep } from './TimeUtils';
 
 
 const kafka = new Kafka({
@@ -21,6 +22,7 @@ const producerMap: Producer = kafka.producer();
 
 export async function initMapPublisher() {
     await producerMap.connect();
+    console.log("Map publisher connected");
 }
 
 export async function publishMap(map: MapEntity) {
@@ -36,26 +38,26 @@ export async function publishMap(map: MapEntity) {
             ]
         });
         console.log(map.toString());
+        console.log("drones: " , map.getAllDrones().length, "alive: ", map.getAliveDrones().length, "dead: ", map.getDeadDrones().length);
     } catch (err) {
         console.error("ERROR: Trying to publish the map. ")
     }
 }
 
-export async function subscribeToCurrentPosition(server: ServerEntity, drone: DronEntity) {
-    const droneId = drone.getId();
-    const droneTopic = `${BrokerSettings.TOPIC_CURRENT_POSITION}_${droneId}`;
-    const droneGroupId = `current_position=${droneId}`;
+export async function subscribeToCurrentPosition(server: ServerEntity) {
+    const currentPositionTopic = BrokerSettings.TOPIC_CURRENT_POSITION;
+    const engineGroupId = `current_position_ad_engine`;
 
     const consumer = kafka.consumer({
-        groupId: droneGroupId
+        groupId: engineGroupId,
     });
 
     await consumer.connect();
     await consumer.subscribe({
-        topic: droneTopic,
+        topic: currentPositionTopic,
         fromBeginning: false
     })
-    console.log(`Subscribed to topic ${droneTopic} with groupId ${droneGroupId}`);
+    console.log(`Subscribed to topic ${currentPositionTopic} with groupId ${engineGroupId}`);
 
     await consumer.run({
         eachMessage: async ({
@@ -65,18 +67,36 @@ export async function subscribeToCurrentPosition(server: ServerEntity, drone: Dr
         }) => {
             // handle new position
             const value = JSON.parse(message.value.toString());
-            const drones = server.getMap().getAliveDrones();
-            console.log("drones: " + JSON.stringify(drones))
+            const drones = server.getMap().getAllDrones();
+            console.log("drones in map: " + JSON.stringify(drones))
             console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++")
-            console.log(`Received message ${JSON.stringify(value)} on topic ${topic}, grupo: ${droneGroupId} partition ${partition}`);
-            const currentSquareEntity = new SquareEntity(value?.row, value?.col);
-            console.log("Current square: ", currentSquareEntity.toString())
-            const idReceived: number = parseInt(value?.id_registry)
-            const droneEntity = new DronEntity(idReceived);
-            console.log("drone: ", droneEntity.toString());
+            console.log(`Received message ${JSON.stringify(value)} on topic ${topic}, grupo: ${engineGroupId} partition ${partition}`);
+
+            const droneId = parseInt(value?.id_registry);
+            const row = parseInt(value?.current_position?.row);
+            const col = parseInt(value?.current_position?.col);
+            
+            const droneEntity = new DronEntity(droneId);
+            const currentSquareEntity = new SquareEntity(row, col);
+
+            if (! server.getMap().isDroneInMap(droneEntity)) {
+                console.error("ERROR: Drone not in map. Request ignored. DroneId: ", droneId);
+                return;
+            }
+
             console.log(`New current position received: ${droneEntity.toString()}, ${currentSquareEntity.getHash()}`)
             server.getMap().moveDrone(droneEntity, currentSquareEntity);
+
             await publishMap(server.getMap());
+            if (server.getMap().matchesWithFigure(
+                server.getCurrentFigure()
+            )) {
+                console.log(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
+                console.log(`WATING 10 SECONDS TO DRAW NEXT FIGURE...`);
+                await sleep(10_000);
+                // SALIR DEL FLUJO DE CONSUMER.RUN AQUI
+                await consumer.disconnect();
+            }
         }
     })
 
@@ -87,7 +107,7 @@ export async function publishTargetPosition(drone: DronEntity, targetPosition: S
     const producerTargetPosition: Producer = kafka.producer();
 
     const droneId = drone.getId();
-    const topicTargetPositionCurrent: string = `${BrokerSettings.TOPIC_TARGET_POSITION}_${droneId}`;
+    const topicTargetPosition: string = BrokerSettings.TOPIC_TARGET_POSITION;
     const positionJson = targetPosition.toJson();
     try {
         await producerTargetPosition.connect();
@@ -96,7 +116,7 @@ export async function publishTargetPosition(drone: DronEntity, targetPosition: S
             target_position: positionJson
         };
         await producerTargetPosition.send({
-            topic: topicTargetPositionCurrent,
+            topic: topicTargetPosition,
             messages: [
                 {value: JSON.stringify(objectToSend)}
             ]
