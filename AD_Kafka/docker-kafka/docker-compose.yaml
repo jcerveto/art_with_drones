@@ -15,6 +15,7 @@ services:
     ports:
       - 29092:29092
     environment:
+      #KAFKA_LOG_RETENTION_MS: 1000 # Establecer la retención en 1 segundo (1000 milisegundos) // Esto hará que todos los mensajes en todos los topics sean eliminados después de 1 segundo.
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092

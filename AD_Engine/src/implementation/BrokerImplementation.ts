@@ -1,17 +1,18 @@
-import {Kafka, Producer} from 'kafkajs';
+import {Consumer, Kafka, KafkaMessage, logLevel, Producer} from 'kafkajs';
 import {MapEntity} from "../model/MapEntity";
 import {DronEntity} from "../model/DronEntity";
 import * as BrokerSettings from "../settings/BrokerSettings";
 import {SquareEntity} from "../model/SquareEntity";
 import {ServerEntity} from "../model/ServerEntity";
-import {EStatus} from "../model/EStatus";
 import {EKeepAliveStatus} from "../model/EKeepAliveStatus";
-import { sleep } from './TimeUtils';
+import {sleep} from './TimeUtils';
 
 
 const kafka = new Kafka({
     clientId: "art_with_drones",
-    brokers: [`${BrokerSettings.BROKER_HOST}:${BrokerSettings.BROKER_PORT}`]
+    brokers: [`${BrokerSettings.BROKER_HOST}:${BrokerSettings.BROKER_PORT}`],
+    logLevel: logLevel.NOTHING,        // Solo muestra los mensajes de ERROR
+    connectionTimeout: 30_000,             // Time in milliseconds to wait for a successful connection. The default value is: 1000.
 });
 
 // ************************************************
@@ -44,8 +45,58 @@ export async function publishMap(map: MapEntity) {
     }
 }
 
+async function handleCurrentCoordinateReceived(server: ServerEntity, consumer: Consumer, message: KafkaMessage) {
+    try {
+        const value = JSON.parse(message.value.toString());
+        const drones = server.getMap().getAllDrones();
+        console.log("drones in map: " + JSON.stringify(drones))
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++")
+        console.log(`Received message ${JSON.stringify(value)}`);
+
+        const droneId = parseInt(value?.id_registry);
+        const row = parseInt(value?.current_position?.row);
+        const col = parseInt(value?.current_position?.col);
+
+        console.log("droneId: " + droneId, "row: " + row, "col: " + col);
+        const droneEntity = new DronEntity(droneId);
+        const currentSquareEntity = new SquareEntity(row, col);
+
+        // Check if drone is in map
+        if (! server.getMap().isDroneInMap(droneEntity)) {
+            console.error("ERROR: Drone not in map. Request ignored. DroneId: ", droneId);
+            return;
+        }
+
+        // check if show is going on
+        if (! server.getShowActive()) {
+            console.error("ERROR: Show is not active. Request ignored. DroneId: ", droneId);
+            return;
+        } else {
+            console.log("Show is active. Figure: ", server.getCurrentFigure().getName());
+        }
+
+        // move drone
+        console.log(`New current position received: ${droneEntity.toString()}, ${currentSquareEntity.getHash()}`)
+        server.getMap().moveDrone(droneEntity, currentSquareEntity);
+
+        await publishMap(server.getMap());
+        console.log('----------- \n currentFigure: ', server.getCurrentFigure().getName(), '\n -----------');
+        if (server.getMap().matchesWithFigure(
+            server.getCurrentFigure()
+        )) {
+            console.log(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
+            console.log(`WATING 10 SECONDS TO DRAW NEXT FIGURE...`);
+            await sleep(10_000);
+            // SALIR DEL FLUJO DE CONSUMER.RUN AQUI
+            await consumer.disconnect();
+        }
+    } catch (err) {
+        console.error("ERROR: Trying to handleCurrentCoordinateReceived. Exception was not raised. Ignoring message. ", err.message);
+    }
+}
 export async function subscribeToCurrentPosition(server: ServerEntity) {
     const currentPositionTopic = BrokerSettings.TOPIC_CURRENT_POSITION;
+    //const engineGroupId = `current_position_ad_engine_${Date.now()}`;
     const engineGroupId = `current_position_ad_engine`;
 
     const consumer = kafka.consumer({
@@ -66,40 +117,14 @@ export async function subscribeToCurrentPosition(server: ServerEntity) {
             message
         }) => {
             // handle new position
-            const value = JSON.parse(message.value.toString());
-            const drones = server.getMap().getAllDrones();
-            console.log("drones in map: " + JSON.stringify(drones))
-            console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++")
-            console.log(`Received message ${JSON.stringify(value)} on topic ${topic}, grupo: ${engineGroupId} partition ${partition}`);
-
-            const droneId = parseInt(value?.id_registry);
-            const row = parseInt(value?.current_position?.row);
-            const col = parseInt(value?.current_position?.col);
-            
-            const droneEntity = new DronEntity(droneId);
-            const currentSquareEntity = new SquareEntity(row, col);
-
-            if (! server.getMap().isDroneInMap(droneEntity)) {
-                console.error("ERROR: Drone not in map. Request ignored. DroneId: ", droneId);
-                return;
-            }
-
-            console.log(`New current position received: ${droneEntity.toString()}, ${currentSquareEntity.getHash()}`)
-            server.getMap().moveDrone(droneEntity, currentSquareEntity);
-
-            await publishMap(server.getMap());
-            if (server.getMap().matchesWithFigure(
-                server.getCurrentFigure()
-            )) {
-                console.log(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
-                console.log(`WATING 10 SECONDS TO DRAW NEXT FIGURE...`);
-                await sleep(10_000);
-                // SALIR DEL FLUJO DE CONSUMER.RUN AQUI
-                await consumer.disconnect();
+            try {
+                await handleCurrentCoordinateReceived(server, consumer, message);
+            } catch (err) {
+                console.error("ERROR: Trying to handleCurrentCoordinateReceived. Re-Raising exception...", err.message);
+                throw err;
             }
         }
     })
-
 }
 
 export async function publishTargetPosition(drone: DronEntity, targetPosition: SquareEntity): Promise<void> {

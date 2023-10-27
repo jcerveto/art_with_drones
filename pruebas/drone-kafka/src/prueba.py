@@ -11,7 +11,7 @@ def main(droneId: int, row: int, column: int):
     column = int(column)
 
     start = coordinateMovement.CoordinateMovement(1, 1)
-    end = coordinateMovement.CoordinateMovement(10, 7)
+    end = coordinateMovement.CoordinateMovement(row, column)
     path = utils.get_path_temp(start, end)
     print(f"Path: {path}")
     print(type(path))
@@ -19,7 +19,7 @@ def main(droneId: int, row: int, column: int):
         print(i)
 
 
-    drone = droneMovement.DroneMovement(droneId, row, column)
+    drone = droneMovement.DroneMovement(droneId, 1, 1)
     currentPositionProductor.publishCurrentPosition(drone, path)
     print("Done")
 

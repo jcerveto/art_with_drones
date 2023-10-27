@@ -186,6 +186,11 @@ export class MapEntity {
     }
 
     public matchesWithFigure(figure: FigureEntity): boolean {
+        if (figure === null || figure === undefined) {
+            console.error("ERROR: figure is null or undefined. Returning false.");
+            return false;
+        }
+
         try {
             for (let [key, value] of figure.getFigure()) {
                 // si no existe la casilla en el mapa
