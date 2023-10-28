@@ -23,7 +23,7 @@
 	"id_registry": INT,
 	"token": STRING,
 	"stage": STRING,
-	"ok": BOOLEAN
+	"ackSubscribe": BOOLEAN
 }
 
 
