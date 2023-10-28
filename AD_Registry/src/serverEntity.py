@@ -1,4 +1,4 @@
-from . import serverImplementation
+import serverImplementation
 
 
 class ServerEntity:

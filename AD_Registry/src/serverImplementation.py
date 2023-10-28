@@ -2,9 +2,8 @@ import socket
 import threading
 import sys
 from os import getpid
-from time import sleep
 
-from .drone import droneEntity
+from drone import droneEntity
 
 
 class ServerImplementation:

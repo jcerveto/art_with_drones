@@ -1,8 +1,8 @@
-from . import droneImplementation
+import droneImplementation
 
 
 class DroneEntity:
-    def __init__(self, id: str, alias: str):
+    def __init__(self, id: str, alias: str, token = None):
         """
         Constructor. Entity Layer
         :param id:
@@ -11,6 +11,10 @@ class DroneEntity:
         """
         self.id = id
         self.alias = alias
+        if token is None:
+            self.token = self.get_new_token()
+        else:
+            self.token = token
         self.drone = droneImplementation.DroneImplementation(self.id, self.alias)
 
     def create(self) -> bool:
@@ -44,6 +48,13 @@ class DroneEntity:
         except Exception as e:
             print(f"Error deleting drone: {e}")
             return False
+
+    def get_new_token(self) -> str:
+        try:
+            print(f"Generating token for drone: {str(self)}")
+            return droneImplementation.DroneImplementation.generate_token()
+        except Exception as e:
+            print(f"Error generating token for drone: {e}")
 
     def __str__(self):
         return str(self.drone)
