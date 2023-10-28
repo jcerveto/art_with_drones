@@ -1,8 +1,13 @@
 // SOCKET::REGISTRY drone->registry
 {
+	"action": STRING,
 	"id_registry": INT,
-	"alias": STRING
+	"alias": STRING,
+	"token": STRING? 
 }
+* @action es un valor de los siguientes: ["create", "update", "delete"]
+* @token es opcional. Solo se comprobará si la @action es update o delete
+
 
 // SOCKET::REGISTRY registry->drone
 {
