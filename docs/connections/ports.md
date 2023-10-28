@@ -5,6 +5,7 @@ A continuación se muestran los puertos donde es previsible que se ejecuten los 
 | - | - | - |
 | AD_Engine | 8080 | - |
 | AD_Drone | Sin puerto | Actúa como cliente. |
+| AD_Database | Sin puerto | Se usa una BBDD sqlite. Funciona con archivos, no puertos. |
 | AD_Reigstry | 6000 | - |
 | AD_Weather | 5000 | - |
 | AD_Frontend | 3000 | - |
