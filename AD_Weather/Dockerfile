@@ -1,14 +1,15 @@
-FROM python:3.9-slim
+FROM python:3.9-alpine
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
-
+# Install dependencies
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY src src
+# Copy source code
+COPY .env app/.env
+COPY src app/src
 
-COPY data data
 
-CMD ["python", "src/main.py", "5555"]
+CMD ["python", "app/src/main.py"]
 
