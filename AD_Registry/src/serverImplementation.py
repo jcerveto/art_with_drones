@@ -48,6 +48,7 @@ class ServerImplementation:
         except Exception as e:
             self.currents_requests -= 1
             print(f"Error handling request: {e}")
+            client_socket.close()
 
     def start(self):
         try:
