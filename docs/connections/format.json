@@ -1,16 +1,24 @@
 // SOCKET::REGISTRY drone->registry
 {
+	"action": STRING,
 	"id_registry": INT,
-	"alias": STRING
+	"alias": STRING,
+	"token": STRING? 
 }
+* @action es un valor de los siguientes: ["create", "update", "delete"]
+* @token es opcional. Solo se comprobará si la @action es update o delete
+
 
 // SOCKET::REGISTRY registry->drone
 {
 	"token": STRING,
-	"ok": BOOLEAN
+	"ok": BOOLEAN,
+	"token": STRING?	
 }
+* Sólo se devuelve @token con la @action=create
 
-"stage" puede ser "auth_request" o "ok_ack"
+
+"stage" puede ser "auth_request" o "ack_subscribe"
 // SOCKET:AUTHENTICATION:FASE_1 drone->engine
 {
 	"id_registry": INT,
@@ -23,7 +31,7 @@
 	"id_registry": INT,
 	"token": STRING,
 	"stage": STRING,
-	"ok": BOOLEAN
+	"ackSubscribe": BOOLEAN
 }
 
 
@@ -31,10 +39,10 @@
 {
 	"ok": BOOLEAN,
 	"message": STRING,
-	¿"error": STRING? es opcional. Solo si "ok" es False
 }
 
-// KAFKA drone->engine 
+
+// KAFKA current_position: drone->engine 
 {
 	"id_registry": 0,
 	"current_position": {
