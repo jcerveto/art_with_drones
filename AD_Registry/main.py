@@ -1,6 +1,6 @@
 import sys
 
-from src import serverEntity
+import src.serverEntity as serverEntity
 import src.setEnviromentVariables as env
 
 
@@ -14,7 +14,6 @@ def main(argv: list):
     print("Hello World!")
     s = serverEntity.ServerEntity(host, port)
     s.start()
-    print("Bye World!")
 
 
 if __name__ == '__main__':

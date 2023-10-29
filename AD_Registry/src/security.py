@@ -1,9 +1,11 @@
 import uuid
+import src.setEnviromentVariables as env
 
-def generate_new_token(size: int) -> str:
+
+def generate_new_token() -> str:
     complete_uuid = str(uuid.uuid4())
-    return complete_uuid[:size]
+    return complete_uuid[:env.get_token_size()]
 
 
 if __name__ == "__main__":
-    print(generate_new_token(10))
+    print(generate_new_token())

@@ -256,6 +256,7 @@ export class ServerImplementation {
 
     public static async startFigure(server: ServerEntity) {
         try {
+            console.error("ELIMINAR ESTA FUNCION! DEPRECATED. ")
             console.log('Emptying waiting pool... ');
             server.getWaitingPool().emptyPool();
             console.log('Starting figure... ');
@@ -263,7 +264,7 @@ export class ServerImplementation {
             //await MapFiguraDronTableImplementation.fillWithNewFigure(figureIds);
             console.error("Está comentado. Cambiarlo para release.startFigure ")
             console.log("Figure ids stores correctly. ")
-            server.start();
+            await server.start();
         } catch (err) {
             console.error(`ERROR: While startFigure. Re-Raised: ${err}`)
             throw err;
@@ -336,6 +337,7 @@ export class ServerImplementation {
 
     static async handleFigureShow(server: ServerEntity, figure: FigureEntity): Promise<void> {
         try {
+            console.log('↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓')
             server.activateShow();
             server.addCurrentFigure(figure);
             console.log(`Starting figure: ${figure.getName()}`);
@@ -359,6 +361,7 @@ export class ServerImplementation {
             console.log(`Figure ${figure.getName()} ended. `);
             server.clearCurrentFigure();
             server.deactivateShow();
+            console.log('↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑');
         } catch (err) {
             server.clearCurrentFigure();
             server.deactivateShow();

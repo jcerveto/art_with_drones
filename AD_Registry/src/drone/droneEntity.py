@@ -1,42 +1,28 @@
-import droneImplementation
+import src.drone.droneImplementation as impl
 
 
 class DroneEntity:
-    def __init__(self, id: str, alias: str, token = None):
-        """
-        Constructor. Entity Layer
-        :param id:
-        :param alias:
-        :return:
-        """
-        self.id = id
+    def __init__(self, id: int, alias: str, token=None):
+        self.id = int(id)
         self.alias = alias
         if token is None:
+            self.token = None
             self.token = self.get_new_token()
         else:
             self.token = token
-        self.drone = droneImplementation.DroneImplementation(self.id, self.alias)
 
-    def create(self) -> bool:
+    def create(self) -> str:
         try:
-            print(f"Creating drone: {str(self)}")
-            return self.drone.create()
+            return impl.create(self)
         except Exception as e:
             print(f"Error creating drone: {e}")
-            return False
-
-    def read(self) -> bool:
-        try:
-            print(f"Reading drone: {str(self)}")
-            return self.drone.read()
-        except Exception as e:
-            print(f"Error reading drone: {e}")
-            return False
+            return ''
 
     def update(self) -> bool:
         try:
             print(f"Updating drone: {str(self)}")
-            return self.drone.update()
+            impl.update(self)
+            return True
         except Exception as e:
             print(f"Error updating drone: {e}")
             return False
@@ -44,7 +30,7 @@ class DroneEntity:
     def delete(self) -> bool:
         try:
             print(f"Deleting drone: {str(self)}")
-            return self.drone.delete()
+            return impl.delete(self.id)
         except Exception as e:
             print(f"Error deleting drone: {e}")
             return False
@@ -52,10 +38,12 @@ class DroneEntity:
     def get_new_token(self) -> str:
         try:
             print(f"Generating token for drone: {str(self)}")
-            return droneImplementation.DroneImplementation.generate_token()
+            return impl.generate_token()
         except Exception as e:
-            print(f"Error generating token for drone: {e}")
+            print(f"Error generating token for drone. Entity layer: {e}")
 
     def __str__(self):
-        return str(self.drone)
+        return f"[{self.id}, {self.alias}, {self.token}]"
 
+    def __repr__(self):
+        return f"[id={self.id}, alias={self.alias}, token={self.token}"

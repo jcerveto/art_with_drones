@@ -49,8 +49,8 @@ async function handleCurrentCoordinateReceived(server: ServerEntity, consumer: C
     try {
         const value = JSON.parse(message.value.toString());
         const drones = server.getMap().getAllDrones();
-        console.log("drones in map: " + JSON.stringify(drones))
         console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++")
+        console.log("drones in map: " + JSON.stringify(drones))
         console.log(`Received message ${JSON.stringify(value)}`);
 
         const droneId = parseInt(value?.id_registry);

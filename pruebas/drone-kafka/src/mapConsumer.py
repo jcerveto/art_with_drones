@@ -1,16 +1,14 @@
-# https://towardsdatascience.com/kafka-python-explained-in-10-lines-of-code-800e3e07dad1
-
-import sys
 from kafka import KafkaConsumer
 from json import loads
+import time
 
 import utils
 import setEnviromentVariables
 
 def main():
-
+    print("Starting map consumer...")
     topic_name = setEnviromentVariables.getMapTopic()
-    group_id = f"group_{setEnviromentVariables.getMapTopic()}"
+    group_id = f"group_{setEnviromentVariables.getMapTopic()}_{time.time()}"
 
     consumer = KafkaConsumer(
         topic_name,

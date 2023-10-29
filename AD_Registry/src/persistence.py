@@ -1,7 +1,7 @@
 import sqlite3
 
-import setEnviromentVariables as env
-import drone.droneEntity as droneEntity
+import src.setEnviromentVariables as env
+import src.drone.droneEntity
 
 
 def connect_to_database() -> tuple:
@@ -49,7 +49,13 @@ def get_all_drones() -> list:
         close_connection(connection)
 
 
-def add_drone(drone: droneEntity.DroneEntity) -> None:
+def add_drone(drone) -> str:
+    """
+
+    :param drone: droneEntity.DroneEntity
+    :return:
+    """
+    status = True
     try:
         connection, cursor = connect_to_database()
         if connection and cursor:
@@ -58,11 +64,20 @@ def add_drone(drone: droneEntity.DroneEntity) -> None:
             print(f"Fila insertada correctamente: [{drone.id}, {drone.alias}, {drone.token}] ")
     except sqlite3.Error as error:
         print("Error al insertar datos:", error)
+        status = False
     finally:
         close_connection(connection)
+        if status:
+            return drone.token
+        else:
+            return ''
 
+def update_drone(new_drone) -> None:
+    """
 
-def update_drone(new_drone: droneEntity.DroneEntity) -> None:
+    :param new_drone: droneEntity.DroneEntity
+    :return:
+    """
     try:
         connection, cursor = connect_to_database()
         if connection and cursor:

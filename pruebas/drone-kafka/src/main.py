@@ -19,8 +19,8 @@ def main(argv):
     mapConsumerThread.start()
 
     # PRODUCE KEEP ALIVE THREAD
-    keepaliveProductorThread = threading.Thread(target=keepaliveProductor.main, args=(int(argv[1]),))
-    keepaliveProductorThread.start()
+    # keepaliveProductorThread = threading.Thread(target=keepaliveProductor.main, args=(int(argv[1]),))
+    # keepaliveProductorThread.start()
 
     # CONSUMER TARGET POSITION THREAD
     #...

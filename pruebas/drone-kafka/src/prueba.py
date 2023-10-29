@@ -12,7 +12,7 @@ def main(droneId: int, row: int, column: int):
 
     start = coordinateMovement.CoordinateMovement(1, 1)
     end = coordinateMovement.CoordinateMovement(row, column)
-    path = utils.get_path_temp(start, end)
+    path = utils.get_path(start, end)
     print(f"Path: {path}")
     print(type(path))
     for i in path:

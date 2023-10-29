@@ -14,18 +14,18 @@ def publishCurrentPosition(drone, path):
     topic_name = f"{setEnviromentVariables.getCurrentPositionTopic()}"
     print(f"Topic name: {topic_name}")
     producer = KafkaProducer(bootstrap_servers=[f"{setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}"],
-                                value_serializer=lambda x: json.dumps(x).encode('utf-8'))
+                                value_serializer=lambda x: json.dumps(x).encode(setEnviromentVariables.getEncoding()))
 
     for position in path:
         print(f"Publishing position: {position}")
         data = {
-            'id_registry': drone.id,
+            'id_registry': drone.id_drone,
             'current_position': {
                 'row': position.row,
                 'col': position.col
             }
         }
         producer.send(topic_name, value=data)
-        time.sleep(5)
+        time.sleep(setEnviromentVariables.getMessageDelay())
 
     producer.close()

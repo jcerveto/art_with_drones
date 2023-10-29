@@ -1,5 +1,5 @@
 import sys
-import json
+import time
 import socket
 import threading
 
@@ -9,14 +9,15 @@ import droneEntity
 import utils
 
 
-def send_data(drone: droneEntity):
+def main(drone: droneEntity.DroneEntity):
     try:
-        message = {
+        # FASE_1 - Autenticación: AD_Drone -> AD_Engine
+        message = utils.to_json({
+            "stage": "auth_request",
             "id_registry": drone.drone_id,
             "token": drone.token,
-        }
-        json_message = utils.to_json(message)
-        print(f"Sending data: {json_message}")
+        }).encode(setEnviromentVariables.getEncoding())
+        print(f"Sending data. stage=auth_request: {message}")
 
         drone_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         drone_socket.connect(
@@ -26,59 +27,54 @@ def send_data(drone: droneEntity):
             )
         )
 
-        # Authentication request
-        drone_socket.sendall(
-            json_message.encode(setEnviromentVariables.getEncoding())
-        )
+        drone_socket.sendall(message)
 
-        # Authentication response. Open target position topic request
+        # Fase_1 - Autenticación: AD_Engine -> AD_Drone
         response = drone_socket.recv(
             setEnviromentVariables.getMaxContentLength()
-        )
-        clean_response = response.decode(setEnviromentVariables.getEncoding())
-        print(f"Received data: {clean_response}")
-        if utils.from_json(clean_response)["ok"] is False:
+        ).decode(setEnviromentVariables.getEncoding())
+        print(f"Received data: {response}")
+        if utils.from_json(response)["ok"] is False:
             print("Authentication failed. Closing connection...")
             drone_socket.close()
             return
 
-        # open target position topic
+        # Fase_2 - ack_subscribe: AD_Drone -> AD_Engine
+        # Open target position topic
         print("abriendo topics... ")
+        openSuccessfully = [False]
         targetPositionConsumerIsOpen = threading.Event()
-        targetPositionConsumerThread = threading.Thread(target=targetPositionConsumer.main, args=(drone, targetPositionConsumerIsOpen))
+        targetPositionConsumerThread = threading.Thread(target=targetPositionConsumer.main, args=(drone, targetPositionConsumerIsOpen, openSuccessfully))
         targetPositionConsumerThread.start()
         targetPositionConsumerIsOpen.wait()
-        print("topics abiertos...")
 
-        # Authentication response. confirmation aperture current position topic
-        openedCorrectly = True
-        confirmationMessage = {
-            "ok": openedCorrectly
-        }
-        json_confirmationMessage = utils.to_json(confirmationMessage)
+        # validating if target_position topic is open
+        if not openSuccessfully:
+            print("Error opening target_position topic. Closing connection...")
+            drone_socket.close()
+            return
 
-        drone_socket.sendall(
-            json_confirmationMessage.encode(setEnviromentVariables.getEncoding())
-        )
 
+        print("subscribed to target_position...")
+
+        print("Esperando unos segundos de cortesía...")
+        time.sleep(10)
+        message = utils.to_json({
+            "stage": "ack_subscribe",
+            "id_registry": drone.drone_id,
+            "token": drone.token,
+            "ackSubscribe": True
+        }).encode(setEnviromentVariables.getEncoding())
+
+        print(f"Ack subscribe. Sending data: {message}")
+        drone_socket.sendall(message)
+
+        print(f"Authentication completed successfully. Finishing this service. \
+        Map consumer, target_position consumer and current_position producer are currently executing in a different thread right now. ")
         drone_socket.close()
-        print("Authentication completed successfully")
 
     except Exception as e:
-        print(f"Error: {e}")
-        sys.exit(1)
-def main(drone_id: int, token: str, alias: str):
-    try:
-        print("Starting authentication...")
-        drone = droneEntity.DroneEntity(
-            drone_id=int(drone_id),
-            token=token,
-            alias=alias)
-        send_data(drone)
-
-
-    except Exception as e:
-        print(f"Error: {e}")
+        print(f"Error in module authentication: {e}")
         sys.exit(1)
 
 
@@ -86,4 +82,10 @@ if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Usage: python3 authentication.py <id> <token> <alias>")
         sys.exit(1)
-    main(sys.argv[1], sys.argv[2], sys.argv[3])
+
+    drone = droneEntity.DroneEntity(
+        drone_id=int(sys.argv[1]),
+        token=sys.argv[2],
+        alias=sys.argv[3]
+    )
+    main(drone)
