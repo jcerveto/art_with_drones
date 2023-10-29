@@ -12,10 +12,13 @@
 // SOCKET::REGISTRY registry->drone
 {
 	"token": STRING,
-	"ok": BOOLEAN
+	"ok": BOOLEAN,
+	"token": STRING?	
 }
+* Sólo se devuelve @token con la @action=create
 
-"stage" puede ser "auth_request" o "ok_ack"
+
+"stage" puede ser "auth_request" o "ack_subscribe"
 // SOCKET:AUTHENTICATION:FASE_1 drone->engine
 {
 	"id_registry": INT,
@@ -36,8 +39,8 @@
 {
 	"ok": BOOLEAN,
 	"message": STRING,
-	¿"error": STRING? es opcional. Solo si "ok" es False
 }
+
 
 // KAFKA current_position: drone->engine 
 {
