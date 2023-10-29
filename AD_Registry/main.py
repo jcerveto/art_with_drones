@@ -1,3 +1,14 @@
+import os 
+current_directory = os.getcwd()
+
+# List all files and directories in the current directory
+files_and_directories = os.listdir(f"{current_directory}/app")
+
+# Print the list of files and directories
+print("Files and directories in the current directory:")
+for item in files_and_directories:
+    print(item)
+        
 import sys
 
 import src.serverEntity as serverEntity

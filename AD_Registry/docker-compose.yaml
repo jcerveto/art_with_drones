@@ -1,0 +1,14 @@
+version: '3'
+services:
+  ad_registry:
+    build: . 
+
+    ports:
+      - "6000:6000"  
+
+    volumes:
+      - ../AD_Database/database.db  # sqlite3 database. Ver .env
+
+    tty: true  # Habilitar el modo TTY para mostrar la salida del código en la consola    
+
+
