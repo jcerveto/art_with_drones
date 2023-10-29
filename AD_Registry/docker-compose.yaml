@@ -7,7 +7,8 @@ services:
       - "6000:6000"  
 
     volumes:
-      - ../AD_Database/database.db  # sqlite3 database. Ver .env
+    # sqlite3 database. Ver .env y añadir un "../" por el "app/"
+      - ../AD_Database/database.db:/app/AD_Database/database.db
 
     tty: true  # Habilitar el modo TTY para mostrar la salida del código en la consola    
 
