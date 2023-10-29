@@ -78,7 +78,7 @@ class ServerImplementation:
         print(f"Clean request: {clean_request}")
         city = clean_request
         print(f"City: {city}")
-        temp = db.get_temperature(env.get_cities_file(), city)
+        temp = db.get_temperature(city)
         json_response = {
             "city": "alacant",
             "temperature": temp
