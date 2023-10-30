@@ -1,6 +1,8 @@
 version: '3'
 services:
   ad_registry:
+    container_name: ad_registry_container
+
     build: . 
 
     ports:

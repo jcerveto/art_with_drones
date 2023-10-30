@@ -1,7 +1,5 @@
-FROM node
+FROM node:18
 
 WORKDIR /src
 
 COPY . . 
-
-CMD  ["node", "tcp_server.js", "8888"]

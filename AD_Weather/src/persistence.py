@@ -8,7 +8,6 @@ def get_temperature(ciudad) -> int:
         with open(env.get_cities_file(), 'r') as file:
             csvreader = csv.reader(file)
             for row in csvreader:
-                print(f"Row: {row}")
                 # Comprueba si la ciudad está en la fila actual
                 if row and row[0].strip().lower() == ciudad.strip().lower():
                     # Devuelve la temperatura como un entero

@@ -5,14 +5,13 @@ dotenv.load_dotenv()
 
 
 def getBrokerHost() -> str:
-    return os.getenv('KAFKA_HOST', '0.0.0.0')
+    return os.getenv('KAFKA_HOST')
 
 def getBrokerPort() -> str:
-    return os.getenv('KAFKA_PORT', 9092)
+    return os.getenv('KAFKA_PORT')
 
 def getMapTopic() -> str:
-    return os.getenv('KAFKA_TOPIC_MAP', 'map')
-
+    return os.getenv('KAFKA_TOPIC_MAP')
 
 def getTargetPositionTopic() -> str:
     return os.getenv('KAFKA_TOPIC_TARGET_POSITION')

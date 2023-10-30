@@ -15,7 +15,7 @@ import {FigureImplementation} from "./FigureImplementation";
 import {MapFiguraDronTableImplementation} from "./MapFiguraDronTableImplementation";
 import {FigureEntity} from "../model/FigureEntity";
 import { sleep } from './TimeUtils';
-import {copyFileSync} from "fs";
+import * as DatabaseSettings from "../settings/databaseSettings";
 
 export class ServerImplementation {
     public static createNetServer(server: ServerEntity): net.Server {

@@ -1,0 +1,23 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
+let auxPort: number;
+try {
+    auxPort = parseInt(process.env.MAIN_PORT);
+}
+catch (err) {
+    console.error(`ERROR: Trying to get main port: ${err}`);
+    throw err;
+}
+export const MAIN_PORT: number = auxPort;
+
+
+console.log(`MAIN_PORT: ${MAIN_PORT}`);
+let auxHost: string = process.env.MAIN_HOST;
+if (auxHost == undefined) {
+    console.error(`ERROR: Trying to get main host: `);
+    throw new Error("No main host found");
+}
+
+export const MAIN_HOST: string = auxHost;

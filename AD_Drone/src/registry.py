@@ -8,6 +8,7 @@ import csv
 valid_functions = ["create", "update", "delete"]
 
 def store_drone(drone: droneEntity.DroneEntity) -> None:
+    print(f"Storing drone: {drone} in {env.getDronesPath()}")
     with open(env.getDronesPath(), "a+", newline="") as file:
         writer = csv.writer(file)
         writer.writerow([drone.drone_id, drone.alias, drone.token])
@@ -16,6 +17,7 @@ def store_drone(drone: droneEntity.DroneEntity) -> None:
 def send_message(message: bytes, drone: droneEntity.DroneEntity, drone_action: str):
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        print(f"Connecting to {env.getRegistryHost()}:{env.getRegistryPort()}")
         s.connect((env.getRegistryHost(), env.getRegistryPort()))
 
         # send message

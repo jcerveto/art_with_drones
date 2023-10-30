@@ -1,0 +1,7 @@
+version: '3'
+services:
+  prueba:
+    container_name: prueba_container
+
+    build: .
+    tty: true
