@@ -29,8 +29,6 @@ const main = async () => {
             await server.startShow();
             await sleep(10_000);
         } while (true);
-        //server.startFigure()
-        //    .catch((err) => console.error(err));
     } catch (err) {
         console.error(err);
         process.exit(1);
