@@ -1,19 +1,19 @@
-# Leer las figuras desde el json (crear clase FigureEntity). 
-## Cada clase tiene que guardar la posicion (SquareEntity) y el id del dron (DroneRntity o simplemente un int).
-## Crear atributo List<FigureEntity> en ServerEntity donde se guarden TODAS las figuras del fichero.
+# Para hacer. Entrega 1.
 
-
-# crear productor target_position y después ponerlo en AD_Engine. 
-# crear consumidor target_position. Luego crear su THREAD en el dron. 
-
-# Iniciar current_position, target_position y keep_alive desde el ServerImplementation.start. Que no se cree un topic por dron-
-
-# Que no se publiquen mapas vacios
-
-
-# Que ad_drone hable con ad_registry.
-# Registry funcional con sqlite.
-# Que Weather sea multihilo
-
-# Página Web. Yo haría un /map para mostrar el mega y, luego ya si eso, un /registry para mostrar la BBDD. El /map puede ser un consumidor que cada vez que reciba un mensaje, renderice el mapa nuevo. 
-# Documentación de los tipos de mensajes que se envían. 
+* Dockerizar AD_Engine: OJO volúmenes. 
+* Si ya está en el mapa devolve OK: true.
+* Limitar hilos de AD_Engine.
+* Enviar a los drones REGISTRADOS únicamente a la posición correcta.
+* Modo DEBUG-RELEASE en AD_Engine:
+* * Mostrar logs de cada petición.
+  * Mostrar mapa
+  * Reducir logs innecesarios.
+  * Weather SI-NO
+* Validar figura en mapa.
+* AD_Engine: Gestionar hilos de current_position.
+* Consultar AD_Weathwer funcional
+* Modo recover -r en AD_Engine.
+* Comprobar recover en AD_Drone
+* Memoria
+* Página web OK.
+  
