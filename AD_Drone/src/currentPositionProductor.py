@@ -13,8 +13,10 @@ def publishCurrentPosition(drone, path):
     print("Publishing current position...")
     topic_name = f"{setEnviromentVariables.getCurrentPositionTopic()}"
     print(f"Topic name: {topic_name}")
-    producer = KafkaProducer(bootstrap_servers=[f"{setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}"],
-                                value_serializer=lambda x: json.dumps(x).encode(setEnviromentVariables.getEncoding()))
+    producer = KafkaProducer(
+        bootstrap_servers=[f"{setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}"],
+        value_serializer=lambda x: json.dumps(x).encode(setEnviromentVariables.getEncoding()),
+    )
 
     for position in path:
         print(f"Publishing position: {position}")

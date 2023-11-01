@@ -2,6 +2,7 @@ import {SquareEntity} from "./SquareEntity";
 import {DronEntity} from "./DronEntity";
 import {EKeepAliveStatus} from "./EKeepAliveStatus";
 import { FigureEntity } from "./FigureEntity";
+import { EStatus } from "./EStatus";
 
 export class MapEntity {
     public static SIZE: number = 20;
@@ -215,5 +216,38 @@ export class MapEntity {
             console.error("ERROR: at matchesWithMap. Returned false: ", err.message);
             return false;
         }
+    }
+
+    public getStatusArray(): string[][] {
+        function getStringFromStatus(status: EStatus): string {
+            switch (status) {
+                case EStatus.UNKNOWN:
+                    return 'empty';
+                case EStatus.GOOD:
+                    return 'good';
+                case EStatus.BAD:
+                    return 'bad';
+                default:
+                    return 'empty';
+            }
+        }
+        let statusArray: string[][] = [];
+
+        // Inicializar la matriz con espacios en blanco
+        for (let i = 0; i < MapEntity.SIZE; i++) {
+            statusArray[i] = [];
+            for (let j = 0; j < MapEntity.SIZE; j++) {
+                statusArray[i][j] = getStringFromStatus(EStatus.UNKNOWN);
+            }
+        }
+
+        for (let row = 1; row <= MapEntity.SIZE; row++) {
+            for (let column = 1; column <= MapEntity.SIZE; column++) {
+                const square = this.__map.get(`${row}-${column}`);
+                statusArray[row - 1][column - 1] = getStringFromStatus(square.getStatus());
+            }
+        }
+
+        return statusArray;
     }
 }

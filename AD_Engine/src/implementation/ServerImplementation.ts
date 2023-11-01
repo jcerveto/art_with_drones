@@ -16,6 +16,8 @@ import {MapFiguraDronTableImplementation} from "./MapFiguraDronTableImplementati
 import {FigureEntity} from "../model/FigureEntity";
 import { sleep } from './TimeUtils';
 import * as DatabaseSettings from "../settings/databaseSettings";
+import { start as startHttp } from "./HttpServer"
+
 
 export class ServerImplementation {
     public static createNetServer(server: ServerEntity): net.Server {
@@ -46,6 +48,9 @@ export class ServerImplementation {
 
             // Promesa sin resolver para que el topic de current_position no se cierre.
             BrokerServices.subscribeToCurrentPosition(server);
+
+            // open http server
+            startHttp(server);
 
         } catch (err) {
             console.error("ERROR while starting... ", err);

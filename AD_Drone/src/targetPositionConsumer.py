@@ -65,9 +65,12 @@ def main(drone: droneEntity.DroneEntity, targetPositionConsumerIsOpen: threading
         raise TypeError("drone must be a droneEntity.DroneEntity instance. But found: " + str(type(drone)))
 
     topic_name = f"{setEnviromentVariables.getTargetPositionTopic()}"
-    group_id_name = f"{setEnviromentVariables.getTargetPositionTopic()}_{drone.drone_id}_{time.time()}"
+    group_id_name = f"{setEnviromentVariables.getTargetPositionTopic()}_{drone.drone_id}"
+    print(f"Topic name: {topic_name}; Group id: {group_id_name}")
+    print(f"Broker host: {setEnviromentVariables.getBrokerHost()}; Broker port: {setEnviromentVariables.getBrokerPort()}")
 
     try:
+        print(f"{50*'%'}: {setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}")
         consumer = KafkaConsumer(
             topic_name,
             bootstrap_servers=[f"{setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}"],

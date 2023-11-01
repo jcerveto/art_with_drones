@@ -55,9 +55,8 @@ def main(drone: droneEntity.DroneEntity):
             return
 
 
-        print("subscribed to target_position...")
-
-        print("Esperando unos segundos de cortesía...")
+        print("Subscribed to target_position...")
+        print("Esperando unos segundos de cortesía para que se pueda abrir adecuadamente el consumidor de target_position...")
         time.sleep(10)
         message = utils.to_json({
             "stage": "ack_subscribe",

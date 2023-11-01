@@ -21,3 +21,10 @@ if (auxHost == undefined) {
 }
 
 export const MAIN_HOST: string = auxHost;
+
+let httpPort: number = parseInt(process.env.HTTP_PORT);
+if (isNaN(httpPort)) {
+    console.error(`ERROR: Trying to get http port: `);
+    throw new Error("No http port found");
+}
+export const HTTP_PORT: number = httpPort;
