@@ -1,0 +1,17 @@
+version: '3'
+services:
+  ad_registry:
+    container_name: ad_registry_container
+
+    build: . 
+
+    ports:
+      - "6000:6000"  
+
+    volumes:
+    # sqlite3 database. Ver .env y añadir un "../" por el "app/"
+      - ../AD_Database/database.db:/app/AD_Database/database.db
+
+    tty: true  # Habilitar el modo TTY para mostrar la salida del código en la consola    
+
+

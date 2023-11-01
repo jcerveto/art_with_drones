@@ -4,7 +4,7 @@ import {EKeepAliveStatus} from "./EKeepAliveStatus";
 
 export class DronEntity {
     private __id: number;
-    private __status: EKeepAliveStatus = EKeepAliveStatus.DEAD;
+    private __status: EKeepAliveStatus = EKeepAliveStatus.ALIVE;
     private __target: SquareEntity | null = null;
 
     constructor(id: number) {

@@ -2,6 +2,9 @@ import {MapEntity} from "../model/MapEntity";
 import {DronEntity} from "../model/DronEntity";
 import sqlite3 from 'sqlite3';
 import * as DatabaseSettings from "../settings/databaseSettings";
+import { FigureEntity } from "../model/FigureEntity";
+import { SquareEntity } from "../model/SquareEntity";
+
 
 export class MapFiguraDronTableImplementation {
 
@@ -61,16 +64,20 @@ export class MapFiguraDronTableImplementation {
         });
     }
 
-    static async fillWithNewFigure(figureIds: Array<number>): Promise<void> {
-        // TODO: Insertar row y column
+    static async storeFigure(figure: FigureEntity): Promise<void> {
         try {
             await MapFiguraDronTableImplementation.removeFigure();
             const db = new sqlite3.Database(DatabaseSettings.dbPath);
 
-            const insertQuery = `INSERT INTO MapFiguraDron (uk_map_figura, pk_fk_map_registry_id) VALUES (?, NULL)`;
-            for (const figureId of figureIds) {
+            const insertQuery = `
+            INSERT INTO MapFiguraDron 
+            (uk_map_figura, pk_fk_map_registry_id, row, column) 
+            VALUES (?, NULL, ?, ?)`;
+            for (let [squareHash, droneId] of figure.getFigure()) {
+                const [row, column] = squareHash.split('-').map(Number);
+                //console.log('Inserting figure: ', droneId, row, column, squareHash);
                 await new Promise((resolve, reject) => {
-                    db.run(insertQuery, [figureId], (err) => {
+                    db.run(insertQuery, [droneId, row, column], (err) => {
                         if (err) {
                             reject(err);
                         } else {
@@ -79,8 +86,44 @@ export class MapFiguraDronTableImplementation {
                     });
                 });
             }
+            console.log('Figure stored: ', figure.getName());
 
             db.close();
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    static async getSquareFromDrone(drone: DronEntity): Promise<SquareEntity> {
+        try {
+            const db = new sqlite3.Database(DatabaseSettings.dbPath);
+            let square: SquareEntity = null;
+            return await new Promise<SquareEntity>((resolve, reject) => {
+
+            const insertQuery = `
+                SELECT row, column 
+                FROM MapFiguraDron 
+                WHERE pk_fk_map_registry_id = ?`,
+                droneId = drone.getId();
+
+                db.get(insertQuery, [droneId], (err, row) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        if (row) {
+                            const square = new SquareEntity(row["row"], row["column"]);
+                            resolve(square);
+                        } else {
+                            reject(new Error(`No se ha encontrado el dron con id ${droneId} en la tabla MapFiguraDron.`));
+                        }
+                    }
+                });
+
+                console.log('Drone square retrieved: ', drone.getId(), square?.toString());
+                db.close();
+            });
+
+  
         } catch (err) {
             throw err;
         }

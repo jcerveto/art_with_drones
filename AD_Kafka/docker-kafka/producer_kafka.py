@@ -7,12 +7,16 @@ from kafka import KafkaProducer
 
 def main(argv):
     print(argv)
-    if len(argv) != 2:
-        print("Usage: python producer_kafka.py <topic_name>")
+    if len(argv) != 4:
+        print("Usage: python producer_kafka.py <kafka_host> <kafka_port> <topic_name>")
         sys.exit(1)
-    topic_name = argv[1]
 
-    producer = KafkaProducer(bootstrap_servers=['localhost:29092'],
+    kafka_host = argv[1]
+    kafka_port = argv[2]
+    topic_name = argv[3]
+
+    # KAFKA PORT SUELE SER 29092
+    producer = KafkaProducer(bootstrap_servers=[f'{kafka_host}:{kafka_port}'],
                             value_serializer=lambda x: 
                             dumps(x).encode('utf-8'))
 

@@ -12,10 +12,10 @@ export class SquareEntity {
 
     constructor(row: number, column: number) {
         if (row < SquareEntity.MIN_SIZE || row > SquareEntity.MAX_SIZE) {
-            throw new Error('Invalid row number');
+            throw new Error(`Invalid row number (${row})}`);
         }
         if (column < SquareEntity.MIN_SIZE || column > SquareEntity.MAX_SIZE) {
-            throw new Error('Invalid column number');
+            throw new Error(`Invalid column number (${column})`);
         }
 
         this.__row = row;

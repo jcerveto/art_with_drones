@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="script.js"></script>
+    <title>Art With Drones</title>
+</head>
+
+<body>
+    <header>
+        <h1>Art With Drones</h1>
+    </header>
+
+    <nav>
+        <button onclick="generateRandomMap()">Generar Mapa Random</button>
+        <button onclick="generateEmptyMap()">Vaciar Mapa</button>
+        <button onclick="connectToKafka()">Conectar a AD_Engine</button>
+    </nav>
+
+    <main>
+        <div class="map-container" id="map-container"></div>
+        <article class="description">
+            <p>Este es un mapa generado aleatoriamente con celdas rojas, verdes o sin fondo.</p>
+        </article>
+    </main>
+
+</body>
+
+</html>

@@ -1,20 +1,18 @@
 version: '3'
-networks:
-  art_with_drones_network_1:
-    driver: bridge
     
 services:
   ad_weather:
-    build:
-      context: .
+    container_name: ad_weather_container
+
+    build: .
+
     image: ad_weather
-    networks:
-      - art_with_drones_network_1
+
     ports:
-      - "8888:5555"
+      - "5000:5000"
+
     volumes:
-      - ./data:/app/data
-    working_dir: /app
-    stdin_open: true
+      # Ver .env
+      - ./data/cities.csv:/app/data/cities.csv
+
     tty: true
-    command: ["python", "src/main.py", "5555"]

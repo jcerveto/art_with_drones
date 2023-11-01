@@ -17,9 +17,6 @@ const db = new sqlite3.Database(databaseName, (err) => {
             }
             console.log('Data from MapFiguraDron table:');
             console.log("Show row per row: ")
-            rows.forEach((row) => {
-                console.log(`Registry ID: ${row.pk_fk_map_registry_id}, Figure: ${row.uk_map_figura}`);
-            });
             console.log("Show as JSON: /n: ", JSON.stringify(rows, null, 2))
             console.log("============================================")
         });
@@ -31,9 +28,6 @@ const db = new sqlite3.Database(databaseName, (err) => {
             }
             console.log('Data from Registry table:');
             console.log("Show row per row: ")
-            rows.forEach((row) => {
-                console.log(`ID: ${row.pk_registry_id}, Alias: ${row.alias}`);
-            });
             console.log("Show as JSON: /n: ", JSON.stringify(rows, null, 2))
             console.log("============================================")
         });

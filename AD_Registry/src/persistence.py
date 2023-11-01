@@ -1,119 +1,114 @@
-import json
-from .drone import droneEntity as drone
+import sqlite3
+
+import src.setEnviromentVariables as env
+import src.drone.droneEntity
 
 
-class Persistence:
-    def __init__(self, filename):
-        self.filename = filename
+def connect_to_database() -> tuple:
+    """
+    Función para conectarse a la base de datos.
+    :return: conexión y cursor
+    """
+    try:
+        database_name = env.get_database_file()
+        connection = sqlite3.connect(database_name)
+        cursor = connection.cursor()
+        return connection, cursor
+    except sqlite3.Error as error:
+        print("Error al conectar a la base de datos:", error)
+        return None, None
 
-    def get_all_drones(self) -> list:
+
+def close_connection(connection) -> None:
+    """
+    Función para cerrar la conexión con la base de datos.
+    :param connection: conexión a la base de datos
+    :return: None
+    """
+    if connection:
+        connection.close()
+
+
+def get_all_drones() -> list:
+    try:
         drones = []
+        connection, cursor = connect_to_database()
+        if connection and cursor:
+            cursor.execute("SELECT * FROM Registry")
+            rows = cursor.fetchall()
+            for row in rows:
+                new_drone = droneEntity.DroneEntity(id=row[0], alias=row[1], token=row[2])
+                drones.append(new_drone)
+                print(f"Drone: {new_drone.id}, {new_drone.alias}, {new_drone.token}")
+            
+            return rows
+    except sqlite3.Error as error:
+        print("Error al obtener datos:", error)
+        return []
+    finally:
+        close_connection(connection)
 
-        try:
-            with open(self.filename, 'r') as file:
-                drones_data = json.load(file)
-                for drone_data in drones_data:
-                    new_drone = drone.DroneEntity(id=drone_data['id'], alias=drone_data['alias'])
-                    drones.append(new_drone)
-        except Exception as e:
-            print(f"Error reading JSON file: {e}")
-            return []
 
-        return drones
+def add_drone(drone) -> str:
+    """
 
-    def read_drone(self, drone_to_send: object) -> bool:
-        """
-        Get drone by id.
-        Change drone instance attributes.
-        :param drone_to_send:
-        :return: Returns true if the drone exists, false otherwise.
-        """
+    :param drone: droneEntity.DroneEntity
+    :return:
+    """
+    status = True
+    try:
+        connection, cursor = connect_to_database()
+        if connection and cursor:
+            cursor.execute("INSERT INTO Registry (pk_registry_id, alias, token) VALUES (?, ?, ?)", (int(drone.id), drone.alias, drone.token))
+            connection.commit()
+            print(f"Fila insertada correctamente: [{drone.id}, {drone.alias}, {drone.token}] ")
+    except sqlite3.Error as error:
+        print("Error al insertar datos:", error)
+        status = False
+    finally:
+        close_connection(connection)
+        if status:
+            return drone.token
+        else:
+            return ''
 
-        try:
-            with open(self.filename, 'r') as file:
-                drones_data = json.load(file)
-                drone_id_str = str(drone_to_send.id)  # Convertir el ID a cadena
-                if drone_id_str in drones_data:
-                    drone_info = drones_data[drone_id_str][0]
-                    new_drone = drone.DroneEntity(id=drone_info['id'], alias=drone_info['alias'])
-                    drone_to_send.id = new_drone.id
-                    drone_to_send.alias = new_drone.alias
-                else:
-                    print(f"Drone with ID {drone_to_send.id} not found.")
-                    return False
-        except Exception as e:
-            print(f"Error reading JSON file: {e}")
-            return False
+def update_drone(new_drone) -> None:
+    """
 
-        return True
+    :param new_drone: droneEntity.DroneEntity
+    :return:
+    """
+    try:
+        connection, cursor = connect_to_database()
+        if connection and cursor:
+            cursor.execute("UPDATE Registry SET alias = ?, token = ? WHERE pk_registry_id = ?", (new_drone.alias, new_drone.token, new_drone.id))
+            connection.commit()
+            print(f"Fila editada correctamente: [{new_drone.id}, {new_drone.alias}, {new_drone.token}] ")
+    except sqlite3.Error as error:
+        print("Error al editar datos:", error)
+    finally:
+        close_connection(connection)
 
-    def add_drone(self, new_drone) -> bool:
-        drones_data = []
 
-        if self.exists_drone(new_drone):
-            return False  # No se crea
+def delete_drone(droneId: int):
+    try:
+        connection, cursor = connect_to_database()
+        if connection and cursor:
+            cursor.execute("DELETE FROM Registry WHERE pk_registry_id = ?", (int(droneId),))
+            connection.commit()
+            print(f"Fila eliminada correctamente. [{droneId}]")
+    except sqlite3.Error as error:
+        print("Error al eliminar datos:", error)
+    finally:
+        close_connection(connection)
 
-        try:
-            with open(self.filename, 'r') as file:
-                drones_data = json.load(file)
 
-            drones_data[f"{str(new_drone.id)}"] = [{'id': new_drone.id, 'alias': new_drone.alias}]
-
-            with open(self.filename, 'w') as file:
-                json.dump(drones_data, file, indent=4)
-        except Exception as e:
-            print(f"Error writing JSON file: {e}")
-            return False
-
-        return True
-
-    def update_drone(self, updated_drone) -> bool:
-        drones_data = []
-
-        if not self.exists_drone(updated_drone):
-            return False    # No se actualiza
-
-        try:
-            with open(self.filename, 'r') as file:
-                drones_data = json.load(file)
-
-            updated_drone_data = {'id': updated_drone.id, 'alias': updated_drone.alias}
-            drones_data[f"{str(updated_drone.id)}"] = [updated_drone_data]
-
-            with open(self.filename, 'w') as file:
-                json.dump(drones_data, file, indent=4)
-        except Exception as e:
-            print(f"Error updating JSON file: {e}")
-            return False
-
-        return True
-
-    def delete_drone(self, drone_to_delete) -> bool:
-        if not self.exists_drone(drone_to_delete):
-            return False
-
-        try:
-            with open(self.filename, 'r') as file:
-                drones_data = json.load(file)
-            print("hola1")
-
-            # Crear una nueva versión de drones_data sin el dron a eliminar
-            new_drones_data = {key: value for key, value in drones_data.items() if key != str(drone_to_delete.id)}
-
-            with open(self.filename, 'w') as file:
-                json.dump(new_drones_data, file, indent=4)
-        except Exception as e:
-            print(f"Error deleting JSON file: {e}")
-            return False
-
-        return True
-
-    def exists_drone(self, drone_obj) -> bool:
-        try:
-            with open(self.filename, 'r') as file:
-                drones_data = json.load(file)
-                return drone_obj.id in drones_data
-
-        except Exception as e:
-            print(f"Error reading JSON file: {e}")
-            return False
+if __name__ == '__main__':
+    print("Prueba de la base de datos...")
+    connect_to_database()
+    d88 = droneEntity.DroneEntity(88, "Drone88", "token-88")
+    add_drone(d88)
+    d88.alias = "Drone88-2"
+    update_drone(d88)
+    delete_drone(d88.id)
+    get_all_drones()

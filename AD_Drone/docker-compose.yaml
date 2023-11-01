@@ -1,0 +1,15 @@
+version: '3'
+services:
+  ad_drone:
+    container_name: ad_drone_container
+
+    build: .
+
+    volumes:
+      - ./data/drones.csv:/app/data/drones.csv
+
+    tty: true
+
+
+# docker-compose -f docker-runRegistry.yaml run ad_drone_run_registry python app/src/runnerEngine.py
+# sudo docker inspect ad_registry_container | grep IPAddress

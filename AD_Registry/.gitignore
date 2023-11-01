@@ -1,0 +1,10 @@
+# python .gitignore
+
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+*.csv
+*.ipynb
