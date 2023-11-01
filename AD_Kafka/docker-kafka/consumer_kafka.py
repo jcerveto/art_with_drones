@@ -5,16 +5,19 @@ from kafka import KafkaConsumer
 from json import loads
 
 def main(argv):
-    if len(argv) != 3:
-        print("Usage: python consumer_kafka.py <topic_name> <group_id>")
+    if len(argv) != 5:
+        print("Usage: python consumer_kafka.py <kafka_host> <kafka_port> <topic_name> <group_id>")
         sys.exit(1)
 
-    topic_name = argv[1]
-    group_id = argv[2]
+    kafka_host = argv[1]
+    kafka_port = argv[2]
+    topic_name = argv[3]
+    group_id = argv[4]
 
+    # KAFKA PORT SUELE SER 29092
     consumer = KafkaConsumer(
         topic_name,
-        bootstrap_servers=['localhost:29092'],
+        bootstrap_servers=[f'{kafka_host}:{kafka_port}'],
         auto_offset_reset='earliest',
         enable_auto_commit=True,
         group_id=group_id,
