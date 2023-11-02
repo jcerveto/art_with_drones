@@ -116,4 +116,4 @@ if __name__ == "__main__":
         id_drone=int(sys.argv[1]),
         position=coordinateMovement.CoordinateMovement(1, 1)
     )
-    main(drone_movement, None)
+    main(drone_movement, None, None)

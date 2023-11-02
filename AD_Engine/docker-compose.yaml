@@ -2,15 +2,18 @@ version: '3'
 
 services:
   ad_engine:
+    image: ad_engine_image
     container_name: ad_engine_container
 
     build: .
     
     ports:
       - "8080:8080"
+      - "8888:8888"
 
     volumes:
-      - ./AD_Database/database.db:/app/AD_Database/database.db
+      - ../AD_Database/database.db:/app/AD_Database/database.db
+      - ./data/AwD_figuras.json:/app/data/AwD_figuras.json
 
 
     working_dir: /app

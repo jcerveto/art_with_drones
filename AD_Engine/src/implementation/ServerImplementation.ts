@@ -288,7 +288,12 @@ export class ServerImplementation {
 
     static loadFigures(server: ServerEntity) {
         try {
-            const jsonData = fs.readFileSync("data/AwD_figuras.json", 'utf8');
+            console.log('Loading figures... ');
+            console.log('Current directory: ', __dirname);
+            console.log('Figure path: ', DatabaseSettings.FIGURES_FILE_PATH);
+            const files = fs.readdirSync('./');
+            console.log(JSON.stringify(files, null, 2));
+            const jsonData = fs.readFileSync(DatabaseSettings.FIGURES_FILE_PATH, 'utf8');
             const figuresData = JSON.parse(jsonData);
             for (const figure of figuresData.figuras) {
                 const figureEntity = new FigureEntity(figure.Nombre);
