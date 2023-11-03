@@ -13,8 +13,8 @@ echo "Ejecutando $NUM_INSTANCES instancias de registry desde ID=$FIRST_ID hasta 
 for i in $(seq $FIRST_ID $LAST_ID); do
     CONTAINER_NAME="ad_drone_registry_id_$i"
     echo "id: $CONTAINER_NAME"
-    sudo docker stop $CONTAINER_NAME 
-    sudo docker rm $CONTAINER_NAME
+    docker stop $CONTAINER_NAME 
+    docker rm $CONTAINER_NAME
 
 done
 
