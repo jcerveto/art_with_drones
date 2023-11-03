@@ -1,5 +1,6 @@
 import { MapFiguraDronTableImplementation } from "../implementation/MapFiguraDronTableImplementation";
 import {DronEntity} from "./DronEntity";
+import {SquareEntity} from "./SquareEntity";
 
 export class MapFiguraDronTable {
 
@@ -12,6 +13,15 @@ export class MapFiguraDronTable {
         } catch (err) {
             console.error(err);
             return false;
+        }
+    }
+
+    public static async getIdRegistry(square: SquareEntity, figureDroneId: number): Promise<number> {
+        try {
+            return await MapFiguraDronTableImplementation.getIdRegistry(square, figureDroneId);
+        } catch (err) {
+            console.error(err);
+            throw new Error('ERROR: Try to getIdRegistry: ' + err.message);
         }
     }
 }

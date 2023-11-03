@@ -65,7 +65,7 @@ def main(drone: droneEntity.DroneEntity, targetPositionConsumerIsOpen: threading
         raise TypeError("drone must be a droneEntity.DroneEntity instance. But found: " + str(type(drone)))
 
     topic_name = f"{setEnviromentVariables.getTargetPositionTopic()}"
-    group_id_name = f"{setEnviromentVariables.getTargetPositionTopic()}_{drone.drone_id}"
+    group_id_name = f"{setEnviromentVariables.getTargetPositionTopic()}_{drone.drone_id}_{time.time()}"
     print(f"Topic name: {topic_name}; Group id: {group_id_name}")
     print(f"Broker host: {setEnviromentVariables.getBrokerHost()}; Broker port: {setEnviromentVariables.getBrokerPort()}")
 

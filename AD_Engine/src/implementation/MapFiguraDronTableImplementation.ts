@@ -119,11 +119,39 @@ export class MapFiguraDronTableImplementation {
                     }
                 });
 
-                console.log('Drone square retrieved: ', drone.getId(), square?.toString());
+                console.log('Drone square retrieved from db in getSquareFromDrone method: ', drone.getId(), square?.toString());
                 db.close();
             });
 
   
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    static async getIdRegistry(square: SquareEntity, figureDroneId: number) {
+        try {
+            const db = new sqlite3.Database(DatabaseSettings.dbPath);
+            let droneId: number = null;
+            const query: string = `
+                SELECT pk_fk_map_registry_id
+                FROM MapFiguraDron
+                WHERE row = ? AND column = ? AND uk_map_figura = ?`;
+
+            return await new Promise<number>((resolve, reject) => {
+                db.get(query, [square.getRow(), square.getColumn(), figureDroneId], (err, row) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        if (row) {
+                            droneId = row["pk_fk_map_registry_id"];
+                            resolve(droneId);
+                        } else {
+                            reject(new Error(`No se ha encontrado el dron con id ${figureDroneId} en la tabla MapFiguraDron.`));
+                        }
+                    }
+                })
+            });
         } catch (err) {
             throw err;
         }

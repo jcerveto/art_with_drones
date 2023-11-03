@@ -20,3 +20,12 @@ export const TOPIC_CURRENT_POSITION: string = process.env.KAFKA_TOPIC_CURRENT_PO
 export const TOPIC_KEEP_ALIVE: string = process.env.KAFKA_TOPIC_KEEP_ALIVE ?? 'keep_alive';
 export const KEEP_ALIVE_INTERVAL: number = Number(process.env.KEEP_ALIVE_INTERVAL) ?? 20_000;
 export const TOPIC_START_FIGURE: string = process.env.KAFKA_TOPIC_START_FIGURE ?? 'start';
+
+let auxShowMap: string = process.env.SHOW_MAP;
+if (auxShowMap == undefined) {
+    throw new Error("No show map found");
+} else if (auxShowMap != 'yes' && auxShowMap != 'no') {
+    throw new Error("Show map must be yes or no. Not: " + auxShowMap);
+}
+export const SHOW_MAP: boolean = auxShowMap == 'yes';
+

@@ -8,6 +8,9 @@ export class DronEntity {
     private __target: SquareEntity | null = null;
 
     constructor(id: number) {
+        if (id == null) {
+            throw new Error('ERROR: Invalid id. Cannot be null or undefined.');
+        }
         this.__id = id;
     }
 
@@ -19,9 +22,6 @@ export class DronEntity {
         this.__status = status;
     }
 
-    public getTarget(): SquareEntity | null {
-        return this.__target;
-    }
 
     public setTarget(target: SquareEntity) {
         this.__target = target;
@@ -40,10 +40,17 @@ export class DronEntity {
     }
 
     public getTargetSquare(): SquareEntity {
-        return new SquareEntity(15, 18);
+        return this.__target;
     }
 
     public toString(): string {
         return `[${this.__id}]`;
+    }
+
+    public copy(): DronEntity {
+        const copy: DronEntity = new DronEntity(this.__id);
+        copy.setStatus(this.__status);
+        copy.setTarget(this.__target);
+        return copy;
     }
 }

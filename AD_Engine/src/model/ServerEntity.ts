@@ -2,11 +2,13 @@ import { MapEntity } from "./MapEntity";
 import {ServerImplementation} from "../implementation/ServerImplementation";
 import * as net from "net";
 import {SquareEntity} from "./SquareEntity";
-import {DronEntity} from "./DronEntity";
 import {WaitingPoolEntity} from "./WaitingPoolEntity";
 import {FigureEntity} from "./FigureEntity";
+import * as ServerSettings from "../settings/ServerSettings";
 
 export class ServerEntity {
+    public MAX_CONCURRENT_CONNECTIONS: number = ServerSettings.MAX_CONCURRENT_CONNECTIONS;
+
     private _host: string;
     private _port: number;
     private _map: MapEntity;
@@ -15,6 +17,19 @@ export class ServerEntity {
     private _figures = Array<FigureEntity>();
     private _showActive: boolean = false;
     private _currentFigure: FigureEntity | null = null;
+    private _currentConcurrentConnections: number = 0;
+
+    public getCurrentConcurrentConnections(): number {
+        return this._currentConcurrentConnections;
+    }
+
+    public incrementCurrentConcurrentConnections(): void {
+        this._currentConcurrentConnections++;
+    }
+
+    public decrementCurrentConcurrentConnections(): void {
+        this._currentConcurrentConnections--;
+    }
 
     public getShowActive(): boolean {
         return this._showActive;
@@ -149,9 +164,9 @@ export class ServerEntity {
         }
     }
 
-    public sendDronesToBase(): void {
+    public async sendDronesToBase() {
         try {
-            ServerImplementation.sendDronesToBase(this);
+            await ServerImplementation.sendDronesToBase(this);
         } catch (err) {
             console.error("ERROR: Trying to sendDronesToBase. ", err);
         }

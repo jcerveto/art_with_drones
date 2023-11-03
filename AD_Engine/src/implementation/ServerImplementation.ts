@@ -17,6 +17,8 @@ import {FigureEntity} from "../model/FigureEntity";
 import { sleep } from './TimeUtils';
 import * as DatabaseSettings from "../settings/databaseSettings";
 import { start as startHttp } from "./HttpServer"
+import {AlreadyInMap} from "../model/AlreadyInMap";
+import {MaxConcurrentConnectionsExceed} from "../model/MaxConcurrentConnectionsExceed";
 
 
 export class ServerImplementation {
@@ -33,18 +35,18 @@ export class ServerImplementation {
                 });
 
             // Crear seguimiento del tiempo.
-            // setInterval(() => server.weatherStuff(), WeatherSettings.WEATHER_TIMEOUT);
+            if (WeatherSettings.VALIDATE_WEATHER) {
+                console.log('*'.repeat(50), "\nWeather will be validate each ", WeatherSettings.WEATHER_TIMEOUT , ". \n", '*'.repeat(50))
+                setInterval(() => server.weatherStuff(), WeatherSettings.WEATHER_TIMEOUT);
+            } else {
+                console.log('*'.repeat(50), "\nWeather validation disabled. \n", '*'.repeat(50))
+            }
 
             // Crear topic para publicar el mapa.
             await BrokerServices.initMapPublisher();
             console.log("Map Broker connected. ")
             await BrokerServices.publishMap(server.getMap());
-
-            // TODO: Añadir productor de target_position
-            // TODO: Añadir consumidor de current_position
-
-            // TEMPORAL: Cada cierto tiempo se publica el mapa actual.
-            // setInterval(() => server.sendMapToDrones(), 5_000);
+            console.log("Map published. ")
 
             // Promesa sin resolver para que el topic de current_position no se cierre.
             BrokerServices.subscribeToCurrentPosition(server);
@@ -64,8 +66,28 @@ export class ServerImplementation {
         conn.on('data', async data => {
             try {
                 console.log('data received: ' + data);
-                await ServerImplementation.handleClientAuthenticationRequest(server, conn, data);
+                if (server.getCurrentConcurrentConnections() > server.MAX_CONCURRENT_CONNECTIONS) {
+                    throw new MaxConcurrentConnectionsExceed(`ERROR: Max concurrent connections exceed. `)
+                }
+
+                // Normal case
+                server.incrementCurrentConcurrentConnections();
+                // promesa sin AWAIT!
+                ServerImplementation.handleClientAuthenticationRequest(server, conn, data)
+                    .then(() => {
+                        server.decrementCurrentConcurrentConnections();
+                    });
             } catch (err) {
+                if (err instanceof MaxConcurrentConnectionsExceed) {
+                    const answer = {
+                        ok: false,
+                        message: err.message.toString()
+                    }
+                    const jsonAnswer = JSON.stringify(answer);
+                    const bytesResponse = Buffer.from(jsonAnswer);
+                    const encodedResponse = bytesResponse.toString('utf-8');
+                    conn.write(encodedResponse);
+                }
                 console.error(`ERROR: Trying to handle client: ${err}`);
             }
         });
@@ -89,6 +111,7 @@ export class ServerImplementation {
 
     private static async handleClientAuthenticationRequest(server: ServerEntity, conn: net.Socket, data: Buffer) {
         try {
+            console.log(`${'*'.repeat(50)}\nCurrent concurrent connections: ${server.getCurrentConcurrentConnections()}.\n${'*'.repeat(50)}\n`);
             const cleanRequest = data.toString('utf-8');
             console.log('clean request: ', cleanRequest);
             const jsonParsedRequest = JSON.parse(cleanRequest);
@@ -116,14 +139,13 @@ export class ServerImplementation {
                 else {
                     console.log(`Drone ${dron_id} NOT subscribed correctly. `);
                     server.getMap().removeDrone(droneEntity);
-                    console.log(`Drone ${dron_id} removed from map. `);
-                    console.log("FALTA BORRARLO DE LA BASE DE DATOS. OCUPA UN HUECO. ")
+                    console.log("FALTA BORRARLO DE LA BASE DE DATOS. OCUPA UN HUECO. Ignorar...")
                 }
             }
 
             // valida si el dron ya está en el mapa
             if (server.getMap().isDroneInMap(droneEntity)) {
-                throw new Error('ERROR: Drone already in map. ');
+                throw new AlreadyInMap('ERROR: Drone already in map. ');
             }
 
             // valida si hay hueco en la figura
@@ -134,16 +156,19 @@ export class ServerImplementation {
 
             // ver si hay hueco y mapear to figure
             const newDrone = new DronEntity(dron_id);
-            if (! await MapFiguraDronTable.mapNewDrone(newDrone)) {         // TODO: Añadir row y column dede FigureEntity
+            if (! await MapFiguraDronTable.mapNewDrone(newDrone)) {
                 throw new Error('ERROR: BAD DRONE MATCH. ')
             }
             console.log(`New drone added to database: ${newDrone.toString()}`);
+            const square = await MapFiguraDronTableImplementation.getSquareFromDrone(droneEntity);
+            newDrone.setTarget(square);
 
             // add to map (1, 1)
             const firstSquare = new SquareEntity(1, 1);
             server.getMap().addDrone(newDrone, firstSquare);
             console.log("New drone added. ");
             console.log(server.getMap().toString());
+            console.log("Mapa mostrado. ");
 
             // enviar respuesta
             const answer = {
@@ -165,11 +190,24 @@ export class ServerImplementation {
             conn.end();
 
         } catch (err) {
-            console.error('Error handling client request:', err.message, err.error);
-            const answer = {
-                ok: false,
-                message: errorMessages.AuthFailed + err.message
-            };
+            console.error(`Error handling client request: ${JSON.stringify}`, err.message, err.name, err.stack, '<-err.stack');
+            let answer = {}
+            // Already in map
+            if (err instanceof AlreadyInMap) {
+                answer = {
+                    ok: true,
+                    message: err.message.toString()
+                }
+            }
+            // generic error
+            else {
+                answer = {
+                    ok: false,
+                    message: errorMessages.AuthFailed + err.message
+                };
+            }
+
+
             const answerJson = JSON.stringify(answer);
             const bytesResponse = Buffer.from(answerJson);
             const encodedResponse = bytesResponse.toString('utf-8');
@@ -244,16 +282,13 @@ export class ServerImplementation {
         }
     }
 
-    public static sendDronesToBase(server: ServerEntity) {
+    public static async sendDronesToBase(server: ServerEntity) {
         try {
             console.log('Sending drones to base... ');
-            server.getMap()
-                .getAliveDrones().forEach(async (drone: DronEntity) => {
-                await BrokerServices.publishTargetPosition(drone, new SquareEntity(1, 1));
+            for (const drone of server.getMap().getAliveDrones()) {
                 console.log(`Drone ${drone.getId()} sent to base. `);
-            });
-
-
+                await BrokerServices.publishTargetPosition(drone, new SquareEntity(1, 1));
+            }
         } catch (err) {
             console.error(`ERROR: While sendDronesToBase: ${err}`)
         }
@@ -289,10 +324,6 @@ export class ServerImplementation {
     static loadFigures(server: ServerEntity) {
         try {
             console.log('Loading figures... ');
-            console.log('Current directory: ', __dirname);
-            console.log('Figure path: ', DatabaseSettings.FIGURES_FILE_PATH);
-            const files = fs.readdirSync('./');
-            console.log(JSON.stringify(files, null, 2));
             const jsonData = fs.readFileSync(DatabaseSettings.FIGURES_FILE_PATH, 'utf8');
             const figuresData = JSON.parse(jsonData);
             for (const figure of figuresData.figuras) {
@@ -353,20 +384,35 @@ export class ServerImplementation {
             console.log(`Starting figure: ${figure.getName()}`);
             console.log(`Current figure: ${server.getCurrentFigure().toString()}`);
             await MapFiguraDronTableImplementation.storeFigure(figure);
-            for (let [squareHash, droneId] of figure.getFigure()) {
-                const drone = new DronEntity(droneId);
-                const [row, column] = squareHash.split('-').map(Number);
-                const square = new SquareEntity(row, column);
-                await BrokerServices.publishTargetPosition(drone, square);
-                console.log(`New target position published: ${drone.toString()}, ${square.getHash()}`);
+
+
+            for (let registeredDrone of server.getMap().getAliveDrones()) {
+                if (! await MapFiguraDronTable.mapNewDrone(registeredDrone)) {
+                    console.error("ERROR: BAD DRONE MATCH. Continue...", registeredDrone.toString())
+                    continue;
+                }
+                const newSquare: SquareEntity = await MapFiguraDronTableImplementation.getSquareFromDrone(registeredDrone);
+                registeredDrone.setTarget(newSquare);
+                console.log(`New drone added to database: ${registeredDrone.toString()} -> ${newSquare.getHash()}`);
+                await BrokerServices.publishTargetPosition(registeredDrone, newSquare);
+                console.log(`New target position published: ${registeredDrone.toString()}, ${newSquare.getHash()}`);
+            }
+            if (server.getMap().getAliveDrones().length == 0) {
+                console.error("ERROR: No drones in map. Any target_position message was published. ")
+            }
+
+
+            if (server.getMap().getAliveDrones().length == 0) {
+                console.error("ERROR: No drones in map. Any target_position message was published. ")
             }
 
             // MAIN LOOP: mientras no se complete la figura, se repite
-            while (! server.getMap().matchesWithFigure(server.getCurrentFigure())) {
+            while (! ServerImplementation.isFigureShowCompleted(server)) {
                 await sleep(1000);
                 console.log("Waiting for drones to reach target position... ", Date.now().toString());
             }
-            console.log("FIGURA COMPLETADA")
+            console.log(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
+            console.log(`WAITING 10 SECONDS TO DRAW NEXT FIGURE...`);
             await sleep(5_000);
             console.log(`Figure ${figure.getName()} ended. `);
             server.clearCurrentFigure();
@@ -377,6 +423,17 @@ export class ServerImplementation {
             server.deactivateShow();
             console.error(`ERROR: While handleFigureShow. Re-Raised: ${err.message}`)
             throw err;
+        }
+    }
+
+    static isFigureShowCompleted(server: ServerEntity): boolean {
+        try {
+            // Se debería consultar: if (await server.getMap().matchesWithFigure(server.getCurrentFigure())) {}
+            // pero solamente se accede desde el broker. No tiene sentido consultar dos veces lo mismo.
+            return !server.getShowActive(); // se cambia desde el broker.
+        } catch (err) {
+            console.error(`ERROR: While isFigureShowCompleted. Returned false: ${err}`)
+            return false;
         }
     }
 

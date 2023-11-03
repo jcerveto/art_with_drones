@@ -38,7 +38,9 @@ export async function publishMap(map: MapEntity) {
                 {value: JSON.stringify(objectToSend)}
             ]
         });
-        console.log(map.toString());
+        if (BrokerSettings.SHOW_MAP) {
+            console.log(map.toString());
+        }
         console.log("drones: " , map.getAllDrones().length, "alive: ", map.getAliveDrones().length, "dead: ", map.getDeadDrones().length);
     } catch (err) {
         console.error("ERROR: Trying to publish the map. ")
@@ -58,7 +60,7 @@ async function handleCurrentCoordinateReceived(server: ServerEntity, consumer: C
         const col = parseInt(value?.current_position?.col);
 
         console.log("droneId: " + droneId, "row: " + row, "col: " + col);
-        const droneEntity = new DronEntity(droneId);
+        const droneEntity = server.getMap().getDroneBySquare(droneId);
         const currentSquareEntity = new SquareEntity(row, col);
 
         // Check if drone is in map
@@ -81,12 +83,8 @@ async function handleCurrentCoordinateReceived(server: ServerEntity, consumer: C
 
         await publishMap(server.getMap());
         console.log('----------- \n currentFigure: ', server.getCurrentFigure().getName(), '\n -----------');
-        if (server.getMap().matchesWithFigure(
-            server.getCurrentFigure()
-        )) {
-            console.log(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
-            console.log(`WATING 10 SECONDS TO DRAW NEXT FIGURE...`);
-            await sleep(10_000);
+        if (await server.getMap().matchesWithFigure(server.getCurrentFigure())) {
+            server.deactivateShow();
             // SALIR DEL FLUJO DE CONSUMER.RUN AQUI
             await consumer.disconnect();
         }
@@ -96,11 +94,11 @@ async function handleCurrentCoordinateReceived(server: ServerEntity, consumer: C
 }
 export async function subscribeToCurrentPosition(server: ServerEntity) {
     const currentPositionTopic = BrokerSettings.TOPIC_CURRENT_POSITION;
-    //const engineGroupId = `current_position_ad_engine_${Date.now()}`;
-    const engineGroupId = `current_position_ad_engine`;
+    const engineGroupId = `current_position_ad_engine_current_position_${Date.now()}`;
 
     const consumer = kafka.consumer({
         groupId: engineGroupId,
+
     });
 
     await consumer.connect();
@@ -149,73 +147,6 @@ export async function publishTargetPosition(drone: DronEntity, targetPosition: S
     } catch (err) {
         console.error(`ERROR: Trying to publish the target position. ${err}. DroneId: ${droneId}`);
     }
-}
 
-export async function handleKeepAliveStatus(server: ServerEntity, newDrone: DronEntity): Promise<NodeJS.Timeout> {
-    try {
-        const droneId = newDrone.getId();
-        const droneTopic = `${BrokerSettings.TOPIC_KEEP_ALIVE}_${droneId}`;
-        const droneGroupId = `keep_alive_dron_id_${droneId}`;
-
-        const keepAliveConsumer = kafka.consumer({
-            groupId: droneGroupId,
-        });
-
-
-        await keepAliveConsumer.connect();
-        await keepAliveConsumer.subscribe({
-            topic: droneTopic,
-            fromBeginning: false
-        });
-
-        let messageReceived = false;
-
-
-        const onMessageReceivedCallback = async () => {
-            console.log('Se recibió un mensaje en el topic "keep_alive". Ejecutando el callback de condición cumplida...');
-            if (server.getMap().isDroneInMap(newDrone)) {
-                server.getMap().changeDroneStatus(newDrone, EKeepAliveStatus.ALIVE);
-                console.log(`dronId: ${droneId} now is ALIVE`);
-            } else {
-                console.error(`ERROR: Drone ${droneId} is not in map.`);
-            }
-
-            await server.sendMapToDrones();
-        }
-
-        const onNoMessageReceivedCallback = async () => {
-            console.log('No se recibió ningún mensaje en el topic "keep_alive". Ejecutando el callback de condición no cumplida...');
-            if (server.getMap().isDroneInMap(newDrone)) {
-                server.getMap().changeDroneStatus(newDrone, EKeepAliveStatus.DEAD);
-                console.log(`dronId: ${droneId} now is UNKNOWN`);
-            } else {
-                console.error(`ERROR: Drone ${droneId} not in map.`)
-            }
-
-            await server.sendMapToDrones();
-        }
-
-        // poner un await y crear una promesa con timeout encapsulando el consumer.run
-        keepAliveConsumer.run({
-            eachMessage: async ({ topic, partition, message }) => {
-                messageReceived = true;
-                await onMessageReceivedCallback(); // Ejecuta el callback cuando se recibe un mensaje
-            },
-        });
-
-        const setIntervalId: NodeJS.Timeout = setInterval(async () => {
-            if (!messageReceived) {
-                console.log('No se recibió ningún mensaje en el topic "keep_alive". Ejecutando el callback de condición no cumplida...');
-                await onNoMessageReceivedCallback(); // Ejecuta el callback cuando no se recibe ningún mensaje
-            }
-
-            messageReceived = false; // Reinicia el estado del mensaje recibido para la próxima comprobación
-
-        }, BrokerSettings.KEEP_ALIVE_INTERVAL);
-
-        return setIntervalId;
-    } catch (err) {
-        console.error("ERROR: Trying to handleKeepAliveStatus. Exception was not raised. ", err.message);
-    }
 }
 

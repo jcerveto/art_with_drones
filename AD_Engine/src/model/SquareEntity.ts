@@ -25,11 +25,11 @@ export class SquareEntity {
     public getAliveDrones(): Array<DronEntity> {
         let drones: Array<DronEntity> = [];
 
-        this.__drones.forEach((drone: DronEntity) => {
+        for (let [droneHash, drone] of this.__drones) {
             if (drone.getStatus() == EKeepAliveStatus.ALIVE) {
                 drones.push(drone);
             }
-        });
+        }
 
         return drones;
     }
@@ -37,21 +37,21 @@ export class SquareEntity {
     public getDeadDrones(): Array<DronEntity> {
         let drones: Array<DronEntity> = [];
 
-        this.__drones.forEach((drone: DronEntity) => {
+        for (let [droneHash, drone] of this.__drones) {
             if (drone.getStatus() == EKeepAliveStatus.DEAD) {
                 drones.push(drone);
             }
-        });
+        }
 
         return drones;
     }
 
     public getAllDrones(): Array<DronEntity> {
         let dronesArray: Array<DronEntity> = [];
-        
-        this.__drones.forEach((drone: DronEntity) => {
+
+        for (let [droneHash, drone] of this.__drones) {
             dronesArray.push(drone);
-        });
+        }
 
         return dronesArray;
     }
@@ -91,7 +91,7 @@ export class SquareEntity {
     }
 
     public toString(): string {
-        const status: EStatus = this.getStatus();
+        const status: EStatus = this.getSquareStatus();
 
         if (status === EStatus.GOOD) {
             return '■';
@@ -107,7 +107,7 @@ export class SquareEntity {
     }
 
     public toJson(): string {
-        const status: EStatus = this.getStatus();
+        const status: EStatus = this.getSquareStatus();
         const statusString: string = getEStatusToString(status);
 
         const jsonFormat = {
@@ -125,29 +125,28 @@ export class SquareEntity {
     }
 
     public equals(other: null | SquareEntity): boolean {
-        if (!other) {
+        if (other === null || other === undefined) {
             return false;
         }
         return this.__row === other.__row && this.__column === other.__column;
     }
 
-    public getStatus(): EStatus {
-        if (this.getAliveDrones() == null || this.getAliveDrones() == undefined) {
+    public getSquareStatus(): EStatus {
+        const aliveDrones = this.getAliveDrones();
+
+        if (!aliveDrones || aliveDrones.length === 0) {
             return EStatus.UNKNOWN;
         }
 
-        if (this.getAliveDrones().length == 0) {
-            return EStatus.UNKNOWN;
-        }
-        if (this.getAliveDrones().length > 1) {
+        if (aliveDrones.length > 1) {
             return EStatus.BAD;
         }
 
-        if (this.equals(this.__drones[0]?.getTargetSquare())) {
+        if (aliveDrones.length === 1 && aliveDrones[0].getTargetSquare().equals(this)) {
             return EStatus.GOOD;
-        } else {
-            return EStatus.BAD;
         }
+
+        return EStatus.BAD;
     }
 
 
