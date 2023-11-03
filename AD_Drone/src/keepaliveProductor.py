@@ -10,9 +10,10 @@ def main(dronId: int):
     keep_alive_topic = setEnviromentVariables.getKeepAliveTopic(dronId)
     print(f"Keep alive topic: {keep_alive_topic}")
 
-    producer = KafkaProducer(bootstrap_servers=[f"{setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}"],
-                             value_serializer=lambda x:
-                             json.dumps(x).encode('utf-8'))
+    producer = KafkaProducer(
+        bootstrap_servers=[f"{setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}"],
+        value_serializer=lambda x:
+        json.dumps(x).encode('utf-8'))
 
     i = 0
     while True:
@@ -26,9 +27,9 @@ def main(dronId: int):
         print(f"New keepAlive published in topic: {keep_alive_topic}. time: {time.time()}")
         time.sleep(5)
 
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python keepaliveProductor.py <dronId>")
         sys.exit(1)
     main(int(sys.argv[1]))
-

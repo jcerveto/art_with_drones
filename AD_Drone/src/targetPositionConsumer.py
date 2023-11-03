@@ -12,16 +12,11 @@ import coordinateMovement
 import utils
 import currentPositionProductor
 
-def handle_new_message(message: dict, drone: droneMovement.DroneMovement):
-    #if not isinstance(droneMovement, droneMovement.DroneMovement):
+
+def handle_new_message(message: dict, drone: droneMovement.DroneMovement, stopEvent: threading.Event):
+    # if not isinstance(droneMovement, droneMovement.DroneMovement):
     #    raise TypeError("drone must be a droneMovement.DroneMovement instance. But found: " + str(type(drone)))
     print(f"Drone type: {type(drone)}")
-
-    print(f"New message received: {message}")
-    drone_id = get_drone_id_from_message(message)
-    if drone_id != drone.id_drone:
-        print(f"Message not for this drone. {drone_id} != {drone.id_drone} Ignoring...")
-        return
 
     # Get target position
     target_position = get_target_position_from_message(message)
@@ -45,6 +40,9 @@ def handle_new_message(message: dict, drone: droneMovement.DroneMovement):
     while True:
         print("Drone is in target_position. Sending current position...", str(time.time()))
         currentPositionProductor.publishCurrentPosition(drone, [drone.position])
+        if stopEvent.is_set():
+            print("New position received. Breaking thread...")
+            break
         time.sleep(setEnviromentVariables.getMessageDelay())
 
 
@@ -54,6 +52,7 @@ def get_target_position_from_message(message: dict) -> coordinateMovement.Coordi
         row=int(position_dict["row"]),
         col=int(position_dict["col"])
     )
+
 
 def get_drone_id_from_message(message: dict) -> int:
     return int(message["id_registry"])
@@ -67,10 +66,11 @@ def main(drone: droneEntity.DroneEntity, targetPositionConsumerIsOpen: threading
     topic_name = f"{setEnviromentVariables.getTargetPositionTopic()}"
     group_id_name = f"{setEnviromentVariables.getTargetPositionTopic()}_{drone.drone_id}_{time.time()}"
     print(f"Topic name: {topic_name}; Group id: {group_id_name}")
-    print(f"Broker host: {setEnviromentVariables.getBrokerHost()}; Broker port: {setEnviromentVariables.getBrokerPort()}")
+    print(
+        f"Broker host: {setEnviromentVariables.getBrokerHost()}; Broker port: {setEnviromentVariables.getBrokerPort()}")
 
     try:
-        print(f"{50*'%'}: {setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}")
+        print(f"{50 * '%'}: {setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}")
         consumer = KafkaConsumer(
             topic_name,
             bootstrap_servers=[f"{setEnviromentVariables.getBrokerHost()}:{setEnviromentVariables.getBrokerPort()}"],
@@ -92,10 +92,38 @@ def main(drone: droneEntity.DroneEntity, targetPositionConsumerIsOpen: threading
             id_drone=drone.drone_id,
             position=coordinateMovement.CoordinateMovement(1, 1)
         )
+
+        stopEvent = threading.Event()
+        handle_new_message_thread = None
         for message in consumer:
             try:
                 message = message.value
-                handle_new_message(message, drone_movement)
+                print(f"New message received: {message}")
+                drone_id = get_drone_id_from_message(message)
+                if drone_id != drone_movement.id_drone:
+                    print(f"Message not for this drone. {drone_id} != {drone_movement.id_drone} Ignoring...")
+                    continue
+                else:
+                    print(f"Message for this drone. {drone_id} == {drone_movement.id_drone}")
+
+                # Si hay un hilo corriendo, lo paramos
+                if handle_new_message_thread is not None and handle_new_message_thread.is_alive():
+                    print("handle_new_message_thread is alive. Stopping...")
+                    stopEvent.set()
+                    handle_new_message_thread.join()
+                    print("handle_new_message_thread stopped.")
+
+                # Creamos un nuevo hilo
+                print("Creating new handle_new_message_thread...")
+                stopEvent.clear()  # Limpiamos el evento. Se supone que aquí es innecesario. Pero por si acaso.
+                print(f"stopEvent cleared: {drone.drone_id}")
+                stopEvent = threading.Event()
+                print(f"stopEvent created: {drone.drone_id}")
+                handle_new_message_thread = threading.Thread(
+                    target=handle_new_message,
+                    args=(message, drone_movement, stopEvent)
+                )
+                handle_new_message_thread.start()
 
             except Exception as e:
                 print(f"Error in targetPositionConsumer. Ignoring message. {str(e)}")
@@ -112,8 +140,8 @@ if __name__ == "__main__":
         print("Usage: python targetPositionConsumer.py <droneId>")
         sys.exit(-1)
 
-    drone_movement = droneMovement.DroneMovement(
-        id_drone=int(sys.argv[1]),
-        position=coordinateMovement.CoordinateMovement(1, 1)
+    drone_entity = droneEntity.DroneEntity(
+        drone_id=int(sys.argv[1]),
+        alias="drone_" + str(sys.argv[1]),
     )
-    main(drone_movement, None, None)
+    main(drone_entity, None, None)
