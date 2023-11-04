@@ -1,6 +1,6 @@
 import { ServerEntity } from './model/ServerEntity';
 import { sleep } from './implementation/TimeUtils';
-//import * as ServerSettings from './settings/ServerSettings';
+import * as ServerSettings from './settings/ServerSettings';
 
 // Example usage
 if (process.argv.length != 2) {
@@ -18,11 +18,14 @@ const main = async () => {
             throw new Error("No main host or port found");
         }
         */
-        const port = 8080;
+        const port = ServerSettings.MAIN_PORT;
         const host = '0.0.0.0'
 
         const server = await new ServerEntity(port, host);
 
+        if (ServerSettings.RECOVER) {
+            await server.recover();
+        }
         await server.start();
         do {
             await server.loadFigures();

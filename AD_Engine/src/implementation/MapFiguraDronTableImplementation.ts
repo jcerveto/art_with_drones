@@ -156,4 +156,97 @@ export class MapFiguraDronTableImplementation {
             throw err;
         }
     }
+
+    static async removeIdRegistry() {
+        try {
+            const db = new sqlite3.Database(DatabaseSettings.dbPath);
+            const query: string = `
+                UPDATE MapFiguraDron
+                SET pk_fk_map_registry_id = NULL
+                WHERE pk_fk_map_registry_id IS NOT NULL`;
+
+            await new Promise<void>((resolve, reject) => {
+                db.run(query, [], (err) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                })
+            });
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    static async getRecoveredFigure(): Promise<FigureEntity> {
+        try {
+            //console.log("Removing id registry... from getRecoveredFigure method");
+            //await MapFiguraDronTableImplementation.removeIdRegistry();
+
+
+            const db = new sqlite3.Database(DatabaseSettings.dbPath);
+            const query: string = `
+                SELECT uk_map_figura, row, column, pk_fk_map_registry_id
+                FROM MapFiguraDron
+                WHERE pk_fk_map_registry_id IS NOT NULL`;
+
+            const rows = await new Promise<any[]>((resolve, reject) => {
+                db.all(query, [], (err, rows) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(rows);
+                    }
+                });
+            });
+
+            const recoveredFigure = new FigureEntity("RecoveredFigure");
+
+            rows.forEach((row) => {
+                const square = new SquareEntity(row.row, row.column);
+                const droneId = row.pk_fk_map_registry_id;
+                recoveredFigure.addSquare(square, droneId);
+            });
+
+            db.close();
+            return recoveredFigure;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    static async getRecoveredDrones(): Promise<Array<DronEntity>> {
+        try {
+            const db = new sqlite3.Database(DatabaseSettings.dbPath);
+            const query: string = `
+                SELECT pk_fk_map_registry_id, row, column
+                FROM MapFiguraDron
+                WHERE pk_fk_map_registry_id IS NOT NULL`;
+
+            const rows = await new Promise<any[]>((resolve, reject) => {
+                db.all(query, [], (err, rows) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(rows);
+                    }
+                });
+
+            });
+
+            const recoveredDrones: DronEntity[] = [];
+            rows.forEach((row) => {
+                const drone = new DronEntity(row.pk_fk_map_registry_id);
+                const square = new SquareEntity(row.row, row.column);
+                drone.setTarget(square);
+                recoveredDrones.push(drone);
+            });
+
+            db.close()
+            return recoveredDrones;
+        } catch (err) {
+            throw err;
+        }
+    }
 }

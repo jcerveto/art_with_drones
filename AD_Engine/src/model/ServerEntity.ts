@@ -23,6 +23,7 @@ export class ServerEntity {
     private _currentConcurrentConnections: number = 0;
     private _isWeatherValid: boolean = true;
 
+
     /**
      * Podrían editar concurrentemente el mapa si no se controla desde:
      * - Map.MoveDrone(*)
@@ -301,6 +302,14 @@ export class ServerEntity {
             await ServerImplementation.startShow(this);
         } catch (err) {
             console.error("ERROR: Trying to startShow. ", err);
+        }
+    }
+
+    public async recover() {
+        try {
+            await ServerImplementation.recover(this);
+        } catch (err) {
+            console.error("ERROR: Trying to recover. ", err);
         }
     }
 }

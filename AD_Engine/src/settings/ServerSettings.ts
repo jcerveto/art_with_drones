@@ -58,3 +58,11 @@ if (isNaN(auxKeepAliveTimeout) || auxKeepAliveTimeout == undefined) {
  */
 export const KEEP_ALIVE_TIMEOUT: number = auxKeepAliveTimeout;
 
+let auxRecover: string = process.env.RECOVER;
+if (auxRecover == undefined) {
+    console.error(`ERROR: Trying to get recover: `);
+    throw new Error("No recover found");
+}
+export const RECOVER: boolean = auxRecover == 'yes';
+
+

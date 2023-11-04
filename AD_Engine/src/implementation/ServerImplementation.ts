@@ -362,7 +362,7 @@ export class ServerImplementation {
     static async startShow(server: ServerEntity): Promise<void> {
         try {
             console.log('Starting show... ');
-
+            console.log('Starting from the beginning... ');
             for (const figure of server.getFigures()) {
                 try {
                     await ServerImplementation.handleFigureShow(server, figure);
@@ -452,6 +452,26 @@ export class ServerImplementation {
             await BrokerServices.publishCommunicationMessage(message);
         } catch (err) {
             console.error("ERROR: Trying to publishCommunicationMessage. ", err);
+        }
+    }
+
+    static async recover(server: ServerEntity) {
+        try {
+            console.log('Recovering... ');
+
+            console.log('Recovering the last figure... ');
+            const recoveredDrones: Array<DronEntity> = await MapFiguraDronTableImplementation.getRecoveredDrones();
+            for (const recoveredDrone of recoveredDrones) {
+                server.getMap().addDrone(recoveredDrone, new SquareEntity(1, 1));
+                console.log('Recovered drone: ', recoveredDrone.toString());
+                server.updateNewDroneTimeStamp(recoveredDrone);
+            }
+
+            const recoveredFigure: FigureEntity = await MapFiguraDronTableImplementation.getRecoveredFigure();
+            server.getFigures().unshift(recoveredFigure); // add to the beginning
+            console.log('Recovered. ');
+        } catch (err) {
+            console.error("ERROR: Trying to recover. ", err);
         }
     }
 }
