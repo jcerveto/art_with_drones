@@ -10,4 +10,3 @@ COPY tsconfig.json tsconfig.json
 COPY src src
 COPY .env .env
 
-CMD ["npm", "run", "build:start"]

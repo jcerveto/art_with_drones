@@ -2,11 +2,13 @@ import { MapEntity } from "./MapEntity";
 import {ServerImplementation} from "../implementation/ServerImplementation";
 import * as net from "net";
 import {SquareEntity} from "./SquareEntity";
-import {DronEntity} from "./DronEntity";
 import {WaitingPoolEntity} from "./WaitingPoolEntity";
 import {FigureEntity} from "./FigureEntity";
+import * as ServerSettings from "../settings/ServerSettings";
 
 export class ServerEntity {
+    public MAX_CONCURRENT_CONNECTIONS: number = ServerSettings.MAX_CONCURRENT_CONNECTIONS;
+
     private _host: string;
     private _port: number;
     private _map: MapEntity;
@@ -15,6 +17,32 @@ export class ServerEntity {
     private _figures = Array<FigureEntity>();
     private _showActive: boolean = false;
     private _currentFigure: FigureEntity | null = null;
+    private _currentConcurrentConnections: number = 0;
+    private _isWeatherValid: boolean = true;
+
+    public getIsWeatherValid(): boolean {
+        return this._isWeatherValid;
+    }
+
+    public setWeatherToBad(): void {
+        this._isWeatherValid = false;
+    }
+
+    public setWeatherToGood(): void {
+        this._isWeatherValid = true;
+    }
+
+    public getCurrentConcurrentConnections(): number {
+        return this._currentConcurrentConnections;
+    }
+
+    public incrementCurrentConcurrentConnections(): void {
+        this._currentConcurrentConnections++;
+    }
+
+    public decrementCurrentConcurrentConnections(): void {
+        this._currentConcurrentConnections--;
+    }
 
     public getShowActive(): boolean {
         return this._showActive;
@@ -83,13 +111,6 @@ export class ServerEntity {
         }
     }
 
-    public async startFigure(): Promise<void> {
-        try {
-            await ServerImplementation.startFigure(this);
-        } catch (err) {
-            console.error("Error starting figure!", err);
-        }
-    }
 
     public handleClientAuthentication(conn: net.Socket): void {
         try {
@@ -100,22 +121,6 @@ export class ServerEntity {
         }
     }
 
-    public async getTargetSquareFromDronId(dronId: number): Promise<SquareEntity> {
-        try {
-            return await ServerImplementation.getTargetSquareFromDronId(this, dronId);
-        } catch (err) {
-            console.error('ERROR: at getTargetSquareFromDronId: ', err.message);
-        }
-    }
-
-    // BROKER'S METHODS
-    public subscribeToDrones(): void {
-        try {
-            ServerImplementation.subscribeToDrones(this);
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
 
     public async sendMapToDrones() {
         try {
@@ -149,11 +154,22 @@ export class ServerEntity {
         }
     }
 
-    public sendDronesToBase(): void {
+    public async handleGoodWeather(): Promise<void> {
         try {
-            ServerImplementation.sendDronesToBase(this);
+            await ServerImplementation.handleGoodWeather(this);
         } catch (err) {
-            console.error("ERROR: Trying to sendDronesToBase. ", err);
+            console.error("ERROR: Trying to handleGoodWeather. ", err);
+        }
+    }
+
+    public async sendDronesToBase() {
+        try {
+            console.log("Sending drones to base...");
+
+            await ServerImplementation.sendDronesToBase(this);
+        } catch (err) {
+            console.error("ERROR: Trying to sendDronesToBase. Re-Raising ", err);
+            throw err;
         }
     }
 

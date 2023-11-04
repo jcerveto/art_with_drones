@@ -1,7 +1,7 @@
 version: '3'
 services:
   ad_drone:
-    container_name: ad_drone_container
+    image: ad_drone_image
 
     build: .
 

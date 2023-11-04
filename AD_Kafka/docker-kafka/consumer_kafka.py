@@ -3,6 +3,7 @@
 import sys
 from kafka import KafkaConsumer
 from json import loads
+import time
 
 def main(argv):
     if len(argv) != 5:
@@ -18,7 +19,7 @@ def main(argv):
     consumer = KafkaConsumer(
         topic_name,
         bootstrap_servers=[f'{kafka_host}:{kafka_port}'],
-        auto_offset_reset='earliest',
+        auto_offset_reset='latest',
         enable_auto_commit=True,
         group_id=group_id,
         value_deserializer=lambda x: loads(x.decode('utf-8')))
@@ -26,7 +27,7 @@ def main(argv):
 
     for message in consumer:
         message = message.value
-        print(f"Read from Kafka in topic: {topic_name}, group_id: {group_id}, message: {message}")
+        print(f"Read from Kafka in topic: {topic_name}, group_id: {group_id}, message: {message}, {time.time()}")
 
 if __name__ == "__main__":
     main(sys.argv)

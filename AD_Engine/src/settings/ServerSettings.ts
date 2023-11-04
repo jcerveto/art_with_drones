@@ -28,3 +28,11 @@ if (isNaN(httpPort)) {
     throw new Error("No http port found");
 }
 export const HTTP_PORT: number = httpPort;
+
+let maxConcurrentConnections: number = parseInt(process.env.MAX_CONCURRENT_CONNECTIONS);
+if (isNaN(maxConcurrentConnections) || maxConcurrentConnections == undefined) {
+    console.error(`ERROR: Trying to get max concurrent connections: `);
+    throw new Error("No max concurrent connections found");
+}
+export const MAX_CONCURRENT_CONNECTIONS: number = maxConcurrentConnections;
+

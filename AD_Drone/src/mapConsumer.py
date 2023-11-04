@@ -18,10 +18,16 @@ def main():
         group_id=group_id,
         value_deserializer=lambda x: loads(x.decode('utf-8')))
 
+    print(f"Map consumer created: {str(consumer)}")
 
     for message in consumer:
-        message = message.value
-        utils.handle_map(message)
+        try:
+            print(f"New map received. Time: {time.time()}")
+            message = message.value
+            utils.handle_map(message)
+        except Exception as e:
+            print(f"Error handling map. Waiting for next message. {e}")
+            continue
 
 if __name__ == "__main__":
     main()
