@@ -76,23 +76,48 @@ export function Home() {
     const [intervalId, setIntervalId] = useState(null)
 
 
+            /*fetch(`${Settings.HTTP_SERVER_HOST}:${Settings.HTTP_SERVER_PORT}`)*/
+
+
     function connectToKafka() {
         return setInterval(() => {
-            fetch(`${Settings.HTTP_SERVER_HOST}:${Settings.HTTP_SERVER_PORT}`)
-                .then((response) => response.json())
+            fetch(`http://${Settings.HTTP_SERVER_HOST}:${Settings.HTTP_SERVER_PORT}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Error en la solicitud al servidor");
+                    }
+                    return response.json(); // Parsea la respuesta como JSON
+                })
                 .then((data) => {
-                    console.log(data);
-                    setMapArray(parseCsvToMapArray(data.map));
+                    const mapData = data.map; // Obtener el array de mapas del JSON
+                    const matrixSize = 20; // Tamaño de la matriz 20x20
+                    const emptyWord = "empty"; // Palabra para los elementos vacíos
+
+                    // Crear una matriz 20x20 con palabras en cada elemento
+                    const wordMatrix = Array.from({ length: matrixSize }, () =>
+                        Array.from({ length: matrixSize }, () => emptyWord)
+                    );
+
+                    // Llenar la matriz con las palabras del JSON
+                    for (let i = 0; i < matrixSize; i++) {
+                        for (let j = 0; j < matrixSize; j++) {
+                            wordMatrix[i][j] = mapData[i][j] || emptyWord;
+                        }
+                    }
+
+                    // Aquí puedes hacer lo que quieras con wordMatrix, por ejemplo, imprimirlo en la consola
+                    setMapArray(wordMatrix); // Actualiza el estado con la nueva matriz
                 })
                 .catch((error) => {
                     console.error("Error al obtener datos del servidor:", error);
+                    setMapArray(getEmptyMap());
                 });
-    
-            setCounter(prevCounter => prevCounter + 1);
-        }, 2000); // Delay de 2000 milisegundos entre las solicitudes
-    }
-    
 
+            setCounter((prevCounter) => prevCounter + 1);
+        }, Settings.FREQUENCY); // Delay entre las solicitudes
+    }
+
+    
 
     return (
         <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>            <h1>Home</h1>
@@ -100,7 +125,11 @@ export function Home() {
                 {renderMap(mapArray)}
 
             </div>
-            <p>Map iteration: {counter}</p>
+            <p>
+                <span>Map iteration: {counter}</span>
+                <br />
+                <span>Periodo de llamadas HTTP: {Settings.FREQUENCY}ms</span>
+            </p>
 
             <div style={{ display: "flex", justifyContent: "center" }}>
 
