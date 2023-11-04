@@ -48,9 +48,6 @@ export class ServerImplementation {
             await BrokerServices.publishMap(server.getMap());
             console.log("Map published. ")
 
-            // Promesa sin resolver para que el topic de current_position no se cierre.
-            // BrokerServices.subscribeToCurrentPosition(server);
-
             // open http server
             startHttp(server);
 
@@ -220,24 +217,6 @@ export class ServerImplementation {
         console.log("Client conn closed. ");
     }
 
-    public static async getTargetSquareFromDronId(server: ServerEntity, dronId: number): Promise<SquareEntity> {
-        try {
-            // leer fichero de la figura
-            const droneEntity = new DronEntity(dronId);
-            return await MapFiguraDronTableImplementation.getSquareFromDrone(droneEntity);
-        } catch (err) {
-            console.error("ERROR: during getTargetSquareFromDronId: ", err.message);
-            return null;
-        }
-    }
-
-    public static subscribeToDrones(server: ServerEntity): void {
-        try {
-            console.log("subscribed to drones. ")
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
 
     public static async sendMapToDrones(server: ServerEntity) {
         try {
@@ -248,12 +227,15 @@ export class ServerImplementation {
     }
 
     public static async weatherStuff(server: ServerEntity) {
-        console.log('Weather task executed. ');
+        console.log(`${'#'.repeat(50)}\nWeather task executed. ${'#'.repeat(50)}\n`);
 
         try {
             const isValid : boolean = await server.isWeatherValid();
             if (!isValid) {
                 await server.handleBadWeather();
+            }
+            else {
+                await server.handleGoodWeather();
             }
         } catch (err) {
             console.error(`ERROR: While weatherStuff: ${err}`)
@@ -274,11 +256,40 @@ export class ServerImplementation {
 
     public static async handleBadWeather(server: ServerEntity) {
         try {
+            if (server.getIsWeatherValid()) {
+                // Procesar cambio de estado (de bueno a malo)
+                server.setWeatherToBad();
+                await server.sendDronesToBase();
+
+            }
             console.log('Handling bad weather... ');
             console.warn("Está comentado. Cambiarlo para release. ")
-            server.sendDronesToBase();
+            await server.sendDronesToBase();
         } catch (err) {
             console.error(`ERROR: While handleBadWeather: ${err}`)
+        }
+    }
+
+    public static async handleGoodWeather(server: ServerEntity) {
+        try {
+            if (!server.getIsWeatherValid()) {
+                // Procesar cambio de estado (de malo a bueno)
+                server.setWeatherToGood();
+
+                // Vuelve a enviar las coordenadas de destino a los drones
+                for (const drone of server.getMap().getAliveDrones()) {
+                    const square = await MapFiguraDronTableImplementation.getSquareFromDrone(drone);
+                    drone.setTarget(square);
+                    await BrokerServices.publishTargetPosition(drone, square);
+                    console.log(`New target position published: ${drone.toString()}, ${square.getHash()}`);
+                }
+                if (server.getMap().getAliveDrones().length == 0) {
+                    console.error("ERROR: No drones in map. Any target_position message was published. ")
+                }
+            }
+            console.log('Handling good weather... ');
+        } catch (err) {
+            console.error(`ERROR: While handleGoodWeather: ${err}`)
         }
     }
 
@@ -286,8 +297,15 @@ export class ServerImplementation {
         try {
             console.log('Sending drones to base... ');
             for (const drone of server.getMap().getAliveDrones()) {
-                console.log(`Drone ${drone.getId()} sent to base. `);
                 await BrokerServices.publishTargetPosition(drone, new SquareEntity(1, 1));
+            }
+
+            // check how many drones are in the map
+            if (server.getMap().getAliveDrones().length == 0) {
+                console.error("ERROR: No drones in map. Any target_position message was published. ")
+            }
+            else {
+                console.log("All drones sent to base. ")
             }
         } catch (err) {
             console.error(`ERROR: While sendDronesToBase: ${err}`)

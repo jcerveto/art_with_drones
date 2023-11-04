@@ -18,6 +18,19 @@ export class ServerEntity {
     private _showActive: boolean = false;
     private _currentFigure: FigureEntity | null = null;
     private _currentConcurrentConnections: number = 0;
+    private _isWeatherValid: boolean = true;
+
+    public getIsWeatherValid(): boolean {
+        return this._isWeatherValid;
+    }
+
+    public setWeatherToBad(): void {
+        this._isWeatherValid = false;
+    }
+
+    public setWeatherToGood(): void {
+        this._isWeatherValid = true;
+    }
 
     public getCurrentConcurrentConnections(): number {
         return this._currentConcurrentConnections;
@@ -108,22 +121,6 @@ export class ServerEntity {
         }
     }
 
-    public async getTargetSquareFromDronId(dronId: number): Promise<SquareEntity> {
-        try {
-            return await ServerImplementation.getTargetSquareFromDronId(this, dronId);
-        } catch (err) {
-            console.error('ERROR: at getTargetSquareFromDronId: ', err.message);
-        }
-    }
-
-    // BROKER'S METHODS
-    public subscribeToDrones(): void {
-        try {
-            ServerImplementation.subscribeToDrones(this);
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
 
     public async sendMapToDrones() {
         try {
@@ -157,11 +154,22 @@ export class ServerEntity {
         }
     }
 
+    public async handleGoodWeather(): Promise<void> {
+        try {
+            await ServerImplementation.handleGoodWeather(this);
+        } catch (err) {
+            console.error("ERROR: Trying to handleGoodWeather. ", err);
+        }
+    }
+
     public async sendDronesToBase() {
         try {
+            console.log("Sending drones to base...");
+
             await ServerImplementation.sendDronesToBase(this);
         } catch (err) {
-            console.error("ERROR: Trying to sendDronesToBase. ", err);
+            console.error("ERROR: Trying to sendDronesToBase. Re-Raising ", err);
+            throw err;
         }
     }
 
