@@ -1,0 +1,9 @@
+version: '3'
+services:
+  ad_frontend:
+    image: ad_frontend_image
+    container_name: ad_frontend_container
+    build: .
+    ports:
+      - "3000:3000"
+    command: npm start
