@@ -19,6 +19,7 @@ import * as DatabaseSettings from "../settings/databaseSettings";
 import { start as startHttp } from "./HttpServer"
 import {AlreadyInMap} from "../model/AlreadyInMap";
 import {MaxConcurrentConnectionsExceed} from "../model/MaxConcurrentConnectionsExceed";
+import * as ServerSettings from "../settings/ServerSettings";
 
 
 export class ServerImplementation {
@@ -48,8 +49,11 @@ export class ServerImplementation {
             await BrokerServices.publishMap(server.getMap());
             console.log("Map published. ")
 
-            // open http server
+            // not-solved promise: open http server
             startHttp(server);
+
+            // not-solved promise: update alive-dead drones
+            setInterval(() => server.updateAliveDrones(), ServerSettings.KEEP_ALIVE_INTERVAL);
 
         } catch (err) {
             console.error("ERROR while starting... ", err);
@@ -227,7 +231,7 @@ export class ServerImplementation {
     }
 
     public static async weatherStuff(server: ServerEntity) {
-        console.log(`${'#'.repeat(50)}\nWeather task executed. ${'#'.repeat(50)}\n`);
+        console.log(`${'#'.repeat(50)}\nWeather task executed. \n${'#'.repeat(50)}\n`);
 
         try {
             const isValid : boolean = await server.isWeatherValid();
@@ -259,6 +263,7 @@ export class ServerImplementation {
             if (server.getIsWeatherValid()) {
                 // Procesar cambio de estado (de bueno a malo)
                 server.setWeatherToBad();
+                await server.publishCommunicationMessage("SERVER HAS DETECT BAD WEATHER. SENDING DRONES TO BASE. ");
                 await server.sendDronesToBase();
 
             }
@@ -275,6 +280,7 @@ export class ServerImplementation {
             if (!server.getIsWeatherValid()) {
                 // Procesar cambio de estado (de malo a bueno)
                 server.setWeatherToGood();
+                await server.publishCommunicationMessage("SERVER HAS DETECT GOOD WEATHER. SENDING DRONES TO LAST FIGURE TARGET POSITION. ");
 
                 // Vuelve a enviar las coordenadas de destino a los drones
                 for (const drone of server.getMap().getAliveDrones()) {
@@ -385,17 +391,22 @@ export class ServerImplementation {
             console.log(`Current figure: ${server.getCurrentFigure().toString()}`);
             await MapFiguraDronTableImplementation.storeFigure(figure);
 
+
             // Promesa sin resolver para que el topic de current_position no se cierre.
             BrokerServices.subscribeToCurrentPosition(server);
 
 
-            for (let registeredDrone of server.getMap().getAliveDrones()) {
+            for (let registeredDrone of server.getMap().getAllDrones()) {
                 if (! await MapFiguraDronTable.mapNewDrone(registeredDrone)) {
                     console.error("ERROR: BAD DRONE MATCH. Continue...", registeredDrone.toString())
                     continue;
                 }
                 const newSquare: SquareEntity = await MapFiguraDronTableImplementation.getSquareFromDrone(registeredDrone);
                 registeredDrone.setTarget(newSquare);
+
+                // vuelve a actualizar automáticamente los drones vivos:
+                server.updateNewDroneTimeStamp(registeredDrone);
+
                 console.log(`New drone added to database: ${registeredDrone.toString()} -> ${newSquare.getHash()}`);
                 await BrokerServices.publishTargetPosition(registeredDrone, newSquare);
                 console.log(`New target position published: ${registeredDrone.toString()}, ${newSquare.getHash()}`);
@@ -404,19 +415,14 @@ export class ServerImplementation {
                 console.error("ERROR: No drones in map. Any target_position message was published. ")
             }
 
-
-            if (server.getMap().getAliveDrones().length == 0) {
-                console.error("ERROR: No drones in map. Any target_position message was published. ")
-            }
-
             // MAIN LOOP: mientras no se complete la figura, se repite
             while (! ServerImplementation.isFigureShowCompleted(server)) {
                 await sleep(1000);
-                console.log("Waiting for drones to reach target position... ", Date.now().toString());
+                console.log(`${'@'.repeat(50)}\nWaiting for drones to reach target position... ${Date.now().toString()}\n${'@'.repeat(50)}\n`);
             }
             console.log(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
             console.log(`WAITING 10 SECONDS TO DRAW NEXT FIGURE...`);
-            await sleep(5_000);
+            await sleep(10_000);
             console.log(`Figure ${figure.getName()} ended. `);
             server.clearCurrentFigure();
             server.deactivateShow();
@@ -441,4 +447,11 @@ export class ServerImplementation {
     }
 
 
+    static async publishCommunicationMessage(server: ServerEntity, message: string) {
+        try {
+            await BrokerServices.publishCommunicationMessage(message);
+        } catch (err) {
+            console.error("ERROR: Trying to publishCommunicationMessage. ", err);
+        }
+    }
 }

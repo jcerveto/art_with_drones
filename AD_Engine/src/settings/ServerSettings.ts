@@ -36,3 +36,25 @@ if (isNaN(maxConcurrentConnections) || maxConcurrentConnections == undefined) {
 }
 export const MAX_CONCURRENT_CONNECTIONS: number = maxConcurrentConnections;
 
+let auxKeepAliveInterval: number = parseInt(process.env.KEEP_ALIVE_INTERVAL);   // in ms
+if (isNaN(auxKeepAliveInterval) || auxKeepAliveInterval == undefined) {
+    console.error(`ERROR: Trying to get keep alive interval: `);
+    throw new Error("No keep alive interval found");
+}
+
+/**
+ * Cada cuánto tiempo (en ms) se revisan los keep alive de todos loa drones
+ */
+export const KEEP_ALIVE_INTERVAL: number = auxKeepAliveInterval;
+
+let auxKeepAliveTimeout: number = parseInt(process.env.KEEP_ALIVE_TIMEOUT);   // in ms
+if (isNaN(auxKeepAliveTimeout) || auxKeepAliveTimeout == undefined) {
+    console.error(`ERROR: Trying to get keep alive timeout: `);
+    throw new Error("No keep alive timeout found");
+}
+
+/**
+ * Cuánto tiempo (en ms) tiene que pasar para que un drone se considere desconectado
+ */
+export const KEEP_ALIVE_TIMEOUT: number = auxKeepAliveTimeout;
+

@@ -42,4 +42,7 @@ def getMaxContentLength() -> int:
 
 def getDronesPath() -> str:
     return os.getenv('DRONE_PATH')
+
+def getCommunicationTopic() -> str:
+    return os.getenv('KAFKA_TOPIC_COMMUNICATION')
     

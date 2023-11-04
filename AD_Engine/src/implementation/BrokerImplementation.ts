@@ -20,6 +20,9 @@ const kafka = new Kafka({
 // ************************************************
 // MAP PUBLISHER
 const producerMap: Producer = kafka.producer();
+// ************************************************
+// COMMUNICATION PUBLISHER
+const producerCommunication: Producer = kafka.producer();
 
 export async function initMapPublisher() {
     await producerMap.connect();
@@ -69,6 +72,9 @@ async function handleCurrentCoordinateReceived(server: ServerEntity, consumer: C
             return;
         }
 
+        // update drone time
+        server.updateNewDroneTimeStamp(droneEntity);
+
         // check if show is going on
         if (! server.getShowActive()) {
             console.error("ERROR: Show is not active. Request ignored. DroneId: ", droneId);
@@ -78,18 +84,31 @@ async function handleCurrentCoordinateReceived(server: ServerEntity, consumer: C
         }
 
         // move drone
+        // check if editor is available (SEMAPHORE)
+        while (! server.isMapEditorAvailable()) {
+            console.log(`${'$'.repeat(50)}\nWaiting for editor to be available from BrokerImplementation.handleCurrentCoordinateReceived...\n${'$'.repeat(50)}\n`);
+            await sleep(200);
+        }
+        server.setEditorNotAvailable();
         console.log(`New current position received: ${droneEntity.toString()}, ${currentSquareEntity.getHash()}`)
         server.getMap().moveDrone(droneEntity, currentSquareEntity);
+        server.setEditorAvailable();
 
+
+        // publish map
         await publishMap(server.getMap());
         console.log('----------- \n currentFigure: ', server.getCurrentFigure().getName(), '\n -----------');
+
         if (await server.getMap().matchesWithFigure(server.getCurrentFigure())) {
             server.deactivateShow();
             // SALIR DEL FLUJO DE CONSUMER.RUN AQUI
             await consumer.disconnect();
         }
     } catch (err) {
+        server.setEditorAvailable();
         console.error("ERROR: Trying to handleCurrentCoordinateReceived. Exception was not raised. Ignoring message. ", err.message);
+    } finally {
+        server.setEditorAvailable();
     }
 }
 export async function subscribeToCurrentPosition(server: ServerEntity) {
@@ -150,3 +169,17 @@ export async function publishTargetPosition(drone: DronEntity, targetPosition: S
 
 }
 
+
+export async function publishCommunicationMessage(message: string) {
+    try {
+        await producerCommunication.connect();
+        await producerCommunication.send({
+            topic: BrokerSettings.TOPIC_COMMUNICATION,
+            messages: [
+                {value: JSON.stringify({message: message})}
+            ]
+        });
+    } catch (err) {
+        console.error(`ERROR: Trying to publish the communication message. ${err}. Message: ${message}`);
+    }
+}

@@ -5,6 +5,9 @@ import {SquareEntity} from "./SquareEntity";
 import {WaitingPoolEntity} from "./WaitingPoolEntity";
 import {FigureEntity} from "./FigureEntity";
 import * as ServerSettings from "../settings/ServerSettings";
+import {DronEntity} from "./DronEntity";
+import {EKeepAliveStatus} from "./EKeepAliveStatus";
+import {sleep} from "../implementation/TimeUtils";
 
 export class ServerEntity {
     public MAX_CONCURRENT_CONNECTIONS: number = ServerSettings.MAX_CONCURRENT_CONNECTIONS;
@@ -19,6 +22,97 @@ export class ServerEntity {
     private _currentFigure: FigureEntity | null = null;
     private _currentConcurrentConnections: number = 0;
     private _isWeatherValid: boolean = true;
+
+    /**
+     * Podrían editar concurrentemente el mapa si no se controla desde:
+     * - Map.MoveDrone(*)
+     * - UpdateAliveDrones(*)
+     * @private
+     */
+    private _mapEditorSemaphoreAvailable: boolean = true;
+
+    /**
+     * Map that stores the time of the message received from the drone.
+     * key: droneId (number)
+     * value: time (number) (Date.now())
+     * @private
+     */
+    private  _dronesTimeMap: Map<number, number> = new Map<number, number>();
+
+    public async updateAliveDrones() {
+        try {
+            // si no está activo el show, no actualizar. No cambiar estado de los drones
+            if (!this.getShowActive()) {
+                return;
+            }
+
+            while (!this.isMapEditorAvailable()) {
+                console.log(`${'&'.repeat(50)}\nWaiting for editor to be available... Calling from ServerEntity.updateAliveDrones${'&'.repeat(50)}\n`);
+                await sleep(200);
+            }
+            this.setEditorNotAvailable();
+            // actualizar status de los drones
+            console.log(`${'-'.repeat(50)}\nUpdating alive drone status...\n${'-'.repeat(50)}\n`)
+            for (let drone of this.getMap().getAllDrones()) {
+                if (this.isDroneAlive(drone)) {
+                    drone.setStatus(EKeepAliveStatus.ALIVE)
+                } else {
+                    drone.setStatus(EKeepAliveStatus.DEAD);
+                }
+            }
+            // publicar mapa
+            await this.sendMapToDrones();
+
+            this.setEditorAvailable();
+        } catch (err) {
+            console.error("ERROR: Trying to updateAliveDrones. ", err);
+            this.setEditorAvailable();
+        } finally {
+            this.setEditorAvailable();
+        }
+    }
+
+    public async publishCommunicationMessage(message: string): Promise<void> {
+        try {
+            await ServerImplementation.publishCommunicationMessage(this, message);
+        } catch (err) {
+            console.error("ERROR: Trying to publishCommunicationMessage. ", err);
+        }
+    }
+
+    public setEditorAvailable(): void {
+        this._mapEditorSemaphoreAvailable = true;
+    }
+
+    public setEditorNotAvailable(): void {
+        this._mapEditorSemaphoreAvailable = false;
+    }
+
+    public isMapEditorAvailable(): boolean {
+        return this._mapEditorSemaphoreAvailable;
+    }
+
+
+    public deleteDroneTimeStamp(drone: DronEntity): void {
+        this._dronesTimeMap.delete(drone.getId());
+    }
+
+    public updateNewDroneTimeStamp(drone: DronEntity): void {
+        this._dronesTimeMap.set(drone.getId(), Date.now());
+    }
+
+    public getDroneTime(drone: DronEntity): number {
+        return this._dronesTimeMap.get(drone.getId());
+    }
+
+    public isDroneAlive(drone: DronEntity): boolean {
+        try {
+            return Date.now() - this.getDroneTime(drone) < ServerSettings.KEEP_ALIVE_TIMEOUT;
+        } catch (err) {
+            console.error("ERROR: Trying to isDroneAlive. Probablemente el dron no esté en el timestampmap. Returning false ", err);
+            return false;
+        }
+    }
 
     public getIsWeatherValid(): boolean {
         return this._isWeatherValid;

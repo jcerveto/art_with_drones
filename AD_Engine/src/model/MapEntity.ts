@@ -191,26 +191,31 @@ export class MapEntity {
         }
 
         try {
+            // por cada casilla de la figura (o sea, el objetivo)
             for (let [squareHash, figureId] of figure.getFigure()) {
                 // si no existe la casilla en el mapa
                 if (!this.__map.has(squareHash)) {
                     return false;
                 }
-                // si hay un numero diferente a 1 de drones vivos en dicha casilla
+
                 const dronesInSquare = this.__map.get(squareHash).getAliveDrones();
+
+                // si no hay ningun dron, o hay 2 o más drones en la casilla
                 if (dronesInSquare.length !== 1) {
                     return false;
                 }
+
                 // comparar si el unico dron de la casilla es el que estamos buscando
                 const [row, col] = squareHash.split('-').map(Number);
                 const square = new SquareEntity(row, col);
                 const id_registry = await MapFiguraDronTable.getIdRegistry(square, figureId);
                 const droneToTest = new DronEntity(id_registry);
-                if (!dronesInSquare[0].equals(droneToTest)) {
+                if (! dronesInSquare[0].equals(droneToTest)) {
                     return false;
                 }
 
-                // COINCIDE!! Seguimos comprbando los demas
+                // COINCIDE!! Seguimos comprobando los demás drones
+                // si el dron está muerto, darlo por bueno
             }
             return true;
         } catch (err) {
