@@ -11,7 +11,7 @@ let serverRef: ServerEntity = null;
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(morgan("dev"));
+//app.use(morgan("dev")); // Usar morgan para debuggear
 
 function getServerInfo() {
     if (serverRef == null) {
@@ -27,9 +27,7 @@ function getServerInfo() {
 app.get("/", (req, res) => {
     try {
         const serverInfo = getServerInfo();
-        console.log("Server info: ", serverInfo)
-        res.status(200).send(JSON.stringify(serverInfo));
-    
+        res.status(200).header("Content-Type", "application/json").send(JSON.stringify(serverInfo));    
     } catch (err) {
         console.error(`ERROR: Trying to get server info: ${err}`);
         res.status(500).json({ error: "Internal server error" });
