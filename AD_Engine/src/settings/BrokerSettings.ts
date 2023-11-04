@@ -11,7 +11,7 @@ try {
 }
 
 export const BROKER_PORT: number = tempBrokerPort;
-export const BROKER_HOST: string = process.env.KAFKA_HOST ?? '0.0.0.0';
+export const BROKER_HOST: string = process.env.KAFKA_HOST;
 
 // TOPICS
 export const TOPIC_MAP: string = process.env.KAFKA_TOPIC_MAP ?? 'map';

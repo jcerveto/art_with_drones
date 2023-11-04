@@ -1,8 +1,16 @@
 const { Kafka } = require('kafkajs');
 
+
+if (process.argv.length !== 3) {
+  console.log('Usage: node producer.js <topic>');
+  process.exit(-1);
+}
+const myTopic = process.argv[2];
+
+
 const kafka = new Kafka({
   clientId: 'my-producer',
-  brokers: ['localhost:29092']
+  brokers: ['0.0.0.0:29092']
 });
 
 let counter = 0;
@@ -19,7 +27,7 @@ const runProducer = async () => {
 
     try {
       await producer.send({
-        topic: 'numtest2',
+		topic: myTopic,
         messages: [
           { value: JSON.stringify(message) }
         ]

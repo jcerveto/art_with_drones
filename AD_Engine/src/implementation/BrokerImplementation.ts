@@ -43,7 +43,7 @@ export async function publishMap(map: MapEntity) {
         }
         console.log("drones: " , map.getAllDrones().length, "alive: ", map.getAliveDrones().length, "dead: ", map.getDeadDrones().length);
     } catch (err) {
-        console.error("ERROR: Trying to publish the map. ")
+        console.error("ERROR: Trying to publish the map. ", err.message, err.stack);
     }
 }
 

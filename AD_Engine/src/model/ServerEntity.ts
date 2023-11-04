@@ -98,13 +98,6 @@ export class ServerEntity {
         }
     }
 
-    public async startFigure(): Promise<void> {
-        try {
-            await ServerImplementation.startFigure(this);
-        } catch (err) {
-            console.error("Error starting figure!", err);
-        }
-    }
 
     public handleClientAuthentication(conn: net.Socket): void {
         try {

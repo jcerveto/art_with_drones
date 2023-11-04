@@ -9,15 +9,17 @@ const mygGroupId = process.argv[3];
 
 const kafka = new Kafka({
   clientId: 'my-consumer',
-  brokers: ['localhost:29092']
+  brokers: ['0.0.0.0:29092']
 });
 
-const consumer = kafka.consumer({ groupId: mygGroupId});
+const consumer = kafka.consumer({ 
+	groupId: mygGroupId
+});
 
 const runConsumer = async () => {
 
   await consumer.connect();
-  await consumer.subscribe({ topic: myTopic, fromBeginning: true });
+  await consumer.subscribe({ topic: myTopic, fromBeginning: false });
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {

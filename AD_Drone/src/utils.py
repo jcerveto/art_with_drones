@@ -68,18 +68,16 @@ class MapEntity:
 def handle_map(message):
     global counter
     print(f"New message read from Kafka. ")
-    print('*' * 50)
-    print(counter)
+    print(f"{'*'*50}\n{counter}\n{'*'*50}")
     counter += 1
-    print('*' * 50)
     print("length of message: ", len(message))
-    print("type: ", type(message))  # <class 'dict'>
-    print("type: ", type(message["map"]))  # <class 'str'>
+    # print("type: ", type(message))  # <class 'dict'>
+    # print("type: ", type(message["map"]))  # <class 'str'>
 
     # Parse the JSON array from the message
     try:
         map_list = json.loads(message["map"])
-        print("map type: ", type(map_list))  # <class 'list'>
+        # print("map type: ", type(map_list))  # <class 'list'>
 
         # Iterate through each JSON object in the array
         my_map = MapEntity()
@@ -94,7 +92,7 @@ def handle_map(message):
             # print("Square:", square)
             my_map.add_square(square)
 
-        print("repr: ", repr(my_map))
+        # print("repr: ", repr(my_map))
         print(str(my_map))
 
     except json.JSONDecodeError:
