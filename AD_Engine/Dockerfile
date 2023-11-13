@@ -8,5 +8,4 @@ RUN npm install
 
 COPY tsconfig.json tsconfig.json
 COPY src src
-COPY .env .env
 

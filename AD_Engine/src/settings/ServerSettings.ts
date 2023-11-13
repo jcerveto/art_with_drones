@@ -66,3 +66,24 @@ if (auxRecover == undefined) {
 export const RECOVER: boolean = auxRecover == 'yes';
 
 
+let auxMaxDronesAccepted: number = parseInt(process.env.MAX_DRONES_ACCEPTED);
+if (isNaN(auxMaxDronesAccepted) || auxMaxDronesAccepted == undefined) {
+    console.error(`ERROR: Trying to get max drones accepted: `);
+    throw new Error("No max drones accepted found");
+}
+export const MAX_DRONES_ACCEPTED: number = auxMaxDronesAccepted;
+
+let auxEncode: string = process.env.ENCODE;
+if (auxEncode == undefined) {
+    console.error(`ERROR: Trying to get encode: `);
+    throw new Error("No encode found");
+}
+export const ENCODE: string = auxEncode;
+
+
+let auxCompleteWhenAllDronesArrive: string = process.env.COMPLETE_WHEN_ALL_DRONES_ARRIVE;
+if (auxCompleteWhenAllDronesArrive == undefined) {
+    console.error(`ERROR: Trying to get complete when all drones arrive: `);
+    throw new Error("No complete when all drones arrive found");
+}
+export const COMPLETE_WHEN_ALL_DRONES_ARRIVE: boolean = auxCompleteWhenAllDronesArrive == 'yes';

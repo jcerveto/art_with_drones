@@ -24,4 +24,13 @@ export class MapFiguraDronTable {
             throw new Error('ERROR: Try to getIdRegistry: ' + err.message);
         }
     }
+
+    public static async forceMapNewDrone(registeredDrone: DronEntity, squareEntity: SquareEntity) {
+        try {
+            await MapFiguraDronTableImplementation.forceMapNewDrone(registeredDrone, squareEntity);
+        } catch (err) {
+            console.error(err);
+            throw new Error('ERROR: Try to forceMapNewDrone: ' + err.message);
+        }
+    }
 }

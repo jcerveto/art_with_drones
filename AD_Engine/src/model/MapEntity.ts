@@ -4,6 +4,7 @@ import {EKeepAliveStatus} from "./EKeepAliveStatus";
 import { FigureEntity } from "./FigureEntity";
 import { EStatus } from "./EStatus";
 import {MapFiguraDronTable} from "./MapFiguraDronTable";
+import { COMPLETE_WHEN_ALL_DRONES_ARRIVE } from "../settings/ServerSettings";
 
 export class MapEntity {
     public static SIZE: number = 20;
@@ -184,13 +185,15 @@ export class MapEntity {
         });
     }
 
-    public async matchesWithFigure(figure: FigureEntity): Promise<boolean> {
+    private async matchesWhenAllArrived(figure: FigureEntity): Promise<boolean> {
         if (figure === null || figure === undefined) {
             console.error("ERROR: figure is null or undefined. Returning false.");
             return false;
         }
 
         try {
+            let sumOfDrones = 0;
+
             // por cada casilla de la figura (o sea, el objetivo)
             for (let [squareHash, figureId] of figure.getFigure()) {
                 // si no existe la casilla en el mapa
@@ -200,19 +203,18 @@ export class MapEntity {
 
                 const dronesInSquare = this.__map.get(squareHash).getAliveDrones();
 
-                // si no hay ningun dron, o hay 2 o más drones en la casilla
-                if (dronesInSquare.length !== 1) {
-                    return false;
-                }
-
-                // comparar si el unico dron de la casilla es el que estamos buscando
+                // comparar si el primer (pero no único) dron de la casilla es el que estamos buscando
                 const [row, col] = squareHash.split('-').map(Number);
                 const square = new SquareEntity(row, col);
                 const id_registry = await MapFiguraDronTable.getIdRegistry(square, figureId);
                 const droneToTest = new DronEntity(id_registry);
-                if (! dronesInSquare[0].equals(droneToTest)) {
-                    return false;
+                for (let drone of dronesInSquare) {
+                    if (! drone.equals(droneToTest)) {
+                        return false;
+                    }
+                    sumOfDrones++;
                 }
+
 
                 // COINCIDE!! Seguimos comprobando los demás drones
                 // si el dron está muerto, darlo por bueno
@@ -221,6 +223,47 @@ export class MapEntity {
         } catch (err) {
             console.error("ERROR: at matchesWithMap. Returned false: ", err.message);
             return false;
+        }
+    }
+
+    private async matchesWhenNDronesArrived(figure: FigureEntity, n: number): Promise<boolean> {
+        try {
+            let sumOfDrones = 0;
+
+            for (let [squareHash, figureId] of figure.getFigure()) {
+                // si no existe la casilla en el mapa
+                if (!this.__map.has(squareHash)) {
+                    return false;
+                }
+
+                const dronesInSquare = this.__map.get(squareHash).getAliveDrones();
+
+                // comparar si el primer (pero no único) dron de la casilla es el que estamos buscando
+                const [row, col] = squareHash.split('-').map(Number);
+                const square = new SquareEntity(row, col);
+                const id_registry = await MapFiguraDronTable.getIdRegistry(square, figureId);
+                const droneToTest = new DronEntity(id_registry);
+                for (let drone of dronesInSquare) {
+                    if (drone.equals(droneToTest)) {
+                        sumOfDrones++;
+                    }
+
+                    if (sumOfDrones >= n) {
+                        return true;
+                    }
+                }
+            }
+        } catch (err) {
+            console.error("ERROR: at matchesWhenNDronesArrived. Returned false: ", err.message);
+            return false;
+        }
+    }
+
+    public async matchesWithFigure(figure: FigureEntity): Promise<boolean> {
+        if (COMPLETE_WHEN_ALL_DRONES_ARRIVE) {
+            return await this.matchesWhenAllArrived(figure);
+        } else {
+            return await this.matchesWhenNDronesArrived(figure, 1);
         }
     }
 

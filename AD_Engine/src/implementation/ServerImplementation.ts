@@ -152,19 +152,25 @@ export class ServerImplementation {
             }
 
             // valida si hay hueco en la figura
-            if (server.getMap().getAllDrones().length >= server.getCurrentFigure().getFigure().size) {
-                throw new Error('ERROR: No more drones allowed. Figure is full of drones. ');
+            if (server.getMap().getAllDrones().length >= ServerSettings.MAX_DRONES_ACCEPTED) {
+                throw new Error('ERROR: No more drones allowed. map is full of drones. ');
             } 
 
 
             // ver si hay hueco y mapear to figure
             const newDrone = new DronEntity(dron_id);
-            if (! await MapFiguraDronTable.mapNewDrone(newDrone)) {
-                throw new Error('ERROR: BAD DRONE MATCH. ')
+            if (await MapFiguraDronTable.mapNewDrone(newDrone)) {
+                console.log(`New drone added to database: ${newDrone.toString()}`);
+                const square = await MapFiguraDronTableImplementation.getSquareFromDrone(droneEntity);
+                newDrone.setTarget(square);
             }
-            console.log(`New drone added to database: ${newDrone.toString()}`);
-            const square = await MapFiguraDronTableImplementation.getSquareFromDrone(droneEntity);
-            newDrone.setTarget(square);
+            else {
+                console.error("ERROR: Drone not mapped. DroneId: ", newDrone.toString());
+                // await MapFiguraDronTable.forceMapNewDrone(newDrone, new SquareEntity(1, 1));
+                newDrone.setTarget(new SquareEntity(1, 1));
+                console.log(`New drone added to database: ${newDrone.toString()} -> (1, 1)`);
+            }
+
 
             // add to map (1, 1)
             const firstSquare = new SquareEntity(1, 1);
@@ -184,9 +190,9 @@ export class ServerImplementation {
                     '${BrokerSettings.TOPIC_CURRENT_POSITION}
                      `
             }
-            const answerJson = JSON.stringify(answer, null, 2);
-            const bytesResponse = Buffer.from(answerJson);
-            const encodedResponse = bytesResponse.toString('utf-8');
+            const answerJson : string = JSON.stringify(answer);
+            const bytesResponse: Buffer = Buffer.from(answerJson);
+            const encodedResponse : string = bytesResponse.toString('utf-8');
 
             conn.write(encodedResponse);
             console.log("RESPUESTA ENVIADA. ");
@@ -390,12 +396,19 @@ export class ServerImplementation {
             server.activateShow();
             server.addCurrentFigure(figure);
             console.log(`Starting figure: ${figure.getName()}`);
+            await BrokerServices.publishCommunicationMessage(`Starting figure: ${figure.getName()}`);
             console.log(`Current figure: ${server.getCurrentFigure().toString()}`);
             await MapFiguraDronTableImplementation.storeFigure(figure);
 
 
             for (let registeredDrone of server.getMap().getAllDrones()) {
                 if (! await MapFiguraDronTable.mapNewDrone(registeredDrone)) {
+                    // La figura no tiene hueco para el dron.
+                    // Se le asigna la posición (1, 1) y se le envía a la base.
+                    registeredDrone.setTarget(new SquareEntity(1, 1));
+                    //await MapFiguraDronTable.forceMapNewDrone(registeredDrone, new SquareEntity(1, 1));
+                    await BrokerServices.publishTargetPosition(registeredDrone, new SquareEntity(1, 1));
+
                     console.error("ERROR: BAD DRONE MATCH. Continue...", registeredDrone.toString())
                     continue;
                 }
@@ -419,6 +432,7 @@ export class ServerImplementation {
                 console.log(`${'@'.repeat(50)}\nWaiting for drones to reach target position... ${Date.now().toString()}\n${'@'.repeat(50)}\n`);
             }
             console.log(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
+            await BrokerServices.publishCommunicationMessage(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
             console.log(`WAITING 10 SECONDS TO DRAW NEXT FIGURE...`);
             await sleep(10_000);
             console.log(`Figure ${figure.getName()} ended. `);

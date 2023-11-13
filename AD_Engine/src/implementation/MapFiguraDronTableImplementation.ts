@@ -249,4 +249,66 @@ export class MapFiguraDronTableImplementation {
             throw err;
         }
     }
+
+
+    static async forceMapNewDrone(registeredDrone: DronEntity, squareEntity: SquareEntity): Promise<void> {
+        let db = null;
+        try {
+            db = new sqlite3.Database(DatabaseSettings.dbPath);
+            const queryGetMaxUkMapFigura = 'SELECT IFNULL(MAX(uk_map_figura), 0) + 1 AS max_uk_map_figura FROM MapFiguraDron';
+            const max_uk_map_figura: number = await new Promise<number>((resolve, reject) => {
+                db.get(queryGetMaxUkMapFigura, (err, result) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                });
+            });
+
+
+            if (isNaN(max_uk_map_figura)) {
+                throw new Error('ERROR: max_uk_map_figura is NaN');
+            }
+
+            const queryInsert = `
+            INSERT INTO MapFiguraDron
+            (pk_fk_map_registry_id, uk_map_figura, row, column)
+            VALUES (?, ?, ?, ?)
+            ON CONFLICT(uk_map_figura) DO UPDATE SET row = ?, column = ?;
+        `;
+
+            await new Promise<void>((resolve, reject) => {
+                db.run(queryInsert, [
+                    registeredDrone.getId(),
+                    max_uk_map_figura,
+                    squareEntity.getRow(),
+                    squareEntity.getColumn(),
+                    squareEntity.getRow(),
+                    squareEntity.getColumn(),
+                ], (err) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+
+            // Cerrar la conexión a la base de datos después de la operación
+            db.close();
+        } catch (err) {
+            console.error(`ERROR: Trying to forceMapNewDrone. ${err}. DroneId: ${registeredDrone.getId()}`);
+            if (db) {
+                db.close();
+            }
+            throw err;
+        } finally {
+            if (db) {
+                db.close();
+            }
+        }
+    }
+
+
 }
