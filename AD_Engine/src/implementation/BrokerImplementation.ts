@@ -58,6 +58,7 @@ async function handleCurrentCoordinateReceived(server: ServerEntity, consumer: C
         console.log("drones in map: " + JSON.stringify(drones))
         console.log(`Received message ${JSON.stringify(value)}`);
 
+        // parse message
         const droneId = parseInt(value?.id_registry);
         const row = parseInt(value?.current_position?.row);
         const col = parseInt(value?.current_position?.col);
@@ -79,9 +80,10 @@ async function handleCurrentCoordinateReceived(server: ServerEntity, consumer: C
         if (! server.getShowActive()) {
             console.error("ERROR: Show is not active. Request ignored. DroneId: ", droneId);
             return;
-        } else {
-            console.log("Show is active. Figure: ", server.getCurrentFigure().getName());
         }
+
+        console.log("Show is active. Figure: ", server.getCurrentFigure().getName());
+
 
         // move drone
         // check if editor is available (SEMAPHORE)
@@ -99,11 +101,7 @@ async function handleCurrentCoordinateReceived(server: ServerEntity, consumer: C
         await publishMap(server.getMap());
         console.log('----------- \n currentFigure: ', server.getCurrentFigure().getName(), '\n -----------');
 
-        if (await server.getMap().matchesWithFigure(server.getCurrentFigure())) {
-            server.deactivateShow();
-            // SALIR DEL FLUJO DE CONSUMER.RUN AQUI
-            await consumer.disconnect();
-        }
+        // NUNCA SALIR DEL FLUJO DE CONSUMER.RUN AQUI
     } catch (err) {
         server.setEditorAvailable();
         console.error("ERROR: Trying to handleCurrentCoordinateReceived. Exception was not raised. Ignoring message. ", err.message);

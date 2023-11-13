@@ -11,7 +11,6 @@ import * as WeatherServices from "./WeatherImplementation";
 import * as WeatherSettings from "../settings/WeatherSettings";
 import {RegistryTable} from "../model/RegistryTable";
 import * as BrokerSettings from "../settings/BrokerSettings";
-import {FigureImplementation} from "./FigureImplementation";
 import {MapFiguraDronTableImplementation} from "./MapFiguraDronTableImplementation";
 import {FigureEntity} from "../model/FigureEntity";
 import { sleep } from './TimeUtils';
@@ -51,6 +50,9 @@ export class ServerImplementation {
 
             // not-solved promise: open http server
             startHttp(server);
+
+            // not-solved promise: open current_position topic subscriber
+            BrokerServices.subscribeToCurrentPosition(server);
 
             // not-solved promise: update alive-dead drones
             setInterval(() => server.updateAliveDrones(), ServerSettings.KEEP_ALIVE_INTERVAL);
@@ -392,10 +394,6 @@ export class ServerImplementation {
             await MapFiguraDronTableImplementation.storeFigure(figure);
 
 
-            // Promesa sin resolver para que el topic de current_position no se cierre.
-            BrokerServices.subscribeToCurrentPosition(server);
-
-
             for (let registeredDrone of server.getMap().getAllDrones()) {
                 if (! await MapFiguraDronTable.mapNewDrone(registeredDrone)) {
                     console.error("ERROR: BAD DRONE MATCH. Continue...", registeredDrone.toString())
@@ -416,7 +414,7 @@ export class ServerImplementation {
             }
 
             // MAIN LOOP: mientras no se complete la figura, se repite
-            while (! ServerImplementation.isFigureShowCompleted(server)) {
+            while (! await ServerImplementation.isFigureShowCompleted(server)) {
                 await sleep(1000);
                 console.log(`${'@'.repeat(50)}\nWaiting for drones to reach target position... ${Date.now().toString()}\n${'@'.repeat(50)}\n`);
             }
@@ -435,13 +433,11 @@ export class ServerImplementation {
         }
     }
 
-    static isFigureShowCompleted(server: ServerEntity): boolean {
+    static async isFigureShowCompleted(server: ServerEntity): Promise<boolean> {
         try {
-            // Se debería consultar: if (await server.getMap().matchesWithFigure(server.getCurrentFigure())) {}
-            // pero solamente se accede desde el broker. No tiene sentido consultar dos veces lo mismo.
-            return !server.getShowActive(); // se cambia desde el broker.
+            return await server.getMap().matchesWithFigure(server.getCurrentFigure());
         } catch (err) {
-            console.error(`ERROR: While isFigureShowCompleted. Returned false: ${err}`)
+            console.error(`ERROR: While isFigureShowCompleted. Returning false: ${err}`)
             return false;
         }
     }
