@@ -1,6 +1,7 @@
 import { MapFiguraDronTableImplementation } from "../implementation/MapFiguraDronTableImplementation";
 import {DronEntity} from "./DronEntity";
 import {SquareEntity} from "./SquareEntity";
+import {FigureEntity} from "./FigureEntity";
 
 export class MapFiguraDronTable {
 
@@ -25,9 +26,9 @@ export class MapFiguraDronTable {
         }
     }
 
-    public static async forceMapNewDrone(registeredDrone: DronEntity, squareEntity: SquareEntity) {
+    public static async forceMapNewDrone(currentFigure: FigureEntity, registeredDrone: DronEntity, squareEntity: SquareEntity) {
         try {
-            await MapFiguraDronTableImplementation.forceMapNewDrone(registeredDrone, squareEntity);
+            await MapFiguraDronTableImplementation.forceMapNewDrone(currentFigure, registeredDrone, squareEntity);
         } catch (err) {
             console.error(err);
             throw new Error('ERROR: Try to forceMapNewDrone: ' + err.message);

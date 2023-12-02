@@ -4,6 +4,7 @@ import sqlite3 from 'sqlite3';
 import * as DatabaseSettings from "../settings/databaseSettings";
 import { FigureEntity } from "../model/FigureEntity";
 import { SquareEntity } from "../model/SquareEntity";
+import {randomInt} from "crypto";
 
 
 export class MapFiguraDronTableImplementation {
@@ -251,25 +252,11 @@ export class MapFiguraDronTableImplementation {
     }
 
 
-    static async forceMapNewDrone(registeredDrone: DronEntity, squareEntity: SquareEntity): Promise<void> {
+    static async forceMapNewDrone(currentFigure: FigureEntity, registeredDrone: DronEntity, squareEntity: SquareEntity): Promise<void> {
         let db = null;
         try {
             db = new sqlite3.Database(DatabaseSettings.dbPath);
-            const queryGetMaxUkMapFigura = 'SELECT IFNULL(MAX(uk_map_figura), 0) + 1 AS max_uk_map_figura FROM MapFiguraDron';
-            const max_uk_map_figura: number = await new Promise<number>((resolve, reject) => {
-                db.get(queryGetMaxUkMapFigura, (err, result) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(result);
-                    }
-                });
-            });
-
-
-            if (isNaN(max_uk_map_figura)) {
-                throw new Error('ERROR: max_uk_map_figura is NaN');
-            }
+            const queryGetMaxUkMapFigura: number = currentFigure?.getFigure()?.size ?? randomInt(1000, 9999);
 
             const queryInsert = `
             INSERT INTO MapFiguraDron

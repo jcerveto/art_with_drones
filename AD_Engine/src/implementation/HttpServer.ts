@@ -7,6 +7,10 @@ import * as ServerSettings from "../settings/ServerSettings";
 
 let serverRef: ServerEntity = null;
 
+interface AuthDrone {
+    id: number,
+    isAlive: boolean,
+}
 
 const app = express();
 app.use(express.json());
@@ -20,7 +24,15 @@ function getServerInfo() {
     }
 
     return {
-        map: serverRef.getMap().getStatusArray()
+        map: serverRef.getMap().getStatusArray(),
+        figureName: serverRef.getCurrentFigure()?.getName() ?? "No figure currently",
+        authDronesIds: serverRef.getMap().getAllDrones().map((drone) => {
+            return {
+                id: drone.getId(),
+                isAlive: serverRef.isDroneAlive(drone),
+                targetSquare: drone.getTargetSquare().getHash(),
+            }
+        }),
     }
 }
 

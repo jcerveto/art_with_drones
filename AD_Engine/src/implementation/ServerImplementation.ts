@@ -374,6 +374,7 @@ export class ServerImplementation {
             for (const figure of server.getFigures()) {
                 try {
                     await ServerImplementation.handleFigureShow(server, figure);
+                    await sleep(10_000);
                 } catch (err) {
                     console.error(`ERROR: While handling figure: ${figure.getName()} ${err.message}. . Executing next figure...`)
                     continue;
@@ -401,12 +402,12 @@ export class ServerImplementation {
             await MapFiguraDronTableImplementation.storeFigure(figure);
 
 
-            for (let registeredDrone of server.getMap().getAllDrones()) {
+            for (const registeredDrone of server.getMap().getAllDrones()) {
                 if (! await MapFiguraDronTable.mapNewDrone(registeredDrone)) {
                     // La figura no tiene hueco para el dron.
                     // Se le asigna la posición (1, 1) y se le envía a la base.
                     registeredDrone.setTarget(new SquareEntity(1, 1));
-                    //await MapFiguraDronTable.forceMapNewDrone(registeredDrone, new SquareEntity(1, 1));
+                    await MapFiguraDronTable.forceMapNewDrone(server.getCurrentFigure(), registeredDrone, new SquareEntity(1, 1));
                     await BrokerServices.publishTargetPosition(registeredDrone, new SquareEntity(1, 1));
 
                     console.error("ERROR: BAD DRONE MATCH. Continue...", registeredDrone.toString())

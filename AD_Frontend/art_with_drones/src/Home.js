@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import * as Settings from "./setEnv"
 
 const cellStatus = [
@@ -56,17 +56,7 @@ function renderMap(mapArray) {
     );
 }
 
-function parseCsvToMapArray(csv) {
-    // Procesar el CSV y convertirlo en un nuevo mapArray
-    // ... Implementa tu lógica para convertir el CSV en un mapArray ...
-    // Por ejemplo, puedes dividir el CSV en líneas y luego en celdas.
-    // Asumiendo que el CSV es una cadena de texto con líneas y celdas separadas por comas.
-    console.log(JSON.stringify(csv));
-    const lines = csv.split("\n");
-    const newMapArray = lines.map((line) => line.split(","));
 
-    return newMapArray;
-}
 
 
 export function Home() {
@@ -75,52 +65,87 @@ export function Home() {
     const [kafkaConnected, setKafkaConnected] = useState(false)
     const [intervalId, setIntervalId] = useState(null)
 
+    const [figureName, setFigureName] = useState(null)
+    const [authDronesIds, setAuthDronesIds] = useState([])
+    const [error, setError] = useState(null);
+    
 
-            /*fetch(`${Settings.HTTP_SERVER_HOST}:${Settings.HTTP_SERVER_PORT}`)*/
+    function requestMap() {
+        fetch(`http://${Settings.HTTP_SERVER_HOST}:${Settings.HTTP_SERVER_PORT}`)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error en la solicitud al servidor");
+            }
+            return response.json(); // Parsea la respuesta como JSON
+        })
+        .then((data) => {
+            /* Fill map array */
+            const mapData = data.map; // Obtener el array de mapas del JSON
+            const matrixSize = 20; // Tamaño de la matriz 20x20
+            const emptyWord = "empty"; // Palabra para los elementos vacíos
+
+            // Crear una matriz 20x20 con palabras en cada elemento
+            const wordMatrix = Array.from({ length: matrixSize }, () =>
+                Array.from({ length: matrixSize }, () => emptyWord)
+            );
+
+            // Llenar la matriz con las palabras del JSON
+            for (let i = 0; i < matrixSize; i++) {
+                for (let j = 0; j < matrixSize; j++) {
+                    wordMatrix[i][j] = mapData[i][j] || emptyWord;
+                }
+            }
+
+            // Aquí puedes hacer lo que quieras con wordMatrix, por ejemplo, imprimirlo en la consola
+            setMapArray(wordMatrix); // Actualiza el estado con la nueva matriz
+
+
+            /* Figure Name */
+            const figureName = data.figureName;
+            if (figureName) {
+                setFigureName(figureName);
+            } else {
+                setFigureName("No figure name detected");
+            }
+
+            /* Auth Drones Ids */
+            const authDronesIds = data.authDronesIds;
+            if (authDronesIds) {
+                setAuthDronesIds(authDronesIds);
+            } else {
+                setAuthDronesIds([]);
+            }
+            
+
+
+            if (error) setError(null);
+        })
+        .catch((error) => {
+            setError(`Se ha producido un error leyendo el mapa de API_Engine: ${error.message}`);
+            setAuthDronesIds([]);
+            //console.error("Error al obtener datos del servidor:", error);
+            setMapArray(getEmptyMap());
+        });
+    }
 
 
     function connectToKafka() {
         return setInterval(() => {
-            fetch(`http://${Settings.HTTP_SERVER_HOST}:${Settings.HTTP_SERVER_PORT}`)
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error("Error en la solicitud al servidor");
-                    }
-                    return response.json(); // Parsea la respuesta como JSON
-                })
-                .then((data) => {
-                    const mapData = data.map; // Obtener el array de mapas del JSON
-                    const matrixSize = 20; // Tamaño de la matriz 20x20
-                    const emptyWord = "empty"; // Palabra para los elementos vacíos
 
-                    // Crear una matriz 20x20 con palabras en cada elemento
-                    const wordMatrix = Array.from({ length: matrixSize }, () =>
-                        Array.from({ length: matrixSize }, () => emptyWord)
-                    );
-
-                    // Llenar la matriz con las palabras del JSON
-                    for (let i = 0; i < matrixSize; i++) {
-                        for (let j = 0; j < matrixSize; j++) {
-                            wordMatrix[i][j] = mapData[i][j] || emptyWord;
-                        }
-                    }
-
-                    // Aquí puedes hacer lo que quieras con wordMatrix, por ejemplo, imprimirlo en la consola
-                    setMapArray(wordMatrix); // Actualiza el estado con la nueva matriz
-                })
-                .catch((error) => {
-                    console.error("Error al obtener datos del servidor:", error);
-                    setMapArray(getEmptyMap());
-                });
+            requestMap();
 
             setCounter((prevCounter) => prevCounter + 1);
         }, Settings.FREQUENCY); // Delay entre las solicitudes
     }
 
+    function sortedDrones() {
+        return authDronesIds.slice().sort((d1, d2) => d1.id - d2.id);
+      }
     
 
     return (
-        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>            <h1>Home</h1>
+        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>            
+            <h1>Home</h1>
             <div style={{ display: "flex", justifyContent: "center" }}>
                 {renderMap(mapArray)}
 
@@ -129,6 +154,28 @@ export function Home() {
                 <span>Map iteration: {counter}</span>
                 <br />
                 <span>Periodo de llamadas HTTP: {Settings.FREQUENCY}ms</span>
+                <br />
+                <span>
+                    {error ?
+                        <span style={{ color: "red" }}>Error: {error} </span>
+                        : "Petición procesada correctamente. "
+                    }
+                </span>
+                <br />
+
+                <span style={{ color: "blue" }}>
+                    Figure name: {figureName ?? "No figure name detected"}
+                </span>
+                <br />
+
+                <span>
+                    Drones authorized: {authDronesIds.length ?? "N/D"}
+                </span>
+                <br />
+                <span>
+                    Drones alive: {authDronesIds.filter((drone) => drone.isAlive).length ?? "N/D"}
+                </span>
+
             </p>
 
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -173,7 +220,33 @@ export function Home() {
                     setCounter(0)
                 }}>Clear counter</button>
 
+                <br />
+
             </div>
+
+
+            {authDronesIds.length <= 0 ? (
+                <span style={{ color: "red" }}>No drones authorized</span>
+            ) : (   
+                <table style={{ color: "green" }}>
+                <thead>
+                    <tr>
+                    <td>Drone id</td>
+                    <td>Status</td>
+                    <td>Target square</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {sortedDrones().map((drone) => (
+                    <tr key={drone.id}>
+                        <td>{drone.id ?? "No id detected"}</td>
+                        <td>{drone.isAlive ? "Alive" : "Dead"}</td>
+                        <td>{drone.targetSquare ?? "N/D"}</td>
+                    </tr>
+                    ))}
+                </tbody>
+                </table>
+            )}
             
         </div>
     )
