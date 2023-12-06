@@ -291,7 +291,7 @@ export class MapFiguraDronTableImplementation {
              *
              * Si pasa, simplemente se quedará un dron muerto en el mapa durante una sola figura. Al pasar a la
              * siguiente figura, se volverá a generar un número aleatorio y se asignará a la nueva figura.
-             * 
+             *
              */
             //const max_uk_map_figura: number = countRows + 1 || randomInt(1000, 99999); // si no hay figura, se genera un número aleatorio
             const max_uk_map_figura: number = randomInt(1000, 99999); // si no hay figura, se genera un número aleatorio
