@@ -17,17 +17,26 @@ Tercer año de Ingeniería Informáitca.
 
 [1. Introducción](#introducción)
 [2. Tecnologías](#tecnologías)
-- [Introducción](#introducción)
-- [Tecnologías.](#tecnologías)
-  - [Despliegue de aplicación.](#despliegue-de-aplicación)
-  - [Lenguajes de programación.](#lenguajes-de-programación)
-  - [Persistencia.](#persistencia)
-  - [Automatización.](#automatización)
-  - [Control de versiones.](#control-de-versiones)
+- [1. Introducción](#1-introducción)
+- [2. Tecnologías.](#2-tecnologías)
+  - [2.1. Despliegue de aplicación.](#21-despliegue-de-aplicación)
+  - [2.2. Lenguajes de programación.](#22-lenguajes-de-programación)
+  - [2.3 Persistencia.](#23-persistencia)
+  - [2.4. Automatización.](#24-automatización)
+  - [2.5. Control de versiones.](#25-control-de-versiones)
+- [3. Ejecución.](#3-ejecución)
+  - [3.1. AD\_Kafka](#31-ad_kafka)
+  - [3.2. AD\_Weather](#32-ad_weather)
+  - [3.3. AD\_Registry](#33-ad_registry)
+  - [3.4. AD\_Database](#34-ad_database)
+  - [3.5. AD\_Frontend.](#35-ad_frontend)
+  - [3.6. AD\_Engine.](#36-ad_engine)
+  - [3.7. AD\_Drone.](#37-ad_drone)
+- [4. Conclusiones.](#4-conclusiones)
 
 
 
-## Introducción
+## 1. Introducción
 
 El objetivo de la práctica a desarrollar es un sistema distribuido que implemente una simulación de una solución para la creación de figuras mediante dispositivos autónomos (drones) manejados en tiempo real.
 
@@ -56,11 +65,11 @@ Querría aclarar que, como *TypeScript* se transpila a *JavaScript*, a lo largo 
 A la hora de levantar cada *docker-compose* se ha utilizado el parámetro *--build* para forzar a que se reconstruya la imagen, por si hubiera cambios en el código.
 
 
-## Tecnologías.
+## 2. Tecnologías.
 
 Durante el desarrollo de esta práctica se han utilizado diferentes tecnologías para conseguir el mejor desempeño posible.
 
-### Despliegue de aplicación.
+### 2.1. Despliegue de aplicación.
 
 Para facilitar el despliegue de los diferentes servicios en varias máquinas para tener un sistema realmente distribuido se ha hecho uso de *docker*. Se ha utilizado tanto imágenes y contenedores creados por separados como *docker-compose* para automatizar estos procesos. Se han expuesto los puertos y se han montado diferentes volúmenes para conseguir una persistencia adecuada en todas las aplicaciones.
 
@@ -80,7 +89,7 @@ La práctica tendrá el siguiente esquema de puertos:
 
 Los mensajes enviados entre servicios, tendrán el siguiente formato:
 
-### Lenguajes de programación.
+### 2.2. Lenguajes de programación.
 
 A lo largo de esta práctica de ha utilizado *TypeScript*, *Python* y *JavaScript*. Además de algunos scripts en *Bash*.
 
@@ -96,7 +105,7 @@ Para *Node* se ha utilizado la imagen: **node:18-alpine**. Para *python* se ha u
 
 \newpage
 
-### Persistencia.
+### 2.3 Persistencia.
 
 En cuanto a la persistencia, se ha utilizado una base de datos *sqlite* para conectar los drones registrados entre *AD\_Registry* y *AD\_Engine*.
 
@@ -127,7 +136,7 @@ Todos los archivos utilizados, tienen disponibles con variables de entorno sus r
 
 \newpage
 
-### Automatización.
+### 2.4. Automatización.
 
 El uso *docker-compose* ha supuesto una mejora enorme en la automatización. Sin embargo, no se entendería utilizar *docker-compose* sin variables de entorno. Las variables de entorno son ficheros *text.env*. De estos ficheros hay que extraer su contenido usando las librerías correspondientes de cada lenguaje de programación. En python *dotenv-python* o en Node *dotenv*.
 
@@ -206,5 +215,114 @@ Con la siguiente instrucción se ejecutarán 20 instancias. Desde el dron con id
 
 Este script solo es válido en ordenadores Unix, pero no Windows.
 
-### Control de versiones.
+### 2.5. Control de versiones.
 Para mantener, desarrollar y publicar el código fuente de este proyecto, se ha utilizado el sistema de control de versiones \textit{Git} junto con \textit{Github}. El repositorio está publicado, aunque de manera privada, en el siguiente [repositorio](https://github.com/jcerveto/art\_with\_drones).
+
+
+## 3. Ejecución.
+A continuación se presenta cómo se levantan todos los servicios utilizados, junto con capturas que demuestran que cada módulo funciona. 
+
+Se recomienda la ejecución de toda la aplicación en el orden que se presenta a continuación, aunque como es un sistema distribuido, funcionará igualmente sin importar el orden de ejecución.
+
+### 3.1. AD\_Kafka
+Desde la carpeta *docker-kafka/AD\_Kafka* se ha utilizado un docker-compose para levantar *Apache Kafa*. 
+
+```bash
+docker-compose up --build
+```
+
+Se para *Kafka* y *Zookeeper* o bien, parando individualmente sus contenedores de *docker* (*docker stop id*) o bien ejecutando "Ctrl + C" desde su terminal, la opción más sencilla.
+
+### 3.2. AD\_Weather
+Desde la carpeta *AD\_Weather* se ha utilizado un *docker-compose* para levantar *AD\_Weather*.
+
+```bash
+docker-compose up --build
+```
+
+### 3.3. AD\_Registry
+Desde la carpeta *AD\_Registry* se ha utilizado un *docker-compose* para levantar *AD\_Registry*.
+
+```bash
+docker-compose up --build
+```
+
+### 3.4. AD\_Database
+
+En este módulo se podrá consultar el estado de la base de datos.
+
+Desde la carpeta *AD\_Database* se ejecuta:
+
+Este módulo no está *dockerizado*.
+
+```bash
+npm install
+```
+
+Consultar todos los scripts:
+```bash
+npm run start
+```
+
+Mostrar base de datos:
+```bash
+node src/display-data.js
+```
+El nombre del *script* es suficientemente 
+descriptivo para saber utilizarlo. 
+
+### 3.5. AD\_Frontend.
+Se mostrarán las casillas vacías, en verde o en rojo, según su estado. Se conectará mediante conexión HTTP, usando *GET* para conectarse con el puerto de \textit*AD\_Engine* disponible.
+
+Desde la carpeta \textit */AD\_Frontend* se ha utilizado un *docker-compose* para levantar *AD\_Frontend*.
+
+```bash
+docker-compose up --build
+```
+
+A continuación en el puerto 3000 [http:localhost:3000](http:localhost:3000) se podrá visualizar la página web creada con React.js.
+
+
+### 3.6. AD\_Engine.
+Cabe recalcar que realizar dos \textit*expose* de este módulo. Uno para montar el servidor por *sockets* y otro para levantar el puerto *HTTP* con *express*. 
+
+Se marcan con caracteres ASCII es estado de la casilla, según los drones de la misma estén en una posición correcta, o no.
+
+Se pueden editar múltiples opciones en el archivo de entorno *.env*. Ya sea las IP de los otros servicios o *flags* del propio *AD\_Engine*.
+
+```bash
+docker-compouse up --build
+```
+
+### 3.7. AD\_Drone.
+Desde la carpeta *AD\_Drone* se utilizan diferentes comandos.
+
+1) Registrar drones, si no están registrados. Crea 20 drones nuevos en la base de datos. Guarda en un fichero todas las credenciales. 
+```bash
+./run-registry-instances 20 400 &
+```
+2) Levantar múltiples instancias (recomendado).
+   
+Levanta 20 drones desde el id 400 hasta el id 419. 
+```bash
+./run-engine-instances 20 400 &
+```
+
+3) Matar múltiples instancias. 
+Para N instancias según su id.
+```bash
+./run-engine-remove-instances 20 400 &
+```
+4) Construir y ejecutar individualmente los drones.
+```bash
+docker-compose build ad_drone
+```
+
+Después usaremos *docker run* usando el [README.md](AD_Drone/README.md) del módulo *AD\_Drone*.
+
+## 4. Conclusiones.
+Para ser una práctica desarrollada en tan solo seis semanas ha supuesto un gran aprendizaje en la automatización de procesos, uso de *docker*, de *Apache Kafka*. Incluso de *python*, *JavaScript*, *TypeScript* y *Bash*. Aunque también de aspectos concretos de redes de computadores. 
+
+Por su puesto *docker* es una herramienta para cualquier ingeniero especificado en los sistemas distribuidos. Sin embargo, también cabe recalcar que lenguajes modernos como *JavaScript* o *Python* tienen gestores de paquete que simplifican la gestión de las versiones. Ya sea *npm* para *Node* o *pip* y los entornos virtuales (*.vev*) para *python*.
+
+
