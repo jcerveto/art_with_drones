@@ -5,6 +5,20 @@ import * as DatabaseSettings from "../settings/databaseSettings";
 import { FigureEntity } from "../model/FigureEntity";
 import { SquareEntity } from "../model/SquareEntity";
 import {randomInt} from "crypto";
+import * as fs from 'fs';
+
+
+async function appendLineToFile(filePath: string, line: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        fs.appendFile(filePath, `${line}\n`, 'utf8', (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
+}
 
 
 export class MapFiguraDronTableImplementation {
@@ -158,27 +172,6 @@ export class MapFiguraDronTableImplementation {
         }
     }
 
-    static async removeIdRegistry() {
-        try {
-            const db = new sqlite3.Database(DatabaseSettings.dbPath);
-            const query: string = `
-                UPDATE MapFiguraDron
-                SET pk_fk_map_registry_id = NULL
-                WHERE pk_fk_map_registry_id IS NOT NULL`;
-
-            await new Promise<void>((resolve, reject) => {
-                db.run(query, [], (err) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve();
-                    }
-                })
-            });
-        } catch (err) {
-            throw err;
-        }
-    }
 
     static async getRecoveredFigure(): Promise<FigureEntity> {
         try {
@@ -252,25 +245,54 @@ export class MapFiguraDronTableImplementation {
     }
 
 
-    static async forceMapNewDrone(currentFigure: FigureEntity, registeredDrone: DronEntity, squareEntity: SquareEntity): Promise<void> {
+    static async forceMapNewDrone(registeredDrone: DronEntity, squareEntity: SquareEntity): Promise<void> {
         let db = null;
         try {
             db = new sqlite3.Database(DatabaseSettings.dbPath);
-            const queryGetMaxUkMapFigura: number = currentFigure?.getFigure()?.size ?? randomInt(1000, 9999);
 
+            // Eliminar el dron de la tabla MapFiguraDron, si existe
+            const queryDeleteDrone = `
+                DELETE FROM MapFiguraDron
+                WHERE pk_fk_map_registry_id = ?
+            `;
+            await new Promise<void>((resolve, reject) => {
+                db.run(queryDeleteDrone, [registeredDrone.getId()], (err) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+
+            // Obtener el número máximo de uk_map_figura
+            const queryCountRows = `
+            SELECT COUNT(*) AS count
+            FROM MapFiguraDron
+            `;
+            const countRows = await new Promise<number>((resolve, reject) => {
+                db.get(queryCountRows, [], (err, row) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(row.count);
+                    }
+                });
+            });
+
+            const max_uk_map_figura: number = countRows || randomInt(1000, 9999); // si no hay figura, se genera un número aleatorio
+
+            // Insertar el dron en la tabla MapFiguraDron
             const queryInsert = `
             INSERT INTO MapFiguraDron
             (pk_fk_map_registry_id, uk_map_figura, row, column)
             VALUES (?, ?, ?, ?)
-            ON CONFLICT(uk_map_figura) DO UPDATE SET row = ?, column = ?;
         `;
 
             await new Promise<void>((resolve, reject) => {
                 db.run(queryInsert, [
                     registeredDrone.getId(),
                     max_uk_map_figura,
-                    squareEntity.getRow(),
-                    squareEntity.getColumn(),
                     squareEntity.getRow(),
                     squareEntity.getColumn(),
                 ], (err) => {
@@ -284,16 +306,15 @@ export class MapFiguraDronTableImplementation {
 
             // Cerrar la conexión a la base de datos después de la operación
             db.close();
+            await appendLineToFile('app/error.log', `FORCE OK. DroneId: ${registeredDrone.getId()} Square: ${squareEntity.getHash()}`);
+
         } catch (err) {
             console.error(`ERROR: Trying to forceMapNewDrone. ${err}. DroneId: ${registeredDrone.getId()}`);
-            if (db) {
+            await appendLineToFile('app/error.log', `ERROR: Trying to forceMapNewDrone. ${err}, ${err.message}. DroneId: ${registeredDrone.getId()}`);
+            if (db && db.open) {
                 db.close();
             }
             throw err;
-        } finally {
-            if (db) {
-                db.close();
-            }
         }
     }
 

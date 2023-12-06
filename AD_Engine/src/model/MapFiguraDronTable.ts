@@ -26,12 +26,13 @@ export class MapFiguraDronTable {
         }
     }
 
-    public static async forceMapNewDrone(currentFigure: FigureEntity, registeredDrone: DronEntity, squareEntity: SquareEntity) {
+    public static async forceMapNewDrone(registeredDrone: DronEntity, squareEntity: SquareEntity): Promise<boolean> {
         try {
-            await MapFiguraDronTableImplementation.forceMapNewDrone(currentFigure, registeredDrone, squareEntity);
+            await MapFiguraDronTableImplementation.forceMapNewDrone(registeredDrone, squareEntity);
+            return true;
         } catch (err) {
             console.error(err);
-            throw new Error('ERROR: Try to forceMapNewDrone: ' + err.message);
+            return false;
         }
     }
 }

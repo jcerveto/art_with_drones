@@ -192,8 +192,6 @@ export class MapEntity {
         }
 
         try {
-            let sumOfDrones = 0;
-
             // por cada casilla de la figura (o sea, el objetivo)
             for (let [squareHash, figureId] of figure.getFigure()) {
                 // si no existe la casilla en el mapa
@@ -208,17 +206,24 @@ export class MapEntity {
                 const square = new SquareEntity(row, col);
                 const id_registry = await MapFiguraDronTable.getIdRegistry(square, figureId);
                 const droneToTest = new DronEntity(id_registry);
-                for (let drone of dronesInSquare) {
-                    if (! drone.equals(droneToTest)) {
-                        return false;
-                    }
-                    sumOfDrones++;
-                }
 
+               if (dronesInSquare.length === 0) {
+                   return false;
+               }
 
-                // COINCIDE!! Seguimos comprobando los demás drones
-                // si el dron está muerto, darlo por bueno
+               let found: boolean = false;
+               for (const iterDrone of dronesInSquare) {
+                   if (iterDrone.equals(droneToTest)) {
+                      found = true;
+                      break;
+                   }
+               }
+
+               if (!found) {
+                   return false;
+               }
             }
+
             return true;
         } catch (err) {
             console.error("ERROR: at matchesWithMap. Returned false: ", err.message);
@@ -243,14 +248,14 @@ export class MapEntity {
                 const square = new SquareEntity(row, col);
                 const id_registry = await MapFiguraDronTable.getIdRegistry(square, figureId);
                 const droneToTest = new DronEntity(id_registry);
-                for (let drone of dronesInSquare) {
-                    if (drone.equals(droneToTest)) {
+                for (const droneInSquare of dronesInSquare) {
+                    if (droneInSquare.equals(droneToTest)) {
                         sumOfDrones++;
                     }
+                }
 
-                    if (sumOfDrones >= n) {
-                        return true;
-                    }
+                if (sumOfDrones >= n) {
+                    return true;
                 }
             }
         } catch (err) {
@@ -263,7 +268,7 @@ export class MapEntity {
         if (COMPLETE_WHEN_ALL_DRONES_ARRIVE) {
             return await this.matchesWhenAllArrived(figure);
         } else {
-            return await this.matchesWhenNDronesArrived(figure, 1);
+            return await this.matchesWhenNDronesArrived(figure, 3);
         }
     }
 

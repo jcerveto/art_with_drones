@@ -15,6 +15,7 @@ services:
       - ../AD_Database/database.db:/app/AD_Database/database.db
       - ./data/AwD_figuras.json:/app/data/AwD_figuras.json
       - ./.env:/app/.env
+      - ./error.log:/app/error.log
 
 
     working_dir: /app

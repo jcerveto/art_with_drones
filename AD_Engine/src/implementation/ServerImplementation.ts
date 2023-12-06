@@ -166,7 +166,7 @@ export class ServerImplementation {
             }
             else {
                 console.error("ERROR: Drone not mapped. DroneId: ", newDrone.toString());
-                // await MapFiguraDronTable.forceMapNewDrone(newDrone, new SquareEntity(1, 1));
+                await MapFiguraDronTable.forceMapNewDrone(newDrone, new SquareEntity(1, 1));
                 newDrone.setTarget(new SquareEntity(1, 1));
                 console.log(`New drone added to database: ${newDrone.toString()} -> (1, 1)`);
             }
@@ -407,7 +407,11 @@ export class ServerImplementation {
                     // La figura no tiene hueco para el dron.
                     // Se le asigna la posición (1, 1) y se le envía a la base.
                     registeredDrone.setTarget(new SquareEntity(1, 1));
-                    await MapFiguraDronTable.forceMapNewDrone(server.getCurrentFigure(), registeredDrone, new SquareEntity(1, 1));
+                    const status: boolean = await MapFiguraDronTable.forceMapNewDrone(registeredDrone, new SquareEntity(1, 1));
+                    if (!status) {
+                        console.error("ERROR: BAD DRONE MATCH. Continue...", registeredDrone.toString())
+                        continue;
+                    }
                     await BrokerServices.publishTargetPosition(registeredDrone, new SquareEntity(1, 1));
 
                     console.error("ERROR: BAD DRONE MATCH. Continue...", registeredDrone.toString())
