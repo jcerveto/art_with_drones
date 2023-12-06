@@ -13,7 +13,11 @@ Tercer año de Ingeniería Informáitca.
 
 	Escuela Politécnica Superior
 
-
+Descargar repositorio:
+```bash
+git clone https://github.com/jcerveto/art_with_drones.git
+cd art_with_drones
+```
 
 [1. Introducción](#introducción)
 [2. Tecnologías](#tecnologías)
