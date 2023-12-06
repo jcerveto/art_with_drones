@@ -50,8 +50,10 @@ export class MapFiguraDronTableImplementation {
 
                         db.run(consultaActualizar, [registryId, figureId], (err) => {
                             if (err) {
+                                appendLineToFile('error.log', `ERROR: Trying to mapNewDrone. ${err}, ${err.message}. DroneId: ${drone.getId()}, FigureId: ${figureId}`);
                                 reject(err);
                             } else {
+                                appendLineToFile('error.log', `NORMAL OK. DroneId: ${drone.getId()} FigureId: ${figureId}`);
                                 resolve(registryId);
                             }
                         });
@@ -280,7 +282,19 @@ export class MapFiguraDronTableImplementation {
                 });
             });
 
-            const max_uk_map_figura: number = countRows || randomInt(1000, 9999); // si no hay figura, se genera un número aleatorio
+
+            /**
+             * MUCHO OJO: Se genera un número aleatorio para la figura. Cuando se usa el SIZE+1 en algunos casos
+             * se genera un número que ya existe en la tabla MapFiguraDron.
+             *
+             * Es extremadamente raro que se repita el max_uk_map_figura, pero puede pasar.
+             *
+             * Si pasa, simplemente se quedará un dron muerto en el mapa durante una sola figura. Al pasar a la
+             * siguiente figura, se volverá a generar un número aleatorio y se asignará a la nueva figura.
+             * 
+             */
+            //const max_uk_map_figura: number = countRows + 1 || randomInt(1000, 99999); // si no hay figura, se genera un número aleatorio
+            const max_uk_map_figura: number = randomInt(1000, 99999); // si no hay figura, se genera un número aleatorio
 
             // Insertar el dron en la tabla MapFiguraDron
             const queryInsert = `
@@ -306,11 +320,11 @@ export class MapFiguraDronTableImplementation {
 
             // Cerrar la conexión a la base de datos después de la operación
             db.close();
-            await appendLineToFile('app/error.log', `FORCE OK. DroneId: ${registeredDrone.getId()} Square: ${squareEntity.getHash()}`);
+            await appendLineToFile('error.log', `FORCE OK. DroneId: ${registeredDrone.getId()} Square: ${squareEntity.getHash()}, FigureId: ${max_uk_map_figura}, Size: ${countRows}`);
 
         } catch (err) {
             console.error(`ERROR: Trying to forceMapNewDrone. ${err}. DroneId: ${registeredDrone.getId()}`);
-            await appendLineToFile('app/error.log', `ERROR: Trying to forceMapNewDrone. ${err}, ${err.message}. DroneId: ${registeredDrone.getId()}`);
+            await appendLineToFile('error.log', `ERROR: Trying to forceMapNewDrone. ${err}, ${err.message}. DroneId: ${registeredDrone.getId()}, Square: ${squareEntity.getHash()},`);
             if (db && db.open) {
                 db.close();
             }
