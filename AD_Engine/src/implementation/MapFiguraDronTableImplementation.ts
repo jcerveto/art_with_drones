@@ -8,7 +8,7 @@ import {randomInt} from "crypto";
 import * as fs from 'fs';
 
 
-async function appendLineToFile(filePath: string, line: string): Promise<void> {
+export async function appendLineToFile(filePath: string, line: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         fs.appendFile(filePath, `${line}\n`, 'utf8', (err) => {
             if (err) {

@@ -13,9 +13,9 @@ import {RegistryTable} from "../model/RegistryTable";
 import * as BrokerSettings from "../settings/BrokerSettings";
 import {MapFiguraDronTableImplementation} from "./MapFiguraDronTableImplementation";
 import {FigureEntity} from "../model/FigureEntity";
-import { sleep } from './TimeUtils';
+import {sleep} from './TimeUtils';
 import * as DatabaseSettings from "../settings/databaseSettings";
-import { start as startHttp } from "./HttpServer"
+import {start as startHttp} from "./HttpServer"
 import {AlreadyInMap} from "../model/AlreadyInMap";
 import {MaxConcurrentConnectionsExceed} from "../model/MaxConcurrentConnectionsExceed";
 import * as ServerSettings from "../settings/ServerSettings";
@@ -255,11 +255,15 @@ export class ServerImplementation {
 
     }
 
-    public static async isWeatherValid(server: ServerEntity) {
+    public static async isWeatherValid(server: ServerEntity) : Promise<boolean> {
         try {
-            const currentTemperature = await WeatherServices.getCurrentTemperature();
-            const isWeatherValid = WeatherServices.isWeatherValid(currentTemperature);
-            return isWeatherValid;
+            const currentTemperature: number = await WeatherServices.getCurrentTemperature()
+                .catch((err) => {
+                    console.error(`ERROR: While getting current temperature: ${err}`)
+                    return -1;
+                });
+
+            return WeatherServices.isWeatherValid(currentTemperature);
         } catch (err) {
             console.error(`ERROR: While isWeatherValid: ${err}`)
             return false;

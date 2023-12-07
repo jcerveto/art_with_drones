@@ -16,6 +16,7 @@ services:
       - ./data/AwD_figuras.json:/app/data/AwD_figuras.json
       - ./.env:/app/.env
       - ./error.log:/app/error.log
+      - ./data/city.txt:/app/data/city.txt
 
 
     working_dir: /app
