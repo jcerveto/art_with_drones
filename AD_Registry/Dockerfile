@@ -8,10 +8,10 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copy source code
-COPY .env app/.env
 COPY main.py app/main.py
 COPY src/ app/src/
 
 EXPOSE 6000
+EXPOSE 6001
 
 CMD ["python", "app/main.py"]

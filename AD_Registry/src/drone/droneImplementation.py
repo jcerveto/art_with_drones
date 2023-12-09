@@ -2,7 +2,7 @@ from .. import security
 from .. import persistence as db
 
 
-def create(entity) -> str:
+def create(entity) -> tuple[str, str]:
     """
     :param entity: droneEntity.DroneEntity
     :return:
@@ -37,7 +37,7 @@ def delete(droneId: int):
 
 def generate_token():
     try:
-        print(f"Generating token for drone...")
+        #print(f"Generating token for drone...")
         return security.generate_new_token()
     except Exception as e:
         print(f"Error generating token for drone. Impl layer. {e}")

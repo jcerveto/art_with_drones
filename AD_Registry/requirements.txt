@@ -1,2 +1,3 @@
 python-dotenv
+Flask
 # sqlite3 no se importa ya que viene por defecto en python

@@ -49,7 +49,7 @@ def get_all_drones() -> list:
         close_connection(connection)
 
 
-def add_drone(drone) -> str:
+def add_drone(drone) -> tuple[str, str]:
     """
 
     :param drone: droneEntity.DroneEntity
@@ -68,9 +68,9 @@ def add_drone(drone) -> str:
     finally:
         close_connection(connection)
         if status:
-            return drone.token
+            return drone.token, 'temporal_token'
         else:
-            return ''
+            return '', ''
 
 def update_drone(new_drone) -> None:
     """

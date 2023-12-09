@@ -6,11 +6,14 @@ services:
     build: . 
 
     ports:
-      - "6000:6000"  
+      - "6000:6000"     # Servidor sockets
+      - "6001:6001"     # Servidor HTTP REST API
 
     volumes:
-    # sqlite3 database. Ver .env y añadir un "../" por el "app/"
       - ../AD_Database/database.db:/app/AD_Database/database.db
+      - ./.env:/app/.env
+
+    working_dir: /app
 
     tty: true  # Habilitar el modo TTY para mostrar la salida del código en la consola    
 

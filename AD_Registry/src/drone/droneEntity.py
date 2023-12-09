@@ -11,12 +11,16 @@ class DroneEntity:
         else:
             self.token = token
 
-    def create(self) -> str:
+    def create(self) -> tuple[str, str]:
+        """
+        Creates a drone in the database
+        :return: tuple (password__usually token__, temporary token)
+        """
         try:
             return impl.create(self)
         except Exception as e:
             print(f"Error creating drone: {e}")
-            return ''
+            return '', ''
 
     def update(self) -> bool:
         try:
@@ -37,7 +41,7 @@ class DroneEntity:
 
     def get_new_token(self) -> str:
         try:
-            print(f"Generating token for drone: {str(self)}")
+            #print(f"Generating token for drone: {str(self)}")
             return impl.generate_token()
         except Exception as e:
             print(f"Error generating token for drone. Entity layer: {e}")

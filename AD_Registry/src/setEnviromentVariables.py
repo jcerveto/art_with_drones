@@ -30,3 +30,7 @@ def get_encoding() -> str:
 
 def get_max_concurrent_connections() -> int:
     return int(os.getenv("MAX_CONCURRENT_CONNECTIONS"))
+
+
+def get_http_server_port() -> int:
+    return int(os.getenv("HTTP_PORT"))
