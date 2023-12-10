@@ -8,6 +8,7 @@ import * as ServerSettings from "../settings/ServerSettings";
 import {DronEntity} from "./DronEntity";
 import {EKeepAliveStatus} from "./EKeepAliveStatus";
 import {sleep} from "../implementation/TimeUtils";
+import * as Logger from "../settings/LoggerSettings";
 
 export class ServerEntity {
     public MAX_CONCURRENT_CONNECTIONS: number = ServerSettings.MAX_CONCURRENT_CONNECTIONS;
@@ -47,6 +48,8 @@ export class ServerEntity {
                 return;
             }
 
+            const aliveDronesInit: Array<number> = this.getMap().getAliveDrones().map((drone: DronEntity) => drone.getId());
+
             while (!this.isMapEditorAvailable()) {
                 console.log(`${'&'.repeat(50)}\nWaiting for editor to be available... Calling from ServerEntity.updateAliveDrones${'&'.repeat(50)}\n`);
                 await sleep(200);
@@ -65,6 +68,17 @@ export class ServerEntity {
             await this.sendMapToDrones();
 
             this.setEditorAvailable();
+
+            const aliveDronesEnd: Array<number> = this.getMap().getAliveDrones().map((drone: DronEntity) => drone.getId());
+            const deadsIds: Array<number> = aliveDronesInit.filter((id: number) => !aliveDronesEnd.includes(id));
+            if (aliveDronesInit.length > aliveDronesEnd.length) {
+                await Logger.addNewLog({
+                    dataTime: new Date().toISOString(),
+                    ipAddr: "0.0.0.0",
+                    action: "DroneDead",
+                    description: `Drone/s ${deadsIds} died. `
+                })
+            }
         } catch (err) {
             console.error("ERROR: Trying to updateAliveDrones. ", err);
             this.setEditorAvailable();

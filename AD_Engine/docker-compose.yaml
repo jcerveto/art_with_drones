@@ -17,6 +17,7 @@ services:
       - ./.env:/app/.env
       - ./error.log:/app/error.log
       - ./data/city.txt:/app/data/city.txt
+      - ./logger.json:/app/logger.json
 
 
     working_dir: /app

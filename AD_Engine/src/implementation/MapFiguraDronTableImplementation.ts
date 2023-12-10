@@ -10,6 +10,7 @@ import * as fs from 'fs';
 
 export async function appendLineToFile(filePath: string, line: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
+        resolve();
         fs.appendFile(filePath, `${line}\n`, 'utf8', (err) => {
             if (err) {
                 reject(err);

@@ -19,6 +19,8 @@ import {start as startHttp} from "./HttpServer"
 import {AlreadyInMap} from "../model/AlreadyInMap";
 import {MaxConcurrentConnectionsExceed} from "../model/MaxConcurrentConnectionsExceed";
 import * as ServerSettings from "../settings/ServerSettings";
+import * as LoggerSettings from "../settings/LoggerSettings";
+
 
 
 export class ServerImplementation {
@@ -56,6 +58,13 @@ export class ServerImplementation {
 
             // not-solved promise: update alive-dead drones
             setInterval(() => server.updateAliveDrones(), ServerSettings.KEEP_ALIVE_INTERVAL);
+
+            await LoggerSettings.addNewLog({
+                dataTime: new Date().toISOString(),
+                ipAddr: "0.0.0.0",
+                action: "START",
+                description: "Server started successfully. "
+            });
 
         } catch (err) {
             console.error("ERROR while starting... ", err);
@@ -194,6 +203,13 @@ export class ServerImplementation {
             const bytesResponse: Buffer = Buffer.from(answerJson);
             const encodedResponse : string = bytesResponse.toString('utf-8');
 
+            await LoggerSettings.addNewLog({
+                dataTime: new Date().toISOString(),
+                ipAddr: conn.remoteAddress ?? "N/D",
+                action: "Auth OK",
+                description: answer.message
+            })
+
             conn.write(encodedResponse);
             console.log("RESPUESTA ENVIADA. ");
             conn.end();
@@ -207,6 +223,12 @@ export class ServerImplementation {
                     ok: true,
                     message: err.message.toString()
                 }
+                await LoggerSettings.addNewLog({
+                    dataTime: new Date().toISOString(),
+                    ipAddr: conn.remoteAddress ?? "N/D",
+                    action: "Auth OK",
+                    description: err.message.toString()
+                })
             }
             // generic error
             else {
@@ -214,6 +236,12 @@ export class ServerImplementation {
                     ok: false,
                     message: errorMessages.AuthFailed + err.message
                 };
+                await LoggerSettings.addNewLog({
+                    dataTime: new Date().toISOString(),
+                    ipAddr: conn.remoteAddress ?? "N/D",
+                    action: "Auth FAILED",
+                    description: err.message.toString()
+                })
             }
 
 
@@ -275,7 +303,13 @@ export class ServerImplementation {
             if (server.getIsWeatherValid()) {
                 // Procesar cambio de estado (de bueno a malo)
                 server.setWeatherToBad();
-                await server.publishCommunicationMessage("SERVER HAS DETECT BAD WEATHER. SENDING DRONES TO BASE. ");
+                await server.publishCommunicationMessage("SERVER HAS DETECTED BAD WEATHER. SENDING DRONES TO BASE. ");
+                await LoggerSettings.addNewLog({
+                    dataTime: new Date().toISOString(),
+                    ipAddr: "0.0.0.0",
+                    action: "BAD WEATHER",
+                    description: "Server has detected bad weather. Sending drones to base. "
+                })
                 await server.sendDronesToBase();
 
             }
@@ -293,7 +327,12 @@ export class ServerImplementation {
                 // Procesar cambio de estado (de malo a bueno)
                 server.setWeatherToGood();
                 await server.publishCommunicationMessage("SERVER HAS DETECT GOOD WEATHER. SENDING DRONES TO LAST FIGURE TARGET POSITION. ");
-
+                await LoggerSettings.addNewLog({
+                    dataTime: new Date().toISOString(),
+                    ipAddr: "0.0.0.0",
+                    action: "GOOD WEATHER",
+                    description: "Server has detected good again weather. Drawing figures again... "
+                })
                 // Vuelve a enviar las coordenadas de destino a los drones
                 for (const drone of server.getMap().getAliveDrones()) {
                     const square = await MapFiguraDronTableImplementation.getSquareFromDrone(drone);
@@ -402,6 +441,13 @@ export class ServerImplementation {
             server.addCurrentFigure(figure);
             console.log(`Starting figure: ${figure.getName()}`);
             await BrokerServices.publishCommunicationMessage(`Starting figure: ${figure.getName()}`);
+            await LoggerSettings.addNewLog({
+                dataTime: new Date().toISOString(),
+                ipAddr: "0.0.0.0",
+                action: `START FIGURE`,
+                description: `Starting figure: ${figure.getName()}`
+            });
+
             console.log(`Current figure: ${server.getCurrentFigure().toString()}`);
             await MapFiguraDronTableImplementation.storeFigure(figure);
 
@@ -441,6 +487,12 @@ export class ServerImplementation {
                 console.log(`${'@'.repeat(50)}\nWaiting for drones to reach target position... ${Date.now().toString()}\n${'@'.repeat(50)}\n`);
             }
             console.log(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
+            await LoggerSettings.addNewLog({
+                dataTime: new Date().toISOString(),
+                ipAddr: "0.0.0.0",
+                action: `FIGURE COMPLETED`,
+                description: `Figure ${server.getCurrentFigure()?.getName() ?? '?'} completed successfully. `
+            });
             await BrokerServices.publishCommunicationMessage(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
             console.log(`WAITING 10 SECONDS TO DRAW NEXT FIGURE...`);
             await sleep(10_000);
@@ -477,6 +529,12 @@ export class ServerImplementation {
     static async recover(server: ServerEntity) {
         try {
             console.log('Recovering... ');
+            await LoggerSettings.addNewLog({
+                dataTime: new Date().toISOString(),
+                ipAddr: "0.0.0.0",
+                action: "RECOVER",
+                description: "Server is recovering... "
+            })
 
             console.log('Recovering the last figure... ');
             const recoveredDrones: Array<DronEntity> = await MapFiguraDronTableImplementation.getRecoveredDrones();
