@@ -11,6 +11,12 @@ export class DronEntity {
         if (id == null) {
             throw new Error('ERROR: Invalid id. Cannot be null or undefined.');
         }
+        if (id < 0) {
+            throw new Error('ERROR: Invalid id. Cannot be negative.');
+        }
+        if (isNaN(id)) {
+            throw new Error('ERROR: Invalid id. Cannot be NaN.');
+        }
         this.__id = id;
     }
 
