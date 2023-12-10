@@ -2,7 +2,7 @@ from .. import security
 from .. import persistence as db
 
 
-def create(entity) -> tuple[str, str]:
+def create(entity) -> str:
     """
     :param entity: droneEntity.DroneEntity
     :return:
@@ -37,7 +37,19 @@ def delete(droneId: int):
 
 def generate_token():
     try:
-        #print(f"Generating token for drone...")
         return security.generate_new_token()
     except Exception as e:
         print(f"Error generating token for drone. Impl layer. {e}")
+
+
+def exists(entity) -> bool:
+    """
+
+    :param entity: droneEntity.DroneEntity
+    :return:
+    """
+    try:
+        return db.drone_exists(entity)
+    except Exception as e:
+        print(f"Error checking if drone exists: {e}")
+        return False

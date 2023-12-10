@@ -2,7 +2,7 @@ import src.drone.droneImplementation as impl
 
 
 class DroneEntity:
-    def __init__(self, id: int, alias: str, token=None):
+    def __init__(self, id: int, alias: str = "default_drone", token=None):
         self.id = int(id)
         self.alias = alias
         if token is None:
@@ -11,7 +11,14 @@ class DroneEntity:
         else:
             self.token = token
 
-    def create(self) -> tuple[str, str]:
+    def exists(self) -> bool:
+        try:
+            return impl.exists(self)
+        except Exception as e:
+            print(f"Error checking if drone exists: {e}")
+            return False
+
+    def create(self) -> str:
         """
         Creates a drone in the database
         :return: tuple (password__usually token__, temporary token)
@@ -20,7 +27,7 @@ class DroneEntity:
             return impl.create(self)
         except Exception as e:
             print(f"Error creating drone: {e}")
-            return '', ''
+            return ''
 
     def update(self) -> bool:
         try:

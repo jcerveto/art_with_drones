@@ -40,7 +40,7 @@ def get_all_drones() -> list:
                 new_drone = droneEntity.DroneEntity(id=row[0], alias=row[1], token=row[2])
                 drones.append(new_drone)
                 print(f"Drone: {new_drone.id}, {new_drone.alias}, {new_drone.token}")
-            
+
             return rows
     except sqlite3.Error as error:
         print("Error al obtener datos:", error)
@@ -49,7 +49,7 @@ def get_all_drones() -> list:
         close_connection(connection)
 
 
-def add_drone(drone) -> tuple[str, str]:
+def add_drone(drone) -> str:
     """
 
     :param drone: droneEntity.DroneEntity
@@ -59,7 +59,8 @@ def add_drone(drone) -> tuple[str, str]:
     try:
         connection, cursor = connect_to_database()
         if connection and cursor:
-            cursor.execute("INSERT INTO Registry (pk_registry_id, alias, token) VALUES (?, ?, ?)", (int(drone.id), drone.alias, drone.token))
+            cursor.execute("INSERT INTO Registry (pk_registry_id, alias, token) VALUES (?, ?, ?)",
+                           (int(drone.id), drone.alias, drone.token))
             connection.commit()
             print(f"Fila insertada correctamente: [{drone.id}, {drone.alias}, {drone.token}] ")
     except sqlite3.Error as error:
@@ -68,9 +69,10 @@ def add_drone(drone) -> tuple[str, str]:
     finally:
         close_connection(connection)
         if status:
-            return drone.token, 'temporal_token'
+            return drone.token
         else:
-            return '', ''
+            return ''
+
 
 def update_drone(new_drone) -> None:
     """
@@ -81,7 +83,8 @@ def update_drone(new_drone) -> None:
     try:
         connection, cursor = connect_to_database()
         if connection and cursor:
-            cursor.execute("UPDATE Registry SET alias = ?, token = ? WHERE pk_registry_id = ?", (new_drone.alias, new_drone.token, new_drone.id))
+            cursor.execute("UPDATE Registry SET alias = ?, token = ? WHERE pk_registry_id = ?",
+                           (new_drone.alias, new_drone.token, new_drone.id))
             connection.commit()
             print(f"Fila editada correctamente: [{new_drone.id}, {new_drone.alias}, {new_drone.token}] ")
     except sqlite3.Error as error:
@@ -112,3 +115,23 @@ if __name__ == '__main__':
     update_drone(d88)
     delete_drone(d88.id)
     get_all_drones()
+
+
+def drone_exists(drone) -> bool:
+    """
+    Función para comprobar si existe un drone en la base de datos con todos sus atributos válidos.
+    :param drone: droneEntity.DroneEntity
+    :return:
+    """
+    try:
+        connection, cursor = connect_to_database()
+        if connection and cursor:
+            cursor.execute("SELECT * FROM Registry WHERE pk_registry_id = ? AND token = ?",
+                           (int(drone.id), drone.token))
+            rows = cursor.fetchall()
+            return len(rows) > 0
+    except sqlite3.Error as error:
+        print("Error al obtener datos:", error)
+        return False
+    finally:
+        close_connection(connection)

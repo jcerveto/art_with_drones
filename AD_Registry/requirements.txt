@@ -1,3 +1,5 @@
-python-dotenv
+python-dotenv~=1.0.0
 Flask
 # sqlite3 no se importa ya que viene por defecto en python
+
+cryptography
