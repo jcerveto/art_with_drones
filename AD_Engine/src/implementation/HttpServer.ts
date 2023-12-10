@@ -4,6 +4,7 @@ import morgan from "morgan";
 
 import { ServerEntity } from "../model/ServerEntity";
 import * as ServerSettings from "../settings/ServerSettings";
+import {DronEntity} from "../model/DronEntity";
 
 let serverRef: ServerEntity = null;
 
@@ -45,6 +46,52 @@ app.get("/", (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+app.get("/home", (req, res) => {
+    try {
+        const serverInfo = getServerInfo();
+        res.status(200).header("Content-Type", "application/json").send(JSON.stringify(serverInfo));
+    } catch (err) {
+        console.error(`ERROR: Trying to get server info: ${err}`);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
+app.post("/register", (req, res) => {
+    try {
+        const response = {}
+        res.status(200).send(JSON.stringify(response));
+    } catch (err) {
+        console.error(`ERROR: Trying to get server info: ${err}`);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
+app.delete("/remove", (req, res) => {
+    try {
+        if (serverRef == null) {
+            console.error("ERROR: Trying to remove drone but server is null");
+            res.status(500).json({ error: "Internal server error" });
+        }
+
+        const droneId = req.body.id;
+        const droneObj = new DronEntity(droneId);
+        serverRef.getMap().removeDrone(droneObj);
+
+        res.status(200).send(JSON.stringify({
+            ok: true,
+            message: `Drone ${droneId} removed`,
+        }));
+    } catch (err) {
+        console.error(`ERROR: Trying to get server info: ${err}`);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
+
 
 export async function start(server: ServerEntity) {
     try {
