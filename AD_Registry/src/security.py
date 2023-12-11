@@ -118,12 +118,15 @@ def generate_key_aes(password, salt):
     )
     key = kdf.derive(password)
     return key
+
+
 def encrypt_aes(key, message) -> str:
     iv = os.urandom(16)  # Initialization Vector
     cipher = Cipher(algorithms.AES(key), modes.CFB(iv), backend=default_backend())
     encryptor = cipher.encryptor()
     ciphertext = encryptor.update(message.encode()) + encryptor.finalize()
     return iv + ciphertext
+
 
 def decrypt_aes(key, ciphertext) -> str:
     iv = ciphertext[:16]
@@ -132,7 +135,6 @@ def decrypt_aes(key, ciphertext) -> str:
     decryptor = cipher.decryptor()
     plaintext = decryptor.update(ciphertext) + decryptor.finalize()
     return plaintext.decode()
-
 
 
 def generate_temporal_token(drone_id: int, pem_data: str = None) -> str:
