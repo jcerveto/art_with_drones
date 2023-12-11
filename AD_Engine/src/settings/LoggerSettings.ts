@@ -16,6 +16,16 @@ export interface LoggerLineFormat {
     description: string
 }
 
+/**
+ * Add a new log to the logger file
+ * export interface LoggerLineFormat {
+ *     dataTime: string,
+ *     ipAddr: string,
+ *     action: string,
+ *     description: string
+ * }
+ * @param line
+ */
 export async function addNewLog(line: LoggerLineFormat): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         resolve();

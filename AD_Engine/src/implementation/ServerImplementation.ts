@@ -160,7 +160,7 @@ export class ServerImplementation {
                 throw new AlreadyInMap('ERROR: Drone already in map. ');
             }
 
-            // valida si hay hueco en la figura
+            // valida si hay hueco en la base de datos
             if (server.getMap().getAllDrones().length >= ServerSettings.MAX_DRONES_ACCEPTED) {
                 throw new Error('ERROR: No more drones allowed. map is full of drones. ');
             } 

@@ -9,6 +9,8 @@ import {DronEntity} from "./DronEntity";
 import {EKeepAliveStatus} from "./EKeepAliveStatus";
 import {sleep} from "../implementation/TimeUtils";
 import * as Logger from "../settings/LoggerSettings";
+import * as SecurityImplementation from "../implementation/SecurityImplementation";
+
 
 export class ServerEntity {
     public MAX_CONCURRENT_CONNECTIONS: number = ServerSettings.MAX_CONCURRENT_CONNECTIONS;
@@ -324,6 +326,16 @@ export class ServerEntity {
             await ServerImplementation.recover(this);
         } catch (err) {
             console.error("ERROR: Trying to recover. ", err);
+        }
+    }
+
+    public async generateToken(drone: DronEntity, timestamp: number): Promise<string> {
+        try {
+            const message = `${drone.getId()}#${timestamp}`;
+            return await SecurityImplementation.encryptMessageBase64(message);
+        } catch (err) {
+            console.error("ERROR: Trying to generateToken. ", err);
+            return "";
         }
     }
 }
