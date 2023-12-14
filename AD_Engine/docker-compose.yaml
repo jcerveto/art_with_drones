@@ -18,6 +18,7 @@ services:
       - ./error.log:/app/error.log
       - ./data/city.txt:/app/data/city.txt
       - ./logger.json:/app/logger.json
+      - ./logs:/app/logs
 
 
     working_dir: /app

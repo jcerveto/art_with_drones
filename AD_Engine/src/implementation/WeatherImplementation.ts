@@ -2,6 +2,7 @@ import * as net from "net";
 
 import * as WeatherSettings from '../settings/WeatherSettings';
 import {appendLineToFile} from "./MapFiguraDronTableImplementation";
+import {DEBUG_FILE} from "../settings/LoggerSettings";
 
 
 export const MINIMUM_TEMPERATURE : number = 0;
@@ -16,7 +17,7 @@ export async function getCurrentTemperature(): Promise<number> {
         const response = await fetch(GET_URL);
         const data = await response.json();
 
-        await appendLineToFile("error.log", "URL=" + GET_URL +'->' + JSON.stringify(data));
+        await appendLineToFile(DEBUG_FILE, "OpenWeatherQuery -> URL=" + GET_URL +'->' + JSON.stringify(data));
         if (!response.ok) {
             return -1;
         }

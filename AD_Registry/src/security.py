@@ -137,11 +137,8 @@ def decrypt_aes(key, ciphertext) -> str:
     return plaintext.decode()
 
 
-def generate_temporal_token(drone_id: int, pem_data: str = None) -> str:
+def generate_temporal_token(drone_id: int) -> str:
     """
-    Generate a temporal token for a drone
-    :param pem_data: str public RSA key of the drone
-    :param drone_id: id of the drone
     :return: str(int(token))
     """
 
@@ -155,7 +152,8 @@ def generate_temporal_token(drone_id: int, pem_data: str = None) -> str:
         print("clean_token: ", clean_token)
         ciphertext = encrypt_key_base64(clean_token)
         print("ciphertext: ", ciphertext)
-        return ciphertext
+        return ciphertext   # se imprime un '=' al final
+        #return ciphertext[len(ciphertext)-1:]
     except Exception as e:
         print("Error generating temporal token. Re-Raised: ", e)
         raise e

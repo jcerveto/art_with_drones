@@ -78,7 +78,7 @@ def login():
         print("request: ", request, request.args)
         drone_obj = droneEntity.DroneEntity(
             id=int(request.args.get("id")),
-            token=request.args.get("token"),
+            token=request.args.get("password"),
         )
         print("drone_obj: ", drone_obj)
         if drone_obj.id is None or drone_obj.alias is None or drone_obj.id == '' or drone_obj.alias == '':
@@ -89,7 +89,6 @@ def login():
 
         temp_token: str = security.generate_temporal_token(
             int(request.args.get("id")),
-            str(request.args.get("public_key"))
         )
 
         return jsonify({

@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from 'express';
 import cors from "cors";
 import morgan from "morgan";
 
@@ -12,6 +12,7 @@ import {MapFiguraDronTable} from "../model/MapFiguraDronTable";
 import {MapFiguraDronTableImplementation} from "./MapFiguraDronTableImplementation";
 import {SquareEntity} from "../model/SquareEntity";
 import * as BrokerServices from "./BrokerImplementation";
+
 
 const auxRegistrationTimeout: string = process.env.REGISTRY_TIMEOUT;
 if (auxRegistrationTimeout == null) {
@@ -29,6 +30,13 @@ let serverRef: ServerEntity = null;
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+LoggerSettings.addNewLog({
+    dataTime: new Date().toISOString(),
+    ipAddr: "N/D",
+    action: "HTTP server started",
+    description: "HTTP server started",
+})
 //app.use(morgan("dev")); // Usar morgan para debuggear
 
 function getServerInfo() {
@@ -70,18 +78,41 @@ app.get("/home", (req, res) => {
     }
 });
 
+app.get("/map", (req, res) => {
+    try {
+        const serverInfo = getServerInfo();
+        res.status(200).header("Content-Type", "application/json").send(JSON.stringify(serverInfo.map));
+    } catch (err) {
+        console.error(`ERROR: Trying to get server info: ${err}`);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 
-    app.post("/register", async (req, res) => {
+
+app.post("/register", async (req: Request, res: Response) => {
     try {
         if (serverRef == null) {
             console.error("ERROR: Trying to register drone but server is null");
             res.status(500).json({ error: "Internal server error" });
         }
 
+        await LoggerSettings.addNewLog({
+            dataTime: new Date().toISOString(),
+            ipAddr: req.ip ?? "N/D",
+            action: "HTTP Auth",
+            description: `Drone ${req.body} trying to register`,
+        })
+
         const droneId: number = parseInt(req.body.id);
         const password: string = req.body.password;
         const tempToken: string = req.body.token;
         const registrationTimeStamp: number = parseInt(req.body.timestamp);
+        await LoggerSettings.addNewLog({
+            dataTime: new Date().toISOString(),
+            ipAddr: `id=${droneId}, password=${password}, tempToken=${tempToken}, registrationTimeStamp=${registrationTimeStamp}`,
+            action: "INFO request",
+            description: `Drone ${droneId} trying to register`,
+        });
 
         const droneObj = new DronEntity(droneId);
 
