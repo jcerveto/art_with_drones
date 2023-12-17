@@ -34,6 +34,7 @@ export interface LoggerLineFormat {
  */
 export async function addNewLog(line: LoggerLineFormat): Promise<void> {
     // genera un archivo por cada log
+    /*
     await new Promise<void>((resolve, reject) => {
         fs.writeFile(`${LOGGER_PATH}/log-${new Date().toISOString()}.log`, `${JSON.stringify(line)}\n`, 'utf8', (err) => {
             if (err) {
@@ -44,10 +45,10 @@ export async function addNewLog(line: LoggerLineFormat): Promise<void> {
             }
         });
     });
-
+    */
 
     // genera un archivo con todos los logs
-    new Promise<void>((resolve, reject) => {
+    await new Promise<void>((resolve, reject) => {
         resolve();
         fs.appendFile(`${LOGGER_PATH}/logs.log`, `${JSON.stringify(line)}\n`, 'utf8', (err) => {
             if (err) {

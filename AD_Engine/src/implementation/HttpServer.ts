@@ -100,7 +100,7 @@ app.post("/register", async (req: Request, res: Response) => {
             dataTime: new Date().toISOString(),
             ipAddr: req.ip ?? "N/D",
             action: "HTTP Auth",
-            description: `Drone ${req.body} trying to register`,
+            description: `New drone trying to register`,
         })
 
         const droneId: number = parseInt(req.body.id);
@@ -109,9 +109,9 @@ app.post("/register", async (req: Request, res: Response) => {
         const registrationTimeStamp: number = parseInt(req.body.timestamp);
         await LoggerSettings.addNewLog({
             dataTime: new Date().toISOString(),
-            ipAddr: `id=${droneId}, password=${password}, tempToken=${tempToken}, registrationTimeStamp=${registrationTimeStamp}`,
+            ipAddr: req.ip ?? "N/D",
             action: "INFO request",
-            description: `Drone ${droneId} trying to register`,
+            description: `Drone ${droneId} trying to register. id=${droneId}, password=${password}, tempToken=${tempToken}, registrationTimeStamp=${registrationTimeStamp}`,
         });
 
         const droneObj = new DronEntity(droneId);
@@ -123,16 +123,26 @@ app.post("/register", async (req: Request, res: Response) => {
         }
 
        // validate timestamp
-        if (Date.now() - registrationTimeStamp > REGISTRATION_TIMEOUT) {
-            throw new Error("ERROR: Registration timeout expired");
+        let currentTimestamp: number = Date.now();
+        const stringCurrentTimestamp: string = currentTimestamp.toString();
+        const firstTenDigits: string = stringCurrentTimestamp.substring(0, 10);
+        currentTimestamp = parseInt(firstTenDigits);
+        const difference: number = currentTimestamp - registrationTimeStamp;
+        if (difference > REGISTRATION_TIMEOUT || difference < 0) {
+            throw new Error(`ERROR: Registration timeout expired. Current timestamp=${currentTimestamp}, registration timestamp=${registrationTimeStamp}, Max=${REGISTRATION_TIMEOUT}, Difference=${difference}.`);
         }
 
         // validate token
-        // TODO: validate token
-        const generatedTimeStamp: string = await serverRef.generateToken(droneObj, registrationTimeStamp);
-        if (tempToken != generatedTimeStamp) {
-            throw new Error(`ERROR: Token don't match with Drone id: ${droneId} and token: ${tempToken}.`);
+        const generatedToken: string = await serverRef.generateToken(droneObj, registrationTimeStamp);
+        if (tempToken != generatedToken) {
+            throw new Error(`ERROR: Token don't match with Drone id: ${droneId} and token: ${tempToken}. Generated token: ${generatedToken}. Registered: ${registrationTimeStamp}.`);
         }
+        await LoggerSettings.addNewLog({
+            dataTime: new Date().toISOString(),
+            ipAddr: req.ip ?? "N/D",
+            action: "HTTP Auth OK",
+            description: `Drone ${droneId} authenticated successfully. Difference=${difference}.`,
+        });
 
         // valida si el dron ya está en el mapa
         if (serverRef.getMap().isDroneInMap(droneObj)) {
@@ -143,6 +153,13 @@ app.post("/register", async (req: Request, res: Response) => {
         if (serverRef.getMap().getAllDrones().length >= ServerSettings.MAX_DRONES_ACCEPTED) {
             throw new Error('ERROR: No more drones allowed. map is full of drones. ');
         }
+
+        await LoggerSettings.addNewLog({
+            dataTime: new Date().toISOString(),
+            ipAddr: req.ip ?? "N/D",
+            action: "HTTP Auth OK",
+            description: `Drone ${droneId} authenticated successfully. Drone ${droneId} is now in the map. Adding to database...`,
+        })
 
         let targetSquare: SquareEntity = null;
         // ver si hay hueco y mapear to figure
@@ -165,6 +182,13 @@ app.post("/register", async (req: Request, res: Response) => {
         console.log(serverRef.getMap().toString());
         console.log("Mapa mostrado. ");
         serverRef.updateNewDroneTimeStamp(droneObj);
+
+        await LoggerSettings.addNewLog({
+            dataTime: new Date().toISOString(),
+            ipAddr: req.ip ?? "N/D",
+            action: "HTTP Auth OK",
+            description: `Drone ${droneId} authenticated successfully. Drone ${droneId} is now in the map.`,
+        });
 
         // kafka publish
         await BrokerServices.publishTargetPosition(droneObj, targetSquare);
@@ -192,7 +216,11 @@ app.post("/register", async (req: Request, res: Response) => {
         });
 
         console.error(`ERROR: Trying to get server info: ${err}`);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({
+            ok: false,
+            message: err.message,
+            error: "Internal server error"
+        });
     }
 });
 

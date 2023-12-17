@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, request
+import time
+
 
 import src.drone.droneEntity as droneEntity
 import src.security as security
@@ -87,15 +89,20 @@ def login():
         if not drone_obj.exists():
             raise Exception(f"Drone {drone_obj.id} does not exist. We can not generate a token. ")
 
-        temp_token: str = security.generate_temporal_token(
+        temp_token, currentTimeStamp = security.generate_temporal_token(
             int(request.args.get("id")),
         )
+
+        if temp_token == '':
+            raise Exception(f"Error generating temporal token. ")
 
         return jsonify({
             "ok": True,
             "message": f"Drone {drone_obj.id} updated",
+            "id": drone_obj.id,
             "password": drone_obj.token,
-            "token": temp_token
+            "token": temp_token,
+            "timestamp": currentTimeStamp
         })
     except Exception as e:
         return jsonify({
