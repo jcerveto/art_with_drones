@@ -1,5 +1,7 @@
 import * as crypto from "crypto";
-import {DronEntity} from "../model/DronEntity";
+import sha256 from 'crypto-js/sha256';
+import aes from 'crypto-js/aes';
+
 
 export async function encryptMessageBase64(message: string): Promise<string> {
     return Buffer.from(message).toString("base64");
@@ -18,10 +20,18 @@ export async function encryptMessageAes(message: string, key: string): Promise<s
 }
 
 export async function decryptMessageAes(message: string, key: string): Promise<string> {
-    return "hola";
+    return aes.encrypt(message, key).toString();
 }
 
 
-export async function encryptMessageRsa(message: string, drone: DronEntity): Promise<string> {
-    return "hola";
+export async function encryptMessageRsa(message: string, key: string): Promise<string> {
+    return aes.encrypt(message, key);
+}
+
+export function encryptPassword(message: string): string {
+    return sha256(message).toString();
+}
+
+export function generateNewKey(): string {
+    return crypto.randomBytes(32).toString("hex");
 }

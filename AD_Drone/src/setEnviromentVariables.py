@@ -45,4 +45,10 @@ def getDronesPath() -> str:
 
 def getCommunicationTopic() -> str:
     return os.getenv('KAFKA_TOPIC_COMMUNICATION')
+
+def getRegistryCertificatePath() -> str:
+    return os.getenv('REGISTRY_CERTIFICATE_PATH')
+
+def getEngineCertificatePath() -> str:
+    return os.getenv('ENGINE_CERTIFICATE_PATH')
     

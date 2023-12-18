@@ -36,6 +36,7 @@ export class ServerImplementation {
                     console.log('listening on 0.0.0.0:' + server.getPort());
                 });
 
+            console.log("Activating weather...")
             // Crear seguimiento del tiempo.
             if (WeatherSettings.VALIDATE_WEATHER) {
                 console.log('*'.repeat(50), "\nWeather will be validate each ", WeatherSettings.WEATHER_TIMEOUT , ". \n", '*'.repeat(50))
@@ -44,17 +45,20 @@ export class ServerImplementation {
                 console.log('*'.repeat(50), "\nWeather validation disabled. \n", '*'.repeat(50))
             }
 
+            console.log("Initializing Kafka...")
             // Crear topic para publicar el mapa.
             await BrokerServices.initMapPublisher();
+
+
             console.log("Map Broker connected. ")
             await BrokerServices.publishMap(server.getMap());
             console.log("Map published. ")
 
             // not-solved promise: open http server
-            startHttp(server);
+            await startHttp(server);
 
             // not-solved promise: open current_position topic subscriber
-            BrokerServices.subscribeToCurrentPosition(server);
+            await BrokerServices.subscribeToCurrentPosition(server);
 
             // not-solved promise: update alive-dead drones
             setInterval(() => server.updateAliveDrones(), ServerSettings.KEEP_ALIVE_INTERVAL);
@@ -145,7 +149,7 @@ export class ServerImplementation {
                 if (isSubscribed) {
                     console.log(`Drone ${dron_id} subscribed correctly. `);
                     const square = await MapFiguraDronTableImplementation.getSquareFromDrone(droneEntity);
-                    await BrokerServices.publishTargetPosition(droneEntity, square)
+                    await BrokerServices.publishTargetPosition(droneEntity, square, server)
                     console.log(`New target position published: ${droneEntity.toString()}, ${square.getHash()}`);
                 }
                 else {
@@ -267,7 +271,7 @@ export class ServerImplementation {
     }
 
     public static async weatherStuff(server: ServerEntity) {
-        console.log(`${'#'.repeat(50)}\nWeather task executed. \n${'#'.repeat(50)}\n`);
+        //console.log(`${'#'.repeat(50)}\nWeather task executed. \n${'#'.repeat(50)}\n`);
 
         try {
             const isValid : boolean = await server.isWeatherValid();
@@ -313,7 +317,7 @@ export class ServerImplementation {
                 await server.sendDronesToBase();
 
             }
-            console.log('Handling bad weather... ');
+            console.log('Handling bad weather... ', new Date().toISOString());
             console.warn("Está comentado. Cambiarlo para release. ")
             await server.sendDronesToBase();
         } catch (err) {
@@ -337,14 +341,14 @@ export class ServerImplementation {
                 for (const drone of server.getMap().getAliveDrones()) {
                     const square = await MapFiguraDronTableImplementation.getSquareFromDrone(drone);
                     drone.setTarget(square);
-                    await BrokerServices.publishTargetPosition(drone, square);
+                    await BrokerServices.publishTargetPosition(drone, square, server);
                     console.log(`New target position published: ${drone.toString()}, ${square.getHash()}`);
                 }
                 if (server.getMap().getAliveDrones().length == 0) {
                     console.error("ERROR: No drones in map. Any target_position message was published. ")
                 }
             }
-            console.log('Handling good weather... ');
+            console.log('Handling good weather... ', new Date().toISOString());
         } catch (err) {
             console.error(`ERROR: While handleGoodWeather: ${err}`)
         }
@@ -354,7 +358,7 @@ export class ServerImplementation {
         try {
             console.log('Sending drones to base... ');
             for (const drone of server.getMap().getAliveDrones()) {
-                await BrokerServices.publishTargetPosition(drone, new SquareEntity(1, 1));
+                await BrokerServices.publishTargetPosition(drone, new SquareEntity(1, 1), server);
             }
 
             // check how many drones are in the map
@@ -462,7 +466,7 @@ export class ServerImplementation {
                         console.error("ERROR: BAD DRONE MATCH. Continue...", registeredDrone.toString())
                         continue;
                     }
-                    await BrokerServices.publishTargetPosition(registeredDrone, new SquareEntity(1, 1));
+                    await BrokerServices.publishTargetPosition(registeredDrone, new SquareEntity(1, 1), server);
 
                     console.error("ERROR: BAD DRONE MATCH. Continue...", registeredDrone.toString())
                     continue;
@@ -474,7 +478,7 @@ export class ServerImplementation {
                 server.updateNewDroneTimeStamp(registeredDrone);
 
                 console.log(`New drone added to database: ${registeredDrone.toString()} -> ${newSquare.getHash()}`);
-                await BrokerServices.publishTargetPosition(registeredDrone, newSquare);
+                await BrokerServices.publishTargetPosition(registeredDrone, newSquare, server);
                 console.log(`New target position published: ${registeredDrone.toString()}, ${newSquare.getHash()}`);
             }
             if (server.getMap().getAliveDrones().length == 0) {
@@ -484,7 +488,8 @@ export class ServerImplementation {
             // MAIN LOOP: mientras no se complete la figura, se repite
             while (! await ServerImplementation.isFigureShowCompleted(server)) {
                 await sleep(1000);
-                console.log(`${'@'.repeat(50)}\nWaiting for drones to reach target position... ${Date.now().toString()}\n${'@'.repeat(50)}\n`);
+                //console.log(`${'@'.repeat(50)}\nWaiting for drones to reach target position... ${Date.now().toString()}\n${'@'.repeat(50)}\n`);
+                console.log(`Waiting for drones to reach target position...`);
             }
             console.log(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
             await LoggerSettings.addNewLog({

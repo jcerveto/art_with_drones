@@ -4,8 +4,12 @@ import droneEntity
 import json
 import setEnviromentVariables as env
 import csv
+import requests
+
+import security
 
 valid_functions = ["create", "update", "delete"]
+
 
 def store_drone(drone: droneEntity.DroneEntity) -> None:
     print(f"Storing drone: {drone} in {env.getDronesPath()}")
@@ -14,19 +18,15 @@ def store_drone(drone: droneEntity.DroneEntity) -> None:
         writer.writerow([drone.drone_id, drone.alias, drone.token])
     print(f"Drone stored: {drone}")
 
+
 def send_message(message: bytes, drone: droneEntity.DroneEntity, drone_action: str):
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        print(f"Connecting to {env.getRegistryHost()}:{env.getRegistryPort()}")
-        s.connect((env.getRegistryHost(), env.getRegistryPort()))
+        response = requests.get(url, cert=env.getEngineCertificatePath(), verify=False)
+        dict_response = json.loads(response.text)
+        drone.temporalToken = dict_response["temp_token"]
+        drone.personalKey = dict_response["personalKey"]
+        drone.generalKey = dict_response["generalKey"]
 
-        # send message
-        s.send(message)
-        print(f"Message sent. ")
-
-        # response
-        response = s.recv(env.getMaxContentLength())
-        dict_response = json.loads(response.decode(env.getEncoding()))
         if not dict_response["ok"]:
             print(f"Error in {drone_action} action: {dict_response['message']}")
             sys.exit(-1)
@@ -52,6 +52,7 @@ def send_message(message: bytes, drone: droneEntity.DroneEntity, drone_action: s
         print(f"Error sending message. {e}. Closing process...")
         sys.exit(-1)
 
+
 def get_message_to_send(drone: droneEntity.DroneEntity, drone_action: str) -> bytes:
     if drone_action not in valid_functions:
         raise ValueError(f"Invalid function: {drone_action}")
@@ -71,6 +72,7 @@ def get_message_to_send(drone: droneEntity.DroneEntity, drone_action: str) -> by
         "alias": drone.alias,
         "token": drone.token
     }).encode(env.getEncoding())
+
 
 def main(drone: droneEntity.DroneEntity, drone_action: str):
     try:

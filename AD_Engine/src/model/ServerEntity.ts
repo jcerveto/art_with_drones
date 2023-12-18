@@ -14,6 +14,7 @@ import * as SecurityImplementation from "../implementation/SecurityImplementatio
 
 export class ServerEntity {
     public MAX_CONCURRENT_CONNECTIONS: number = ServerSettings.MAX_CONCURRENT_CONNECTIONS;
+    public GENERAL_KEY: string = null;
 
     private _host: string;
     private _port: number;
@@ -25,6 +26,22 @@ export class ServerEntity {
     private _currentFigure: FigureEntity | null = null;
     private _currentConcurrentConnections: number = 0;
     private _isWeatherValid: boolean = true;
+
+    /**
+     * Map that stores the keys of the drones.
+     * key: droneId (number)
+     * value: private key (string)
+     * @private
+     */
+    private _keysMap: Map<number, string>;
+
+    public getKey(drone: DronEntity): string {
+        return this._keysMap.get(drone.getId());
+    }
+
+    public setKey(drone: DronEntity, key: string): void {
+        this._keysMap.set(drone.getId(), key);
+    }
 
 
     /**

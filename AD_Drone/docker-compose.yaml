@@ -7,6 +7,8 @@ services:
 
     volumes:
       - ./data/drones.csv:/app/data/drones.csv
+      - ./cert_engine.pem:/app/cert_engine.pem
+      - ./cert_registry.pem:/app/cert_registry.pem
 
     tty: true
 

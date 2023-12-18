@@ -31,5 +31,6 @@ def main():
             print(f"Error handling map. Waiting for next message. {e}")
             continue
 
+
 if __name__ == "__main__":
     main()

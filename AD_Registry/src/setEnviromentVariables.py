@@ -34,3 +34,11 @@ def get_max_concurrent_connections() -> int:
 
 def get_http_server_port() -> int:
     return int(os.getenv("HTTP_PORT"))
+
+
+def get_ssl_certificate():
+    return os.getenv("SSL_CERTIFICATE")
+
+
+def get_ssl_key():
+    return os.getenv("SSL_KEY")

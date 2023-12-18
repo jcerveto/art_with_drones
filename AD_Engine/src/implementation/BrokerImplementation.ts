@@ -6,6 +6,7 @@ import {SquareEntity} from "../model/SquareEntity";
 import {ServerEntity} from "../model/ServerEntity";
 import {EKeepAliveStatus} from "../model/EKeepAliveStatus";
 import {sleep} from './TimeUtils';
+import * as Security from "../implementation/SecurityImplementation"
 
 
 const kafka = new Kafka({
@@ -142,23 +143,25 @@ export async function subscribeToCurrentPosition(server: ServerEntity) {
     })
 }
 
-export async function publishTargetPosition(drone: DronEntity, targetPosition: SquareEntity): Promise<void> {
+export async function publishTargetPosition(drone: DronEntity, targetPosition: SquareEntity, server: ServerEntity): Promise<void> {
     // TARGET POSITION PUBLISHER
     const producerTargetPosition: Producer = kafka.producer();
 
     const droneId = drone.getId();
     const topicTargetPosition: string = BrokerSettings.TOPIC_TARGET_POSITION;
     const positionJson = targetPosition.toJson();
+    const positionEncoded = Security.encryptMessageAes(positionJson, server.getKey(drone))
     try {
         await producerTargetPosition.connect();
         const objectToSend = {
             id_registry: droneId,
-            target_position: positionJson
+            target_position: positionEncoded
         };
+        const objectToSendEncoded = await Security.encryptMessageAes(JSON.stringify(objectToSend), server.GENERAL_KEY);
         await producerTargetPosition.send({
             topic: topicTargetPosition,
             messages: [
-                {value: JSON.stringify(objectToSend)}
+                {value: objectToSendEncoded}
             ]
         });
     } catch (err) {

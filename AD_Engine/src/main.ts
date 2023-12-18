@@ -1,6 +1,7 @@
 import { ServerEntity } from './model/ServerEntity';
 import { sleep } from './implementation/TimeUtils';
 import * as ServerSettings from './settings/ServerSettings';
+import { generateNewKey} from "./implementation/SecurityImplementation";
 
 // Example usage
 if (process.argv.length != 2) {
@@ -22,6 +23,9 @@ const main = async () => {
         const host = '0.0.0.0'
 
         const server = await new ServerEntity(port, host);
+        server.GENERAL_KEY = generateNewKey();
+        console.log("GENERAL_KEY has been generated: ", server.GENERAL_KEY);
+
 
         if (ServerSettings.RECOVER) {
             await server.recover();

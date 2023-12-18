@@ -12,6 +12,8 @@ services:
     volumes:
       - ../AD_Database/database.db:/app/AD_Database/database.db
       - ./.env:/app/.env
+      - ./key.pem:/app/key.pem
+      - ./cert.pem:/app/cert.pem
 
     working_dir: /app
 

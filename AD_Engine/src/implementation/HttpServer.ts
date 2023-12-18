@@ -12,6 +12,7 @@ import {MapFiguraDronTable} from "../model/MapFiguraDronTable";
 import {MapFiguraDronTableImplementation} from "./MapFiguraDronTableImplementation";
 import {SquareEntity} from "../model/SquareEntity";
 import * as BrokerServices from "./BrokerImplementation";
+import { generateNewKey} from "./SecurityImplementation";
 
 
 const auxRegistrationTimeout: string = process.env.REGISTRY_TIMEOUT;
@@ -31,12 +32,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-LoggerSettings.addNewLog({
-    dataTime: new Date().toISOString(),
-    ipAddr: "N/D",
-    action: "HTTP server started",
-    description: "HTTP server started",
-})
 //app.use(morgan("dev")); // Usar morgan para debuggear
 
 function getServerInfo() {
@@ -191,8 +186,10 @@ app.post("/register", async (req: Request, res: Response) => {
         });
 
         // kafka publish
-        await BrokerServices.publishTargetPosition(droneObj, targetSquare);
+        await BrokerServices.publishTargetPosition(droneObj, targetSquare, serverRef);
 
+        const newKey = generateNewKey();
+        serverRef.setKey(droneObj, newKey);
 
         await LoggerSettings.addNewLog({
             dataTime: new Date().toISOString(),
@@ -204,6 +201,8 @@ app.post("/register", async (req: Request, res: Response) => {
         res.status(200).send(JSON.stringify({
             ok: true,
             message: `Successful authentication. Drone ${droneId} registered`,
+            personalKey: newKey,
+            generalKey: serverRef.GENERAL_KEY,
         }));
 
 
@@ -219,6 +218,7 @@ app.post("/register", async (req: Request, res: Response) => {
         res.status(500).json({
             ok: false,
             message: err.message,
+            trace: err.stack,
             error: "Internal server error"
         });
     }
@@ -252,9 +252,17 @@ app.delete("/remove", (req, res) => {
 export async function start(server: ServerEntity) {
     try {
         serverRef = server;
+        console.log("Starting HTTP server...")
         app.listen(ServerSettings.HTTP_PORT, () => {
             console.log(`HTTP server listening on port ${ServerSettings.HTTP_PORT}`);
+            LoggerSettings.addNewLog({
+                dataTime: new Date().toISOString(),
+                ipAddr: "N/D",
+                action: "HTTP server started",
+                description: "HTTP server started",
+            })
         });
+        console.log("HTTP server started. ")
     } catch (err) {
         console.error(`ERROR: Trying to start HTTP server: ${err}`);
     }
