@@ -1,8 +1,14 @@
 #!/bin/bash
 
+#
+# Instrucciones:
+#
+# Solicita el token temporal a AD_Registry y se une a la función de AD_Engine
+#
 
-#docker-compose run ad_drone python app/src/runnerEngine.py 255 hash
-#docker-compose run ad_drone python app/src/runnerEngine.py 255 
-#docker-compose run ad_drone python app/src/runnerEngine.py 255 hash -s
-#docker-compose run ad_drone python app/src/runnerEngine.py 255 -s
-docker-compose run ad_drone python app/src/runnerEngine.py $1 $2 $3 $4
+#docker-compose run ad_drone python app/src/registry.py <id>
+#docker-compose run ad_drone python app/src/registry.py <id> <-s (opcional)>
+#docker-compose run ad_drone python app/src/registry.py <id> <--show_map (opcional)>
+
+docker-compose build ad_drone
+docker-compose run ad_drone python app/src/registry.py $1 $2

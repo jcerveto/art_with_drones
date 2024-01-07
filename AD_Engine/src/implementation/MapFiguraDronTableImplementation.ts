@@ -333,5 +333,21 @@ export class MapFiguraDronTableImplementation {
         }
     }
 
+    static async removeId(droneId: number): Promise<void> {
+        return new Promise((resolve, reject) => {
+            const db = new sqlite3.Database(DatabaseSettings.dbPath);
+            const deleteQuery = `DELETE FROM MapFiguraDron WHERE pk_fk_map_registry_id = ?`;
+
+            db.run(deleteQuery, [droneId], (err) => {
+                db.close();
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    }
+
 
 }

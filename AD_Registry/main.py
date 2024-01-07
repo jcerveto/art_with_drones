@@ -21,7 +21,7 @@ import src.httpServer as httpServer
 def run_http_server():
     print("Running http server... PORT: ", env.get_http_server_port())
     httpServer.app.run(debug=True, host=env.get_host(), port=env.get_http_server_port(),
-                       #ssl_context=(env.get_ssl_certificate(), env.get_ssl_key())
+                       ssl_context=(env.get_ssl_certificate(), env.get_ssl_key())
    )
 
 

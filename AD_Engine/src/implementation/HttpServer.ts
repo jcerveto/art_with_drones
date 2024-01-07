@@ -141,7 +141,7 @@ app.post("/register", async (req: Request, res: Response) => {
 
         // valida si el dron ya está en el mapa
         if (serverRef.getMap().isDroneInMap(droneObj)) {
-            throw new AlreadyInMap('ERROR: Drone already in map. ');
+            //throw new AlreadyInMap('ERROR: Drone already in map. ');
         }
 
         // valida si hay hueco en la base de datos
@@ -206,6 +206,26 @@ app.post("/register", async (req: Request, res: Response) => {
 
 
     } catch (err) {
+        /*
+        if (err instanceof AlreadyInMap) {
+            console.error(`ERROR: Trying to register drone: ${err.message}`);
+            const droneObj = new DronEntity(parseInt(req.body.id));
+            const square = await MapFiguraDronTableImplementation.getSquareFromDrone(droneObj);
+            res.status(200).json({
+                ok: true,
+                message: err.message,
+                error: "You are already in the map. It's fine. ",
+                generalKey: serverRef?.GENERAL_KEY,
+                personalKey: serverRef?.getKey(new DronEntity(parseInt(req.body.id))),
+            });
+            await LoggerSettings.addNewLog({
+                dataTime: new Date().toISOString(),
+                ipAddr: req.ip ?? "N/D",
+                action: "Already in map. OK",
+                description: `${err.message}, ${err.stack},`
+            });
+            return;
+        }*/
         await LoggerSettings.addNewLog({
             dataTime: new Date().toISOString(),
             ipAddr: req.ip ?? "N/D",

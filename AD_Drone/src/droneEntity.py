@@ -3,6 +3,14 @@ class DroneEntity:
         self.drone_id = drone_id
         self.alias = alias
         self.token = token
+        
+
+        self.temporal_token = None
+        self.timestamp = None
+
+        self.generalKey = None
+        self.personalKey = None
+
 
     def __str__(self):
         return f"[{self.drone_id}, {self.alias}, {self.token}]"

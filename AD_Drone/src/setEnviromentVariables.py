@@ -28,11 +28,17 @@ def getEngineHost() -> str:
 def getEnginePort() -> int:
     return int(os.getenv('ENGINE_PORT'))
 
+def getEnginePortHttp() -> int:
+    return int(os.getenv('ENGINE_PORT_HTTP'))
+
 def getRegistryHost() -> str:
     return os.getenv('REGISTRY_HOST')
 
 def getRegistryPort() -> int:
     return int(os.getenv('REGISTRY_PORT'))
+
+def getRegistryPortHttp() -> int:
+    return int(os.getenv('REGISTRY_PORT_HTTP'))
 
 def getEncoding() -> str:
     return os.getenv('ENCODING')

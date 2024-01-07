@@ -1,5 +1,16 @@
 #!/bin/bash
 
+#
+# Instrucciones:
+#
+# Solicita el token temporal a AD_Registry y se une a la función de AD_Engine
+#
+# ./script.sh <num_instances> <first_id>
+
+#docker-compose run ad_drone python app/src/registry.py <id>
+#docker-compose run ad_drone python app/src/registry.py <id> <-s (opcional)>
+#docker-compose run ad_drone python app/src/registry.py <id> <--show_map (opcional)>
+
 
 # PARÁMETROS:
 NUM_INSTANCES=$1
@@ -15,7 +26,7 @@ docker-compose build ad_drone
 for i in $(seq $FIRST_ID $LAST_ID); do
     CONTAINER_NAME="ad_drone_engine_id_$i"
     echo "id: $CONTAINER_NAME"
-    docker-compose run --name $CONTAINER_NAME --rm ad_drone python app/src/runnerEngine.py $i &
+    docker-compose run --name $CONTAINER_NAME --rm ad_drone python app/src/registry.py $i &
 
     if [ $? -ne 0 ]; then
         echo "Error en la ejecución de la instancia $i. Parando el script..."

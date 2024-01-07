@@ -1,14 +1,17 @@
 import sys
-import socket
-import droneEntity
 import json
-import setEnviromentVariables as env
 import csv
 import requests
+import os
+from pprint import pprint
 
 import security
+import droneEntity
+import setEnviromentVariables as env
+import engineHttp
 
-valid_functions = ["create", "update", "delete"]
+
+valid_functions = ["create", "update", "delete", "login"]
 
 
 def store_drone(drone: droneEntity.DroneEntity) -> None:
@@ -19,66 +22,66 @@ def store_drone(drone: droneEntity.DroneEntity) -> None:
     print(f"Drone stored: {drone}")
 
 
-def send_message(message: bytes, drone: droneEntity.DroneEntity, drone_action: str):
+def send_message(message: bytes, drone: droneEntity.DroneEntity):
     try:
-        response = requests.get(url, cert=env.getEngineCertificatePath(), verify=False)
+        params = {
+            "id": drone.drone_id,
+            "password": drone.token,
+        }
+
+        url = f"https://{env.getRegistryHost()}:{env.getRegistryPortHttp()}/login"
+        response = requests.get(url, params=params, verify=False)
         dict_response = json.loads(response.text)
-        drone.temporalToken = dict_response["temp_token"]
-        drone.personalKey = dict_response["personalKey"]
-        drone.generalKey = dict_response["generalKey"]
+        print(f"Response: {dict_response.get('message'), ''}")
+        drone.temporal_token = dict_response["token"]
+        drone.timestamp = dict_response["timestamp"]
+        
 
         if not dict_response["ok"]:
-            print(f"Error in {drone_action} action: {dict_response['message']}")
+            print(f"Error in login {dict_response['message']}")
             sys.exit(-1)
 
-        # it is ok
-        if drone_action == "create":
-            drone.token = dict_response["token"]
-            print(f"Drone created. Token: {drone.token}")
-            store_drone(drone)
 
-        elif drone_action == "update":
-            print(f"Drone updated. Token: {drone.token}")
-
-        elif drone_action == "delete":
-            print(f"Drone deleted.")
-
-        else:
-            print(f"Invalid action: {drone_action}")
-            sys.exit(-1)
-
-        s.close()
     except Exception as e:
         print(f"Error sending message. {e}. Closing process...")
         sys.exit(-1)
 
 
-def get_message_to_send(drone: droneEntity.DroneEntity, drone_action: str) -> bytes:
-    if drone_action not in valid_functions:
-        raise ValueError(f"Invalid function: {drone_action}")
-
-    # No requiere token
-    if drone_action == "create":
-        return json.dumps({
-            "action": drone_action,
-            "id_registry": drone.drone_id,
-            "alias": drone.alias,
-        }).encode(env.getEncoding())
+def get_message_to_send(drone: droneEntity.DroneEntity) -> bytes:
 
     # Requiere token
     return json.dumps({
-        "action": drone_action,
+        "action": "login",
         "id_registry": drone.drone_id,
         "alias": drone.alias,
         "token": drone.token
     }).encode(env.getEncoding())
 
+def get_token(drone_id: int) -> str:
+    """
+    File structure:
+    <droneId>,<alias>,<token>
+    ...
 
-def main(drone: droneEntity.DroneEntity, drone_action: str):
+    :param drone_id: int
+    :return: str
+    """
+    drone_id = int(drone_id)
+    with open(env.getDronesPath()) as file:
+        reader = csv.reader(file, delimiter=",")
+        for row in reader:
+            if int(row[0]) == drone_id:
+                return row[2]
+
+    raise Exception("Drone with id=" + str(drone_id) + " not found in " + str(env.getDronesPath()))
+
+
+def main(drone: droneEntity.DroneEntity):
     try:
-        message = get_message_to_send(drone, drone_action)
+        message = get_message_to_send(drone)
         print(f"Message to send: {message}")
-        send_message(message, drone, drone_action)
+        send_message(message, drone)
+        print("END")
 
 
     except Exception as e:
@@ -87,37 +90,27 @@ def main(drone: droneEntity.DroneEntity, drone_action: str):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 4 and len(sys.argv) != 5:
-        print(f"Usage: python main.py <function> <droneId> <alias> <token: optional>\
-              \n\t{valid_functions}")
+    if len(sys.argv) not in [2, 3]:
+        print(f"Usage: python {sys.argv[0]} <droneId> <-s or --show_map: optional>")
         sys.exit(-1)
 
-    if sys.argv[1] not in valid_functions:
-        print(f"Usage: <function> must be in: \
-              \t{valid_functions}")
-        sys.exit(-1)
+    show_map = len(sys.argv) == 3 and (sys.argv[2] == "--show_map" or sys.argv[2] == "-s")
 
-    drone_function = sys.argv[1]
-    drone_object = None
+    print(f"PID: {os.getpid()}")
 
-    # create
-    if len(sys.argv) == 4 and sys.argv[1] == "create":
-        drone_object = droneEntity.DroneEntity(
-            drone_id=int(sys.argv[2]),
-            alias=sys.argv[3]
-        )
-    # update, delete
-    elif len(sys.argv) == 5 and (sys.argv[1] == "update" or sys.argv[1] == "delete"):
-        drone_object = droneEntity.DroneEntity(
-            drone_id=int(sys.argv[2]),
-            alias=sys.argv[3],
-            token=sys.argv[4]
-        )
-    # error
-    else:
-        print(f"Error. Usage: python main.py <function> <droneId> <alias> <token: optional>\
-              \n\t{valid_functions}")
-        sys.exit(-1)
+    drone_id = int(sys.argv[1])
+    password = get_token(drone_id)
+    drone_object = droneEntity.DroneEntity(
+        drone_id=drone_id,
+        alias=f"not_required_{drone_id}",
+        token=password,
+    )
 
-    print(f"Starting {drone_function} function. Drone object: {drone_object}")
-    main(drone_object, drone_function)
+    print(f"Starting login function. Drone object: {drone_object}")
+    main(drone_object)
+    print(f"Finished login function.", pprint(vars(drone_object)))
+    print("Starting engine...")
+    engineHttp.main(drone_object, show_map)
+    print("Engine finished.")
+
+
