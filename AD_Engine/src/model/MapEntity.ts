@@ -187,7 +187,11 @@ export class MapEntity {
 
     private async matchesWhenAllArrived(figure: FigureEntity): Promise<boolean> {
         if (figure === null || figure === undefined) {
-            console.error("ERROR: figure is null or undefined. Returning false.");
+            //console.error("ERROR: figure is null or undefined. Returning false.");
+            return false;
+        }
+        if (figure.getFigure()?.size === 0) {
+            //console.error("ERROR: figure is empty. Returning false.");
             return false;
         }
 
@@ -265,6 +269,13 @@ export class MapEntity {
     }
 
     public async matchesWithFigure(figure: FigureEntity): Promise<boolean> {
+        if (figure === null || figure === undefined) {
+            return false;
+        }
+        if (figure.getFigure().size === 0) {
+            return false;
+        }
+
         if (COMPLETE_WHEN_ALL_DRONES_ARRIVE) {
             return await this.matchesWhenAllArrived(figure);
         } else {

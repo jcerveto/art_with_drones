@@ -31,11 +31,12 @@ export class ServerImplementation {
     public static async start(server: ServerEntity) {
         try {
             // Publicar servidor en puerto
+            /*
             server.getServer()
                 .listen(server.getPort(), () => {
                     console.log('listening on 0.0.0.0:' + server.getPort());
                 });
-
+            */
             console.log("Activating weather...")
             // Crear seguimiento del tiempo.
             if (WeatherSettings.VALIDATE_WEATHER) {
@@ -54,7 +55,6 @@ export class ServerImplementation {
             await BrokerServices.publishMap(server.getMap());
             console.log("Map published. ")
 
-            // not-solved promise: open http server
             await startHttp(server);
 
             // not-solved promise: open current_position topic subscriber
@@ -77,7 +77,8 @@ export class ServerImplementation {
     }
 
     public static handleClientAuthentication(server: ServerEntity, conn: net.Socket): void {
-        console.log(`New client. `);
+        console.log(`New socket client. `);
+        /*
 
         conn.on('data', async data => {
             try {
@@ -123,6 +124,9 @@ export class ServerImplementation {
                 console.error(`ERROR: Trying to close client: ${err}`);
             }
         });
+
+
+         */
     }
 
     private static async handleClientAuthenticationRequest(server: ServerEntity, conn: net.Socket, data: Buffer) {
@@ -489,7 +493,7 @@ export class ServerImplementation {
             while (! await ServerImplementation.isFigureShowCompleted(server)) {
                 await sleep(1000);
                 //console.log(`${'@'.repeat(50)}\nWaiting for drones to reach target position... ${Date.now().toString()}\n${'@'.repeat(50)}\n`);
-                console.log(`Waiting for drones to reach target position...`);
+                //console.log(`Waiting for drones to reach target position...`);
             }
             console.log(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
             await LoggerSettings.addNewLog({

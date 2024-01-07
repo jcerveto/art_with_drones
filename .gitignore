@@ -12,3 +12,5 @@ __pycache__/
 # Ignorar la carpeta node_modules en cualquier ubicación del proyecto Node.js
 node_modules/
 
+.idea/
+.vscode/

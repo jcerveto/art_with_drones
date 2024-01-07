@@ -156,7 +156,6 @@ app.post("/register", async (req: Request, res: Response) => {
             description: `Drone ${droneId} authenticated successfully. Drone ${droneId} is now in the map. Adding to database...`,
         })
 
-        let targetSquare: SquareEntity = null;
         // ver si hay hueco y mapear to figure
         if (await MapFiguraDronTable.mapNewDrone(droneObj)) {
             console.log(`New drone added to database: ${droneObj.toString()}`);
@@ -186,7 +185,7 @@ app.post("/register", async (req: Request, res: Response) => {
         });
 
         // kafka publish
-        await BrokerServices.publishTargetPosition(droneObj, targetSquare, serverRef);
+        await BrokerServices.publishTargetPosition(droneObj, droneObj.getTargetSquare() ?? new SquareEntity(1, 1), serverRef);
 
         const newKey = generateNewKey();
         serverRef.setKey(droneObj, newKey);
@@ -211,7 +210,7 @@ app.post("/register", async (req: Request, res: Response) => {
             dataTime: new Date().toISOString(),
             ipAddr: req.ip ?? "N/D",
             action: "BAD Auth",
-            description: err.message,
+            description: `${err.message}, ${err.stack},`
         });
 
         console.error(`ERROR: Trying to get server info: ${err}`);

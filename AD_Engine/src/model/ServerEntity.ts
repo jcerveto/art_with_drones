@@ -33,7 +33,7 @@ export class ServerEntity {
      * value: private key (string)
      * @private
      */
-    private _keysMap: Map<number, string>;
+    private _keysMap: Map<number, string> = new Map<number, string>();
 
     public getKey(drone: DronEntity): string {
         return this._keysMap.get(drone.getId());
@@ -75,7 +75,7 @@ export class ServerEntity {
             }
             this.setEditorNotAvailable();
             // actualizar status de los drones
-            console.log(`${'-'.repeat(50)}\nUpdating alive drone status...\n${'-'.repeat(50)}\n`)
+            //console.log(`${'-'.repeat(50)}\nUpdating alive drone status...\n${'-'.repeat(50)}\n`)
             for (let drone of this.getMap().getAllDrones()) {
                 if (this.isDroneAlive(drone)) {
                     drone.setStatus(EKeepAliveStatus.ALIVE)
@@ -220,7 +220,7 @@ export class ServerEntity {
         this._host = host;
         this._port = port;
 
-        this._serverNet = this.createNetServer();
+        this._serverNet = null;//this.createNetServer();
         this._map = new MapEntity();
     }
 

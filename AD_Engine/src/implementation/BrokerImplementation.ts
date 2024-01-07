@@ -150,14 +150,16 @@ export async function publishTargetPosition(drone: DronEntity, targetPosition: S
     const droneId = drone.getId();
     const topicTargetPosition: string = BrokerSettings.TOPIC_TARGET_POSITION;
     const positionJson = targetPosition.toJson();
-    const positionEncoded = Security.encryptMessageAes(positionJson, server.getKey(drone))
+    //const positionEncoded = Security.encryptMessageAes(positionJson, server.getKey(drone))
+    const positionEncoded = positionJson;
     try {
         await producerTargetPosition.connect();
         const objectToSend = {
             id_registry: droneId,
             target_position: positionEncoded
         };
-        const objectToSendEncoded = await Security.encryptMessageAes(JSON.stringify(objectToSend), server.GENERAL_KEY);
+        //const objectToSendEncoded = await Security.encryptMessageAes(JSON.stringify(objectToSend), server.GENERAL_KEY);
+        const objectToSendEncoded = JSON.stringify(objectToSend);
         await producerTargetPosition.send({
             topic: topicTargetPosition,
             messages: [
