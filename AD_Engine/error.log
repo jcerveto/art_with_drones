@@ -6021,3 +6021,1118 @@ NORMAL OK. DroneId: 1006 FigureId: 15
 FORCE OK. DroneId: 1015 Square: 1-1, FigureId: 19546, Size: 15
 FORCE OK. DroneId: 1000 Square: 1-1, FigureId: 51522, Size: 16
 FORCE OK. DroneId: 1011 Square: 1-1, FigureId: 30419, Size: 17
+FORCE OK. DroneId: 1007 Square: 1-1, FigureId: 90238, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1011 FigureId: 1
+NORMAL OK. DroneId: 1000 FigureId: 2
+NORMAL OK. DroneId: 1015 FigureId: 3
+NORMAL OK. DroneId: 1007 FigureId: 4
+NORMAL OK. DroneId: 1016 FigureId: 5
+NORMAL OK. DroneId: 1002 FigureId: 6
+NORMAL OK. DroneId: 1004 FigureId: 7
+NORMAL OK. DroneId: 1010 FigureId: 8
+NORMAL OK. DroneId: 1014 FigureId: 9
+NORMAL OK. DroneId: 1001 FigureId: 10
+NORMAL OK. DroneId: 1005 FigureId: 11
+NORMAL OK. DroneId: 1017 FigureId: 12
+NORMAL OK. DroneId: 1012 FigureId: 13
+FORCE OK. DroneId: 1018 Square: 1-1, FigureId: 9384, Size: 13
+FORCE OK. DroneId: 1008 Square: 1-1, FigureId: 14101, Size: 14
+FORCE OK. DroneId: 1019 Square: 1-1, FigureId: 22983, Size: 15
+FORCE OK. DroneId: 1013 Square: 1-1, FigureId: 90907, Size: 16
+FORCE OK. DroneId: 1003 Square: 1-1, FigureId: 9252, Size: 17
+FORCE OK. DroneId: 1006 Square: 1-1, FigureId: 15494, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1008 FigureId: 1
+NORMAL OK. DroneId: 1006 FigureId: 2
+NORMAL OK. DroneId: 1019 FigureId: 3
+NORMAL OK. DroneId: 1018 FigureId: 4
+NORMAL OK. DroneId: 1013 FigureId: 5
+NORMAL OK. DroneId: 1003 FigureId: 6
+NORMAL OK. DroneId: 1011 FigureId: 7
+NORMAL OK. DroneId: 1007 FigureId: 8
+NORMAL OK. DroneId: 1002 FigureId: 10
+NORMAL OK. DroneId: 1014 FigureId: 12
+NORMAL OK. DroneId: 1005 FigureId: 13
+FORCE OK. DroneId: 1000 Square: 1-1, FigureId: 92328, Size: 11
+FORCE OK. DroneId: 1004 Square: 1-1, FigureId: 15209, Size: 12
+FORCE OK. DroneId: 1017 Square: 1-1, FigureId: 27836, Size: 13
+FORCE OK. DroneId: 1015 Square: 1-1, FigureId: 62106, Size: 14
+FORCE OK. DroneId: 1016 Square: 1-1, FigureId: 84926, Size: 15
+FORCE OK. DroneId: 1010 Square: 1-1, FigureId: 58434, Size: 16
+FORCE OK. DroneId: 1001 Square: 1-1, FigureId: 97486, Size: 17
+FORCE OK. DroneId: 1012 Square: 1-1, FigureId: 16433, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1015 FigureId: 1
+NORMAL OK. DroneId: 1017 FigureId: 2
+NORMAL OK. DroneId: 1016 FigureId: 3
+NORMAL OK. DroneId: 1001 FigureId: 4
+NORMAL OK. DroneId: 1010 FigureId: 5
+NORMAL OK. DroneId: 1014 FigureId: 6
+NORMAL OK. DroneId: 1000 FigureId: 7
+NORMAL OK. DroneId: 1012 FigureId: 8
+NORMAL OK. DroneId: 1004 FigureId: 9
+NORMAL OK. DroneId: 1008 FigureId: 10
+NORMAL OK. DroneId: 1018 FigureId: 11
+NORMAL OK. DroneId: 1003 FigureId: 12
+NORMAL OK. DroneId: 1006 FigureId: 13
+NORMAL OK. DroneId: 1011 FigureId: 14
+NORMAL OK. DroneId: 1019 FigureId: 15
+FORCE OK. DroneId: 1013 Square: 1-1, FigureId: 10271, Size: 15
+FORCE OK. DroneId: 1007 Square: 1-1, FigureId: 61597, Size: 16
+FORCE OK. DroneId: 1002 Square: 1-1, FigureId: 8838, Size: 17
+FORCE OK. DroneId: 1005 Square: 1-1, FigureId: 41454, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1013 FigureId: 1
+NORMAL OK. DroneId: 1005 FigureId: 2
+NORMAL OK. DroneId: 1002 FigureId: 3
+NORMAL OK. DroneId: 1007 FigureId: 4
+NORMAL OK. DroneId: 1015 FigureId: 5
+NORMAL OK. DroneId: 1016 FigureId: 6
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1010 FigureId: 7
+NORMAL OK. DroneId: 1012 FigureId: 8
+NORMAL OK. DroneId: 1008 FigureId: 9
+NORMAL OK. DroneId: 1017 FigureId: 10
+NORMAL OK. DroneId: 1000 FigureId: 11
+NORMAL OK. DroneId: 1018 FigureId: 12
+NORMAL OK. DroneId: 1006 FigureId: 13
+FORCE OK. DroneId: 1001 Square: 1-1, FigureId: 29271, Size: 13
+FORCE OK. DroneId: 1011 Square: 1-1, FigureId: 69310, Size: 14
+FORCE OK. DroneId: 1014 Square: 1-1, FigureId: 61560, Size: 15
+FORCE OK. DroneId: 1004 Square: 1-1, FigureId: 49997, Size: 16
+FORCE OK. DroneId: 1003 Square: 1-1, FigureId: 8015, Size: 17
+FORCE OK. DroneId: 1019 Square: 1-1, FigureId: 51836, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1011 FigureId: 1
+NORMAL OK. DroneId: 1001 FigureId: 2
+NORMAL OK. DroneId: 1003 FigureId: 3
+NORMAL OK. DroneId: 1014 FigureId: 4
+NORMAL OK. DroneId: 1004 FigureId: 5
+NORMAL OK. DroneId: 1019 FigureId: 6
+NORMAL OK. DroneId: 1013 FigureId: 7
+NORMAL OK. DroneId: 1007 FigureId: 8
+NORMAL OK. DroneId: 1016 FigureId: 10
+NORMAL OK. DroneId: 1008 FigureId: 12
+NORMAL OK. DroneId: 1000 FigureId: 13
+FORCE OK. DroneId: 1005 Square: 1-1, FigureId: 76859, Size: 11
+FORCE OK. DroneId: 1010 Square: 1-1, FigureId: 39235, Size: 12
+FORCE OK. DroneId: 1018 Square: 1-1, FigureId: 9207, Size: 13
+FORCE OK. DroneId: 1002 Square: 1-1, FigureId: 10839, Size: 14
+FORCE OK. DroneId: 1015 Square: 1-1, FigureId: 95299, Size: 15
+FORCE OK. DroneId: 1012 Square: 1-1, FigureId: 26952, Size: 16
+FORCE OK. DroneId: 1017 Square: 1-1, FigureId: 93649, Size: 17
+FORCE OK. DroneId: 1006 Square: 1-1, FigureId: 18833, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1002 FigureId: 1
+NORMAL OK. DroneId: 1006 FigureId: 2
+NORMAL OK. DroneId: 1015 FigureId: 3
+NORMAL OK. DroneId: 1005 FigureId: 4
+NORMAL OK. DroneId: 1017 FigureId: 5
+NORMAL OK. DroneId: 1008 FigureId: 6
+NORMAL OK. DroneId: 1018 FigureId: 7
+NORMAL OK. DroneId: 1012 FigureId: 8
+NORMAL OK. DroneId: 1010 FigureId: 9
+NORMAL OK. DroneId: 1011 FigureId: 10
+NORMAL OK. DroneId: 1014 FigureId: 11
+NORMAL OK. DroneId: 1019 FigureId: 12
+NORMAL OK. DroneId: 1001 FigureId: 13
+NORMAL OK. DroneId: 1013 FigureId: 14
+NORMAL OK. DroneId: 1003 FigureId: 15
+FORCE OK. DroneId: 1004 Square: 1-1, FigureId: 31418, Size: 15
+FORCE OK. DroneId: 1007 Square: 1-1, FigureId: 27309, Size: 16
+FORCE OK. DroneId: 1016 Square: 1-1, FigureId: 35769, Size: 17
+FORCE OK. DroneId: 1000 Square: 1-1, FigureId: 43951, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1004 FigureId: 1
+NORMAL OK. DroneId: 1000 FigureId: 2
+NORMAL OK. DroneId: 1016 FigureId: 3
+NORMAL OK. DroneId: 1007 FigureId: 4
+NORMAL OK. DroneId: 1002 FigureId: 5
+NORMAL OK. DroneId: 1015 FigureId: 6
+NORMAL OK. DroneId: 1017 FigureId: 7
+NORMAL OK. DroneId: 1012 FigureId: 8
+NORMAL OK. DroneId: 1011 FigureId: 9
+NORMAL OK. DroneId: 1006 FigureId: 10
+NORMAL OK. DroneId: 1018 FigureId: 11
+NORMAL OK. DroneId: 1014 FigureId: 12
+NORMAL OK. DroneId: 1001 FigureId: 13
+FORCE OK. DroneId: 1005 Square: 1-1, FigureId: 77551, Size: 13
+FORCE OK. DroneId: 1013 Square: 1-1, FigureId: 53909, Size: 14
+FORCE OK. DroneId: 1008 Square: 1-1, FigureId: 7282, Size: 15
+FORCE OK. DroneId: 1010 Square: 1-1, FigureId: 33711, Size: 16
+FORCE OK. DroneId: 1019 Square: 1-1, FigureId: 49905, Size: 17
+FORCE OK. DroneId: 1003 Square: 1-1, FigureId: 78704, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1010 FigureId: 1
+NORMAL OK. DroneId: 1003 FigureId: 2
+NORMAL OK. DroneId: 1005 FigureId: 3
+NORMAL OK. DroneId: 1008 FigureId: 4
+NORMAL OK. DroneId: 1019 FigureId: 5
+NORMAL OK. DroneId: 1013 FigureId: 6
+NORMAL OK. DroneId: 1004 FigureId: 7
+NORMAL OK. DroneId: 1007 FigureId: 8
+NORMAL OK. DroneId: 1015 FigureId: 10
+NORMAL OK. DroneId: 1011 FigureId: 12
+NORMAL OK. DroneId: 1018 FigureId: 13
+FORCE OK. DroneId: 1000 Square: 1-1, FigureId: 54068, Size: 11
+FORCE OK. DroneId: 1017 Square: 1-1, FigureId: 28773, Size: 12
+FORCE OK. DroneId: 1014 Square: 1-1, FigureId: 18876, Size: 13
+FORCE OK. DroneId: 1016 Square: 1-1, FigureId: 47543, Size: 14
+FORCE OK. DroneId: 1002 Square: 1-1, FigureId: 20513, Size: 15
+FORCE OK. DroneId: 1012 Square: 1-1, FigureId: 93798, Size: 16
+FORCE OK. DroneId: 1006 Square: 1-1, FigureId: 92140, Size: 17
+FORCE OK. DroneId: 1001 Square: 1-1, FigureId: 72307, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1012 FigureId: 1
+NORMAL OK. DroneId: 1002 FigureId: 2
+NORMAL OK. DroneId: 1000 FigureId: 3
+NORMAL OK. DroneId: 1016 FigureId: 4
+NORMAL OK. DroneId: 1006 FigureId: 5
+NORMAL OK. DroneId: 1011 FigureId: 6
+NORMAL OK. DroneId: 1014 FigureId: 7
+NORMAL OK. DroneId: 1017 FigureId: 8
+NORMAL OK. DroneId: 1001 FigureId: 9
+NORMAL OK. DroneId: 1010 FigureId: 10
+NORMAL OK. DroneId: 1008 FigureId: 11
+NORMAL OK. DroneId: 1013 FigureId: 12
+NORMAL OK. DroneId: 1003 FigureId: 13
+NORMAL OK. DroneId: 1004 FigureId: 14
+NORMAL OK. DroneId: 1005 FigureId: 15
+FORCE OK. DroneId: 1019 Square: 1-1, FigureId: 12609, Size: 15
+FORCE OK. DroneId: 1007 Square: 1-1, FigureId: 47550, Size: 16
+FORCE OK. DroneId: 1015 Square: 1-1, FigureId: 58754, Size: 17
+FORCE OK. DroneId: 1018 Square: 1-1, FigureId: 75288, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1015 FigureId: 1
+NORMAL OK. DroneId: 1007 FigureId: 2
+NORMAL OK. DroneId: 1018 FigureId: 3
+NORMAL OK. DroneId: 1019 FigureId: 4
+NORMAL OK. DroneId: 1012 FigureId: 5
+NORMAL OK. DroneId: 1000 FigureId: 6
+NORMAL OK. DroneId: 1006 FigureId: 7
+NORMAL OK. DroneId: 1017 FigureId: 8
+NORMAL OK. DroneId: 1010 FigureId: 9
+NORMAL OK. DroneId: 1002 FigureId: 10
+NORMAL OK. DroneId: 1014 FigureId: 11
+NORMAL OK. DroneId: 1008 FigureId: 12
+NORMAL OK. DroneId: 1003 FigureId: 13
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+FORCE OK. DroneId: 1016 Square: 1-1, FigureId: 96173, Size: 13
+FORCE OK. DroneId: 1004 Square: 1-1, FigureId: 83854, Size: 14
+FORCE OK. DroneId: 1011 Square: 1-1, FigureId: 53756, Size: 15
+FORCE OK. DroneId: 1001 Square: 1-1, FigureId: 47318, Size: 16
+FORCE OK. DroneId: 1013 Square: 1-1, FigureId: 75268, Size: 17
+FORCE OK. DroneId: 1005 Square: 1-1, FigureId: 55543, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1004 FigureId: 1
+NORMAL OK. DroneId: 1011 FigureId: 2
+NORMAL OK. DroneId: 1005 FigureId: 3
+NORMAL OK. DroneId: 1013 FigureId: 4
+NORMAL OK. DroneId: 1001 FigureId: 5
+NORMAL OK. DroneId: 1016 FigureId: 6
+NORMAL OK. DroneId: 1015 FigureId: 7
+NORMAL OK. DroneId: 1019 FigureId: 8
+NORMAL OK. DroneId: 1000 FigureId: 10
+NORMAL OK. DroneId: 1010 FigureId: 12
+NORMAL OK. DroneId: 1014 FigureId: 13
+FORCE OK. DroneId: 1007 Square: 1-1, FigureId: 41128, Size: 11
+FORCE OK. DroneId: 1006 Square: 1-1, FigureId: 48133, Size: 12
+FORCE OK. DroneId: 1008 Square: 1-1, FigureId: 96220, Size: 13
+FORCE OK. DroneId: 1018 Square: 1-1, FigureId: 23569, Size: 14
+FORCE OK. DroneId: 1012 Square: 1-1, FigureId: 1839, Size: 15
+FORCE OK. DroneId: 1017 Square: 1-1, FigureId: 6995, Size: 16
+FORCE OK. DroneId: 1002 Square: 1-1, FigureId: 31119, Size: 17
+FORCE OK. DroneId: 1003 Square: 1-1, FigureId: 30360, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1012 FigureId: 1
+NORMAL OK. DroneId: 1017 FigureId: 2
+NORMAL OK. DroneId: 1006 FigureId: 3
+NORMAL OK. DroneId: 1010 FigureId: 4
+NORMAL OK. DroneId: 1007 FigureId: 5
+NORMAL OK. DroneId: 1008 FigureId: 6
+NORMAL OK. DroneId: 1002 FigureId: 7
+NORMAL OK. DroneId: 1003 FigureId: 8
+NORMAL OK. DroneId: 1018 FigureId: 9
+NORMAL OK. DroneId: 1004 FigureId: 10
+NORMAL OK. DroneId: 1013 FigureId: 11
+NORMAL OK. DroneId: 1016 FigureId: 12
+NORMAL OK. DroneId: 1011 FigureId: 13
+NORMAL OK. DroneId: 1015 FigureId: 14
+NORMAL OK. DroneId: 1005 FigureId: 15
+FORCE OK. DroneId: 1001 Square: 1-1, FigureId: 43246, Size: 15
+FORCE OK. DroneId: 1019 Square: 1-1, FigureId: 18938, Size: 16
+FORCE OK. DroneId: 1000 Square: 1-1, FigureId: 22775, Size: 17
+FORCE OK. DroneId: 1014 Square: 1-1, FigureId: 22579, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1001 FigureId: 1
+NORMAL OK. DroneId: 1014 FigureId: 2
+NORMAL OK. DroneId: 1019 FigureId: 3
+NORMAL OK. DroneId: 1000 FigureId: 4
+NORMAL OK. DroneId: 1012 FigureId: 5
+NORMAL OK. DroneId: 1006 FigureId: 6
+NORMAL OK. DroneId: 1007 FigureId: 7
+NORMAL OK. DroneId: 1003 FigureId: 8
+NORMAL OK. DroneId: 1004 FigureId: 9
+NORMAL OK. DroneId: 1017 FigureId: 10
+NORMAL OK. DroneId: 1002 FigureId: 11
+NORMAL OK. DroneId: 1013 FigureId: 12
+NORMAL OK. DroneId: 1011 FigureId: 13
+FORCE OK. DroneId: 1010 Square: 1-1, FigureId: 99808, Size: 13
+FORCE OK. DroneId: 1015 Square: 1-1, FigureId: 75218, Size: 14
+FORCE OK. DroneId: 1008 Square: 1-1, FigureId: 57959, Size: 15
+FORCE OK. DroneId: 1018 Square: 1-1, FigureId: 62586, Size: 16
+FORCE OK. DroneId: 1016 Square: 1-1, FigureId: 31985, Size: 17
+FORCE OK. DroneId: 1005 Square: 1-1, FigureId: 64056, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1010 FigureId: 1
+NORMAL OK. DroneId: 1015 FigureId: 2
+NORMAL OK. DroneId: 1018 FigureId: 3
+NORMAL OK. DroneId: 1016 FigureId: 4
+NORMAL OK. DroneId: 1008 FigureId: 5
+NORMAL OK. DroneId: 1005 FigureId: 6
+NORMAL OK. DroneId: 1001 FigureId: 7
+NORMAL OK. DroneId: 1000 FigureId: 8
+NORMAL OK. DroneId: 1006 FigureId: 10
+NORMAL OK. DroneId: 1004 FigureId: 12
+NORMAL OK. DroneId: 1002 FigureId: 13
+FORCE OK. DroneId: 1014 Square: 1-1, FigureId: 90479, Size: 11
+FORCE OK. DroneId: 1007 Square: 1-1, FigureId: 44773, Size: 12
+FORCE OK. DroneId: 1013 Square: 1-1, FigureId: 78136, Size: 13
+FORCE OK. DroneId: 1019 Square: 1-1, FigureId: 77520, Size: 14
+FORCE OK. DroneId: 1012 Square: 1-1, FigureId: 46029, Size: 15
+FORCE OK. DroneId: 1003 Square: 1-1, FigureId: 90271, Size: 16
+FORCE OK. DroneId: 1017 Square: 1-1, FigureId: 56585, Size: 17
+FORCE OK. DroneId: 1011 Square: 1-1, FigureId: 76634, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1014 FigureId: 1
+NORMAL OK. DroneId: 1004 FigureId: 2
+NORMAL OK. DroneId: 1017 FigureId: 3
+NORMAL OK. DroneId: 1012 FigureId: 4
+NORMAL OK. DroneId: 1019 FigureId: 5
+NORMAL OK. DroneId: 1007 FigureId: 6
+NORMAL OK. DroneId: 1011 FigureId: 7
+NORMAL OK. DroneId: 1013 FigureId: 8
+NORMAL OK. DroneId: 1003 FigureId: 9
+NORMAL OK. DroneId: 1010 FigureId: 10
+NORMAL OK. DroneId: 1016 FigureId: 11
+NORMAL OK. DroneId: 1005 FigureId: 12
+NORMAL OK. DroneId: 1015 FigureId: 13
+NORMAL OK. DroneId: 1001 FigureId: 14
+NORMAL OK. DroneId: 1018 FigureId: 15
+FORCE OK. DroneId: 1008 Square: 1-1, FigureId: 51017, Size: 15
+FORCE OK. DroneId: 1000 Square: 1-1, FigureId: 98843, Size: 16
+FORCE OK. DroneId: 1006 Square: 1-1, FigureId: 76753, Size: 17
+FORCE OK. DroneId: 1002 Square: 1-1, FigureId: 18925, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.08,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704657941,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658204,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1000 FigureId: 1
+NORMAL OK. DroneId: 1006 FigureId: 2
+NORMAL OK. DroneId: 1002 FigureId: 3
+NORMAL OK. DroneId: 1008 FigureId: 4
+NORMAL OK. DroneId: 1014 FigureId: 5
+NORMAL OK. DroneId: 1017 FigureId: 6
+NORMAL OK. DroneId: 1019 FigureId: 7
+NORMAL OK. DroneId: 1013 FigureId: 8
+NORMAL OK. DroneId: 1010 FigureId: 9
+NORMAL OK. DroneId: 1004 FigureId: 10
+NORMAL OK. DroneId: 1011 FigureId: 11
+NORMAL OK. DroneId: 1016 FigureId: 12
+NORMAL OK. DroneId: 1015 FigureId: 13
+FORCE OK. DroneId: 1012 Square: 1-1, FigureId: 61396, Size: 13
+FORCE OK. DroneId: 1001 Square: 1-1, FigureId: 79054, Size: 14
+FORCE OK. DroneId: 1007 Square: 1-1, FigureId: 10045, Size: 15
+FORCE OK. DroneId: 1003 Square: 1-1, FigureId: 63368, Size: 16
+FORCE OK. DroneId: 1005 Square: 1-1, FigureId: 52917, Size: 17
+FORCE OK. DroneId: 1018 Square: 1-1, FigureId: 54604, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.83,"feels_like":10.27,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658538,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1001 FigureId: 1
+NORMAL OK. DroneId: 1012 FigureId: 2
+NORMAL OK. DroneId: 1018 FigureId: 3
+NORMAL OK. DroneId: 1007 FigureId: 4
+NORMAL OK. DroneId: 1003 FigureId: 5
+NORMAL OK. DroneId: 1005 FigureId: 6
+NORMAL OK. DroneId: 1000 FigureId: 7
+NORMAL OK. DroneId: 1008 FigureId: 8
+NORMAL OK. DroneId: 1017 FigureId: 10
+NORMAL OK. DroneId: 1010 FigureId: 12
+NORMAL OK. DroneId: 1011 FigureId: 13
+FORCE OK. DroneId: 1006 Square: 1-1, FigureId: 54017, Size: 11
+FORCE OK. DroneId: 1019 Square: 1-1, FigureId: 4217, Size: 12
+FORCE OK. DroneId: 1016 Square: 1-1, FigureId: 6460, Size: 13
+FORCE OK. DroneId: 1002 Square: 1-1, FigureId: 47554, Size: 14
+FORCE OK. DroneId: 1014 Square: 1-1, FigureId: 56925, Size: 15
+FORCE OK. DroneId: 1013 Square: 1-1, FigureId: 54082, Size: 16
+FORCE OK. DroneId: 1004 Square: 1-1, FigureId: 58474, Size: 17
+FORCE OK. DroneId: 1015 Square: 1-1, FigureId: 19110, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658842,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658842,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.66,"feels_like":10.11,"temp_min":10.69,"temp_max":13.01,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704658228,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1014 FigureId: 1
+NORMAL OK. DroneId: 1013 FigureId: 2
+NORMAL OK. DroneId: 1004 FigureId: 3
+NORMAL OK. DroneId: 1016 FigureId: 4
+NORMAL OK. DroneId: 1002 FigureId: 5
+NORMAL OK. DroneId: 1010 FigureId: 6
+NORMAL OK. DroneId: 1019 FigureId: 7
+NORMAL OK. DroneId: 1006 FigureId: 8
+NORMAL OK. DroneId: 1015 FigureId: 9
+NORMAL OK. DroneId: 1001 FigureId: 10
+NORMAL OK. DroneId: 1007 FigureId: 11
+NORMAL OK. DroneId: 1005 FigureId: 12
+NORMAL OK. DroneId: 1012 FigureId: 13
+NORMAL OK. DroneId: 1000 FigureId: 14
+NORMAL OK. DroneId: 1018 FigureId: 15
+FORCE OK. DroneId: 1003 Square: 1-1, FigureId: 46224, Size: 15
+FORCE OK. DroneId: 1008 Square: 1-1, FigureId: 6758, Size: 16
+FORCE OK. DroneId: 1017 Square: 1-1, FigureId: 3477, Size: 17
+FORCE OK. DroneId: 1011 Square: 1-1, FigureId: 15104, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658842,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658842,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658842,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1008 FigureId: 1
+NORMAL OK. DroneId: 1003 FigureId: 2
+NORMAL OK. DroneId: 1017 FigureId: 3
+NORMAL OK. DroneId: 1011 FigureId: 4
+NORMAL OK. DroneId: 1014 FigureId: 5
+NORMAL OK. DroneId: 1004 FigureId: 6
+NORMAL OK. DroneId: 1002 FigureId: 7
+NORMAL OK. DroneId: 1006 FigureId: 8
+NORMAL OK. DroneId: 1001 FigureId: 9
+NORMAL OK. DroneId: 1013 FigureId: 10
+NORMAL OK. DroneId: 1019 FigureId: 11
+NORMAL OK. DroneId: 1007 FigureId: 12
+NORMAL OK. DroneId: 1012 FigureId: 13
+FORCE OK. DroneId: 1016 Square: 1-1, FigureId: 94163, Size: 13
+FORCE OK. DroneId: 1000 Square: 1-1, FigureId: 48133, Size: 14
+FORCE OK. DroneId: 1010 Square: 1-1, FigureId: 44317, Size: 15
+FORCE OK. DroneId: 1015 Square: 1-1, FigureId: 33367, Size: 16
+FORCE OK. DroneId: 1005 Square: 1-1, FigureId: 81697, Size: 17
+FORCE OK. DroneId: 1018 Square: 1-1, FigureId: 81595, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.83,"feels_like":10.27,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658538,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1016 FigureId: 1
+NORMAL OK. DroneId: 1005 FigureId: 2
+NORMAL OK. DroneId: 1010 FigureId: 3
+NORMAL OK. DroneId: 1018 FigureId: 4
+NORMAL OK. DroneId: 1015 FigureId: 5
+NORMAL OK. DroneId: 1000 FigureId: 6
+NORMAL OK. DroneId: 1008 FigureId: 7
+NORMAL OK. DroneId: 1011 FigureId: 8
+NORMAL OK. DroneId: 1004 FigureId: 10
+NORMAL OK. DroneId: 1001 FigureId: 12
+NORMAL OK. DroneId: 1019 FigureId: 13
+FORCE OK. DroneId: 1003 Square: 1-1, FigureId: 21896, Size: 11
+FORCE OK. DroneId: 1002 Square: 1-1, FigureId: 10624, Size: 12
+FORCE OK. DroneId: 1007 Square: 1-1, FigureId: 35795, Size: 13
+FORCE OK. DroneId: 1017 Square: 1-1, FigureId: 60743, Size: 14
+FORCE OK. DroneId: 1014 Square: 1-1, FigureId: 43022, Size: 15
+FORCE OK. DroneId: 1006 Square: 1-1, FigureId: 56183, Size: 16
+FORCE OK. DroneId: 1013 Square: 1-1, FigureId: 25343, Size: 17
+FORCE OK. DroneId: 1012 Square: 1-1, FigureId: 86701, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.83,"feels_like":10.27,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658538,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.83,"feels_like":10.27,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658538,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1001 FigureId: 1
+NORMAL OK. DroneId: 1017 FigureId: 2
+NORMAL OK. DroneId: 1013 FigureId: 3
+NORMAL OK. DroneId: 1014 FigureId: 4
+NORMAL OK. DroneId: 1012 FigureId: 5
+NORMAL OK. DroneId: 1002 FigureId: 6
+NORMAL OK. DroneId: 1003 FigureId: 7
+NORMAL OK. DroneId: 1006 FigureId: 8
+NORMAL OK. DroneId: 1007 FigureId: 9
+NORMAL OK. DroneId: 1016 FigureId: 10
+NORMAL OK. DroneId: 1018 FigureId: 11
+NORMAL OK. DroneId: 1000 FigureId: 12
+NORMAL OK. DroneId: 1005 FigureId: 13
+NORMAL OK. DroneId: 1008 FigureId: 14
+NORMAL OK. DroneId: 1010 FigureId: 15
+FORCE OK. DroneId: 1015 Square: 1-1, FigureId: 76358, Size: 15
+FORCE OK. DroneId: 1011 Square: 1-1, FigureId: 82219, Size: 16
+FORCE OK. DroneId: 1004 Square: 1-1, FigureId: 11783, Size: 17
+FORCE OK. DroneId: 1019 Square: 1-1, FigureId: 64227, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658842,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.83,"feels_like":10.27,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658538,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658842,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1004 FigureId: 1
+NORMAL OK. DroneId: 1019 FigureId: 2
+NORMAL OK. DroneId: 1015 FigureId: 3
+NORMAL OK. DroneId: 1011 FigureId: 4
+NORMAL OK. DroneId: 1001 FigureId: 5
+NORMAL OK. DroneId: 1013 FigureId: 6
+NORMAL OK. DroneId: 1012 FigureId: 7
+NORMAL OK. DroneId: 1006 FigureId: 8
+NORMAL OK. DroneId: 1016 FigureId: 9
+NORMAL OK. DroneId: 1017 FigureId: 10
+NORMAL OK. DroneId: 1003 FigureId: 11
+NORMAL OK. DroneId: 1018 FigureId: 12
+NORMAL OK. DroneId: 1005 FigureId: 13
+FORCE OK. DroneId: 1014 Square: 1-1, FigureId: 71723, Size: 13
+FORCE OK. DroneId: 1008 Square: 1-1, FigureId: 80566, Size: 14
+FORCE OK. DroneId: 1002 Square: 1-1, FigureId: 59734, Size: 15
+FORCE OK. DroneId: 1007 Square: 1-1, FigureId: 18210, Size: 16
+FORCE OK. DroneId: 1000 Square: 1-1, FigureId: 88585, Size: 17
+FORCE OK. DroneId: 1010 Square: 1-1, FigureId: 60318, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.83,"feels_like":10.27,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658538,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1008 FigureId: 1
+NORMAL OK. DroneId: 1014 FigureId: 2
+NORMAL OK. DroneId: 1002 FigureId: 3
+NORMAL OK. DroneId: 1007 FigureId: 4
+NORMAL OK. DroneId: 1010 FigureId: 5
+NORMAL OK. DroneId: 1000 FigureId: 6
+NORMAL OK. DroneId: 1004 FigureId: 7
+NORMAL OK. DroneId: 1011 FigureId: 8
+NORMAL OK. DroneId: 1013 FigureId: 10
+NORMAL OK. DroneId: 1016 FigureId: 12
+NORMAL OK. DroneId: 1003 FigureId: 13
+FORCE OK. DroneId: 1019 Square: 1-1, FigureId: 78937, Size: 11
+FORCE OK. DroneId: 1012 Square: 1-1, FigureId: 62117, Size: 12
+FORCE OK. DroneId: 1018 Square: 1-1, FigureId: 2275, Size: 13
+FORCE OK. DroneId: 1015 Square: 1-1, FigureId: 37440, Size: 14
+FORCE OK. DroneId: 1001 Square: 1-1, FigureId: 7155, Size: 15
+FORCE OK. DroneId: 1006 Square: 1-1, FigureId: 34424, Size: 16
+FORCE OK. DroneId: 1017 Square: 1-1, FigureId: 67495, Size: 17
+FORCE OK. DroneId: 1005 Square: 1-1, FigureId: 53114, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1017 FigureId: 1
+NORMAL OK. DroneId: 1016 FigureId: 2
+NORMAL OK. DroneId: 1006 FigureId: 3
+NORMAL OK. DroneId: 1001 FigureId: 4
+NORMAL OK. DroneId: 1019 FigureId: 5
+NORMAL OK. DroneId: 1015 FigureId: 6
+NORMAL OK. DroneId: 1018 FigureId: 7
+NORMAL OK. DroneId: 1012 FigureId: 8
+NORMAL OK. DroneId: 1005 FigureId: 9
+NORMAL OK. DroneId: 1008 FigureId: 10
+NORMAL OK. DroneId: 1007 FigureId: 11
+NORMAL OK. DroneId: 1000 FigureId: 12
+NORMAL OK. DroneId: 1014 FigureId: 13
+NORMAL OK. DroneId: 1004 FigureId: 14
+NORMAL OK. DroneId: 1002 FigureId: 15
+FORCE OK. DroneId: 1010 Square: 1-1, FigureId: 63147, Size: 15
+FORCE OK. DroneId: 1011 Square: 1-1, FigureId: 7782, Size: 16
+FORCE OK. DroneId: 1013 Square: 1-1, FigureId: 13660, Size: 17
+FORCE OK. DroneId: 1003 Square: 1-1, FigureId: 49334, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658842,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.83,"feels_like":10.27,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658538,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1003 FigureId: 1
+NORMAL OK. DroneId: 1011 FigureId: 2
+NORMAL OK. DroneId: 1010 FigureId: 3
+NORMAL OK. DroneId: 1013 FigureId: 4
+NORMAL OK. DroneId: 1017 FigureId: 5
+NORMAL OK. DroneId: 1006 FigureId: 6
+NORMAL OK. DroneId: 1019 FigureId: 7
+NORMAL OK. DroneId: 1012 FigureId: 8
+NORMAL OK. DroneId: 1008 FigureId: 9
+NORMAL OK. DroneId: 1016 FigureId: 10
+NORMAL OK. DroneId: 1018 FigureId: 11
+NORMAL OK. DroneId: 1007 FigureId: 12
+NORMAL OK. DroneId: 1014 FigureId: 13
+FORCE OK. DroneId: 1001 Square: 1-1, FigureId: 12143, Size: 13
+FORCE OK. DroneId: 1004 Square: 1-1, FigureId: 75180, Size: 14
+FORCE OK. DroneId: 1015 Square: 1-1, FigureId: 88756, Size: 15
+FORCE OK. DroneId: 1005 Square: 1-1, FigureId: 66826, Size: 16
+FORCE OK. DroneId: 1000 Square: 1-1, FigureId: 82493, Size: 17
+FORCE OK. DroneId: 1002 Square: 1-1, FigureId: 28368, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1004 FigureId: 1
+NORMAL OK. DroneId: 1000 FigureId: 2
+NORMAL OK. DroneId: 1001 FigureId: 3
+NORMAL OK. DroneId: 1005 FigureId: 4
+NORMAL OK. DroneId: 1002 FigureId: 5
+NORMAL OK. DroneId: 1015 FigureId: 6
+NORMAL OK. DroneId: 1003 FigureId: 7
+NORMAL OK. DroneId: 1013 FigureId: 8
+NORMAL OK. DroneId: 1006 FigureId: 10
+NORMAL OK. DroneId: 1008 FigureId: 12
+NORMAL OK. DroneId: 1018 FigureId: 13
+FORCE OK. DroneId: 1011 Square: 1-1, FigureId: 14806, Size: 11
+FORCE OK. DroneId: 1019 Square: 1-1, FigureId: 32813, Size: 12
+FORCE OK. DroneId: 1007 Square: 1-1, FigureId: 51314, Size: 13
+FORCE OK. DroneId: 1010 Square: 1-1, FigureId: 58856, Size: 14
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+FORCE OK. DroneId: 1017 Square: 1-1, FigureId: 66209, Size: 15
+FORCE OK. DroneId: 1012 Square: 1-1, FigureId: 93217, Size: 16
+FORCE OK. DroneId: 1016 Square: 1-1, FigureId: 55874, Size: 17
+FORCE OK. DroneId: 1014 Square: 1-1, FigureId: 43224, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658842,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1014 FigureId: 1
+NORMAL OK. DroneId: 1017 FigureId: 2
+NORMAL OK. DroneId: 1016 FigureId: 3
+NORMAL OK. DroneId: 1010 FigureId: 4
+NORMAL OK. DroneId: 1008 FigureId: 5
+NORMAL OK. DroneId: 1012 FigureId: 6
+NORMAL OK. DroneId: 1011 FigureId: 7
+NORMAL OK. DroneId: 1019 FigureId: 8
+NORMAL OK. DroneId: 1007 FigureId: 9
+NORMAL OK. DroneId: 1004 FigureId: 10
+NORMAL OK. DroneId: 1005 FigureId: 11
+NORMAL OK. DroneId: 1015 FigureId: 12
+NORMAL OK. DroneId: 1000 FigureId: 13
+NORMAL OK. DroneId: 1003 FigureId: 14
+NORMAL OK. DroneId: 1001 FigureId: 15
+FORCE OK. DroneId: 1002 Square: 1-1, FigureId: 81318, Size: 15
+FORCE OK. DroneId: 1013 Square: 1-1, FigureId: 67614, Size: 16
+FORCE OK. DroneId: 1006 Square: 1-1, FigureId: 88903, Size: 17
+FORCE OK. DroneId: 1018 Square: 1-1, FigureId: 55389, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658842,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658842,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1002 FigureId: 1
+NORMAL OK. DroneId: 1013 FigureId: 2
+NORMAL OK. DroneId: 1006 FigureId: 3
+NORMAL OK. DroneId: 1018 FigureId: 4
+NORMAL OK. DroneId: 1014 FigureId: 5
+NORMAL OK. DroneId: 1016 FigureId: 6
+NORMAL OK. DroneId: 1008 FigureId: 7
+NORMAL OK. DroneId: 1019 FigureId: 8
+NORMAL OK. DroneId: 1004 FigureId: 9
+NORMAL OK. DroneId: 1017 FigureId: 10
+NORMAL OK. DroneId: 1011 FigureId: 11
+NORMAL OK. DroneId: 1005 FigureId: 12
+NORMAL OK. DroneId: 1000 FigureId: 13
+FORCE OK. DroneId: 1010 Square: 1-1, FigureId: 72541, Size: 13
+FORCE OK. DroneId: 1003 Square: 1-1, FigureId: 46585, Size: 14
+FORCE OK. DroneId: 1012 Square: 1-1, FigureId: 72693, Size: 15
+FORCE OK. DroneId: 1007 Square: 1-1, FigureId: 21016, Size: 16
+FORCE OK. DroneId: 1015 Square: 1-1, FigureId: 48234, Size: 17
+FORCE OK. DroneId: 1001 Square: 1-1, FigureId: 63151, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.83,"feels_like":10.27,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658538,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1010 FigureId: 1
+NORMAL OK. DroneId: 1015 FigureId: 2
+NORMAL OK. DroneId: 1012 FigureId: 3
+NORMAL OK. DroneId: 1007 FigureId: 4
+NORMAL OK. DroneId: 1001 FigureId: 5
+NORMAL OK. DroneId: 1003 FigureId: 6
+NORMAL OK. DroneId: 1002 FigureId: 7
+NORMAL OK. DroneId: 1018 FigureId: 8
+NORMAL OK. DroneId: 1016 FigureId: 10
+NORMAL OK. DroneId: 1004 FigureId: 12
+NORMAL OK. DroneId: 1011 FigureId: 13
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.83,"feels_like":10.27,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658538,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+FORCE OK. DroneId: 1013 Square: 1-1, FigureId: 85710, Size: 11
+FORCE OK. DroneId: 1008 Square: 1-1, FigureId: 1479, Size: 12
+FORCE OK. DroneId: 1005 Square: 1-1, FigureId: 14616, Size: 13
+FORCE OK. DroneId: 1006 Square: 1-1, FigureId: 4522, Size: 14
+FORCE OK. DroneId: 1014 Square: 1-1, FigureId: 41454, Size: 15
+FORCE OK. DroneId: 1019 Square: 1-1, FigureId: 48134, Size: 16
+FORCE OK. DroneId: 1017 Square: 1-1, FigureId: 76205, Size: 17
+FORCE OK. DroneId: 1000 Square: 1-1, FigureId: 66221, Size: 18
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.85,"feels_like":10.29,"temp_min":11.01,"temp_max":12.73,"pressure":1019,"humidity":46},"visibility":10000,"wind":{"speed":4.63,"deg":260},"clouds":{"all":0},"dt":1704658893,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660850,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660850,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660850,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660850,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660491,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660491,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660491,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660491,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660491,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660850,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660850,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660850,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660850,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660850,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660850,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661616,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660930,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661616,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661616,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661616,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.59,"feels_like":10.03,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704660907,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661838,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661838,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661616,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661616,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661838,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661616,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661838,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661616,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 2 FigureId: 1
+NORMAL OK. DroneId: 6 FigureId: 2
+NORMAL OK. DroneId: 4 FigureId: 3
+NORMAL OK. DroneId: 7 FigureId: 4
+NORMAL OK. DroneId: 8 FigureId: 5
+NORMAL OK. DroneId: 5 FigureId: 6
+NORMAL OK. DroneId: 9 FigureId: 7
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 3 FigureId: 8
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661616,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 2 FigureId: 1
+NORMAL OK. DroneId: 7 FigureId: 2
+NORMAL OK. DroneId: 5 FigureId: 3
+NORMAL OK. DroneId: 6 FigureId: 4
+NORMAL OK. DroneId: 9 FigureId: 5
+NORMAL OK. DroneId: 4 FigureId: 6
+NORMAL OK. DroneId: 8 FigureId: 7
+NORMAL OK. DroneId: 3 FigureId: 8
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661838,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 2 FigureId: 1
+NORMAL OK. DroneId: 6 FigureId: 2
+NORMAL OK. DroneId: 4 FigureId: 3
+NORMAL OK. DroneId: 7 FigureId: 4
+NORMAL OK. DroneId: 8 FigureId: 5
+NORMAL OK. DroneId: 5 FigureId: 6
+NORMAL OK. DroneId: 9 FigureId: 7
+NORMAL OK. DroneId: 3 FigureId: 8
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661616,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661838,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 2 FigureId: 1
+NORMAL OK. DroneId: 4 FigureId: 2
+NORMAL OK. DroneId: 8 FigureId: 3
+NORMAL OK. DroneId: 3 FigureId: 4
+NORMAL OK. DroneId: 6 FigureId: 5
+NORMAL OK. DroneId: 9 FigureId: 6
+NORMAL OK. DroneId: 7 FigureId: 7
+NORMAL OK. DroneId: 5 FigureId: 8
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661838,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 2 FigureId: 1
+NORMAL OK. DroneId: 3 FigureId: 2
+NORMAL OK. DroneId: 9 FigureId: 3
+NORMAL OK. DroneId: 4 FigureId: 4
+NORMAL OK. DroneId: 7 FigureId: 5
+NORMAL OK. DroneId: 8 FigureId: 6
+NORMAL OK. DroneId: 6 FigureId: 7
+NORMAL OK. DroneId: 5 FigureId: 8
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.32,"feels_like":9.76,"temp_min":10.95,"temp_max":12.17,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704662156,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.44,"feels_like":9.89,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704661950,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 2 FigureId: 1
+NORMAL OK. DroneId: 4 FigureId: 2
+NORMAL OK. DroneId: 8 FigureId: 3
+NORMAL OK. DroneId: 3 FigureId: 4
+NORMAL OK. DroneId: 6 FigureId: 5
+NORMAL OK. DroneId: 9 FigureId: 6
+NORMAL OK. DroneId: 7 FigureId: 7
+NORMAL OK. DroneId: 5 FigureId: 8
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.56,"feels_like":10,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661524,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661838,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1043 FigureId: 9
+NORMAL OK. DroneId: 1047 FigureId: 10
+NORMAL OK. DroneId: 1050 FigureId: 11
+NORMAL OK. DroneId: 1042 FigureId: 12
+NORMAL OK. DroneId: 1044 FigureId: 13
+NORMAL OK. DroneId: 1040 FigureId: 14
+NORMAL OK. DroneId: 1056 FigureId: 15
+FORCE OK. DroneId: 1052 Square: 1-1, FigureId: 67821, Size: 15
+FORCE OK. DroneId: 1046 Square: 1-1, FigureId: 4526, Size: 16
+FORCE OK. DroneId: 1048 Square: 1-1, FigureId: 84492, Size: 17
+FORCE OK. DroneId: 1049 Square: 1-1, FigureId: 60455, Size: 18
+FORCE OK. DroneId: 1041 Square: 1-1, FigureId: 37778, Size: 19
+FORCE OK. DroneId: 1053 Square: 1-1, FigureId: 47840, Size: 20
+FORCE OK. DroneId: 1055 Square: 1-1, FigureId: 51309, Size: 21
+FORCE OK. DroneId: 1054 Square: 1-1, FigureId: 21318, Size: 22
+FORCE OK. DroneId: 1057 Square: 1-1, FigureId: 42652, Size: 23
+FORCE OK. DroneId: 1059 Square: 1-1, FigureId: 63019, Size: 24
+FORCE OK. DroneId: 1045 Square: 1-1, FigureId: 71202, Size: 25
+FORCE OK. DroneId: 1051 Square: 1-1, FigureId: 82856, Size: 26
+FORCE OK. DroneId: 1058 Square: 1-1, FigureId: 62826, Size: 27
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.32,"feels_like":9.76,"temp_min":10.95,"temp_max":12.17,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704662156,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.32,"feels_like":9.76,"temp_min":10.95,"temp_max":12.17,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704662156,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1043 FigureId: 1
+NORMAL OK. DroneId: 1047 FigureId: 2
+NORMAL OK. DroneId: 1050 FigureId: 3
+NORMAL OK. DroneId: 1042 FigureId: 4
+NORMAL OK. DroneId: 1044 FigureId: 5
+NORMAL OK. DroneId: 1056 FigureId: 6
+NORMAL OK. DroneId: 1052 FigureId: 7
+NORMAL OK. DroneId: 1046 FigureId: 8
+NORMAL OK. DroneId: 1048 FigureId: 9
+NORMAL OK. DroneId: 1049 FigureId: 10
+NORMAL OK. DroneId: 1041 FigureId: 11
+NORMAL OK. DroneId: 1053 FigureId: 12
+NORMAL OK. DroneId: 1055 FigureId: 13
+FORCE OK. DroneId: 1054 Square: 1-1, FigureId: 33511, Size: 13
+FORCE OK. DroneId: 1057 Square: 1-1, FigureId: 51395, Size: 14
+FORCE OK. DroneId: 1059 Square: 1-1, FigureId: 88627, Size: 15
+FORCE OK. DroneId: 1045 Square: 1-1, FigureId: 43651, Size: 16
+FORCE OK. DroneId: 1051 Square: 1-1, FigureId: 32326, Size: 17
+FORCE OK. DroneId: 1058 Square: 1-1, FigureId: 92479, Size: 18
+FORCE OK. DroneId: 2 Square: 1-1, FigureId: 22862, Size: 19
+FORCE OK. DroneId: 8 Square: 1-1, FigureId: 86086, Size: 20
+FORCE OK. DroneId: 6 Square: 1-1, FigureId: 79531, Size: 21
+FORCE OK. DroneId: 5 Square: 1-1, FigureId: 72705, Size: 22
+FORCE OK. DroneId: 4 Square: 1-1, FigureId: 7714, Size: 23
+FORCE OK. DroneId: 7 Square: 1-1, FigureId: 17332, Size: 24
+FORCE OK. DroneId: 3 Square: 1-1, FigureId: 34395, Size: 25
+FORCE OK. DroneId: 1040 Square: 1-1, FigureId: 20515, Size: 26
+FORCE OK. DroneId: 9 Square: 1-1, FigureId: 54472, Size: 27
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.52,"feels_like":9.95,"temp_min":10.95,"temp_max":12.45,"pressure":1019,"humidity":47},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704662299,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.32,"feels_like":9.76,"temp_min":10.95,"temp_max":12.17,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":4.12,"deg":260},"clouds":{"all":0},"dt":1704662156,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=alicante&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.4815,"lat":38.3452},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":11.49,"feels_like":9.95,"temp_min":10.69,"temp_max":12.45,"pressure":1019,"humidity":48},"visibility":10000,"wind":{"speed":2.57,"deg":260},"clouds":{"all":0},"dt":1704661838,"sys":{"type":1,"id":6391,"country":"ES","sunrise":1704611949,"sunset":1704646576},"timezone":3600,"id":2521978,"name":"Alicante","cod":200}
+NORMAL OK. DroneId: 1040 FigureId: 1
+NORMAL OK. DroneId: 1054 FigureId: 2
+NORMAL OK. DroneId: 5 FigureId: 3
+NORMAL OK. DroneId: 1057 FigureId: 4
+NORMAL OK. DroneId: 2 FigureId: 5
+NORMAL OK. DroneId: 1059 FigureId: 6
+NORMAL OK. DroneId: 4 FigureId: 7
+NORMAL OK. DroneId: 9 FigureId: 8
+NORMAL OK. DroneId: 1045 FigureId: 10
+NORMAL OK. DroneId: 1058 FigureId: 12
+NORMAL OK. DroneId: 1051 FigureId: 13
+FORCE OK. DroneId: 8 Square: 1-1, FigureId: 24108, Size: 11
+FORCE OK. DroneId: 6 Square: 1-1, FigureId: 3410, Size: 12
+FORCE OK. DroneId: 7 Square: 1-1, FigureId: 26819, Size: 13
+FORCE OK. DroneId: 3 Square: 1-1, FigureId: 6179, Size: 14
+FORCE OK. DroneId: 1043 Square: 1-1, FigureId: 20759, Size: 15
+FORCE OK. DroneId: 1042 Square: 1-1, FigureId: 96778, Size: 16
+FORCE OK. DroneId: 1056 Square: 1-1, FigureId: 28128, Size: 17
+FORCE OK. DroneId: 1048 Square: 1-1, FigureId: 79463, Size: 18
+FORCE OK. DroneId: 1041 Square: 1-1, FigureId: 5386, Size: 19
+FORCE OK. DroneId: 1047 Square: 1-1, FigureId: 67658, Size: 20
+FORCE OK. DroneId: 1052 Square: 1-1, FigureId: 44758, Size: 21
+FORCE OK. DroneId: 1053 Square: 1-1, FigureId: 41391, Size: 22
+FORCE OK. DroneId: 1050 Square: 1-1, FigureId: 66046, Size: 23
+FORCE OK. DroneId: 1044 Square: 1-1, FigureId: 90097, Size: 24
+FORCE OK. DroneId: 1046 Square: 1-1, FigureId: 7925, Size: 25
+FORCE OK. DroneId: 1049 Square: 1-1, FigureId: 16816, Size: 26
+FORCE OK. DroneId: 1055 Square: 1-1, FigureId: 91162, Size: 27
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704661842,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704661842,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704662151,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+NORMAL OK. DroneId: 1058 FigureId: 1
+NORMAL OK. DroneId: 1056 FigureId: 2
+NORMAL OK. DroneId: 1052 FigureId: 3
+NORMAL OK. DroneId: 8 FigureId: 4
+NORMAL OK. DroneId: 1041 FigureId: 5
+NORMAL OK. DroneId: 6 FigureId: 6
+NORMAL OK. DroneId: 1046 FigureId: 7
+NORMAL OK. DroneId: 1049 FigureId: 8
+NORMAL OK. DroneId: 1048 FigureId: 9
+NORMAL OK. DroneId: 1053 FigureId: 10
+NORMAL OK. DroneId: 7 FigureId: 11
+NORMAL OK. DroneId: 1047 FigureId: 12
+NORMAL OK. DroneId: 3 FigureId: 13
+NORMAL OK. DroneId: 1040 FigureId: 14
+NORMAL OK. DroneId: 1044 FigureId: 15
+FORCE OK. DroneId: 4 Square: 1-1, FigureId: 6613, Size: 15
+FORCE OK. DroneId: 1055 Square: 1-1, FigureId: 9547, Size: 16
+FORCE OK. DroneId: 1043 Square: 1-1, FigureId: 71181, Size: 17
+FORCE OK. DroneId: 1042 Square: 1-1, FigureId: 36921, Size: 18
+FORCE OK. DroneId: 1050 Square: 1-1, FigureId: 77491, Size: 19
+FORCE OK. DroneId: 5 Square: 1-1, FigureId: 86921, Size: 20
+FORCE OK. DroneId: 1054 Square: 1-1, FigureId: 15751, Size: 21
+FORCE OK. DroneId: 1057 Square: 1-1, FigureId: 46485, Size: 22
+FORCE OK. DroneId: 1059 Square: 1-1, FigureId: 17103, Size: 23
+FORCE OK. DroneId: 2 Square: 1-1, FigureId: 5253, Size: 24
+FORCE OK. DroneId: 9 Square: 1-1, FigureId: 44068, Size: 25
+FORCE OK. DroneId: 1045 Square: 1-1, FigureId: 84865, Size: 26
+FORCE OK. DroneId: 1051 Square: 1-1, FigureId: 83831, Size: 27
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704662151,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704661842,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704662151,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704661969,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+NORMAL OK. DroneId: 1059 FigureId: 1
+NORMAL OK. DroneId: 1054 FigureId: 2
+NORMAL OK. DroneId: 1055 FigureId: 3
+NORMAL OK. DroneId: 1043 FigureId: 4
+NORMAL OK. DroneId: 2 FigureId: 5
+NORMAL OK. DroneId: 9 FigureId: 6
+NORMAL OK. DroneId: 1042 FigureId: 7
+NORMAL OK. DroneId: 5 FigureId: 8
+NORMAL OK. DroneId: 1050 FigureId: 9
+NORMAL OK. DroneId: 1052 FigureId: 10
+NORMAL OK. DroneId: 1058 FigureId: 11
+NORMAL OK. DroneId: 1051 FigureId: 12
+NORMAL OK. DroneId: 4 FigureId: 13
+FORCE OK. DroneId: 1040 Square: 1-1, FigureId: 42730, Size: 13
+FORCE OK. DroneId: 1057 Square: 1-1, FigureId: 43079, Size: 14
+FORCE OK. DroneId: 1045 Square: 1-1, FigureId: 34671, Size: 15
+FORCE OK. DroneId: 1041 Square: 1-1, FigureId: 94139, Size: 16
+FORCE OK. DroneId: 1049 Square: 1-1, FigureId: 89084, Size: 17
+FORCE OK. DroneId: 1053 Square: 1-1, FigureId: 78968, Size: 18
+FORCE OK. DroneId: 1056 Square: 1-1, FigureId: 12520, Size: 19
+FORCE OK. DroneId: 1046 Square: 1-1, FigureId: 28161, Size: 20
+FORCE OK. DroneId: 7 Square: 1-1, FigureId: 85534, Size: 21
+FORCE OK. DroneId: 3 Square: 1-1, FigureId: 49381, Size: 22
+FORCE OK. DroneId: 8 Square: 1-1, FigureId: 18509, Size: 23
+FORCE OK. DroneId: 6 Square: 1-1, FigureId: 47686, Size: 24
+FORCE OK. DroneId: 1048 Square: 1-1, FigureId: 2861, Size: 25
+FORCE OK. DroneId: 1047 Square: 1-1, FigureId: 80963, Size: 26
+FORCE OK. DroneId: 1044 Square: 1-1, FigureId: 68141, Size: 27
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704661842,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704661969,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704662151,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+NORMAL OK. DroneId: 1042 FigureId: 1
+NORMAL OK. DroneId: 1040 FigureId: 2
+NORMAL OK. DroneId: 1045 FigureId: 3
+NORMAL OK. DroneId: 8 FigureId: 4
+NORMAL OK. DroneId: 1056 FigureId: 5
+NORMAL OK. DroneId: 1057 FigureId: 6
+NORMAL OK. DroneId: 6 FigureId: 7
+NORMAL OK. DroneId: 1048 FigureId: 8
+NORMAL OK. DroneId: 1046 FigureId: 10
+NORMAL OK. DroneId: 1055 FigureId: 12
+NORMAL OK. DroneId: 1050 FigureId: 13
+FORCE OK. DroneId: 7 Square: 1-1, FigureId: 59703, Size: 11
+FORCE OK. DroneId: 1047 Square: 1-1, FigureId: 85476, Size: 12
+FORCE OK. DroneId: 1049 Square: 1-1, FigureId: 95543, Size: 13
+FORCE OK. DroneId: 1041 Square: 1-1, FigureId: 1090, Size: 14
+FORCE OK. DroneId: 1052 Square: 1-1, FigureId: 90992, Size: 15
+FORCE OK. DroneId: 1054 Square: 1-1, FigureId: 3964, Size: 16
+FORCE OK. DroneId: 1059 Square: 1-1, FigureId: 57096, Size: 17
+FORCE OK. DroneId: 2 Square: 1-1, FigureId: 48501, Size: 18
+FORCE OK. DroneId: 5 Square: 1-1, FigureId: 76084, Size: 19
+FORCE OK. DroneId: 1053 Square: 1-1, FigureId: 17853, Size: 20
+FORCE OK. DroneId: 9 Square: 1-1, FigureId: 69742, Size: 21
+FORCE OK. DroneId: 1044 Square: 1-1, FigureId: 92916, Size: 22
+FORCE OK. DroneId: 3 Square: 1-1, FigureId: 39293, Size: 23
+FORCE OK. DroneId: 1043 Square: 1-1, FigureId: 14087, Size: 24
+FORCE OK. DroneId: 4 Square: 1-1, FigureId: 44234, Size: 25
+FORCE OK. DroneId: 1051 Square: 1-1, FigureId: 88331, Size: 26
+FORCE OK. DroneId: 1058 Square: 1-1, FigureId: 58576, Size: 27
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704661969,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704662151,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704661842,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+NORMAL OK. DroneId: 2 FigureId: 1
+NORMAL OK. DroneId: 1058 FigureId: 2
+NORMAL OK. DroneId: 1055 FigureId: 3
+NORMAL OK. DroneId: 1040 FigureId: 4
+NORMAL OK. DroneId: 1043 FigureId: 5
+NORMAL OK. DroneId: 1052 FigureId: 6
+NORMAL OK. DroneId: 1047 FigureId: 7
+NORMAL OK. DroneId: 4 FigureId: 8
+NORMAL OK. DroneId: 1049 FigureId: 9
+NORMAL OK. DroneId: 1041 FigureId: 10
+NORMAL OK. DroneId: 1054 FigureId: 11
+NORMAL OK. DroneId: 1059 FigureId: 12
+NORMAL OK. DroneId: 3 FigureId: 13
+NORMAL OK. DroneId: 1051 FigureId: 14
+NORMAL OK. DroneId: 1042 FigureId: 15
+FORCE OK. DroneId: 1053 Square: 1-1, FigureId: 26333, Size: 15
+FORCE OK. DroneId: 7 Square: 1-1, FigureId: 9896, Size: 16
+FORCE OK. DroneId: 9 Square: 1-1, FigureId: 73368, Size: 17
+FORCE OK. DroneId: 1044 Square: 1-1, FigureId: 36126, Size: 18
+FORCE OK. DroneId: 5 Square: 1-1, FigureId: 23072, Size: 19
+FORCE OK. DroneId: 8 Square: 1-1, FigureId: 66846, Size: 20
+FORCE OK. DroneId: 1057 Square: 1-1, FigureId: 58282, Size: 21
+FORCE OK. DroneId: 1045 Square: 1-1, FigureId: 51487, Size: 22
+FORCE OK. DroneId: 1056 Square: 1-1, FigureId: 87930, Size: 23
+FORCE OK. DroneId: 6 Square: 1-1, FigureId: 21985, Size: 24
+FORCE OK. DroneId: 1048 Square: 1-1, FigureId: 45871, Size: 25
+FORCE OK. DroneId: 1046 Square: 1-1, FigureId: 27831, Size: 26
+FORCE OK. DroneId: 1050 Square: 1-1, FigureId: 94391, Size: 27
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.81,"feels_like":-27.47,"temp_min":-23.19,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704662404,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704661969,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.81,"feels_like":-27.47,"temp_min":-23.19,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704662404,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.81,"feels_like":-27.47,"temp_min":-23.19,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704662404,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+NORMAL OK. DroneId: 1050 FigureId: 1
+NORMAL OK. DroneId: 9 FigureId: 2
+NORMAL OK. DroneId: 5 FigureId: 3
+NORMAL OK. DroneId: 1044 FigureId: 4
+NORMAL OK. DroneId: 1053 FigureId: 5
+NORMAL OK. DroneId: 7 FigureId: 6
+NORMAL OK. DroneId: 8 FigureId: 7
+NORMAL OK. DroneId: 6 FigureId: 8
+NORMAL OK. DroneId: 1056 FigureId: 9
+NORMAL OK. DroneId: 1057 FigureId: 10
+NORMAL OK. DroneId: 1048 FigureId: 11
+NORMAL OK. DroneId: 1045 FigureId: 12
+NORMAL OK. DroneId: 1046 FigureId: 13
+FORCE OK. DroneId: 2 Square: 1-1, FigureId: 43149, Size: 13
+FORCE OK. DroneId: 1055 Square: 1-1, FigureId: 2824, Size: 14
+FORCE OK. DroneId: 1043 Square: 1-1, FigureId: 98273, Size: 15
+FORCE OK. DroneId: 4 Square: 1-1, FigureId: 37173, Size: 16
+FORCE OK. DroneId: 1041 Square: 1-1, FigureId: 1811, Size: 17
+FORCE OK. DroneId: 1058 Square: 1-1, FigureId: 60015, Size: 18
+FORCE OK. DroneId: 1047 Square: 1-1, FigureId: 26449, Size: 19
+FORCE OK. DroneId: 1054 Square: 1-1, FigureId: 69944, Size: 20
+FORCE OK. DroneId: 3 Square: 1-1, FigureId: 21083, Size: 21
+FORCE OK. DroneId: 1040 Square: 1-1, FigureId: 50963, Size: 22
+FORCE OK. DroneId: 1051 Square: 1-1, FigureId: 13812, Size: 23
+FORCE OK. DroneId: 1052 Square: 1-1, FigureId: 89773, Size: 24
+FORCE OK. DroneId: 1049 Square: 1-1, FigureId: 11141, Size: 25
+FORCE OK. DroneId: 1059 Square: 1-1, FigureId: 46251, Size: 26
+FORCE OK. DroneId: 1042 Square: 1-1, FigureId: 54268, Size: 27
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704661842,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=oslo&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":10.7461,"lat":59.9127},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02n"}],"base":"stations","main":{"temp":-22.37,"feels_like":-26.97,"temp_min":-22.82,"temp_max":-19.38,"pressure":1040,"humidity":96,"sea_level":1040,"grnd_level":1036},"visibility":10000,"wind":{"speed":1.4,"deg":339,"gust":1.19},"clouds":{"all":12},"dt":1704661842,"sys":{"type":2,"id":237284,"country":"NO","sunrise":1704615282,"sunset":1704637852},"timezone":3600,"id":3143244,"name":"Oslo","cod":200}
+NORMAL OK. DroneId: 1052 FigureId: 1
+NORMAL OK. DroneId: 1058 FigureId: 2
+NORMAL OK. DroneId: 1042 FigureId: 3
+NORMAL OK. DroneId: 1049 FigureId: 4
+NORMAL OK. DroneId: 1040 FigureId: 5
+NORMAL OK. DroneId: 1059 FigureId: 6
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=valencia&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.8333,"lat":39.3333},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":8.49,"feels_like":5.8,"temp_min":7.71,"temp_max":8.56,"pressure":1021,"humidity":62,"sea_level":1021,"grnd_level":976},"visibility":10000,"wind":{"speed":4.76,"deg":275,"gust":8.73},"clouds":{"all":1},"dt":1704662236,"sys":{"type":2,"id":2008731,"country":"ES","sunrise":1704612200,"sunset":1704646494},"timezone":3600,"id":2509951,"name":"Valencia","cod":200}
+NORMAL OK. DroneId: 1050 FigureId: 7
+NORMAL OK. DroneId: 1051 FigureId: 8
+NORMAL OK. DroneId: 1041 FigureId: 10
+NORMAL OK. DroneId: 4 FigureId: 12
+NORMAL OK. DroneId: 1047 FigureId: 13
+FORCE OK. DroneId: 1054 Square: 1-1, FigureId: 37893, Size: 11
+FORCE OK. DroneId: 2 Square: 1-1, FigureId: 85982, Size: 12
+FORCE OK. DroneId: 3 Square: 1-1, FigureId: 56497, Size: 13
+FORCE OK. DroneId: 7 Square: 1-1, FigureId: 26127, Size: 14
+FORCE OK. DroneId: 1044 Square: 1-1, FigureId: 62281, Size: 15
+FORCE OK. DroneId: 5 Square: 1-1, FigureId: 2512, Size: 16
+FORCE OK. DroneId: 1043 Square: 1-1, FigureId: 36149, Size: 17
+FORCE OK. DroneId: 9 Square: 1-1, FigureId: 31537, Size: 18
+FORCE OK. DroneId: 1055 Square: 1-1, FigureId: 72391, Size: 19
+FORCE OK. DroneId: 1045 Square: 1-1, FigureId: 8405, Size: 20
+FORCE OK. DroneId: 8 Square: 1-1, FigureId: 80766, Size: 21
+FORCE OK. DroneId: 1057 Square: 1-1, FigureId: 10647, Size: 22
+FORCE OK. DroneId: 1056 Square: 1-1, FigureId: 55287, Size: 23
+FORCE OK. DroneId: 1048 Square: 1-1, FigureId: 99095, Size: 24
+FORCE OK. DroneId: 6 Square: 1-1, FigureId: 8165, Size: 25
+FORCE OK. DroneId: 1053 Square: 1-1, FigureId: 1601, Size: 26
+FORCE OK. DroneId: 1046 Square: 1-1, FigureId: 3977, Size: 27
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=valencia&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.8333,"lat":39.3333},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":8.49,"feels_like":5.8,"temp_min":7.71,"temp_max":8.56,"pressure":1021,"humidity":62,"sea_level":1021,"grnd_level":976},"visibility":10000,"wind":{"speed":4.76,"deg":275,"gust":8.73},"clouds":{"all":1},"dt":1704662236,"sys":{"type":2,"id":2008731,"country":"ES","sunrise":1704612200,"sunset":1704646494},"timezone":3600,"id":2509951,"name":"Valencia","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=valencia&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.8333,"lat":39.3333},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":8.49,"feels_like":5.8,"temp_min":7.71,"temp_max":8.56,"pressure":1021,"humidity":62,"sea_level":1021,"grnd_level":976},"visibility":10000,"wind":{"speed":4.76,"deg":275,"gust":8.73},"clouds":{"all":1},"dt":1704662236,"sys":{"type":2,"id":2008731,"country":"ES","sunrise":1704612200,"sunset":1704646494},"timezone":3600,"id":2509951,"name":"Valencia","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=valencia&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.8333,"lat":39.3333},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":8.44,"feels_like":5.74,"temp_min":7.71,"temp_max":8.56,"pressure":1021,"humidity":62,"sea_level":1021,"grnd_level":976},"visibility":10000,"wind":{"speed":4.76,"deg":275,"gust":8.73},"clouds":{"all":1},"dt":1704662458,"sys":{"type":2,"id":2008731,"country":"ES","sunrise":1704612200,"sunset":1704646494},"timezone":3600,"id":2509951,"name":"Valencia","cod":200}
+NORMAL OK. DroneId: 1054 FigureId: 1
+NORMAL OK. DroneId: 3 FigureId: 2
+NORMAL OK. DroneId: 4 FigureId: 3
+NORMAL OK. DroneId: 2 FigureId: 4
+NORMAL OK. DroneId: 6 FigureId: 5
+NORMAL OK. DroneId: 7 FigureId: 6
+NORMAL OK. DroneId: 1044 FigureId: 7
+NORMAL OK. DroneId: 1056 FigureId: 8
+NORMAL OK. DroneId: 1053 FigureId: 9
+NORMAL OK. DroneId: 1055 FigureId: 10
+NORMAL OK. DroneId: 1045 FigureId: 11
+NORMAL OK. DroneId: 8 FigureId: 12
+NORMAL OK. DroneId: 1057 FigureId: 13
+NORMAL OK. DroneId: 1048 FigureId: 14
+NORMAL OK. DroneId: 1043 FigureId: 15
+FORCE OK. DroneId: 9 Square: 1-1, FigureId: 85727, Size: 15
+FORCE OK. DroneId: 1046 Square: 1-1, FigureId: 57090, Size: 16
+FORCE OK. DroneId: 5 Square: 1-1, FigureId: 14334, Size: 17
+FORCE OK. DroneId: 1052 Square: 1-1, FigureId: 78556, Size: 18
+FORCE OK. DroneId: 1049 Square: 1-1, FigureId: 87951, Size: 19
+FORCE OK. DroneId: 1059 Square: 1-1, FigureId: 51235, Size: 20
+FORCE OK. DroneId: 1058 Square: 1-1, FigureId: 16204, Size: 21
+FORCE OK. DroneId: 1050 Square: 1-1, FigureId: 98854, Size: 22
+FORCE OK. DroneId: 1042 Square: 1-1, FigureId: 88158, Size: 23
+FORCE OK. DroneId: 1040 Square: 1-1, FigureId: 63212, Size: 24
+FORCE OK. DroneId: 1051 Square: 1-1, FigureId: 77269, Size: 25
+FORCE OK. DroneId: 1041 Square: 1-1, FigureId: 65100, Size: 26
+FORCE OK. DroneId: 1047 Square: 1-1, FigureId: 12764, Size: 27
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=valencia&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.8333,"lat":39.3333},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":8.44,"feels_like":5.74,"temp_min":7.71,"temp_max":8.56,"pressure":1021,"humidity":62,"sea_level":1021,"grnd_level":976},"visibility":10000,"wind":{"speed":4.76,"deg":275,"gust":8.73},"clouds":{"all":1},"dt":1704662503,"sys":{"type":2,"id":2008731,"country":"ES","sunrise":1704612200,"sunset":1704646494},"timezone":3600,"id":2509951,"name":"Valencia","cod":200}
+OpenWeatherQuery -> URL=http://api.openweathermap.org/data/2.5/weather?q=valencia&appid=380d5a72dfdb72ae15b3d67c63bb299d&units=metric->{"coord":{"lon":-0.8333,"lat":39.3333},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":8.49,"feels_like":5.8,"temp_min":7.71,"temp_max":8.56,"pressure":1021,"humidity":62,"sea_level":1021,"grnd_level":976},"visibility":10000,"wind":{"speed":4.76,"deg":275,"gust":8.73},"clouds":{"all":1},"dt":1704662236,"sys":{"type":2,"id":2008731,"country":"ES","sunrise":1704612200,"sunset":1704646494},"timezone":3600,"id":2509951,"name":"Valencia","cod":200}

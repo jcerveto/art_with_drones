@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from "cors";
 import morgan from "morgan";
 import * as https from "https";
+import { readFileSync } from "fs";
 
 import { ServerEntity } from "../model/ServerEntity";
 import * as ServerSettings from "../settings/ServerSettings";
@@ -29,14 +30,17 @@ export const REGISTRATION_TIMEOUT: number = auxRegistrationTimeoutNumber;
 let serverRef: ServerEntity = null;
 
 const options = {
-    key: ServerSettings.SSL_KEY,
-    cert: ServerSettings.SSL_CERT,
+    key: readFileSync(ServerSettings.SSL_KEY),
+    cert: readFileSync(ServerSettings.SSL_CERT),
 };
 
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+//const httpsServer = https.createServer(options, app);
+
 
 //app.use(morgan("dev")); // Usar morgan para debuggear
 
@@ -278,6 +282,7 @@ export async function start(server: ServerEntity) {
     try {
         serverRef = server;
         console.log("Starting HTTP server...")
+        //httpsServer.listen(ServerSettings.HTTP_PORT, () => {
         app.listen(ServerSettings.HTTP_PORT, () => {
             console.log(`HTTP server listening on port ${ServerSettings.HTTP_PORT}`);
             LoggerSettings.addNewLog({

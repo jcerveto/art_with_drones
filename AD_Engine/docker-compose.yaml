@@ -19,6 +19,7 @@ services:
       - ./data/city.txt:/app/data/city.txt
       - ./logger.json:/app/logger.json
       - ./logs:/app/logs
+      - ./certs:/app/certs
 
 
     working_dir: /app
