@@ -52,7 +52,7 @@ export class ServerImplementation {
 
 
             console.log("Map Broker connected. ")
-            await BrokerServices.publishMap(server.getMap());
+            await BrokerServices.publishMap(server);
             console.log("Map published. ")
 
             await startHttp(server);
@@ -268,7 +268,7 @@ export class ServerImplementation {
 
     public static async sendMapToDrones(server: ServerEntity) {
         try {
-            await BrokerServices.publishMap(server.getMap());
+            await BrokerServices.publishMap(server);
         } catch (err) {
             console.error(err.message);
         }
@@ -448,7 +448,7 @@ export class ServerImplementation {
             server.activateShow();
             server.addCurrentFigure(figure);
             console.log(`Starting figure: ${figure.getName()}`);
-            await BrokerServices.publishCommunicationMessage(`Starting figure: ${figure.getName()}`);
+            await BrokerServices.publishCommunicationMessage(server, `Starting figure: ${figure.getName()}`);
             await LoggerSettings.addNewLog({
                 dataTime: new Date().toISOString(),
                 ipAddr: "0.0.0.0",
@@ -502,7 +502,7 @@ export class ServerImplementation {
                 action: `FIGURE COMPLETED`,
                 description: `Figure ${server.getCurrentFigure()?.getName() ?? '?'} completed successfully. `
             });
-            await BrokerServices.publishCommunicationMessage(`FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
+            await BrokerServices.publishCommunicationMessage(server, `FIGURE ${server.getCurrentFigure().getName()} COMPLETED!`);
             console.log(`WAITING 10 SECONDS TO DRAW NEXT FIGURE...`);
             await sleep(10_000);
             console.log(`Figure ${figure.getName()} ended. `);
@@ -529,7 +529,7 @@ export class ServerImplementation {
 
     static async publishCommunicationMessage(server: ServerEntity, message: string) {
         try {
-            await BrokerServices.publishCommunicationMessage(message);
+            await BrokerServices.publishCommunicationMessage(server, message);
         } catch (err) {
             console.error("ERROR: Trying to publishCommunicationMessage. ", err);
         }

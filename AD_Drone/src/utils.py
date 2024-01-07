@@ -1,5 +1,7 @@
 import json
 import coordinateMovement
+import security
+
 
 counter = 0
 
@@ -70,14 +72,14 @@ def handle_map(message):
     print(f"New message read from Kafka. ")
     print(f"{'*'*50}\n{counter}\n{'*'*50}")
     counter += 1
-    print("length of message: ", len(message))
+    print("length of message: ", len(message), "\nmessage: ", message)
     # print("type: ", type(message))  # <class 'dict'>
     # print("type: ", type(message["map"]))  # <class 'str'>
 
     # Parse the JSON array from the message
     try:
         map_list = json.loads(message["map"])
-        # print("map type: ", type(map_list))  # <class 'list'>
+
 
         # Iterate through each JSON object in the array
         my_map = MapEntity()

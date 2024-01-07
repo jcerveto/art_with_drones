@@ -4,9 +4,10 @@ import time
 
 import utils
 import setEnviromentVariables
+import security
+import droneEntity
 
-
-def main():
+def main(drone: droneEntity.DroneEntity):
     print("Starting map consumer...")
     topic_name = setEnviromentVariables.getMapTopic()
     group_id = f"group_{setEnviromentVariables.getMapTopic()}_{time.time()}"
@@ -26,6 +27,8 @@ def main():
         try:
             print(f"New map received. Time: {time.time()}")
             message = message.value
+            if drone.generalKey is not None:
+                message = security.decryptAES(drone.generalKey, message)
             utils.handle_map(message)
         except Exception as e:
             print(f"Error handling map. Waiting for next message. {e}")

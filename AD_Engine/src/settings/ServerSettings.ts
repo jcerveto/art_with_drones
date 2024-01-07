@@ -87,3 +87,17 @@ if (auxCompleteWhenAllDronesArrive == undefined) {
     throw new Error("No complete when all drones arrive found");
 }
 export const COMPLETE_WHEN_ALL_DRONES_ARRIVE: boolean = auxCompleteWhenAllDronesArrive == 'yes';
+
+let auxSslKey: string = process.env.SSL_KEY;
+if (auxSslKey == undefined) {
+    console.error(`ERROR: Trying to get ssl key: `);
+    throw new Error("No ssl key found");
+}
+export const SSL_KEY: string = auxSslKey;
+
+let auxSslCert: string = process.env.SSL_CERT;
+if (auxSslCert == undefined) {
+    console.error(`ERROR: Trying to get ssl cert: `);
+    throw new Error("No ssl cert found");
+}
+export const SSL_CERT: string = auxSslCert;

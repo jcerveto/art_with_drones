@@ -86,14 +86,14 @@ def main(drone: droneEntity.DroneEntity, show_map: bool):
         # start map consumer thread
         if show_map:
             print("Starting map consumer thread...")
-            mapConsumerThread = threading.Thread(target=mapConsumer.main, args=())
+            mapConsumerThread = threading.Thread(target=mapConsumer.main, args=(drone,))
             mapConsumerThread.start()
         else:
             print("Map consumer is not going to be started...")
 
         # read communication messages from AD_Engine
         print("Starting communication thread...")
-        communicationThread = threading.Thread(target=communication.main, args=())
+        communicationThread = threading.Thread(target=communication.main, args=(drone,))
         communicationThread.start()
 
 

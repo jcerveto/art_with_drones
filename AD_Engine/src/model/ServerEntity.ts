@@ -14,7 +14,7 @@ import * as SecurityImplementation from "../implementation/SecurityImplementatio
 
 export class ServerEntity {
     public MAX_CONCURRENT_CONNECTIONS: number = ServerSettings.MAX_CONCURRENT_CONNECTIONS;
-    public GENERAL_KEY: string = null;
+    public GENERAL_KEY = null;
 
     private _host: string;
     private _port: number;

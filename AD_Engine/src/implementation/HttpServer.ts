@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import cors from "cors";
 import morgan from "morgan";
+import * as https from "https";
 
 import { ServerEntity } from "../model/ServerEntity";
 import * as ServerSettings from "../settings/ServerSettings";
@@ -26,6 +27,11 @@ if (isNaN(auxRegistrationTimeoutNumber)) {
 export const REGISTRATION_TIMEOUT: number = auxRegistrationTimeoutNumber;
 
 let serverRef: ServerEntity = null;
+
+const options = {
+    key: ServerSettings.SSL_KEY,
+    cert: ServerSettings.SSL_CERT,
+};
 
 
 const app = express();

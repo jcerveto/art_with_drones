@@ -8,8 +8,8 @@ class DroneEntity:
         self.temporal_token = None
         self.timestamp = None
 
-        self.generalKey = None
-        self.personalKey = None
+        self.generalKey = ''
+        self.personalKey = ''
 
 
     def __str__(self):

@@ -30,11 +30,12 @@ export async function initMapPublisher() {
     console.log("Map publisher connected");
 }
 
-export async function publishMap(map: MapEntity) {
+export async function publishMap(server: ServerEntity) {
     try {
-        const mapJson = map.toJson();
+        const mapJson = server.getMap().toJson();
+        const mapEncoded = Security.encryptMessageAes(mapJson, server.GENERAL_KEY);
         const objectToSend = {
-            map: mapJson
+            map: mapEncoded
         }
         await producerMap.send({
             topic: BrokerSettings.TOPIC_MAP,
@@ -43,9 +44,9 @@ export async function publishMap(map: MapEntity) {
             ]
         });
         if (BrokerSettings.SHOW_MAP) {
-            console.log(map.toString());
+            console.log(server.getMap().toString());
         }
-        console.log("drones: " , map.getAllDrones().length, "alive: ", map.getAliveDrones().length, "dead: ", map.getDeadDrones().length);
+        console.log("drones: " , server.getMap().getAllDrones().length, "alive: ", server.getMap().getAliveDrones().length, "dead: ", server.getMap().getDeadDrones().length);
     } catch (err) {
         console.error("ERROR: Trying to publish the map. ", err.message, err.stack);
     }
@@ -99,7 +100,7 @@ async function handleCurrentCoordinateReceived(server: ServerEntity, consumer: C
 
 
         // publish map
-        await publishMap(server.getMap());
+        await publishMap(server);
         console.log('----------- \n currentFigure: ', server.getCurrentFigure().getName(), '\n -----------');
 
         // NUNCA SALIR DEL FLUJO DE CONSUMER.RUN AQUI
@@ -173,13 +174,14 @@ export async function publishTargetPosition(drone: DronEntity, targetPosition: S
 }
 
 
-export async function publishCommunicationMessage(message: string) {
+export async function publishCommunicationMessage(server: ServerEntity, message: string) {
     try {
+        const encodedMessage = Security.encryptMessageAes(message, server.GENERAL_KEY);
         await producerCommunication.connect();
         await producerCommunication.send({
             topic: BrokerSettings.TOPIC_COMMUNICATION,
             messages: [
-                {value: JSON.stringify({message: message})}
+                {value: JSON.stringify({message: encodedMessage})}
             ]
         });
     } catch (err) {

@@ -13,19 +13,18 @@ export async function decryptMessageBase64(message: string): Promise<string> {
 
 
 export async function encryptMessageAes(message: string, key: string): Promise<string> {
+    return message;
+    // TODO: Encrypt message
+
+
     const iv = crypto.randomBytes(16);
-    const cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(key), iv);
+    const cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(key, 'hex'), iv);
     const encrypted = Buffer.concat([cipher.update(message), cipher.final()]);
     return iv.toString("hex") + ":" + encrypted.toString("hex");
 }
 
 export async function decryptMessageAes(message: string, key: string): Promise<string> {
     return aes.encrypt(message, key).toString();
-}
-
-
-export async function encryptMessageRsa(message: string, key: string): Promise<string> {
-    return aes.encrypt(message, key);
 }
 
 export function encryptPassword(message: string): string {
